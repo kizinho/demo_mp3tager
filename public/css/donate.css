@@ -1,0 +1,117 @@
+body,html{
+    font-family: 'Roboto';
+    background: #0c2461;
+    height: 100vh;
+  }
+
+.donate-content{
+    background-image: url('../images/donate.png');
+    background-size: cover;
+    width: 700px;
+    height: 544px;
+    margin: auto;
+    margin-top: 50px;
+}
+.donate-content p{
+  text-align: center;
+  background: #0a3d62;
+  color: #fff;
+  padding: 10px 30px;
+}
+.donate-amount{
+  text-align: center;
+  margin-top: 150px;
+}
+.donate-amount input[type='text']{
+  display: block;
+  width: 300px;
+  margin: auto;
+  height: 40px;
+  padding : 10px 15px;
+  border : none;
+  outline: none;
+  border:1px solid #333;
+  border-radius: 3px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #777;
+}
+
+.donate-amount input[type='text']:focus{
+  border : 1.5px solid #1e90ff;
+  transition: .3s;
+}
+
+
+
+.donate-amount input[type='submit']{
+  display: block;
+  width: 100px;
+  margin: auto;
+  height: 40px;
+  padding : 7px 15px;
+  border : none;
+  outline: none;
+  border-radius: 3px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #fff;
+  background: #3c6382;
+  text-transform: capitalize;
+}
+
+@media (min-width:850px) {
+  .navbar .logo{
+    margin-top: -15px;
+  }
+}
+
+@media (max-width:850px) {
+  .navbar .logo{
+    margin-left: -20px;
+    font-size: 16px;
+    line-height: 60px;
+    margin-top: -10px;
+  }
+  .navbar .logo i{
+    top:-5px !important;
+    left: 15px;
+    font-size: 28px;
+    line-height: 70px;
+  }
+  .navbar .logo span{
+    font-size: 18px;
+  }
+  .donate-content{
+    width: 500px;
+    height: 389px;
+  }
+  .donate-amount{
+    text-align: center;
+    margin-top: 100px;
+  }
+
+}
+@media (max-width:750px) {
+.navbar .logo{
+  margin-top: 0px;
+}
+
+.donate-amount input[type='text']{
+  width: 250px;
+}
+
+}
+@media (max-width:550px) {
+  .container {
+      padding: 0px !important;
+    }
+  .donate-content{
+    width: 300px;
+    height: 232px;
+  }
+  .donate-amount{
+    text-align: center;
+    margin-top: 50px;
+  }
+}
