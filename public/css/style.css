@@ -3,6 +3,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+a{
+	color:#DA0353
+}
 body,html{
   font-family: 'Roboto';
   background: #0A183D;

@@ -1,100 +1,139 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('title')
+<title>MP3 tag editor - tag mp3 files online | the best mp3 tagger 2020</title>
+<meta name="description" content="Tagmp3.net is a free mp3 tag editor available online where you can tag mp3 files, change id3 tags, edit mp3 image, add or change existing album art in mp3 and change mp3 cover image." />
+<meta name="keywords" content="tagmp3, mp3tag, tag mp3, mp3 tag" />
+<meta name="apple-mobile-web-app-title" content="Tagmp3" />
+<meta property="fb:app_id" content="2291526731101380" />
+<meta http-equiv="Cache-control" content="public">
+<meta name="theme-color" content="#d1ecf1"/>
+<meta property="og:title" content="MP3 tag editor - tag mp3 files online | tagmp3.net" />
+<meta property="og:description" content="Tagmp3.net is a free mp3 tag editor available online where you can tag mp3 files, change id3 tags, edit mp3 image, add or change existing album art in mp3 and change mp3 cover image." />
+<meta property="og:url" content="https://tagmp3.net/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Tagmp3" />
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@Tagmp31">
+<meta name="twitter:title" content="MP3 tag editor - tag mp3 files online | tagmp3.net">
+<meta name="twitter:description" content="Tagmp3.net is a free mp3 tag editor available online where you can tag mp3 files, change id3 tags, edit mp3 image, add or change existing album art in mp3 and change mp3 cover image.">
+<link rel="canonical" href="https://tagmp3.net/" />
+<meta property="og:image" content="https://tagmp3.net/images/tagmp3-1200x630.png" />
+<meta property="og:image:alt" content="MP3 tag editor - tag mp3 files online | tagmp3.net">
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="https://tagmp3.net/images/tagmp3-1200x630.png" />
+<meta name="twitter:image:alt" content="MP3 tag editor - tag mp3 files online | tagmp3.net" />
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+@endsection
+@extends('layouts.app')
+@section('content')
+<!-- --------------Start of Body----------->
+<div class="container">
+    <div id="aboutUs">
+        <div class="body-content">
+            <section>
+                <div class="section-text">
+                    <h2> <span>Music</span> for the world <i class="fas fa-music"></i></h2>
+                    <p>
+                        join the world of free , easy , fast and reliable music tag editing website.
+                    </p>
+                    <a href="{{url('upload')}}">Upload</a>
+                    <a href="{{url('signup')}}">sign up</a>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
+                <div class="section-img section-img-1"></div>
+            </section>
         </div>
-    </body>
-</html>
+
+        <div class="body-content">
+            <section>
+                <div class="section-text">
+                    <h2>Edit your music tags</h2>
+                    <p>With our editor you can easly edit or update you music tags just upload your songs and we will take care of it.
+
+
+                    </p>
+                    <p>Change mp3 cover art , mp3 name, voice tag etc .
+
+
+                    </p>
+                </div>
+                <div class="section-img section-img-2"></div>
+            </section>
+        </div>
+
+        <div class="body-content">
+            <section>
+                <div class="section-text">
+                    <h2>Want to join voice tag  to mp3? </h2>
+                    <p>It's very easy ,
+                        upload your music and select where to join start or end and just hit submit thats it  :)
+                    </p>
+                </div>
+                <div class="section-img section-img-3"></div>
+            </section>
+        </div>
+
+        <div class="body-content">
+            <section>
+                <div class="section-text">
+                    <h2>Tired from too much steps</h2>
+                    <p>Well it takes us 2 clicks to get the job done , just click to upload your music ,choose what to do the another click to save & download
+                    </p>
+                </div>
+                <div class="section-img section-img-4"></div>
+            </section>
+        </div>
+
+        <div class="body-content">
+            <section>
+                <div class="section-text">
+                    <h2>It is fast</h2>
+                    <p>
+                        no more wating , too simple and too easy
+                    </p>
+                </div>
+                <div class="section-img section-img-5"></div>
+            </section>
+        </div>
+
+        <div class="body-content">
+            <section>
+                <div class="section-text">
+                    <h2>Easy to Download</h2>
+                    <p>
+                        You can download your music directly or we can save it for you using our server storage or your own google drive storage, it's just
+                        your choice
+                    </p>
+                </div>
+                <div class="section-img section-img-6"></div>
+            </section>
+        </div>
+    </div>
+
+<!--    <div id="contactUs">
+
+        <div class="body-content">
+            <section>
+                <div class="section-text">
+                    <h2>contact us</h2>
+                     here you put your contact list 
+                </div>
+                <div class="section-img section-img-7">
+
+                     here you put your contact list image if there is one
+                      note : put your image inside this div inside css style sheet called [style.css]
+                      at line 121 you will find the class used for this image like below
+                      .section-img-7{
+                        background-image: url('../images/cintact img');
+                      }  
+
+                </div>
+            </section>
+        </div>
+
+
+    </div>-->
+
+
+</div>
+@endsection
