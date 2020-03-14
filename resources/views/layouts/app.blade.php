@@ -25,6 +25,7 @@
         .toast {
             opacity: 0.9!important;
         }
+
     </style>
 
 </head>
@@ -73,7 +74,7 @@ $(".deleted").on("submit", function () {
             text: "<span style='color:{{ session('message.color') }};font-size:20px;margin:10px'>{!! session('message.content') !!}",
             timer: 10000,
             type: "{{ session('message.level') }}",
-            confirmButtonColor: "#DA0353"
+            confirmButtonColor: "#0000cc"
         }).then((value) => {
             //location.reload();
         }).catch(swal.noop);

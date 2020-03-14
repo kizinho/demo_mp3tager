@@ -1,3 +1,4 @@
+
 @section('title')
 <title>MP3 tag editor - tag mp3 files online | the best mp3 tagger 2020</title>
 <meta name="description" content="Tagmp3.net is a free mp3 tag editor available online where you can tag mp3 files, change id3 tags, edit mp3 image, add or change existing album art in mp3 and change mp3 cover image." />
@@ -245,9 +246,5 @@
 
         </form>
         <!-- End of container -->
-    </div>
-</div>
-@section('script')
 
-@endsection
 @endsection
