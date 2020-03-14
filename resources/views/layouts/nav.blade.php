@@ -10,12 +10,12 @@
             <i class="fa fa-bars"></i>
         </label>
         <ul>
-            <li><a  class="active" href="{{url('/')}}">home</a></li>
+            <li><a  class="@if(request()->path() == '/') active @endif" href="{{url('/')}}">home</a></li>
             <li><a href="#aboutUs">about us</a></li>
         <li><a href="{{url('contact-us')}}">contact Us</a></li>
-        <li><a href="{{url('upload')}}">Start Uploading</a></li>
-        <li><a href="{{url('signup')}}">Sign up</a></li>
-        <li><a href="{{url('signin')}}">Sign in<i class="fas fa-sign-in-alt"></i></a></li>
+        <li><a class="@if(request()->path() == 'upload') active @endif @if(request()->path() == 'tags') active @endif @if(request()->path() == 'downloads') active @endif"  href="{{url('upload')}}">Start Uploading</a></li>
+        <li><a class="@if(request()->path() == 'signup') active @endif"  href="{{url('signup')}}">Sign up</a></li>
+        <li><a class="@if(request()->path() == 'signin') active @endif"  href="{{url('signin')}}">Sign in<i class="fas fa-sign-in-alt"></i></a></li>
 <!--            <li> <span class="menu" id="google_translate_element"></span>
 
         </li>-->

@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 //upload
 Route::get('upload', 'UploadController@index')->name('upload');
+Route::post('upload', 'UploadController@store');
+Route::get('tags', 'UploadController@tag')->name('tags');
