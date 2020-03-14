@@ -4,12 +4,10 @@ body,html{
     height: 100vh;
   }
 
-  /* .navbar .logo{
-    margin-top: -15px !important;
-  } */
 
-.container{
+.Mycontainer{
     padding:0px !important;
+    flex: 1;
 }
 .msg-content{
 

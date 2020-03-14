@@ -3,14 +3,15 @@ body,html{
     background: #0c2461;
     height: 100vh;
   }
-
+  .Mycontainer{
+    flex:1;
+  }
 .donate-content{
     background-image: url('../images/donate.png');
     background-size: cover;
     width: 700px;
     height: 544px;
-    margin: auto;
-    margin-top: 50px;
+    margin: 100px auto 50px auto;
 }
 .donate-content p{
   text-align: center;

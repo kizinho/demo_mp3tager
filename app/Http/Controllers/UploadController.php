@@ -8,6 +8,10 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\File;
 
 class UploadController extends Controller {
+    public function __construct() {
+
+       // $this->middleware('token');
+    }
 
     public function index() {
         return view('pages.upload');
@@ -95,9 +99,9 @@ class UploadController extends Controller {
                 session()->flash('message.content', 'Invalid Response');
                 return redirect()->route('upload');
             }
-             return [
-                'data' => $res->tags
-            ];
+//             return [
+//                'data' => $res->tags
+//            ];
             $data['details'] = $res->tags;
            return view('pages.tags',$data);
         } catch (RequestException $res) {

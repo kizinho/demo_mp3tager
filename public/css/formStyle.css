@@ -4,16 +4,15 @@ body,html{
   font-family: 'Roboto';
   display: flex;
   flex-direction: column;
-
+  height: 100vh;
 }
 
-.navbar .logo{
-  margin-top: -15px !important;
-}
 
-.container{
+
+.Mycontainer{
   padding: 0;
   flex: 1;
+
 }
 .form-container{
   background: #fff;
@@ -38,6 +37,9 @@ body,html{
   text-align: center;
   color: #888;
   text-transform: capitalize;
+}
+.side-form-box p{
+  margin-top: 20px;
 }
 .side-form-box a , .form-container .signup-resp-p a{
   text-decoration: none;
@@ -64,8 +66,9 @@ body,html{
   display: flex;
   font-size: 12px;
   color:#777;
-  margin: 20px 0;
+  margin: 20px 0 !important;
   position: relative;
+  justify-content: center;
 }
 .form-field label i{
   color:rgba(26, 188, 156, .5);
@@ -74,7 +77,12 @@ body,html{
   font-size: 16px;
   position: absolute;
   z-index: 2;
-  left: 10px;
+  left: 105px;
+}
+.form-field-sigup label i{
+  position: absolute;
+  z-index: 2;
+  left: 90px;
 }
 .form-field input::placeholder{color: #ccc;}
 .form-field input{
@@ -99,13 +107,13 @@ body,html{
   color:white;
   background: #48dbfb;
   height: 40px;
-  flex-basis: 70%;
+  flex-basis: 60%;
   font-size: 16px;
   margin: auto;
   cursor: pointer;
   border-radius: 20px;
   padding: 0;
-  margin-left: 30px;
+
 }
 .form-field input[type='submit']:hover{
   background: #3498db;
@@ -115,18 +123,49 @@ body,html{
   display:none;
 }
 
-@media (min-width:850px) {
-  .navbar .logo{
-    margin-top: 0px !important;
-  }
+
+#google_translate_element{
+  position: relative;
+}
+.goog-logo-link{
+  display: none;
+}
+.goog-logo-link #text{
+  display: none;
+}
+.goog-te-gadget{
+  font-size: 0px !important;
+}
+.goog-te-gadget div{
+  display: inline;
 }
 
-@media (max-width:850px) {
+.goog-te-gadget div select{
+width: 131px;
+height: 35px;
+background-color: #08192D !important;
+color: #fff;
+padding: 2px;
+outline: none;border:none;
+}
+.goog-te-gadget div select option{
+  background-color: #08192D;
+
+}
+.goog-te-gadget div select option:hover{
+  cursor: pointer;
+}
+.goog-te-gadget div select:hover{
+  background-color: #DA0353 !important;
+  cursor: pointer;
+}}
+
+@media (max-width:896px) {
   .navbar .logo{
     margin-left: -20px;
     font-size: 16px;
     line-height: 60px;
-    margin-top: 0px !important ;
+    margin-top: -25px !important ;
   }
   .navbar .logo i{
     top:-5px !important;
@@ -138,7 +177,106 @@ body,html{
     font-size: 18px;
   }
 }
-@media (max-width:750px) {
+@media (max-width:1000px) {
+  .form-container{
+      margin-top: 70px !important;
+      display: block !important;
+      padding:10px 40px !important;
+      text-align: center !important;
+    }
+    .side-form-box img{
+      width: 200px !important;
+      height: 177px !important;
+    }
+    .form-field:first-child h3{
+      font-size: 13px !important;
+    }
+    .form-field{
+      margin-left: -50px !important;
+    }
+    .form-field .signin-h3{
+      margin-left: -30px !important;
+    }
+    .form-field-sigup{
+      margin-left: -50px !important;
+    }
+    .side-form-box p{
+      margin-left: -60px !important;
+      padding-bottom: 10px !important;
+    }
+    .signup-resp-p{
+      display:block !important;
+    }
+    .signup-p{
+      display: none !important
+    }
+    .form-field label i{
+      left: 15px;
+    }
+    .form-field-sigup label i{
+      left: 45px;
+    }
+}
+@media (max-width:340px) {
+  .form-field-sigup{
+    margin-left: -70px !important;
+  }
+}
+
+@media (max-width:976px) {
+  /* navbar */
+  .navbar{
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
 .navbar .logo{
-  margin-top: 0px !important;
+  margin-top: 0px !important ;
+}
+
+.nav-links .fa-bars{
+  display: block;
+}
+.nav-links ul li {
+  display:block;
+  width: 100%;
+  padding: 10px 0px !important;
+}
+.nav-links ul li:hover{
+  background: #636e72;
+  cursor: pointer;
+  border-left: 4px solid #DA0353;
+}
+.nav-links ul li:hover a{
+  transition: .5s;
+  padding-left: 40px;
+  color: #DA0353;
+  border:none;
+  font-weight: bold
+}
+.navbar .nav-links ul li a:hover{
+  border:none !important;
+  color: #DA0353;
+  background: none !important;
+}
+.nav-links ul{
+  padding-left: 0px !important;
+  position: absolute;
+  left: 0;
+  top: 80px;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  z-index: 20;
+  margin-top: -20px;
+  transition: all 1s ease-out;
+  text-align: center;
+  clip-path:circle(100px at 90% -40%);
+  pointer-events:none;
+}
+.fade-nav{
+  transition: all 2s ease-out;
+  clip-path:circle(1500px at 90% -40%) !important;
+  pointer-events:all !important;}
+}
 }

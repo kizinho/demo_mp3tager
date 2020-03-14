@@ -5,7 +5,7 @@ body,html{
     height: 100vh;
 }
 
-.container{
+.Mycontainer{
   margin-top: 70px;
   padding-left: 150px !important;
   padding-right: 150px !important;
@@ -177,25 +177,14 @@ body,html{
   background: #000;
 }
 
-@media (max-width:1250px) {
 
-  /* .container{
-    padding: 0 100px;
-  } */
-}
 
-@media (min-width:850px) {
-  .navbar .logo{
-    margin-top: -15px;
-  }
-}
-
-@media (max-width:850px) {
+@media (max-width:986px) {
   .navbar .logo{
     margin-left: -20px;
     font-size: 16px;
     line-height: 60px;
-    margin-top: -15px;
+    margin-top: -25px;
   }
   .navbar .logo i{
     top:-5px !important;
@@ -206,13 +195,12 @@ body,html{
   .navbar .logo span{
     font-size: 18px;
   }
-  .container{
+  .Mycontainer{
     padding-left: 10px !important;
     padding-right: 10px !important;
   }
-
 }
-@media (max-width:750px) {
+@media (max-width:850px) {
 .navbar .logo{
   margin-top: 0px;
 }
@@ -226,4 +214,5 @@ body,html{
 }
 .lbl-sel label:first-child{
   text-align: left;
+}
 }

@@ -27,8 +27,9 @@
 @endsection
 @extends('layouts.app')
 @section('content')
+
 <!-- --------------Start of Body----------->
-<div class="container">
+<div class="Mycontainer-home">
     <div id="aboutUs">
         <div class="body-content">
             <section>
@@ -37,24 +38,18 @@
                     <p>
                         join the world of free , easy , fast and reliable music tag editing website.
                     </p>
-                    <a href="{{url('upload')}}">Upload</a>
+                    <a href="{{url('upload')}}" id="Upload-btn">Upload</a>
                     <a href="{{url('signup')}}">sign up</a>
                 </div>
                 <div class="section-img section-img-1"></div>
             </section>
         </div>
-
         <div class="body-content">
             <section>
                 <div class="section-text">
                     <h2>Edit your music tags</h2>
                     <p>With our editor you can easly edit or update you music tags just upload your songs and we will take care of it.
-
-
-                    </p>
-                    <p>Change mp3 cover art , mp3 name, voice tag etc .
-
-
+                        <br>Change mp3 cover art , mp3 name, voice tag etc .
                     </p>
                 </div>
                 <div class="section-img section-img-2"></div>
@@ -110,30 +105,7 @@
         </div>
     </div>
 
-<!--    <div id="contactUs">
-
-        <div class="body-content">
-            <section>
-                <div class="section-text">
-                    <h2>contact us</h2>
-                     here you put your contact list 
-                </div>
-                <div class="section-img section-img-7">
-
-                     here you put your contact list image if there is one
-                      note : put your image inside this div inside css style sheet called [style.css]
-                      at line 121 you will find the class used for this image like below
-                      .section-img-7{
-                        background-image: url('../images/cintact img');
-                      }  
-
-                </div>
-            </section>
-        </div>
-
-
-    </div>-->
-
-
 </div>
+
+
 @endsection

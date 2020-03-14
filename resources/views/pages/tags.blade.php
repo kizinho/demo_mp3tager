@@ -23,7 +23,6 @@
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="https://tagmp3.net/images/tagmp3-1200x630.png" />
 <meta name="twitter:image:alt" content="MP3 tag editor - tag mp3 files online | tagmp3.net" />
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <link rel="stylesheet" href="{{asset('css/tags.css')}}">
 @endsection
@@ -35,8 +34,13 @@
         <form action="">
 
             @foreach($details as $tag)
-
-            {{$tag}}
+            <div class="tag-field-head alert alert-success">
+                <div class="row">
+                    <div class="col-sm tag-title">
+                        <label class="tag-responsive-p " id="title"><span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$tag->file_name}}</label>
+                    </div>
+                </div>
+            </div>
 
             <div class="tag-field">
                 <div class="row">
@@ -44,14 +48,18 @@
                         <label class="tag-responsive-p">Existing image</label>
                     </div>
                     <div class="col-sm browse-btn-cont preview-field"  onchange="loadFile(this)">
-                        <img id="picture" src="" alt= "uploaded Song has no cover art" />
+                        @if(empty($tag->cover_art))
+                        uploaded Song has no cover art
+                        @else
+                        <img id="picture" src=" {{$tag->cover_art}}" alt= "{{$tag->file_name}}" />
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="tag-field tag-field-join">
                 <div class="row">
                     <div class="col-sm">
-                        <label class="tag-responsive-p">Join anther song ?</label>
+                        <label class="tag-responsive-p">Join Voice Tag or Join Another Song ?</label>
                         <input type="file" id="mp3-file-2" data-index="2"  class="d-nn" accept=".mp3">
                     </div>
                     <div class="col-sm browse-btn-cont">
@@ -66,12 +74,12 @@
                         <label for="none-song" class="none-song-lbl">✔</label>
                     </div>
                     <div class="lbl-sel">
-                        <label for="start-song">start</label>
+                        <label for="start-song">at beginning</label>
                         <input type="radio" name="JoinSelect" value="strat" id='start-song'class="start-song-rad">
                         <label for="start-song" class="start-song-lbl">✔</label>
                     </div>
                     <div class="lbl-sel">
-                        <label for="end-song">end</label>
+                        <label for="end-song">at end</label>
                         <input type="radio" name="JoinSelect" value="end" id='end-song' class="end-song-rad" >
                         <label for="end-song" class="end-song-lbl">✔</label>
                     </div>
@@ -97,7 +105,7 @@
                         <label>Title</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder=''>
+                        <input type="text" placeholder='Enter Title' value="{{$tag->title}}" >
                     </div>
                 </div>
             </div>
@@ -107,7 +115,7 @@
                         <label>Artist</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='my name'>
+                        <input type="text" placeholder='Enter Artist Name' value=" {{$tag->artist}}">
                     </div>
                 </div>
             </div>
@@ -117,7 +125,7 @@
                         <label>Album</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='My Album'>
+                        <input type="text" placeholder='Album' value=" {{$tag->album}}">
                     </div>
                 </div>
             </div>
@@ -127,7 +135,7 @@
                         <label>Track Number</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='12'>
+                        <input type="text" placeholder='Track Number' value=" {{$tag->track_number}}">
                     </div>
                 </div>
             </div>
@@ -137,7 +145,7 @@
                         <label>Genre</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='country'>
+                        <input type="text" placeholder='Genre' value=" {{$tag->genre}}">
                     </div>
                 </div>
             </div>
@@ -147,7 +155,7 @@
                         <label>Comments</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='my comments'>
+                        <input type="text" placeholder='comments' value=" {{$tag->comments}}">
                     </div>
                 </div>
             </div>
@@ -157,10 +165,58 @@
                         <label>Year</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='2020'>
+                        <input type="text" placeholder='year' value=" {{$tag->year}}">
                     </div>
                 </div>
             </div>
+            @if(!empty($tag->publisher))
+            <div class="tag-field tag-responsive">
+                <div class="row">
+                    <div class="col-sm">
+                        <label>Publisher</label>
+                    </div>
+                    <div class="col-sm">
+                        <input type="text" placeholder='Publisher' value=" {{$tag->publisher}}">
+                    </div>
+                </div>
+            </div>
+            @endif
+            @if(!empty($tag->encoded_by))
+            <div class="tag-field tag-responsive">
+                <div class="row">
+                    <div class="col-sm">
+                        <label>Encoded by</label>
+                    </div>
+                    <div class="col-sm">
+                        <input type="text" placeholder='Encoded by' value=" {{$tag->encoded_by}}">
+                    </div>
+                </div>
+            </div>
+            @endif
+            @if(!empty($tag->composer))
+            <div class="tag-field tag-responsive">
+                <div class="row">
+                    <div class="col-sm">
+                        <label>Composer</label>
+                    </div>
+                    <div class="col-sm">
+                        <input type="text" placeholder='Composer' value=" {{$tag->composer}}">
+                    </div>
+                </div>
+            </div>
+            @endif
+            @if(!empty($encoder_settings))
+            <div class="tag-field tag-responsive">
+                <div class="row">
+                    <div class="col-sm">
+                        <label>Encoder Settings</label>
+                    </div>
+                    <div class="col-sm">
+                        <input type="text" placeholder='Encoder Settings' value=" {{$tag->encoder_settings}}">
+                    </div>
+                </div>
+            </div>
+            @endif
             @endforeach
             <div class="tag-field tag-responsive tag-field-save">
                 <div class="row">
@@ -192,8 +248,6 @@
     </div>
 </div>
 @section('script')
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 @endsection
 @endsection

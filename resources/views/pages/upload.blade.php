@@ -23,7 +23,6 @@
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="https://tagmp3.net/images/tagmp3-1200x630.png" />
 <meta name="twitter:image:alt" content="MP3 tag editor - tag mp3 files online | tagmp3.net" />
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <link rel="stylesheet" href="{{asset('css/upload.css')}}">
 <link rel="stylesheet" href="{{asset('dropzone/dropzone.min.css')}}">
@@ -164,7 +163,6 @@ Dropzone.options.myUpload = {
     }
 };
 </script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 @endsection
 @endsection

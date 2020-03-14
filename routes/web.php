@@ -20,3 +20,5 @@ Route::get('/', function () {
 Route::get('upload', 'UploadController@index')->name('upload');
 Route::post('upload', 'UploadController@store');
 Route::get('tags', 'UploadController@tag')->name('tags');
+Route::get('signup', 'AuthController@signUp')->name('signup');
+Route::get('signin', 'AuthController@signIn')->name('signin');

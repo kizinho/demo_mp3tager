@@ -1,0 +1,112 @@
+body{
+  height: 100vh;
+}
+
+.navbar .logo {
+  margin-top: -15px !important;
+}
+.contactus-content{
+  width: 100%;
+}
+.contact-form{
+  border:1px dashed #ccc;
+  width: 550px;
+  padding: 20px 50px;
+  margin:100px auto;
+  transition: none;
+  text-align: center;
+  border-radius:10px;
+}
+.conatact-data-field{
+  text-align: left;
+}
+.contact-form span{
+  color: #fff;
+  font-size: 15px;
+}
+.contact-form input,
+.contact-form textarea{
+  display: block;
+  width: 450px;
+  margin-bottom:20px ;
+}
+.contact-form input ,.contact-form textarea{
+  padding: 8px 20px;
+  border:none;
+  outline: none ;
+  border: 1px solid #444;
+  color: #888;
+  transition: .3s;
+  border-radius: 5px;
+}
+.contact-form input::placeholder,.contact-form textarea::placeholder{
+  font-size: 14px;
+  letter-spacing: 3px;
+}
+.contact-form input:focus{
+  border-color: #b71540;
+}
+
+.contact-form input{
+height: 40px;
+}
+.contact-form input[type='submit']{
+  background:#0652DD;
+  color: #fff;
+  outline: none;
+  border:none;
+  border-radius: 5px;
+  display: inline;
+
+}
+.contact-form input[type='submit']:hover{
+  background: #1289A7;
+  border:none;
+}
+.conatact-data-btn{
+  position: relative;
+}
+.contact-form i{
+  position: absolute;
+  color: #fff;
+  top: 10px;
+
+}
+
+
+
+
+
+@media (max-width:1200px) {
+  .contact-form{
+    width: 450px;
+  }
+  .contact-form input,
+  .contact-form textarea{
+    width: 350px;
+  }
+
+}
+@media (max-width:750px) {
+
+  .navbar .logo {
+    margin-top: 0px !important;
+  }
+  .Mycontainer{
+    padding: 0px;
+  }
+  .conatact-data-field{
+    text-align: center;
+  }
+  .contact-form{
+    width: 300px;
+    padding:10px 25px ;
+  }
+  .contact-form input,
+  .contact-form textarea{
+    width: 250px;
+    padding: 8px 0px 8px 10px;
+  }
+
+
+}
