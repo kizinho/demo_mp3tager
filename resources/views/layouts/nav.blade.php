@@ -3,16 +3,16 @@
 <div class="navbar">
     <div class="logo">
         <a href="{{url('/')}}"><i class="fas fa-compact-disc"></i>
-            Mp3Tag<span>.com</span></a>
+            Mp3Tager<span>.com</span></a>
     </div>
     <div class="nav-links">
         <label id="chk-list-hide"><i class="fa fa-bars"></i></label>
         <ul>
             <li><a class="@if(request()->path() == '/') active @endif" href="{{url('/')}}" class="active">home</a></li>
-            <li><a class="@if(request()->path() == 'upload') active @endif @if(request()->path() == 'upload') active @endif" href="{{url('upload')}}" class="start-upload-btn">Start Uploading</a></li>
+            <li><a class="@if(request()->path() == 'upload') active @endif @if(request()->path() == 'tags') active @endif" href="{{url('upload')}}" class="start-upload-btn">Start Uploading</a></li>
             <li>
                 <!-- doropdown list -->
-                <div class="dropdown ">
+                <div class="dropdown active">
                     <button class="btn dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Contact 
                     </button>
@@ -25,10 +25,14 @@
                 </div>
                 <!-- End of dropdown list -->
             </li>
+            @if($user == false)
+            
             <li><a class="@if(request()->path() == 'signup') active @endif"  href="{{url('signup')}}">Sign up</a></li>
             <li><a class="@if(request()->path() == 'signin') active @endif"  href="{{url('signin')}}">Sign in<i class="fas fa-sign-in-alt"></i></a></li>
+            @else
+            <li><a class="@if(request()->path() == 'dashboard') active @endif"  href="{{url('dashboard')}}">{{$user->username}} <i class="fas fa-user"></i></a></li>
+            @endif
               <li id="google_translate_element"></li>
-
 
 
         </ul>

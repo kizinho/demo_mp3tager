@@ -1,14 +1,11 @@
-
 body,html{
     font-family: 'Roboto';
     background: rgb(29, 63, 102);
     height: 100vh;
 }
 
-.Mycontainer{
-  margin-top: 70px;
-  padding-left: 150px !important;
-  padding-right: 150px !important;
+.Mycontainer form{
+  margin-top: 100px;
 }
 .tag-field{
   margin: 20px auto;
@@ -72,8 +69,11 @@ body,html{
 .browse-btn-cont{
   position: relative;}
 
-#aud-text2{
-  padding-left: 100px;
+.song-txt-title::placeholder{
+  padding-left:0px!important;
+}
+.song-txt-title{
+  padding-left: 100px !important;
 }
 #img-text{
   padding-left: 100px;
@@ -88,7 +88,7 @@ body,html{
 .browse-btn:hover{
   background: #555;
 }
-.select-btn  input[type='radio']{
+.select-btn  input[type='checkbox']{
   display: none;
 }
 .select-btn label{
@@ -96,7 +96,11 @@ body,html{
   text-transform: capitalize;
   cursor: pointer;
 }
-.lbl-sel .lbl-sel-none label {
+.lbl-sel{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.lbl-sel label {
   padding-left: 0!important;
 }
 .select-btn .lbl-sel{
@@ -179,6 +183,43 @@ body,html{
 
 
 
+.img-txt-style input { 
+  padding-left: 100px !important;
+}
+.img-txt-style input::placeholder{
+  padding-left: 0px !important;
+ }
+
+.optionSelect select{
+  margin:auto;
+  width:150px;
+  height:40px;
+  padding:10px;
+  cursor: pointer;
+  border:none;
+  color:#fff;
+  background:#747d8c;
+  text-transform: capitalize;
+  border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+@media (min-width:986px) {
+  .Mycontainer{
+    margin-top: 100px;
+    width:915px;
+    margin: auto;
+  }
+}
+
 @media (max-width:986px) {
   .navbar .logo{
     margin-left: -20px;
@@ -209,7 +250,7 @@ body,html{
   display: flex;
   flex-direction: column;
 }
-.lbl-sel .lbl-sel-no label{
+.lbl-sel label{
   margin-left: 0px !important;
 }
 .lbl-sel label:first-child{

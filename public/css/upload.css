@@ -1,179 +1,188 @@
 *{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 body,html{
-  font-family: 'Roboto';
-  background: rgb(29, 63, 102);
-  height: 100vh;
+    font-family: 'Roboto';
+    background: rgb(29, 63, 102);
+    height: 100vh;
+}
+.padding{
+    padding: 4px!important
+}
+.dropzone {
+    min-height: 150px;
+    border: 3px dashed #DA0353!important;
+    background: #f5f5f5!important;
+    padding: 20px;
 }
 
 .navbar .nav-links ul {
-  list-style:none;
-  float: right;
+    list-style:none;
+    float: right;
 }
 .navbar .nav-links ul li{
-  display: inline-block;
+    display: inline-block;
 }
 .navbar .nav-links ul li a {
-  color : white;
-  text-decoration: none;
-  text-transform: capitalize;
-  box-sizing: border-box;
-  padding:10px;
-  margin: 0px 10px;
-  transition: .3s;
+    color : white;
+    text-decoration: none;
+    text-transform: capitalize;
+    box-sizing: border-box;
+    padding:10px;
+    margin: 0px 10px;
+    transition: .3s;
 }
 .navbar .nav-links ul li a:hover,.navbar .nav-links ul li a.active {
-color: #fff;
-background: #DA0353;
+    color: #fff;
+    background: #DA0353;
 }
 
 .container{
-  padding: 0px !important;
-  flex:1;
+    padding: 0px !important;
+    flex:1;
 }
 .tabs-container{
-  background: #fff;
-  padding: 20px 30px;
-  width: 80%;
-  height: auto;
-  margin:60px auto;
-  min-width: 300px;
-  margin-top: 100px;
+    background: #fff;
+    padding: 20px 30px;
+    width: 80%;
+    height: auto;
+    margin:60px auto;
+    min-width: 300px;
+    margin-top: 100px;
 }
 .section-container{
-  width: fit-content;
-  margin: auto;
+    width: fit-content;
+    margin: auto;
 }
 /* ---------------------files styling---------------------- */
 .section-container p {
-  font-size: 14px;
-  padding: 3px 20px;
-  color: #e74c3c;
-  margin-left: -10px;
+    font-size: 14px;
+    padding: 3px 20px;
+    color: #e74c3c;
+    margin-left: -10px;
 }
 
 .data-field-btn input{
-  width: 200px;
-  color: #fff;
-  border-radius: 30px
+    width: 200px;
+    color: #fff;
+    border-radius: 30px
 }
 /* ---------------------search styling---------------------- */
 .data-field-search{
-  padding: 10px 30px;
-  text-align: center;
+    padding: 10px 30px;
+    text-align: center;
 }
 .data-field-search form{
-  position: relative;
-  margin: auto;
+    position: relative;
+    margin: auto;
 }
 
 .data-field-search input[type='search']{
-  width: 100%;
-  height: 40px;
-  padding: 5px 20px;
-  outline: none;
-  box-shadow: none;
-  font-size: 14px;
-  color: #777;
-  border:1.4px solid #777 ;
-  border-radius:0px 3px 3px 0;
-  transition: .2s;
-  display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px 20px;
+    outline: none;
+    box-shadow: none;
+    font-size: 14px;
+    color: #777;
+    border:1.4px solid #777 ;
+    border-radius:0px 3px 3px 0;
+    transition: .2s;
+    display: block;
 
 }
 
 .data-field-search input:focus{
-  border:2px solid #74b9ff ;
-  box-shadow: 0 0 5px #74b9ff;
+    border:2px solid #74b9ff ;
+    box-shadow: 0 0 5px #74b9ff;
 }
 
 .data-field-search input[type='submit']{
-  padding: 7px 40px;
-  background: #74b9ff;
-  border-radius: 4px;
-  border:none;
-  color: #fff;
-  outline:none;
-  transition: .3s;
-  margin:20px auto;
+    padding: 7px 40px;
+    background: #74b9ff;
+    border-radius: 4px;
+    border:none;
+    color: #fff;
+    outline:none;
+    transition: .3s;
+    margin:20px auto;
 }
 .data-field-search input[type='submit']:hover{
-  background: #0984e3;
+    background: #0984e3;
 }
 
 .data-field-search i{
-  margin-left: -30px;
-  color: #fff;
-  line-height: 20px
+    margin-left: -30px;
+    color: #fff;
+    line-height: 20px
 }
 
 @media (max-width:700px){
-  .data-field-search input{
-    margin: auto;
-  }
-  .data-field-btn input{
-    width:100px;
-  }
-  .section-container{
-    width: fit-content;
-    padding: 20 auto;
-  }
-  .section-container p span{
-    display: block;
-    text-align: center;
-  }
-  .section-container .data-field{
-    padding-left: 0px;
-  }
-  .section-container .data-field,.data-field-search{
-    text-align: center;
-  }
-  .section-container .data-field input[type='text']{
-    width: 200px;
-  }
+    .data-field-search input{
+        margin: auto;
+    }
+    .data-field-btn input{
+        width:100px;
+    }
+    .section-container{
+        width: fit-content;
+        padding: 20 auto;
+    }
+    .section-container p span{
+        display: block;
+        text-align: center;
+    }
+    .section-container .data-field{
+        padding-left: 0px;
+    }
+    .section-container .data-field,.data-field-search{
+        text-align: center;
+    }
+    .section-container .data-field input[type='text']{
+        width: 200px;
+    }
 }
 
 @media (min-width:850px) {
-  .navbar .logo{
-    margin-top: -15px;
-  }
+    .navbar .logo{
+        margin-top: -15px;
+    }
 }
 @media (max-width:850px) {
-  .navbar .logo{
-    margin-left: -20px;
-    font-size: 16px;
-    line-height: 60px;
-    margin-top: -15px;
-  }
-  .navbar .logo i{
-    top:-5px !important;
-    left: 15px;
-    font-size: 28px;
-    line-height: 70px;
-  }
-  .navbar .logo span{
-    font-size: 18px;
-  }
+    .navbar .logo{
+        margin-left: -20px;
+        font-size: 16px;
+        line-height: 60px;
+        margin-top: -15px;
+    }
+    .navbar .logo i{
+        top:-5px !important;
+        left: 15px;
+        font-size: 28px;
+        line-height: 70px;
+    }
+    .navbar .logo span{
+        font-size: 18px;
+    }
 
 }
 @media (max-width:750px) {
-.navbar .logo{
-  margin-top: 0px;
-}
+    .navbar .logo{
+        margin-top: 0px;
+    }
 
 }
 @media (max-width:500px){
-  .tabs-container ul li span{
-    display: none;
-  }
-  .section-container .data-field input[type='text']{
-    width: 150px;
-  }
-  .section-container .data-field label{
-    padding: 11.5px 3px;
-    font-size: 12px;
-  }
+    .tabs-container ul li span{
+        display: none;
+    }
+    .section-container .data-field input[type='text']{
+        width: 150px;
+    }
+    .section-container .data-field label{
+        padding: 11.5px 3px;
+        font-size: 12px;
+    }
 }

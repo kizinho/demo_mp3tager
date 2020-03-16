@@ -14,12 +14,6 @@ body{
     line-height: 40px;
   }
 }
-@media (max-width:850px) {
-/* navbar */
-.navbar .nav-links ul li a.active{
-  background: none !important;
-}
-/* End of navbar */
 
 
 @media (max-width:876px) {
@@ -28,7 +22,7 @@ body{
   display: flex;
   justify-content: center;
   position: relative;
-}
+  }
 
 .nav-links .fa-bars{
   display: block;
@@ -114,9 +108,9 @@ body{
   /* navbar */
 
 
-@media (max-width:300px) {
+  @media (max-width:300px) {
   .logo span:last-child {
     display: none;
   }
 
-}
+  }

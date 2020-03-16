@@ -1,81 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <title>Sign up</title>
-    <link rel="stylesheet" href="../css/font.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/formStyle.css">
-    <link rel="stylesheet" href="../css/responsive.css">
-</head>
-<body>
-  <!-- --------------Start of navigation bar--------- -->
-      <div class="navbar">
-        <div class="logo">
-          <a href="../index.html"><i class="fas fa-compact-disc"></i>
-          KizitoAdike <span>Music</span></a>
-        </div>
-      <div class="nav-links">
-        <input type="checkbox" id="chk-list-hide">
-        <label for="chk-list-hide">
-          <i class="fa fa-bars"></i>
-        </label>
-        <ul>
-          <li><a href="../index.html">home</a></li>
-          <li><a href="../index.html#aboutUs">about us</a></li>
-          <li><a href="../index.html#contactUs">contact Us</a></li>
-          <li><a href="./upload.html"> start uploading</a></li>
-        </ul>
-      </div>
-      </div>
-  <!-- --------------Start of Body----------->
-  <div class="container">
+@section('title')
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Tell the browser to be responsive to screen width -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Mp3tag Register">
+<meta name="author" content="Mp3tag">
+<meta property="og:description" content="Mp3tag Register" />
+<title>Mp3tag - Register Page</title>
+<link rel="stylesheet" href="{{asset('css/formStyle.css')}}">
+@endsection
+
+@extends('layouts.app')
+@section('content')
+<div class="Mycontainer">
     <div class="form-container">
         <div class="side-form-box">
-          <img src="../images/signup.jpg" alt="band">
-          <p class="signup-p">already member ? <a href="./signin.html">sign in</a></p>
+            <img src="{{asset('images/signup.jpg')}}" alt="band">
+            <p class="signup-p">already member ? <a href="{{url('signin')}}">sign in</a></p>
         </div>
         <div class="form-box">
-            <form action="" method="POST" enctype="multipart/form-data">
-              <div class="form-field">
-                <h3>Join the amazing world of Music</h3>
-                <br>
-                <p>create an account and join our amazing world </p>
-              </div>
+            <form id='register'>
+
+                <div class="form-field">
+                    <h3>Join the amazing world of Mp3tag Editing</h3>
+                    <br>
+                    <p>create an account and let us save your file forever </p>
+                </div>
                 <div class="form-field form-field-sigup">
                     <label><i class="far fa-user"></i></label>
-                    <input type="text" placeholder="Username"  required>
+                    <input type="hidden"  id="actions" value="tag">
+                    <input type="text" id="username" placeholder="Username"  required>
                 </div>
                 <div class="form-field form-field-sigup">
                     <label><i class="far fa-envelope"></i></label>
-                    <input type="email" placeholder="mail"  required>
+                    <input type="email" id="email" placeholder="mail"  required>
                 </div>
                 <div class="form-field form-field-sigup">
                     <label><i class="fas fa-key"></i></label>
-                    <input type="password" placeholder="Password" required >
+                    <input type="password" id="password" placeholder="Password" required >
                 </div>
                 <div class="form-field form-field-sigup">
                     <label><i class="fas fa-lock"></i></label>
-                    <input type="password" placeholder="confirm Password" required >
+                    <input type="password" id="confirm_password" placeholder="confirm Password" required >
                 </div>
-                <p class="signup-resp-p">already member ? <a href="./signin.html">sign in</a></p>
                 <div class="form-field form-field-sigup">
-                    <input type="submit" value="Sign Up">
-                </div>
-            </form>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="customCheck1" class="custom-control-input" id="customCheck1" onclick="if (this.checked)">
+                        <label class="custom-control-label" for="customCheck1">I agree to all <a class="p" href="{{url('tos')}}">Terms</a></label> 
+                    </div> 
+</div>
+            
+        <div class="form-field form-field-sigup">
+            <input type="submit" value="Sign Up">
         </div>
-    </div>
-    </div>
-    <div class="footer">
-      <p>all copyrights reserved</p>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
-    </div>
-<script src="js/script.js"></script>
-</body>
+    </form>
+</div>
+</div>
+</div>
+@section('script')
+<script>
+    /*
+     register
+     */
+    $('#register').submit(function (event) {
+        event.preventDefault();
+        var checkbox = document.getElementById("customCheck1");
+        if (checkbox.checked) {
+        } else {
+            toastr.warning("You Must Agree To Our Terms, Click the CheckBox", {timeOut: 50000});
+            return false;
+        }
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function () {
+                $(".modal").show();
+            },
+            complete: function () {
+                $(".modal").hide();
+            }
+        });
+        jQuery.ajax({
+            url: "{{url('/signup')}}",
+            type: 'POST',
+            data: {
+                username: jQuery('#username').val(),
+                email: jQuery('#email').val(),
+                password: jQuery('#password').val(),
+                confirm_password: jQuery('#confirm_password').val(),
+                actions: jQuery('#actions').val()
+            },
+            success: function (data) {
+                if (data.data['status'] === 401) {
+                    jQuery.each(data.data['message'], function (key, value) {
+                        var message = ('' + value + '');
+                        toastr.options.onHidden = function () {
+                            //window.location.href = "{{url('/register')}}";
+                        };
+                        toastr.error(message, {timeOut: 50000});
+                    });
+                    return false;
+                }
+                if (data.data['status'] === 200) {
+                    jQuery.each(data.data['message'], function (key, value) {
+                        var message = ('' + value + '');
+                        toastr.options.onHidden = function () {
+                            window.location.href = "{{url('/signin')}}";
+                        };
+                        toastr.success(message, {timeOut: 50000});
+                    });
+                    return false;
+                }
+            }
 
-</html>
+        });
+    });</script> 
+@endsection
+@endsection

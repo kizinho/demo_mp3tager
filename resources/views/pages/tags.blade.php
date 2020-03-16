@@ -24,17 +24,18 @@
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="https://tagmp3.net/images/tagmp3-1200x630.png" />
 <meta name="twitter:image:alt" content="MP3 tag editor - tag mp3 files online | tagmp3.net" />
-
 <link rel="stylesheet" href="{{asset('css/tags.css')}}">
 @endsection
 @extends('layouts.app')
 @section('content')
 <!-- Start of tags pages -->
-<div class="container">
+<div class="Mycontainer">
     <div class="upload-container">
-        <form action="">
 
+        <form method="POST" action="{{ route('tags') }}" enctype="multipart/form-data">
+            @csrf
             @foreach($details as $tag)
+            <input type="hidden"  name='id[]' value="{{ $tag->id }}">
             <div class="tag-field-head alert alert-success">
                 <div class="row">
                     <div class="col-sm tag-title">
@@ -57,48 +58,43 @@
                     </div>
                 </div>
             </div>
-            <div class="tag-field tag-field-join">
-                <div class="row">
-                    <div class="col-sm">
-                        <label class="tag-responsive-p">Join Voice Tag or Join Another Song ?</label>
-                        <input type="file" id="mp3-file-2" data-index="2"  class="d-nn" accept=".mp3">
-                    </div>
-                    <div class="col-sm browse-btn-cont">
-                        <label for="mp3-file-2" class="browse-btn browse-btn-js">Browse</label>
-                        <input type="text" placeholder="mp3 ,  wav"  data-select="txt2" id="aud-text2" readonly>
-                    </div>
-                </div>
-                <div class="select-btn">
-                    <div class="lbl-sel lbl-sel-none">
-                        <label for="none-song">none</label>
-                        <input type="radio" name="JoinSelect" value="none" id='none-song' class="none-song-rad" checked='checked'>
-                        <label for="none-song" class="none-song-lbl">✔</label>
-                    </div>
-                    <div class="lbl-sel">
-                        <label for="start-song">at beginning</label>
-                        <input type="radio" name="JoinSelect" value="strat" id='start-song'class="start-song-rad">
-                        <label for="start-song" class="start-song-lbl">✔</label>
-                    </div>
-                    <div class="lbl-sel">
-                        <label for="end-song">at end</label>
-                        <input type="radio" name="JoinSelect" value="end" id='end-song' class="end-song-rad" >
-                        <label for="end-song" class="end-song-lbl">✔</label>
-                    </div>
-                </div>
-            </div>
+       <div class="tag-field tag-field-join" data-render="{{ $loop->iteration }}"> <!-- variable here -->
+    <div class="row">
+        <div class="col-sm">
+          <label class="tag-responsive-p">Join Voice Tag or Join Another Song ?</label>
+          <input type="file" id="mp3-file-2-{{ $loop->iteration }}" name="viocetag[]" data-type='txt'  class="d-nn" accept=".mp3"> <!-- variable here -->
+      </div>
+      
+    <div class="col-sm browse-btn-cont">
+          <label for="mp3-file-2-{{ $loop->iteration }}" id="lbl-{{ $loop->iteration }}" class="browse-btn browse-btn-js">Browse</label> <!-- variable here -->
+          <input type="text" placeholder="mp3 ,  wav"  class="song-txt-title"  id="aud-text2-{{ $loop->iteration }}" readonly> <!-- variable here -->
+    </div>
+  </div>
+  <!--------------------------------------- selection -------------------------->
+  <div class="select-btn optionSelect" data-render="{{ $loop->iteration }}"> <!-- variable here -->
+    <select name="joinSelect[]" ><!-- variable here -->
+      <option value="none">none</option>
+      <option value="start">at beginning</option>
+      <option value="end">at end</option>
+    </select>
+</div>
+</div>
 
-            <div class="tag-field">
-                <div class="row">
-                    <div class="col-sm">
-                        <label class="tag-responsive-p">Select image file (up to 25Mb)</label>
-                        <input type="file" id='img-file'  data-index='0' class="d-nn" accept=".png,.jpg,.jpeg">
-                    </div>
-                    <div class="col-sm browse-btn-cont">
-                        <label for="img-file" class="browse-btn">Browse</label>
-                        <input type="text" placeholder="png , jpg , jpeg" data-select="txt0"  id="img-text" readonly>
-                    </div>
-                </div>
-            </div>
+<div class="tag-field tag-field-img"  data-render="{{ $loop->iteration }}"> <!-- variable here -->
+    <div class="row">
+        <div class="col-sm">
+          <label class="tag-responsive-p">Select image file (up to 25Mb)</label>
+          <input type="file" id='img-file-{{ $loop->iteration }}' name="coverart[]" data-type='img' class="d-nn" accept=".png,.jpg,.jpeg"> <!-- variable here -->
+      </div>
+    <div class="col-sm browse-btn-cont img-txt-style">
+          <label for="img-file-{{ $loop->iteration }}" class="browse-btn">Browse</label> <!-- variable here -->
+          <input type="text" placeholder="png , jpg , jpeg"   id="img-text-{{ $loop->iteration }}" readonly> <!-- variable here -->
+    </div>
+  </div>
+</div>
+
+
+        
 
             <div class="tag-field tag-responsive">
                 <div class="row">
@@ -106,7 +102,7 @@
                         <label>Title</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Enter Title' value="{{$tag->title}}" >
+                        <input type="text" placeholder='Enter Title' name="title[]" value="{{$tag->title}}" >
                     </div>
                 </div>
             </div>
@@ -116,7 +112,7 @@
                         <label>Artist</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Enter Artist Name' value=" {{$tag->artist}}">
+                        <input type="text" placeholder='Enter Artist Name' name="artist[]" value=" {{$tag->artist}}">
                     </div>
                 </div>
             </div>
@@ -126,7 +122,7 @@
                         <label>Album</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Album' value=" {{$tag->album}}">
+                        <input type="text" placeholder='Album' name="album[]" value=" {{$tag->album}}">
                     </div>
                 </div>
             </div>
@@ -218,18 +214,19 @@
                 </div>
             </div>
             @endif
+           
             @endforeach
             <div class="tag-field tag-responsive tag-field-save">
                 <div class="row">
                     <div class="col-sm">
                         <div class="lbl-sel-data">
                             <label for="temp-data">(save data for 10 mins)</label>
-                            <input type="radio" name="saveData" value="10mins" id='temp-data' class="temp-data-chk" checked='checked'>
+                            <input type="radio" name="saveData" value="0" id='temp-data' class="temp-data-chk" checked='checked'>
                             <label for="temp-data" class="temp-data">✔</label>
                         </div>
                         <div class="lbl-sel-data">
                             <label for="forever-data" >(save data forever)</label>
-                            <input type="radio" name="saveData" value="forever" id='forever-data' class="forever-data-chk">
+                            <input type="radio" name="saveData" value="1" id='forever-data' class="forever-data-chk">
                             <label for="forever-data" class="forever-data">✔</label>
                         </div>
                     </div>
@@ -246,5 +243,9 @@
 
         </form>
         <!-- End of container -->
+    </div>
+</div>
+@section('script')
 
+@endsection
 @endsection

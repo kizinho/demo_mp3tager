@@ -5,8 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
-
-class Token {
+class LoginCheck {
 
     /**
      * Handle an incoming request.
@@ -32,10 +31,11 @@ class Token {
             $res = json_decode($response->getBody());
             Cache::put($token, $res, 525600);
         }
+      
         if (empty($res)) {
-           return redirect('/signin');
-        } else {
             return $next($request);
+        } else {
+            return redirect('/dashboard');
         }
     }
 

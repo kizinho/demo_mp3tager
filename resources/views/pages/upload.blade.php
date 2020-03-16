@@ -1,4 +1,3 @@
-
 @section('title')
 <title>MP3 tag editor - tag mp3 files online | the best mp3 tagger 2020</title>
 <meta name="description" content="Tagmp3.net is a free mp3 tag editor available online where you can tag mp3 files, change id3 tags, edit mp3 image, add or change existing album art in mp3 and change mp3 cover image." />
@@ -30,22 +29,33 @@
 @endsection
 @extends('layouts.app')
 @section('content')
-  <!-- --------------Start of Body----------->
+<!-- --------------Start of Body----------->
 <div class="container">
-<div class="tabs-container">
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" id="files-tab" data-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="true"><span> Upload Files </span><i class="far fa-folder-open"></i></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="links-tab" data-toggle="tab" href="#links" role="tab" aria-controls="links" aria-selected="false"><span> Enter URL </span><i class="fas fa-link"></i></a>
-    </li>
-  </ul>
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="files" role="tabpanel" aria-labelledby="files">
-        <!-- Strat of inside  file choose -->
-        <form class="section-container">
-                          <div class="dz-message"><h4>Drag & Drop Files Here</h4>
+    <div class="tabs-container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="files-tab" data-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="true"><span> Upload Files </span><i class="far fa-folder-open"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="links-tab" data-toggle="tab" href="#links" role="tab" aria-controls="links" aria-selected="false"><span> Enter URL </span><i class="fas fa-link"></i></a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="files" role="tabpanel" aria-labelledby="files">
+                <!-- Strat of inside  file choose -->
+                <form class="section-container">
+                    <input type="hidden" name="user_token" id="user_token" value="testnn">
+                    <div class="data-field">
+
+                        <div class="card text-left dropzone dropzone-area " id="myUpload">
+
+
+                            <div class="card-body">
+
+                                <div  class="fallback">
+                                    <input  name="file" type="file" multiple />
+                                </div>
+                                <div class="dz-message"><h4>Drag & Drop Files Here</h4>
                                     <br/>
                                     <span class="btn btn-success text-white padding">Choose Files</span>
 
@@ -59,25 +69,25 @@
                         </div>
                     </div>
 
-        <div class="data-field data-field-btn ">
-          <input type="submit" name="btn-submit" value="upload">
+                    <div class="data-field data-field-btn ">
+                        <input type="submit" id="submit-file"  value="upload">
+                    </div>
+                </form>
+                <!-- End of inside file choose -->
+            </div>
+            <div class="tab-pane fade" id="links" role="tabpanel" aria-labelledby="links-tab">
+                <!-- Strat of inside search bar -->
+                <div class="data-field data-field-search">
+                    <p>Please enter a valid audio url</p>
+                    <form action="">
+                        <input type="search" placeholder="https://www.yourdomain.com/yoursong.mp3" required>
+                        <input type="submit"  value="Go"><i class="fas fa-sign-in-alt"></i>
+                    </form>
+                </div>
+                <!-- End of inside search bar -->
+            </div>
         </div>
-        </form>
-        <!-- End of inside file choose -->
     </div>
-    <div class="tab-pane fade" id="links" role="tabpanel" aria-labelledby="links-tab">
-      <!-- Strat of inside search bar -->
-          <div class="data-field data-field-search">
-              <p>Plaese enter a valid audio url</p>
-                <form action="">
-                <input type="search" placeholder="https://www.yourdomain.com/yoursong.mp3" required>
-                <input type="submit"  value="Go"><i class="fas fa-sign-in-alt"></i>
-            </form>
-          </div>
-      <!-- End of inside search bar -->
-      </div>
-  </div>
-</div>
 </div>
 @section('script')
 <script src="{{asset('dropzone/dropzone.min.js')}}"></script>
@@ -117,8 +127,8 @@ Dropzone.options.myUpload = {
 
         });
         this.on("success", function (file, responseText) {
-            if (responseText.status === 401) {
-                jQuery.each(responseText.message, function (key, value) {
+            if (responseText.data['status'] === 401) {
+                jQuery.each(responseText.data['message'], function (key, value) {
                     var message = ('' + value + '');
                     toastr.options.onHidden = function () {
                         $('.dz-preview').remove();
@@ -130,8 +140,8 @@ Dropzone.options.myUpload = {
 
                 return false;
             }
-            if (responseText.status === 422) {
-                var message = responseText.message;
+            if (responseText.data['status'] === 422) {
+                var message = responseText.data['message'];
                 toastr.options.onHidden = function () {
                     $('.dz-preview').remove();
                     $(".modal").hide();
@@ -156,4 +166,3 @@ Dropzone.options.myUpload = {
 
 @endsection
 @endsection
-

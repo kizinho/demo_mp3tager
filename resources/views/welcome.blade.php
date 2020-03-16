@@ -39,7 +39,11 @@
                         join the world of free , easy , fast and reliable music tag editing website.
                     </p>
                     <a href="{{url('upload')}}" id="Upload-btn">Upload</a>
-                    <a href="{{url('signup')}}">sign up</a>
+                      @if($user == false)
+                      <a href="{{url('signup')}}">sign up</a>
+                      @else
+                    <a href="{{url('dashboard')}}">Dashboard</a>
+                    @endif
                 </div>
                 <div class="section-img section-img-1"></div>
             </section>
