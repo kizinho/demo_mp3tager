@@ -61,9 +61,9 @@
                                 </div>
 
                                 <div class="alert alert-info small" role="alert">
-                                    Allowed file types: MP3, MP4, M4A, WMA, AAC, WAV, 3GP, OGV, AMR, FLAC
+                                    Allowed file types: MP3
                                 </div>
-                                <div class="alert alert-secondary small text-center " >Files updated this year: &nbsp; <span class="text-danger">1,094,126</span></div>
+                                <div class="alert alert-secondary small text-center " >Mp3 Edited this year: &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
                             </div>
                         </div>
                     </div>
@@ -99,7 +99,7 @@ Dropzone.options.myUpload = {
     parallelUploads: 6,
     maxFiles: 6,
     timeout: 3000000,
-    acceptedFiles: '.mp3,.mp4,.m4a,.wma,.aac,.wav,.3gp,.ogv,.amr,.flac',
+    acceptedFiles: '.mp3',
     addRemoveLinks: true,
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
