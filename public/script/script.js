@@ -39,6 +39,12 @@ $("input[type = file]").change(function(e){
   if($(this).attr('data-type') ==='img')
   $(mylbltext).val(e.target.files[0].name);
 });
-
+setInterval(function(){ 
+if ( $('html').hasClass('translated-ltr')) {
+  $('.navbar').css('margin-top','30px');
+}else{
+  $('.navbar').css('margin-top','0px');
+}
+}, 3000);
 });
 

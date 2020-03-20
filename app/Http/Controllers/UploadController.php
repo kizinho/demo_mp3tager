@@ -175,7 +175,7 @@ class UploadController extends Controller {
             foreach ($voicetags as $key => $value) {
                 if (!is_array($value)) {
                     $output[] = [
-                        'name' => 'voicetag[]',
+                        'name' => 'voicetag['.$key.']',
                         'contents' => fopen($value->getPathname(), 'r'),
                         'filename' => $value->getClientOriginalName()
                     ];
@@ -188,7 +188,7 @@ class UploadController extends Controller {
             foreach ($coverarts as $key => $cover) {
                 if (!is_array($cover)) {
                     $output[] = [
-                        'name' => 'coverart[]',
+                        'name' => 'coverart['.$key.']',
                         'contents' => fopen($cover->getPathname(), 'r'),
                      'filename' => $cover->getClientOriginalName()
                     ];
@@ -196,7 +196,6 @@ class UploadController extends Controller {
                 }
             }
         }
-
 
   $output [] = [
             'name' => 'data',

@@ -42,8 +42,8 @@
             @csrf
             @foreach($details as $key => $tag)
 
-            <input type="hidden"  name='id[]' value="{{ $tag->id }}">
-            <input type="hidden"  name='path[]' value="{{ $tag->path }}">
+            <input type="hidden"  name='id[{{$key}}]' value="{{ $tag->id }}">
+            <input type="hidden"  name='path[{{$key}}]' value="{{ $tag->path }}">
             <div class="tag-field-head alert alert-success">
                 <div class="row">
                     <div class="col-sm tag-title">
@@ -70,7 +70,7 @@
                 <div class="row">
                     <div class="col-sm">
                         <label class="tag-responsive-p">Join Voice Tag or Join Another Song ?</label>
-                        <input type="file" id="mp3-file-2-{{ $loop->iteration }}" name="viocetag[]" data-type='txt'  class="d-nn" accept=".mp3"> <!-- variable here -->
+                        <input type="file" id="mp3-file-2-{{ $loop->iteration }}" name="viocetag[{{$key}}]" data-type='txt'  class="d-nn" accept=".mp3"> <!-- variable here -->
                     </div>
 
                     <div class="col-sm browse-btn-cont">
@@ -80,7 +80,7 @@
                 </div>
                 <!--------------------------------------- selection -------------------------->
                 <div class="select-btn optionSelect" data-render="{{ $loop->iteration }}"> <!-- variable here -->
-                    <select name="joinSelect[]" ><!-- variable here -->
+                    <select name="joinSelect[{{$key}}]" ><!-- variable here -->
                         <option value="0">none</option>
                         <option value="1">at beginning</option>
                         <option value="2">at end</option>
@@ -91,8 +91,8 @@
             <div class="tag-field tag-field-img"  data-render="{{ $loop->iteration }}"> <!-- variable here -->
                 <div class="row">
                     <div class="col-sm">
-                        <label class="tag-responsive-p">Select image file (up to 25Mb)</label>
-                        <input type="file" id='img-file-{{ $loop->iteration }}' name="coverart[]" data-type='img' class="d-nn" accept=".png,.jpg,.jpeg"> <!-- variable here -->
+                        <label class="tag-responsive-p">Select image file (up to 2Mb) </label>
+                        <input type="file" id='img-file-{{ $loop->iteration }}' name="coverart[{{$key}}]" data-type='img' class="d-nn" accept=".png,.jpg,.jpeg"> <!-- variable here -->
                     </div>
                     <div class="col-sm browse-btn-cont img-txt-style">
                         <label for="img-file-{{ $loop->iteration }}" class="browse-btn">Browse</label> <!-- variable here -->
@@ -110,7 +110,7 @@
                         <label>Title</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Enter Title' name="title[]" value="{{$tag->title}}" >
+                        <input type="text" placeholder='Enter Title' name="title[{{$key}}]" value="{{$tag->title}}" >
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
                         <label>Artist</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Enter Artist Name' name="artist[]" value=" {{$tag->artist}}">
+                        <input type="text" placeholder='Enter Artist Name' name="artist[{{$key}}]" value=" {{$tag->artist}}">
                     </div>
                 </div>
             </div>
@@ -130,7 +130,7 @@
                         <label>Album</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Album' name="album[]" value=" {{$tag->album}}">
+                        <input type="text" placeholder='Album' name="album[{{$key}}]" value=" {{$tag->album}}">
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@
                         <label>Track Number</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Track Number' name="track_number[]" value=" {{$tag->track_number}}">
+                        <input type="text" placeholder='Track Number' name="track_number[{{$key}}]" value=" {{$tag->track_number}}">
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
                         <label>Genre</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Genre' name="genre[]" value=" {{$tag->genre}}">
+                        <input type="text" placeholder='Genre' name="genre[{{$key}}]" value=" {{$tag->genre}}">
                     </div>
                 </div>
             </div>
@@ -160,7 +160,7 @@
                         <label>Comments</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='comments' name="comments[]" value=" {{$tag->comments}}">
+                        <input type="text" placeholder='comments' name="comments[{{$key}}]" value=" {{$tag->comments}}">
                     </div>
                 </div>
             </div>
@@ -170,7 +170,7 @@
                         <label>Year</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='year' name="year[]" value=" {{$tag->year}}">
+                        <input type="text" placeholder='year' name="year[{{$key}}]" value=" {{$tag->year}}">
                     </div>
                 </div>
             </div>
@@ -180,7 +180,7 @@
                         <label>Publisher</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Publisher' name="publisher[]" value=" {{$tag->publisher}}">
+                        <input type="text" placeholder='Publisher' name="publisher[{{$key}}]" value=" {{$tag->publisher}}">
                     </div>
                 </div>
             </div>
@@ -190,7 +190,7 @@
                         <label>Encoded by</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Encoded by' name="encoded_by[]" value=" {{$tag->encoded_by}}">
+                        <input type="text" placeholder='Encoded by' name="encoded_by[{{$key}}]" value=" {{$tag->encoded_by}}">
                     </div>
                 </div>
             </div>
@@ -200,7 +200,7 @@
                         <label>Composer</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Composer' name="composer[]" value=" {{$tag->composer}}">
+                        <input type="text" placeholder='Composer' name="composer[{{$key}}]" value=" {{$tag->composer}}">
                     </div>
                 </div>
             </div>
@@ -211,7 +211,7 @@
                         <label>Encoder Settings</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Encoder Settings' name="encoder_settings[]" value=" {{$tag->encoder_settings}}">
+                        <input type="text" placeholder='Encoder Settings' name="encoder_settings[{{$key}}]" value=" {{$tag->encoder_settings}}">
                     </div>
                 </div>
             </div>
