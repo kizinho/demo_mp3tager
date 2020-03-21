@@ -88,7 +88,7 @@
                         if (data.data['status'] === 200) {
                             var message = data.data['message'];
                             toastr.options.onHidden = function () {
-                                window.location.href = "{{url('/upload')}}";
+                                window.location.href = "{{url('/dashboard')}}";
                             };
                             toastr.success(message, {timeOut: 50000});
 

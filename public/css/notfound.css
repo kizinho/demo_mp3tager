@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+body,html{
+    height:100vh;
+}
+body{
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .navbar .logo {
+    margin-top: -25px !important;
+  }
+  .Mycontainer{
+   flex:1;
+   margin:auto; 
+  }
+.notfound-content,.notfound-content-dup{
+    margin-top: 70px;
+    background:url('../Images/notfound.jpg');
+    background-size: cover;
+    width:800px;
+    height:450px;
+    padding-top: 50px;
+    padding-left: 50px;
+    display: flex;
+    justify-content: center;
+    
+}
+.notfound-content-dup h1{
+    color:#ccc;
+    font-size:50px;
+    text-align: center;
+}
+.notfound-content-dup p{
+    color:#ccc;
+    font-size:14px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+.notfound-content-dup a{
+    text-decoration: none;
+    background: #fff;
+    color:#2f2f31;
+    padding:10px 20px;
+    border-radius: 10px;
+    text-transform: capitalize;
+    font-weight: bold;
+    transition: .5s;
+    
+    
+}
+.notfound-content-dup a i{
+    margin-left: 10px;
+    color:#2f2f31;
+    transition: .5s;
+}
+.notfound-content-dup a:hover{
+    color: #fff;
+    background: #2f2f31;
+}
+ .notfound-content-dup a:hover i{
+    color: #fff;
+}
+.notfound-content-dup{
+    background: none;
+    text-align:center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:0px;
+    margin-top: -220px;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:986px) {
+    /* navbar */
+    .navbar{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    }
+    .navbar .logo {
+      margin-top: 0px !important;
+    }
+  .nav-links .fa-bars{
+    display: block;
+  }
+  .nav-links ul li {
+    display:block;
+    width: 100%;
+    padding: 10px 0px !important;
+  }
+  .nav-links ul li:hover{
+    background: #636e72;
+    cursor: pointer;
+    border-left: 4px solid #DA0353;
+  }
+  .nav-links ul li:hover a{
+    transition: .5s;
+    padding-left: 40px;
+    color: #DA0353;
+    border:none;
+    font-weight: bold
+  }
+  .navbar .nav-links ul li a:hover{
+    border:none !important;
+    color: #DA0353;
+    background: none !important;
+  }
+  .nav-links ul{
+    padding-left: 0px !important;
+    position: absolute;
+    left: 0;
+    top: 80px;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    z-index: 20;
+    margin-top: -20px;
+    transition: all 1s ease-out;
+    text-align: center;
+    clip-path:circle(100px at 90% -40%);
+    pointer-events:none;
+  }
+  .fade-nav{
+    transition: all 2s ease-out;
+    clip-path:circle(1500px at 90% -40%) !important;
+    pointer-events:all !important;
+  }
+  }
+
+  
+  @media screen and (max-width:786px){
+    .notfound-content{
+        width: 400px;
+        height: 227px;
+      }
+      .notfound-content-dup{
+        width: auto;
+        height:auto;
+        margin-top: 30px;
+        
+      }
+      .notfound-content-dup h1{
+          font-size: 50px;
+      }
+      .notfound-content-dup p{
+          font-size: 16px;
+          margin-bottom: 5px;
+          padding-bottom: 5px;
+      }
+      .notfound-content-dup a{
+
+          padding:5px 10px;
+      }
+      .notfound-content-dup a span{
+        display: none;
+      }
+      .notfound-content-dup a i{
+          margin-left: 2px;
+          font-size: 13px;
+      }
+   .notfound-content-dup{
+       text-align:center;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+       padding:0px;
+       margin: 0px;
+   }
+   .footer {
+    height: 120px !important;
+    line-height: 10px;
+    }
+  }
+  
+  @media screen and (max-width:476px){
+    .notfound-content{
+        width: 300px;
+        height: 170px;
+        padding-top: 0px;
+    }
+    
+  }

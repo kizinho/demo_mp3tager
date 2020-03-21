@@ -66,6 +66,7 @@ class AuthController extends Controller {
                 $token = $res->token->user->token;
                 session(['token' => $token]);
             }
+            session()->flash('login.content', 'Welcome');
             return [
                 'data' => $res
             ];

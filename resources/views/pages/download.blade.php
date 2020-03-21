@@ -1,40 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/font.css">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/download.css">
-  <link rel="stylesheet" href="../css/responsive.css">
-  <title>Download</title>
-</head>
-<body>
 
-  <!-- --------------Start of navigation bar--------- -->
-      <div class="navbar">
-        <div class="logo">
-          <a href="../index.html"><i class="fas fa-compact-disc"></i>
-          KizitoAdike <span>Music</span></a>
-        </div>
-      <div class="nav-links">
-        <input type="checkbox" id="chk-list-hide">
-        <label for="chk-list-hide">
-          <i class="fa fa-bars"></i>
-        </label>
-        <ul>
-          <li><a href="../index.html">home</a></li>
-          <li><a href="../index.html#aboutUs">about us</a></li>
-          <li><a href="../index.html#contactUs">contact Us</a></li>
-          <li><a href="./upload.html"> start uploading</a></li>
-        </ul>
-      </div>
-      </div>
-  <!-- --------------Start of Body----------->
-<div class="container">
+@section('title')
+<title>MP3 tag editor - tag mp3 files online | the best mp3 tagger 2020</title>
+<meta name="description" content="Mp3Tager.com is a free mp3 tag editor available online where you can tag mp3 files, change id3 tags, edit mp3 image, add or change existing album art in mp3 and change mp3 cover image." />
+<meta name="keywords" content="tagmp3, mp3tag, tag mp3, mp3 tag" />
+<meta name="apple-mobile-web-app-title" content="Mp3Tager" />
+<meta property="fb:app_id" content="" />
+<meta name="theme-color" content="#d1ecf1"/>
+<meta property="og:title" content="MP3 tag editor - tag mp3 files online | mp3tager.com" />
+<meta property="og:description" content="Mp3Tager.com is a free mp3 tag editor available online where you can tag mp3 files, change id3 tags, edit mp3 image, add or change existing album art in mp3 and change mp3 cover image." />
+<meta property="og:url" content="{{url('/')}}" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Mp3Tager" />
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@mp3tager">
+<meta name="twitter:title" content="MP3 tag editor - tag mp3 files online | mp3tager.com">
+<meta name="twitter:description" content="Mp3Tager.com is a free mp3 tag editor available online where you can tag mp3 files, change id3 tags, edit mp3 image, add or change existing album art in mp3 and change mp3 cover image.">
+<link rel="canonical" href="{{url('/')}}" />
+<meta property="og:image" content="{{asset('logo/logo.png') }}" />
+<meta property="og:image:alt" content="MP3 tag editor - tag mp3 files online | mp3tager.com">
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
+<meta name="twitter:image:alt" content="MP3 tag editor - tag mp3 files online | mp3tager.com" />
+<link rel="stylesheet" href="{{asset('css/download.css')}}">
+@endsection
+@extends('layouts.app')
+@section('content')
+<div class="Mycontainer">
     <div class="msg-content">
     <p class="bg-success text-center text-white p-2 mt-5">your settings saved successfully</p>
     <p>click <a href="#">Here  <i class="fa fa-download"></i>  </a> to download your song</p>
@@ -42,16 +35,4 @@
 </div>
 
 </div>
-
-<div class="footer">
-  <p>all copyrights reserved</p>
-    <a href="#"><i class="fab fa-facebook"></i></a>
-    <a href="#"><i class="fab fa-twitter"></i></a>
-    <a href="#"><i class="fab fa-youtube"></i></a>
-    <a href="#"><i class="fab fa-whatsapp"></i></a>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="../script/script.js"></script>
-</body>
-</html>
+@endsection

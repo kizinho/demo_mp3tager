@@ -114,7 +114,7 @@ class UploadController extends Controller {
             }
 
             $data['details'] = $res->tags;
-            
+
             Cache::forget('countupload');
             return view('pages.tags', $data);
         } catch (RequestException $res) {
@@ -175,7 +175,7 @@ class UploadController extends Controller {
             foreach ($voicetags as $key => $value) {
                 if (!is_array($value)) {
                     $output[] = [
-                        'name' => 'voicetag['.$key.']',
+                        'name' => 'voicetag[' . $key . ']',
                         'contents' => fopen($value->getPathname(), 'r'),
                         'filename' => $value->getClientOriginalName()
                     ];
@@ -185,40 +185,40 @@ class UploadController extends Controller {
         }
         if ($request->hasFile('coverart')) {
             $coverarts = $request->file('coverart');
-            foreach ($coverarts as $key => $cover) {
+            foreach ($coverarts as $keyt => $cover) {
                 if (!is_array($cover)) {
                     $output[] = [
-                        'name' => 'coverart['.$key.']',
+                        'name' => 'coverart[' . $keyt . ']',
                         'contents' => fopen($cover->getPathname(), 'r'),
-                     'filename' => $cover->getClientOriginalName()
+                        'filename' => $cover->getClientOriginalName()
                     ];
                     continue;
                 }
             }
         }
 
-  $output [] = [
+        $output [] = [
             'name' => 'data',
             'contents' => json_encode(
-            [
-                'id' => $request->id,
-                'joinSelect' => $request->joinSelect,
-                'title' => $request->title,
-                'artist' => $request->artist,
-                'album' => $request->album,
-                'track_number' => $request->track_number,
-                'genre' => $request->genre,
-                'comments' => $request->comments,
-                'year' => $request->year,
-                'publisher' => $request->publisher,
-                'encoded_by' => $request->encoded_by,
-                'composer' => $request->composer,
-                'encoder_settings' => $request->encoder_settings,
-                'path' => $request->path,
-                'user_id' => $request->user_id,
-                'saveData' => $request->saveData
-            ]
-                    ),
+                    [
+                        'id' => $request->id,
+                        'joinSelect' => $request->joinSelect,
+                        'title' => $request->title,
+                        'artist' => $request->artist,
+                        'album' => $request->album,
+                        'track_number' => $request->track_number,
+                        'genre' => $request->genre,
+                        'comments' => $request->comments,
+                        'year' => $request->year,
+                        'publisher' => $request->publisher,
+                        'encoded_by' => $request->encoded_by,
+                        'composer' => $request->composer,
+                        'encoder_settings' => $request->encoder_settings,
+                        'path' => $request->path,
+                        'user_id' => $request->user_id,
+                        'saveData' => $request->saveData
+                    ]
+            ),
         ];
 
 
@@ -241,10 +241,54 @@ class UploadController extends Controller {
 //                session()->flash('message.content', 'Invalid Response');
 //                return redirect()->route('upload');
 //            }
-dd($res);
+
             return [
                 'data' => $res
             ];
+        } catch (RequestException $res) {
+            return [
+                'status' => 422,
+                'message' => 'Server Busy',
+            ];
+        }
+    }
+
+    public function downloads(Request $request) {
+        $data_array = $request->all();
+        $output = [];
+        foreach ($data_array as $key => $value) {
+            if (!is_array($value)) {
+                $output[] = [
+                    'contents' => $value
+                ];
+                continue;
+            }
+        }
+
+        try {
+            $client = new Client();
+            $headers = [
+                'API-Key' => env('API_KEY')
+            ];
+
+            $url = config('app.naijacrawl_api') . '/download-details';
+            $response = $client->request('GET', $url, [
+                'headers' => $headers,
+                'query' => $output
+            ]);
+
+            $res = json_decode($response->getBody());
+            if ($res->status == 401) {
+                session()->flash('message.level', 'error');
+                session()->flash('message.color', 'red');
+                session()->flash('message.content', 'Invalid Response');
+                return redirect()->route('upload');
+            }
+
+            $data['details'] = $res->details;
+
+            Cache::forget('countupload', $data);
+            return view('pages.download');
         } catch (RequestException $res) {
             return [
                 'status' => 422,

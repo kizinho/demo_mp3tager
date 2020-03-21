@@ -25,3 +25,4 @@ Route::get('signup', 'AuthController@signUp')->name('signup');
 Route::post('signup', 'AuthController@signUpCreate');
 Route::get('signin', 'AuthController@signIn')->name('signin');
 Route::post('signin', 'AuthController@signInPost');
+Route::get('downloads', 'UploadController@downloads')->name('downloads');

@@ -290,13 +290,12 @@
 
                     return false;
                 }
-                if (data.data['status'] === 200) {
-                    let url = data.data['data'];
-                   // window.location.href = "{{url('/downloads')}}?" + url;
-
-
-                    return false;
-                }
+                 if (data.data['status'] === 200) {
+                let url = data.data['data'];
+                window.location.href = "{{url('/downloads')}}?" + url;
+              
+                return false;
+            }
             }
 
         });

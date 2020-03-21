@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+body,html{
+    height:100vh;
+}
+body{
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .navbar .logo {
+    margin-top: -25px !important;
+  }
+  .Mycontainer{
+   flex:1;
+  margin:auto; 
+  }
+
+
+
+.error-content,.error-content-dup{
+    margin-top: 60px;
+    background:url('../Images/error.jpg');
+    background-size: cover;
+    width:800px;
+    height:450px;
+    padding-top: 50px;
+    padding-left: 50px;
+}
+.error-content h1,.error-content-dup h1{
+    color:#ccc;
+    font-size:120px;
+    text-align: left;
+}
+.error-content p , .error-content-dup p{
+    color:#ccc;
+    font-size:18px;
+    text-align: left;
+    padding-bottom: 20px;
+}
+.error-content a , .error-content-dup a{
+    text-decoration: none;
+    background: #fff;
+    color:#2f2f31;
+    padding:10px 20px;
+    border-radius: 10px;
+    text-transform: capitalize;
+    font-weight: bold;
+    transition: .5s;
+    
+    
+}
+.error-content a i ,.error-content-dup a i{
+    margin-left: 10px;
+    color:#2f2f31;
+    transition: .5s;
+}
+.error-content a:hover , .error-content-dup a:hover{
+    color: #fff;
+    background: #2f2f31;
+}
+.error-content a:hover i , .error-content-dup a:hover i{
+    color: #fff;
+}
+.error-content-dup{
+    background: none;
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width:986px) {
+    /* navbar */
+    .navbar{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    }
+    .navbar .logo {
+      margin-top: 0px !important;
+    }
+  .nav-links .fa-bars{
+    display: block;
+  }
+  .nav-links ul li {
+    display:block;
+    width: 100%;
+    padding: 10px 0px !important;
+  }
+  .nav-links ul li:hover{
+    background: #636e72;
+    cursor: pointer;
+    border-left: 4px solid #DA0353;
+  }
+  .nav-links ul li:hover a{
+    transition: .5s;
+    padding-left: 40px;
+    color: #DA0353;
+    border:none;
+    font-weight: bold
+  }
+  .navbar .nav-links ul li a:hover{
+    border:none !important;
+    color: #DA0353;
+    background: none !important;
+  }
+  .nav-links ul{
+    padding-left: 0px !important;
+    position: absolute;
+    left: 0;
+    top: 80px;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    z-index: 20;
+    margin-top: -20px;
+    transition: all 1s ease-out;
+    text-align: center;
+    clip-path:circle(100px at 90% -40%);
+    pointer-events:none;
+  }
+  .fade-nav{
+    transition: all 2s ease-out;
+    clip-path:circle(1500px at 90% -40%) !important;
+    pointer-events:all !important;
+  }
+
+  .error-content{
+      width: 600px;
+      height: 338px;
+      padding-top: 10px;
+      padding-left: 20px;
+    }
+    .error-content h1{
+        font-size: 70px;
+    }
+    .error-content p{
+        font-size: 16px;
+    }
+    .error-content a{
+        font-size: 13px;
+        padding:10px 15px;
+    }
+    .error-content a i{
+        font-size: 15px;
+    }
+
+
+  }
+
+  
+  @media screen and (max-width:786px){
+    .error-content{
+        width: 400px;
+        height: 227px;
+      }
+      .error-content-dup{
+        width: auto;
+        height:auto;
+        margin-top: 30px;
+        
+      }
+      .error-content-dup h1{
+          font-size: 70px;
+      }
+      .error-content-dup p{
+          font-size: 16px;
+          margin-bottom: 5px;
+          padding-bottom: 5px;
+      }
+      .error-content-dup a{
+
+          padding:5px 10px;
+      }
+      .error-content-dup a span{
+        display: none;
+      }
+      .error-content-dup a i{
+          margin-left: 2px;
+          font-size: 13px;
+      }
+  
+   .error-content div{
+       display :none;
+   }
+   .error-content-dup{
+       text-align:center;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       flex-direction: column;
+       padding:0px;
+       margin: 0px;
+   }
+
+  }
+  
+  @media screen and (max-width:446px){
+    .error-content{
+        width: 300px;
+        height: 170px;
+        padding-top: 0px;
+    }
+    .footer {
+    height: 120px !important;
+    line-height: 10px;
+}
+  }
