@@ -75,7 +75,7 @@
                             @endif {{Auth::user()->username}}
                         </p>
                         <p class="designation">
-                            {{Auth::user()->full_name}}
+                            {{$user->username}}
                         </p>
                     </div>
                 </div>
@@ -89,15 +89,15 @@
             </li>
           
             <li class="nav-item @if(request()->path() == 'deposit') active @endif">
-                <a class="nav-link" href="{{url('deposit')}}">
+                <a class="nav-link" href="{{url('storage-mangement')}}">
                     <i class="fa fa-share-square menu-icon"></i>
-                    <span class="menu-title">Make Deposit</span>
+                    <span class="menu-title">Storage Management</span>
                 </a>
             </li>
             <li class="nav-item  @if(request()->path() == 'withdraw') active @endif">
-                <a class="nav-link" href="{{url('withdraw')}}">
+                <a class="nav-link" href="{{url('my-files')}}">
                     <i class="fa fa-download menu-icon"></i>
-                    <span class="menu-title">Request Withdraw</span>
+                    <span class="menu-title">My Files</span>
                 </a>
             </li>
             <li class="nav-item @if(request()->path() == 'deposit_list') active @endif">

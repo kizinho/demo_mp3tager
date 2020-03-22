@@ -23,31 +23,27 @@
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
 <meta name="twitter:image:alt" content="MP3 tag editor - tag mp3 files online | mp3tager.com" />
-<link rel="stylesheet" href="{{asset('css/download.css')}}">
+<link rel="stylesheet" href="{{asset('css/donate.css')}}">
 @endsection
 @extends('layouts.app')
 @section('content')
 
+  <!-- --------------Start of Body----------->
 <div class="Mycontainer">
-    <div class="msg-content">
-        <p class="bg-success text-center text-white p-2 mt-5">your settings saved successfully <i class="fas fa-thumbs-up"></i></p>
-  
-        @foreach($details as $key => $download)
-      
-        <div class="download-songs " style="background-color: #d4edda; color: #000">
-
-            <span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$download->file_name}}
-
-        </div>
-        <div class="download-songs">click <a href="{{url('tag-downloads/'.$download->slug)}}"> Here  <i class="fa fa-download"></i></a> <span class="badge badge-danger">{{$download->size}}</span> to download your file or Copy the link. <a href="{{url('tags?' . $key . '='.$download->slug)}}"> Edit  <i class="fa fa-pen"></i></a></div> 
-         
-        @endforeach
-          @if(count($details) >1 )
-          <div class="download-songs" style="background-color: #000"><a href="{{url('batch-downloads?'.$url)}}"> Batch Download All  <i class="fa fa-download"></i></a> &nbsp;<span class="badge badge-primary"><a href="{{url('tags?'.$url)}}"> Edit  <i class="fa fa-pen"></i></a></span></div> 
-         
-        @endif
-        <div class="support-btn"><a href="{{url('donate')}}">Support Us</a></div> 
-    </div>
+    <div class="donate-content">
+    <p>
+      Please support us if you appreciate our free service
+    </p>
+    <form  class="donate-amount" method="POST" action="{{ route('donate') }}">
+                        @csrf
+        <select class="donate-selec" name="payment_method">
+<!--        <option value="card">Card</option>-->
+        <option value="btc">BTC</option>
+      </select>
+                        <input type="text" placeholder="$" name="amount" required>
+      <input type="submit" value="donate">
+    </form>
+</div>
 
 </div>
 @endsection

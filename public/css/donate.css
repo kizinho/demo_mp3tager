@@ -6,6 +6,19 @@ body,html{
   .Mycontainer{
     flex:1;
   }
+  .donate-selec{
+  width: 150px ;
+  text-align: center;
+  padding:5px 20px;
+  border:1px solid #ddd;
+  margin-bottom: 15px;
+  background: #74b9ff;
+  color:#fff;
+  outline: none;
+  cursor: pointer;
+  border-radius: 3px;
+ padding-left: 45px;
+}
 .donate-content{
     background-image: url('../images/donate.png');
     background-size: cover;

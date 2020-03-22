@@ -24,6 +24,9 @@
 <meta name="twitter:image:alt" content="MP3 tag editor - tag mp3 files online | mp3tager.com" />
 <link rel="stylesheet" href="{{asset('css/notfound.css')}}">
   <!-- --------------Start of Body----------->
+  @endsection
+@extends('layouts.app')
+@section('content')
 <div class="Mycontainer">
    <div class="notfound-content"></div>
         <div class="notfound-content-dup">

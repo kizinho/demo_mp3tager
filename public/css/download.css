@@ -14,40 +14,42 @@ body,html{
     margin-top: 100px;
 
 }
-.msg-content p:first-child,.msg-content p:nth-child(2){
+.msg-content p:first-child,.download-songs{
     background: #fff;
     border-radius: 5px;
     text-transform: capitalize;
     color: white;
     text-align: center;
+    width: 600px;
     margin: 20px auto;
+    transition: .5s;
 }
 
-.msg-content p:nth-child(2){
+.download-songs{
     background: #535c68;
     padding:5px  20px;
 }
 
-.msg-content p:nth-child(2) a{
+.download-songs a{
     text-transform: uppercase;
     color: #33d9b2;
     text-decoration: none;
 }
-.msg-content p:nth-child(3){
+.support-btn{
   margin-top: 100px;
   text-align: center;
 }
-.msg-content p:nth-child(3) a{
+.support-btn a{
   border-radius: 3px;
-  background: #60a3bc;
+  background: #cd6133;
   padding: 10px 30px;
     text-transform: uppercase;
     color: #fff;
     text-decoration: none;
     transition: .3s;
 }
-.msg-content p:nth-child(3) a:hover{
-  background: #3c6382;
+.support-btn a:hover{
+  background: #60a3bc;
 }
 
 
@@ -56,9 +58,13 @@ body,html{
   .navbar .logo{
     margin-top: -15px;
   }
+
 }
 
 @media (max-width:850px) {
+  .msg-content p:first-child,.download-songs{
+    width: 400px;
+  }
   .navbar .logo{
     margin-left: -20px;
     font-size: 16px;
@@ -79,4 +85,12 @@ body,html{
 @media (max-width:750px) {
 .navbar .logo{
   margin-top: 0px;
+}
+.msg-content p:first-child,.download-songs{
+  font-size: 12px;
+  width:fit-content;
+}
+}
+
+
 }

@@ -278,6 +278,7 @@ class UploadController extends Controller {
             ]);
 
             $res = json_decode($response->getBody());
+
             if ($res->status == 401) {
                 session()->flash('message.level', 'error');
                 session()->flash('message.color', 'red');
@@ -286,9 +287,79 @@ class UploadController extends Controller {
             }
 
             $data['details'] = $res->details;
+            $data['url'] = $res->url;
 
-            Cache::forget('countupload', $data);
-            return view('pages.download');
+            return view('pages.download', $data);
+        } catch (RequestException $res) {
+            return [
+                'status' => 422,
+                'message' => 'Server Busy',
+            ];
+        }
+    }
+
+    public function downloadTag($slug) {
+        $data_array = $slug;
+
+        $output = [
+            'contents' => $data_array
+        ];
+
+        try {
+            $client = new Client();
+            $headers = [
+                'API-Key' => env('API_KEY')
+            ];
+
+            $url = config('app.naijacrawl_api') . '/tag-download';
+            $response = $client->request('GET', $url, [
+                'headers' => $headers,
+                'query' => $output
+            ]);
+
+            $res = json_decode($response->getBody());
+
+            if ($res->status == 455) {
+                abort(455);
+            }
+            return response()->download($res->file);
+        } catch (RequestException $res) {
+            return [
+                'status' => 422,
+                'message' => 'Server Busy',
+            ];
+        }
+    }
+
+    public function downloadBatch(Request $request) {
+        $data_array = $request->all();
+        $output = [];
+        foreach ($data_array as $key => $value) {
+            if (!is_array($value)) {
+                $output[] = [
+                    'contents' => $value
+                ];
+                continue;
+            }
+        }
+
+        try {
+            $client = new Client();
+            $headers = [
+                'API-Key' => env('API_KEY')
+            ];
+
+            $url = config('app.naijacrawl_api') . '/batch-download';
+            $response = $client->request('GET', $url, [
+                'headers' => $headers,
+                'query' => $output
+            ]);
+
+            $res = json_decode($response->getBody());
+            if ($res->status == 455) {
+                abort(455);
+            }
+            return response()->download($res->file)->deleteFileAfterSend(true);
         } catch (RequestException $res) {
             return [
                 'status' => 422,

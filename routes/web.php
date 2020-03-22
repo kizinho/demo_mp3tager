@@ -26,3 +26,7 @@ Route::post('signup', 'AuthController@signUpCreate');
 Route::get('signin', 'AuthController@signIn')->name('signin');
 Route::post('signin', 'AuthController@signInPost');
 Route::get('downloads', 'UploadController@downloads')->name('downloads');
+Route::get('tag-downloads/{slug}', 'UploadController@downloadTag')->name('tag-downloads');
+Route::get('batch-downloads', 'UploadController@downloadBatch')->name('batch-downloads');
+Route::get('donate', 'DonateController@donate')->name('donate');
+Route::post('donate', 'DonateController@donatePost');
