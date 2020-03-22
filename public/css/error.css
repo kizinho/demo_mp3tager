@@ -19,7 +19,7 @@ body{
 
 .error-content,.error-content-dup{
     margin-top: 60px;
-    background:url('../Images/error.jpg');
+    background:url('../images/error.jpg');
     background-size: cover;
     width:800px;
     height:450px;

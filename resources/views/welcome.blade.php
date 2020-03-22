@@ -4,7 +4,7 @@
 <meta name="keywords" content="tagmp3, mp3tag, tag mp3, mp3 tag" />
 <meta name="apple-mobile-web-app-title" content="Mp3Tager" />
 <meta property="fb:app_id" content="" />
-<meta name="theme-color" content="#d1ecf1"/>
+<meta name="theme-color" content="#08192D"/>
 <meta property="og:title" content="MP3 tag editor - tag mp3 files online | mp3tager.com" />
 <meta property="og:description" content="Mp3Tager.com is a free mp3 tag editor available online where you can tag mp3 files, change id3 tags, edit mp3 image, add or change existing album art in mp3 and change mp3 cover image." />
 <meta property="og:url" content="{{url('/')}}" />

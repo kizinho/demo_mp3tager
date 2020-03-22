@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('offline', function () {
+    return view('pages.offline');
+});
 //upload
 Route::get('upload', 'UploadController@index')->name('upload');
 Route::post('upload', 'UploadController@store');
@@ -30,3 +33,9 @@ Route::get('tag-downloads/{slug}', 'UploadController@downloadTag')->name('tag-do
 Route::get('batch-downloads', 'UploadController@downloadBatch')->name('batch-downloads');
 Route::get('donate', 'DonateController@donate')->name('donate');
 Route::post('donate', 'DonateController@donatePost');
+Route::get('privacy-policy', 'PageController@PP')->name('privacy-policy');
+Route::get('tos', 'PageController@tos')->name('tos');
+Route::get('about-us', 'PageController@aboutUs')->name('about-us');
+Route::get('contact-us', 'PageController@contactUs')->name('contact-us');
+Route::get('how-it-works', 'PageController@how')->name('how-it-works');
+

@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Mp3tag Login">
 <meta name="author" content="Mp3tag">
+<meta name="theme-color" content="#08192D"/>
 <meta property="og:description" content="Mp3tag Login" />
 <title>Mp3tag - Login Page</title>
 <link rel="stylesheet" href="{{asset('css/formStyle.css')}}">

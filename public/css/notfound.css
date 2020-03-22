@@ -16,7 +16,7 @@ body{
   }
 .notfound-content,.notfound-content-dup{
     margin-top: 70px;
-    background:url('../Images/notfound.jpg');
+    background:url('../images/notfound.jpg');
     background-size: cover;
     width:800px;
     height:450px;

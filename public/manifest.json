@@ -1,0 +1,21 @@
+{
+  "short_name": "Mp3tager",
+  "name": "Mp3tager",
+  "theme_color": "#08192D",
+  "background_color": "#08192D",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "logo/logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+ 
+    {
+      "src": "logo/logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "https://mp3tager.com/"
+}
