@@ -97,6 +97,7 @@ a.p {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
 .Mycontainer-home {
     width: 100%;
     display: flex;
@@ -110,7 +111,7 @@ a.p {
 }
 .navbar{
     background: #08192D;
-    padding: 0 100px;
+    padding: 0 50px;
     height: 60px;
     line-height: 60px;
     position: fixed !important;

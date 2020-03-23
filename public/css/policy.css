@@ -4,31 +4,30 @@ height: 100vh;
 .Mycontainer{
   flex: 1;
   padding: 100px 200px;
-  height: 100%;
   background-image: url('../images/policy.jpg');
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  width: 100%;
   filter: blur();
+  display: flex;
 }
 .policy-content{
-  color: #fff;
-  /* overflow: auto; */
+  color: #fff;  
 }
-.policy-content ol{
-  list-style:decimal-leading-zero;
-  padding: 0;
-  margin: 0;
-  padding:10px 50px;
 
+
+@media (max-width:1280px) {
+  .navbar{
+    padding: 0px 50px !important;
+  }
+  .navbar .nav-links ul li{
+    font-size: 14px !important;
+    margin: 10px -10px !important;
+    line-height: 40px !important;
+  }
 }
-.policy-content ol h2{
-  font-size: 28px;
-}
-.policy-content ol p{
-  font-size: 16px;
-}
+
+
 
 @media (max-width:986px) {
   .Mycontainer{
@@ -38,14 +37,8 @@ height: 100vh;
 
 @media (max-width:750px) {
 
-  .policy-content ol h2{
-    font-size: 22px !important;
-  }
-  .policy-content ol p{
-    font-size: 15px !important;
-  }
   .Mycontainer{
-    flex: 1;
+    
     background-image: url('../images/policy-res.jpg') !important;
     height: auto;
     width: auto;
@@ -106,6 +99,6 @@ height: 100vh;
 .fade-nav{
   transition: all 2s ease-out;
   clip-path:circle(1500px at 90% -40%) !important;
-  pointer-events:all !important;}
+  pointer-events:all !important;
 }
 }

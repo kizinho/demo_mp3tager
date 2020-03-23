@@ -26,8 +26,8 @@ body,html{
   padding-left: 10px;
   padding-top: 5px;
 }
-.btc-container .qr-img{
-  background-size: cover;
+.btc-container .qr-img img{
+    object-fit: cover;
   margin: 10px auto 0 ;
   width: 300px;
   height: 300px;
@@ -77,10 +77,10 @@ body,html{
   margin-top: 100px;
   margin-bottom: 40px;
 }
-.btc-container .qr-img{
+/*.btc-container .qr-img{
   width: 200px;
   height: 200px;
-}
+}*/
 .btc-container p {
   padding-bottom: 20px;
 }
@@ -94,8 +94,14 @@ body,html{
       padding: 0px !important;
     }
     .btc-container{
-      width: 280px;
+      width: 300px;
       height: 300px;
     }
+    .btc-container .qr-img img{
+            width: 200px !important;
+            height: 200px !important;
+}
 
 }
+
+/*now try*/ 

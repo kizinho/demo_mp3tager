@@ -20,6 +20,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <link href="{{ asset('sweetalert/sweetalert.css')}}" rel="stylesheet" />
     <style>
@@ -81,7 +82,7 @@ $(".deleted").on("submit", function () {
         }).catch(swal.noop);
     </script>
     @endif
-     <script>
+<!--     <script>
 
 /*Register Service Worker if it is supported*/
 if ('serviceWorker' in navigator) {
@@ -95,7 +96,7 @@ if ('serviceWorker' in navigator) {
     console.log('No service worker');
 }
 
-    </script>
+    </script>-->
     @yield('script')
 </body>
 </html>
