@@ -5,7 +5,7 @@
 <meta name="keywords" content="Private Policy" />
 <meta name="apple-mobile-web-app-title" content="Mp3Tager" />
 <meta property="fb:app_id" content="" />
-<meta name="theme-color" content="#d1ecf1"/>
+<meta name="theme-color" content="#08192D"/>
 <meta property="og:title" content="Private Policy" />
 <meta property="og:description" content="Private Policy" />
 <meta property="og:url" content="{{url('/')}}" />
