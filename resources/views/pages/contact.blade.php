@@ -23,14 +23,20 @@
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
 <meta name="twitter:image:alt" content="Contact Us" />
-
 <link rel="stylesheet" href="{{asset('css/contact.css')}}">
+
 @endsection
 @extends('layouts.app')
 @section('content')
+
  <!-- --------------Start of Body----------->
 <div class="Mycontainer">
     <div class="contactus-content">
+      <div class="contact-info">
+        <p>You can contact us via the follwing: </p>
+        <p class="info-mail">info@mp3tager.com</p>
+        <p class="info-number">Or Call : +2348137140110 </p>
+      </div>
     <form action="" class="contact-form">
     <div class="conatact-data-field">
         <span>Your name *</span>
@@ -46,9 +52,11 @@
     </div>
     <div class="conatact-data-field conatact-data-btn">
         <input type="submit" name="" value="Send" class="contact-sub-btn">
-        
+
     </div>
     </form>
+</div>
+
 </div>
 
 

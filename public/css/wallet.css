@@ -1,0 +1,101 @@
+body,html{
+    font-family: 'Roboto';
+    background: #0c2461;
+    height: 100vh;
+  }
+  .Mycontainer{
+    flex:1;
+  }
+.btc-container{
+  background: #fff;
+  width: 500px;
+  height: auto;
+  margin: auto;
+  margin-top: 100px;
+  text-align: center;
+  border-radius: 3px;
+  transition: .5s;
+}
+.btc-container header{
+  border-bottom: 1px solid #999;
+}
+.btc-container header h3{
+  font-size: 16px;
+  width: 100%;
+  color: #555;
+  padding-left: 10px;
+  padding-top: 5px;
+}
+.btc-container .qr-img{
+  background-size: cover;
+  margin: 10px auto 0 ;
+  width: 300px;
+  height: 300px;
+}
+.btc-container p {
+  padding-bottom: 20px;
+}
+.btc-container p , .btc-container .wallet-address{
+  font-size: 15px
+}
+
+@media (min-width:850px) {
+  .navbar .logo{
+    margin-top: -15px;
+  }
+}
+
+@media (max-width:850px) {
+  .navbar .logo{
+    margin-left: -20px;
+    font-size: 16px;
+    line-height: 60px;
+    margin-top: -10px;
+  }
+  .navbar .logo i{
+    top:-5px !important;
+    left: 15px;
+    font-size: 28px;
+    line-height: 70px;
+  }
+  .navbar .logo span{
+    font-size: 18px;
+  }
+
+}
+@media (max-width:750px) {
+.navbar .logo{
+  margin-top: 0px;
+}
+
+.donate-amount input[type='text']{
+  width: 250px;
+}
+.btc-container{
+  width: 500px;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 40px;
+}
+.btc-container .qr-img{
+  width: 200px;
+  height: 200px;
+}
+.btc-container p {
+  padding-bottom: 20px;
+}
+.btc-container p , .btc-container .wallet-address{
+  font-size: 12px
+}
+
+}
+@media (max-width:550px) {
+  .Mycontainer {
+      padding: 0px !important;
+    }
+    .btc-container{
+      width: 280px;
+      height: 300px;
+    }
+
+}

@@ -1,5 +1,5 @@
 /*Cache meta information*/
-const CACHE_NAME = 'NAIJACRAWL-CACHE V2'
+const CACHE_NAME = 'MP3Tager-CACHE V2'
 
 /*assets to cache before service worker is installed*/
 const CACHE_URLS = [

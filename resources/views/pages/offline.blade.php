@@ -28,14 +28,18 @@
 @extends('layouts.app')
 @section('content')
 <div class="Mycontainer">
-   <div class="error-content">
+    <div class="error-content">
         <div>
-            <h1>Offline.</h1>
+            <h1>Offline</h1>
             <p>Try turn on your internet connection, we'll be waiting..</p>
             <a onClick="window.location.reload();" href="#"><span> Click to   </span>Refresh<i class="fa fa-plug"></i></a>
         </div>
-   </div>
-       
+    </div>
+    <div class="error-content-dup">
+        <h1>Offline</h1>
+        <p>Try turn on your internet connection, we'll be waiting..</p>
+        <a onClick="window.location.reload();" href="#"><span> Click to   </span>Refresh<i class="fa fa-plug"></i></a>
+    </div>    
 </div>
-           
+
 @endsection

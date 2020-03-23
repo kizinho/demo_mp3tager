@@ -23,27 +23,30 @@
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
 <meta name="twitter:image:alt" content="MP3 tag editor - tag mp3 files online | mp3tager.com" />
-<link rel="stylesheet" href="{{asset('css/donate.css')}}">
+<link rel="stylesheet" href="{{asset('css/wallet.css')}}">
 @endsection
 @extends('layouts.app')
 @section('content')
 
   <!-- --------------Start of Body----------->
 <div class="Mycontainer">
-    <div class="donate-content">
-    <p>
-      Please support us if you appreciate our free service
-    </p>
-    <form  class="donate-amount" method="POST" action="{{ route('donate') }}">
-                        @csrf
-        <select class="donate-selec" name="payment_method">
-<!--        <option value="card">Card</option>-->
-        <option value="btc">BTC</option>
-      </select>
-                        <input type="text" placeholder="$" name="amount" required>
-      <input type="submit" value="donate">
-    </form>
-</div>
-
+      <div class="btc-container">
+        <header>
+          <h3>Desposite Bitcoin</h3>
+          </header>
+            <div class="text-center"><strong>Scan to pay</strong></div>
+          <div class="qr-img">
+          
+              <img height="300" width="300" src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=1D3KBBq4BCbud5jffEq9SpJJSa4P5rUJF9?amount={{$amount_convert}}"/></td>
+                                    
+              
+              
+          </div>
+      
+      
+      <div class="wallet-address">Amount: <strong> {{$amount_convert}} BTC </strong></div>
+      <div class="wallet-address"><strong>1D3KBBq4BCbud5jffEq9SpJJSa4P5rUJF9</strong></div>
+      <p>You can send Bitcoin to the above address</p>
+      </div>
 </div>
 @endsection

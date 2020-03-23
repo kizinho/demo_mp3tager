@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicons -->
-    <link rel="icon" href="{{asset('logo/logo.png') }}">
-    <link rel="shortcut icon" href="{{asset('logo/logo.png') }}">
-    <link rel="apple-touch-icon"   href="{{asset('logo/logo.png') }}">
-    <link rel="apple-touch-icon"  href="{{asset('logo/logo.png') }}">
-    <link rel="apple-touch-icon"  href="{{asset('logo/logo.png') }}">
-    <link rel="apple-touch-icon"  href="{{asset('logo/logo.png') }}">
+    <link rel="icon" href="{{asset('logo/icon.png') }}">
+    <link rel="shortcut icon" href="{{asset('logo/icon.png') }}">
+    <link rel="apple-touch-icon"   href="{{asset('logo/icon.png') }}">
+    <link rel="apple-touch-icon"  href="{{asset('logo/icon.png') }}">
+    <link rel="apple-touch-icon"  href="{{asset('logo/icon.png') }}">
+    <link rel="apple-touch-icon"  href="{{asset('logo/icon.png') }}">
     @yield('title')
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -80,6 +80,21 @@ $(".deleted").on("submit", function () {
         }).catch(swal.noop);
     </script>
     @endif
+     <script>
+
+/*Register Service Worker if it is supported*/
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/mp3sw.js').then(event => {
+        }).catch((err) => {
+            console.log(err);
+        });
+    });
+} else {
+    console.log('No service worker');
+}
+
+    </script>
     @yield('script')
 </body>
 </html>

@@ -1,22 +1,20 @@
 body{
-  height: 100vh;
+height: 100vh;
+}
+.Mycontainer{
+  flex: 1;
+  padding: 100px 200px;
+  height: 100%;
   background-image: url('../images/policy.jpg');
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
   width: 100%;
-  height: 100vh;
   filter: blur();
-
-}
-.Mycontainer{
-
-  flex: 1;
-  padding: 100px 200px;
 }
 .policy-content{
   color: #fff;
-  overflow: auto;
+  /* overflow: auto; */
 }
 .policy-content ol{
   list-style:decimal-leading-zero;
@@ -39,11 +37,7 @@ body{
 }
 
 @media (max-width:750px) {
-  body{
-    background-image: url('../images/policy-res.jpg') !important;
-    height: auto;
-    width: auto;
-  }
+
   .policy-content ol h2{
     font-size: 22px !important;
   }
@@ -52,6 +46,10 @@ body{
   }
   .Mycontainer{
     flex: 1;
+    background-image: url('../images/policy-res.jpg') !important;
+    height: auto;
+    width: auto;
+  
   }
 }
 @media (max-width:986px) {
