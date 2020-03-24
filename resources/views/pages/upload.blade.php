@@ -85,7 +85,9 @@
                     <div class="data-field data-field-btn ">
                         <input type="submit" id="submit-file"  value="upload">
                     </div>
+                    
                 </form>
+                
                 <!-- End of inside file choose -->
             </div>
             <div class="tab-pane fade" id="links" role="tabpanel" aria-labelledby="links-tab">
@@ -97,12 +99,15 @@
                         <input type="submit"  value="Go"><i class="fas fa-sign-in-alt"></i>
                     </form>
                 </div>
-              A free online website to edit mp3 tags, change album art, and other ID3 (ID3v1, ID3v2) tags. Tagmp3.net is the best mp3 tag editor. Here you can upload and edit id3 tags of your mp3 files for free. You can also change photo in mp3 songs, add photo in mp3 and change mp3 cover. So start uploading your files, or enter remote URL of your mp3 files and then enter new tags and then download new files.
-
-edit id3 tags online edit mp3 tags change mp3 picture online id3 tag editor mp3 tag editing software mp3 song picture editor best mp3 tag editor mp3 tag online mp3 tag editor editor mp3 online add photo to mp3 change album art add image to mp3 songs add album art to mp3 change mp3 cover mp3 photo editor edit mp3 metadata music photo editor change mp3 info mp3 tagger song photo editor album art changer music tag editor id3 tag editor mp3 tag editor online edit id3 tags on mac flac tag editor convert mp4 to mp3
-                <!-- End of inside search bar -->
+                          <!-- End of inside search bar -->
             </div>
         </div>
+        Mp3tager is the best online editing tool to change your mp3 tags like cover art and join two mp3 files . Using this platform you can upload and edit your mp3 tags or join another mp3 . You can upload mutiple mp3 files and edit all at once
+       Download your updated files by using our easy download button .
+       <br/>  <br/>
+       <small>
+           Mp3tager you can now change your mp3 files by adding pictures to mp3 tag, changing mp3tag title, changing mp3tag album, changing mp3tag artist and joining mp3 voice tag . 
+       </small>
     </div>
 </div>
 @section('script')
