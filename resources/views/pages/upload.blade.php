@@ -1,30 +1,44 @@
 @section('title')
-<title>MP3 tag editor - tag mp3 files online | the best mp3 tagger 2020</title>
-<meta name="description" content="Mp3Tager.com is a free mp3 tag editor available online where you can tag mp3 files, change id3 tags, edit mp3 image, add or change existing album art in mp3 and change mp3 cover image." />
-<meta name="keywords" content="tagmp3, mp3tag, tag mp3, mp3 tag" />
+<title>Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files {{date('Y')}}</title>
+<meta name="description" content="Upload and use this free online editor tool for editing mp3 files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files " />
+<meta name="keywords" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files" />
 <meta name="apple-mobile-web-app-title" content="Mp3Tager" />
 <meta property="fb:app_id" content="" />
 <meta name="theme-color" content="#08192D"/>
-<meta property="og:title" content="MP3 tag editor - tag mp3 files online | mp3tager.com" />
-<meta property="og:description" content="Mp3Tager.com is a free mp3 tag editor available online where you can tag mp3 files, change id3 tags, edit mp3 image, add or change existing album art in mp3 and change mp3 cover image." />
+<meta property="og:title" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files" />
+<meta property="og:description" content=" Upload and use this free online editor tool for editing mp3 files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files " />
 <meta property="og:url" content="{{url('/')}}" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Mp3Tager" />
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@mp3tager">
-<meta name="twitter:title" content="MP3 tag editor - tag mp3 files online | mp3tager.com">
-<meta name="twitter:description" content="Mp3Tager.com is a free mp3 tag editor available online where you can tag mp3 files, change id3 tags, edit mp3 image, add or change existing album art in mp3 and change mp3 cover image.">
+<meta name="twitter:title" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files">
+<meta name="twitter:description" content="Upload and use this free online editor tool for editing mp3 files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files">
 <link rel="canonical" href="{{url('/')}}" />
 <meta property="og:image" content="{{asset('logo/logo.png') }}" />
-<meta property="og:image:alt" content="MP3 tag editor - tag mp3 files online | mp3tager.com">
+<meta property="og:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files">
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
-<meta name="twitter:image:alt" content="MP3 tag editor - tag mp3 files online | mp3tager.com" />
+<meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files" />
 
 <link rel="stylesheet" href="{{asset('css/upload.css')}}">
 <link rel="stylesheet" href="{{asset('dropzone/dropzone.min.css')}}">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Upload",
+  "name": "Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files {{date('Y')}}",
+  "description": "Upload and use this free online editor tool for editing mp3 files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files",
+  "provider": {
+    "@type": "Organization",
+    "name": "Mp3tager",
+    "sameAs": "http://mp3tager.com"
+  }
+}
+</script>
 @endsection
 @extends('layouts.app')
 @section('content')
@@ -83,6 +97,9 @@
                         <input type="submit"  value="Go"><i class="fas fa-sign-in-alt"></i>
                     </form>
                 </div>
+              A free online website to edit mp3 tags, change album art, and other ID3 (ID3v1, ID3v2) tags. Tagmp3.net is the best mp3 tag editor. Here you can upload and edit id3 tags of your mp3 files for free. You can also change photo in mp3 songs, add photo in mp3 and change mp3 cover. So start uploading your files, or enter remote URL of your mp3 files and then enter new tags and then download new files.
+
+edit id3 tags online edit mp3 tags change mp3 picture online id3 tag editor mp3 tag editing software mp3 song picture editor best mp3 tag editor mp3 tag online mp3 tag editor editor mp3 online add photo to mp3 change album art add image to mp3 songs add album art to mp3 change mp3 cover mp3 photo editor edit mp3 metadata music photo editor change mp3 info mp3 tagger song photo editor album art changer music tag editor id3 tag editor mp3 tag editor online edit id3 tags on mac flac tag editor convert mp4 to mp3
                 <!-- End of inside search bar -->
             </div>
         </div>
