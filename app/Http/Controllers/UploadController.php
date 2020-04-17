@@ -81,6 +81,37 @@ class UploadController extends Controller {
         }
     }
 
+    public function storeLink(Request $request) {
+
+        try {
+            $output = [];
+
+            $output [] = [
+                'name' => 'url',
+                'contents' => $request->url
+            ];
+            $url = config('app.naijacrawl_api') . '/upload-tag-link';
+            $client = new Client();
+            $response = $client->request('POST', $url, [
+                'headers' => [
+                    'API-Key' => env('API_KEY')
+                ],
+                'multipart' => $output
+            ]);
+
+            $data = \GuzzleHttp\json_decode($response->getBody());
+
+            return [
+                'data' => $data
+            ];
+        } catch (RequestException $data) {
+            return [
+                'status' => 422,
+                'message' => 'Server Busy',
+            ];
+        }
+    }
+
     public function tag(Request $request) {
         $data_array = $request->all();
         $output = [];

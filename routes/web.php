@@ -22,6 +22,7 @@ Route::get('offline', function () {
 //upload
 Route::get('upload', 'UploadController@index')->name('upload');
 Route::post('upload', 'UploadController@store');
+Route::post('upload-link', 'UploadController@storeLink');
 Route::get('tags', 'UploadController@tag')->name('tags');
 Route::post('tags', 'UploadController@tagPost');
 Route::get('signup', 'AuthController@signUp')->name('signup');

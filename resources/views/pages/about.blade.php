@@ -28,32 +28,16 @@
 @extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="{{asset('css/policy.css')}}">
-  <!-- --------------Start of Body----------->
+<!-- --------------Start of Body----------->
 <div class="Mycontainer">
-  <div class="policy-content">
-    <ol>
-      <li>
-        <h2>Lorem ipsum dolor sit amet.</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi nemo, tempora earum. Perspiciatis eos ea repellat quos adipisci, architecto alias!</p>
-      </li>
-      <li>
-        <h2>Sapiente qui officia harum laudantium.</h2>
-        <p>Reiciendis nisi voluptatum magni voluptate ut architecto aliquam veniam, adipisci, sapiente, corporis sequi, temporibus similique quas impedit enim a tempore!</p>
-      </li>
-      <li>
-        <h2>Saepe iste, aspernatur delectus quaerat!</h2>
-        <p>Saepe possimus, dolores necessitatibus maiores quidem neque, quis, quae nobis modi doloremque esse accusamus. Placeat minus aliquid repellat nisi sequi?</p>
-      </li>
-      <li>
-        <h2>Error molestias, qui nobis amet.</h2>
-        <p>Ipsam expedita, voluptas hic sapiente neque quae quis dolorem dignissimos nam perspiciatis, laudantium laboriosam accusantium accusamus eaque modi tempora aspernatur.</p>
-      </li>
-      <li>
-        <h2>Commodi sint maxime esse, ut.</h2>
-        <p>Accusantium laborum, sint veniam similique id laboriosam esse, aspernatur dolorum nobis ea, enim. Sint dolore accusantium, et suscipit culpa, rerum.</p>
-      </li>
-    </ol>
-  </div>
+    <div class="policy-content">
+        Mp3tagger.com is a fast-rising web Application that help users upload and tag their music files very easily with great quality downloads.
+        The website allows user to upload as many files they have and also store it for them based on request.
+        <br/> <br/>
+        The mp3tagger.com web application was mostly centered on people’s interest and that's why we provides a platform for an active music upload and easy tag.
+        <br/> <br/>
+        Founded in 2020, mp3tagger.com is a fully registered incorporations.
+    </div>
 
 </div>
 

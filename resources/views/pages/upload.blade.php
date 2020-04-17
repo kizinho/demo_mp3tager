@@ -27,17 +27,17 @@
 <link rel="stylesheet" href="{{asset('dropzone/dropzone.min.css')}}">
 
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Upload",
-  "name": "Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files {{date('Y')}}",
-  "description": "Upload and use this free online editor tool for editing mp3 files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files",
-  "provider": {
+    {
+    "@context": "https://schema.org",
+    "@type": "Upload",
+    "name": "Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files {{date('Y')}}",
+    "description": "Upload and use this free online editor tool for editing mp3 files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files",
+    "provider": {
     "@type": "Organization",
     "name": "Mp3tager",
     "sameAs": "http://mp3tager.com"
-  }
-}
+    }
+    }
 </script>
 @endsection
 @extends('layouts.app')
@@ -85,29 +85,30 @@
                     <div class="data-field data-field-btn ">
                         <input type="submit" id="submit-file"  value="upload">
                     </div>
-                    
+
                 </form>
-                
+
                 <!-- End of inside file choose -->
             </div>
             <div class="tab-pane fade" id="links" role="tabpanel" aria-labelledby="links-tab">
                 <!-- Strat of inside search bar -->
                 <div class="data-field data-field-search">
                     <p>Please enter a valid audio url</p>
-                    <form action="">
-                        <input type="search" placeholder="https://www.yourdomain.com/yoursong.mp3" required>
-                        <input type="submit"  value="Go"><i class="fas fa-sign-in-alt"></i>
+                    <form id="link">
+                        <input class="col col-sm-12" id="url" placeholder="domain.com/song.mp3" required>
+
+                        <input type="submit"  id="submit-file"  value="Go"><i class="fas fa-sign-in-alt"></i>
                     </form>
                 </div>
-                          <!-- End of inside search bar -->
+                <!-- End of inside search bar -->
             </div>
         </div>
         Mp3tager is the best online editing tool to change your mp3 tags like cover art and join two mp3 files . Using this platform you can upload and edit your mp3 tags or join another mp3 . You can upload mutiple mp3 files and edit all at once
-       Download your updated files by using our easy download button .
-       <br/>  <br/>
-       <small>
-           Mp3tager you can now change your mp3 files by adding pictures to mp3 tag, changing mp3tag title, changing mp3tag album, changing mp3tag artist and joining mp3 voice tag . 
-       </small>
+        Download your updated files by using our easy download button .
+        <br/>  <br/>
+        <small>
+            Mp3tager you can now change your mp3 files by adding pictures to mp3 tag, changing mp3tag title, changing mp3tag album, changing mp3tag artist and joining mp3 voice tag . 
+        </small>
     </div>
 </div>
 @section('script')
@@ -184,6 +185,75 @@ Dropzone.options.myUpload = {
     }
 };
 </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (location.hash) {
+            $("a[href='" + location.hash + "']").tab("show");
+        }
+        $(document.body).on("click", "a[data-toggle='tab']", function (event) {
+            location.hash = this.getAttribute("href");
+        });
+    });
+    $(window).on("popstate", function () {
+        var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
+        $("a[href='" + anchor + "']").tab("show");
+    });
+</script>
+<script>
+    /*
+     link
+     */
+    $('#link').submit(function (event) {
+        event.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function () {
+                $(".modal").show();
+            },
+            complete: function () {
+                $(".modal").hide();
+            }
+        });
+        jQuery.ajax({
+            url: "{{url('/upload-link')}}",
+            type: 'POST',
+            data: {
+                url: jQuery('#url').val()
+            },
+            success: function (responseText) {
+                if (responseText.data['status'] === 401) {
+                    jQuery.each(responseText.data['message'], function (key, value) {
+                        var message = ('' + value + '');
+                        toastr.options.onHidden = function () {
+                           
+                        };
+                        toastr.error(message, {timeOut: 50000});
+                    });
 
+                    return false;
+                }
+                if (responseText.data['status'] === 422) {
+                    var message = responseText.data['message'];
+                    toastr.options.onHidden = function () {
+                      
+                    };
+                    toastr.error(message, {timeOut: 50000});
+
+                    return false;
+                }
+                
+                if (responseText.data['status'] === 200) {
+                    let url = responseText.data['data'];
+                    window.location.href = "{{url('/tags')}}?" + url;
+                    return false;
+                }
+            }
+
+        });
+    });
+
+</script> 
 @endsection
 @endsection
