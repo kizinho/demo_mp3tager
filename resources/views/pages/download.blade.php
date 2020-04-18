@@ -101,7 +101,9 @@ Your browser does not support the audio element.
         <div class="download-songs" style="background-color: #000"><a href="{{url('batch-downloads?'.$url)}}"> Batch Download All  <i class="fa fa-download"></i></a> &nbsp;<span class="badge badge-primary"><a href="{{url('tags?'.$url)}}"> Edit  <i class="fa fa-pen"></i></a></span></div> 
 
         @endif
+        
         <div class="support-btn"><a href="{{url('donate')}}">Support Us</a></div> 
+         <br/> <br/>
     </div>
 
 </div>
