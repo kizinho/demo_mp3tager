@@ -20,7 +20,7 @@ body,html{
     text-transform: capitalize;
     color: white;
     text-align: center;
-    width: 600px;
+    width: 500px;
     margin: 20px auto;
     transition: .5s;
 }
@@ -41,7 +41,7 @@ body,html{
 }
 .support-btn a{
   border-radius: 3px;
-  background: #cd6133;
+  background: #60a3bc;
   padding: 10px 30px;
     text-transform: uppercase;
     color: #fff;
@@ -49,7 +49,41 @@ body,html{
     transition: .3s;
 }
 .support-btn a:hover{
-  background: #60a3bc;
+  background: #3c6382;
+
+}
+
+.embd-txt{
+  margin: 10px auto; display: block; font-size: 14px;color: #777;
+  resize: both;
+  overflow: auto;
+}
+.embd-btn{
+  display: inline-block;
+  margin: 10px auto;
+  padding: 5px 20px;
+  background: #00bfa0;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+.embd-btn:hover{
+  opacity: .8;
+}
+
+
+
+
+.down-btn-item{
+  background: none;
+  border:none;
+  color: #00bfa0;
+  outline : none;
+  text-transform: uppercase;
+  margin-right: 5px;
 }
 
 
@@ -63,7 +97,7 @@ body,html{
 
 @media (max-width:850px) {
   .msg-content p:first-child,.download-songs{
-    width: 400px;
+    width: 300px;
   }
   .navbar .logo{
     margin-left: -20px;
@@ -80,7 +114,6 @@ body,html{
   .navbar .logo span{
     font-size: 18px;
   }
-
 }
 @media (max-width:750px) {
 .navbar .logo{
@@ -90,7 +123,4 @@ body,html{
   font-size: 12px;
   width:fit-content;
 }
-}
-
-
 }

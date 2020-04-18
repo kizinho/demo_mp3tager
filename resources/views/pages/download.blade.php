@@ -24,7 +24,6 @@
 <meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
 <meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files" />
 <link rel="stylesheet" href="{{asset('css/download.css')}}">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 @endsection
 @extends('layouts.app')
 @section('content')
@@ -40,72 +39,71 @@
             <span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$download->file_name}}
 
         </div>
-        <div class="download-songs lk{{$key}}">click <a href="{{url('tag-downloads/'.$download->slug)}}"> Here  <i class="fa fa-download"></i> </a> to download your file
-            <span class="badge badge-danger">{{$download->size}}</span> or    
-            <button class="badge badge-primary down-btn-item clip-btn{{$key}}" id=''> copy <i class="fas fa-copy"></i></button> link to clipborad 
+        <div class="download-songs">click <a href="{{url('tag-downloads/'.$download->slug)}}"> Here  <i class="fa fa-download"></i> </a> to download your file
+            <span class="badge badge-danger">{{$download->size}}</span> 
+            <button class="badge badge-primary down-btn-item clip-btn"> copy <i class="fas fa-copy"></i></button> link to clipborad 
+            <input type="text" style="opacity: 0;">
             <br/>
             <a href="{{url('tags?' . $key . '='.$download->slug)}}"> Edit  <i class="fa fa-pen"></i></a>
             <br/> <br/>
-            <audio controls>
+            <audio controls style="width:100%">
                 <source src="{{url('tag-downloads/'.$download->slug)}}" type="audio/ogg">
                 <source src="{{url('tag-downloads/'.$download->slug)}}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
+
             <br/> <br/>
-            <textarea cols="50" rows="5" id="textarea{{$key}}">
-                <audio controls>
-  <source src="{{url('tag-downloads/'.$download->slug)}}" type="audio/ogg">
-  <source src="{{url('tag-downloads/'.$download->slug)}}" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
+            <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
+                <audio controls style="width:100%">
+                    <source src="{{url('tag-downloads/'.$download->slug)}}" type="audio/ogg">
+                    <source src="{{url('tag-downloads/'.$download->slug)}}" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                  </audio>
 
             </textarea>
-            <br>
-            <button onclick="copy{{$key}}()">Copy</button>
+
+            <button class="embd-btn">copy embedded code</button>
         </div> 
-        <input type="text"  style="opacity: 0;" id="down-link-item{{$key}}">
-
-        <script>
-            function copy{{$key}}() {
-                let textarea = document.getElementById("textarea{{$key}}");
-                textarea.select();
-                document.execCommand("copy");
-                 let message = "Embedded Code Copied Successfully , you can use it on your website for post";
-                    toastr.options.onHidden = function () {
-
-                    };
-                    toastr.success(message, {timeOut: 50000});
-            }
-
-            $(document).ready(function () {
-                $('#down-link-item{{$key}}').val($('.lk{{$key}} a').attr('href'));
-                $('.clip-btn{{$key}}').click(function () {
-                    $('#down-link-item{{$key}}').val($('.lk{{$key}} a').attr('href'));
-                    var copyText = document.getElementById("down-link-item{{$key}}");
-                    copyText.select();
-                    copyText.setSelectionRange(0, 99999);
-                    document.execCommand("copy");
-                    let message = "Copied the text: " + copyText.value;
-                    toastr.options.onHidden = function () {
-
-                    };
-                    toastr.success(message, {timeOut: 50000});
-
-                });
 
 
-            });
-        </script>
         @endforeach
         @if(count($details) >1 )
         <div class="download-songs" style="background-color: #000"><a href="{{url('batch-downloads?'.$url)}}"> Batch Download All  <i class="fa fa-download"></i></a> &nbsp;<span class="badge badge-primary"><a href="{{url('tags?'.$url)}}"> Edit  <i class="fa fa-pen"></i></a></span></div> 
 
         @endif
-        
+
         <div class="support-btn"><a href="{{url('donate')}}">Support Us</a></div> 
-         <br/> <br/>
+        <br/> <br/>
     </div>
 
 </div>
+@section('script')
+<script>
+    $(document).ready(function () {
+        $('.clip-btn').click(function () {
+            var targetTxt = $(this).next();
+            var targetLink = $(this).prev().prev();
+            var linKVal = targetTxt.val();
+            targetTxt.val(targetLink.attr('href'))
+            var copyText = targetTxt;
+            copyText.select();
+            document.execCommand("copy");
+            let message = "Copied the text: " + copyText.val();
+            toastr.success(message, {timeOut: 50000});
+        })
 
+        $('.embd-btn').click(function () {
+            var targetTextArea = $(this).prev();
+            var copyTextArea = targetTextArea;
+            copyTextArea.select();
+            document.execCommand("copy");
+            let message = "Embedded Code Copied Successfully , you can use it on your website for post";
+            toastr.success(message, {timeOut: 50000});
+        })
+
+
+
+    })
+</script>
+@endsection
 @endsection
