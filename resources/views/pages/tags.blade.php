@@ -83,6 +83,7 @@
                     <select name="joinSelect[{{$key}}]" ><!-- variable here -->
                         <option value="0">none</option>
                         <option value="1">at beginning</option>
+                         <option value="0">at middle(coming soon)</option>
                         <option value="2">at end</option>
                     </select>
                 </div>
