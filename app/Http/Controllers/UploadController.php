@@ -143,6 +143,10 @@ class UploadController extends Controller {
                 session()->flash('message.content', 'Invalid Response');
                 return redirect()->route('upload');
             }
+        
+            if ($res->status == 455) {
+                abort(455);
+            }
 
             $data['details'] = $res->tags;
 

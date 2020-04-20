@@ -1,34 +1,34 @@
 @section('title')
-<title>MP3tager - mp3 files online mp3 tag editor | the best mp3 voice joiner {{date('Y')}}</title>
-<meta name="description" content="Mp3Tager.com is a free online editor that you can use to edit mp3, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files " />
-<meta name="keywords" content="join voice tag, mp3 tag, mp3tag, join two mp3, voice tag" />
+<title>MP3tager - mp3 and Mp4  files online mp3 and Mp4 tag editor | the best mp3 voice joiner {{date('Y')}}</title>
+<meta name="description" content="Mp3Tager.com is a free online editor that you can use to edit mp3, Mp4 , join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files " />
+<meta name="keywords" content="join voice tag, Mp4 tag, mp3 tag, mp3tag, join two mp3, voice tag" />
 <meta name="apple-mobile-web-app-title" content="Mp3Tager" />
 <meta property="fb:app_id" content="" />
 <meta name="theme-color" content="#08192D"/>
-<meta property="og:title" content="MP3tager editor - tag mp3 files online | the best mp3 voice joiner" />
-<meta property="og:description" content="Mp3Tager.com is a free online editor that you can use to edit mp3, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files " />
+<meta property="og:title" content="MP3tager editor - tag mp3 and Mp4  files online | the best mp3 voice joiner" />
+<meta property="og:description" content="Mp3Tager.com is a free online editor that you can use to edit mp4, mp3, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files " />
 <meta property="og:url" content="{{url('/')}}" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Mp3Tager" />
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@mp3tager">
-<meta name="twitter:title" content="MP3tager editor - tag mp3 files online | the best mp3 voice joiner">
-<meta name="twitter:description" content="Mp3Tager.com is a free online editor that you can use to edit mp3, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files ">
+<meta name="twitter:title" content="MP3tager editor - tag mp3 and Mp4  files online | the best mp3 voice joiner">
+<meta name="twitter:description" content="Mp3Tager.com is a free online editor that you can use to edit mp4, mp3, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files ">
 <link rel="canonical" href="{{url('/')}}" />
 <meta property="og:image" content="{{asset('logo/logo.png') }}" />
-<meta property="og:image:alt" content="MP3tager editor - tag mp3 files online | the best mp3 voice joiner">
+<meta property="og:image:alt" content="MP3tager editor - tag mp3 and Mp4  files online | the best mp3 voice joiner">
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
-<meta name="twitter:image:alt" content="MP3tager editor - tag mp3 files online | the best mp3 voice joiner" />
+<meta name="twitter:image:alt" content="MP3tager editor - tag mp3 and Mp4  files online | the best mp3 voice joiner" />
 
 <script type="application/ld+json">
     {
     "@context": "https://schema.org",
     "@type": "Editor",
-    "name": "MP3tager - mp3 files online mp3 tag editor | the best mp3 voice joiner {{date('Y')}}",
-    "description": "Mp3Tager.com is a free online editor that you can use to edit mp3, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files  ",
+    "name": "MP3tager - mp3 and Mp4  files online mp3 tag editor | the best mp3 voice joiner {{date('Y')}}",
+    "description": "Mp3Tager.com is a free online editor that you can use to edit mp4, mp3, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files  ",
     "provider": {
     "@type": "Organization",
     "name": "Mp3tager",
@@ -49,7 +49,7 @@
                 <div class="section-text">
                     <h2> <span>Music</span> for the world <i class="fas fa-music"></i></h2>
                     <p>
-                        Join the world of free, easy, fast and reliable music tags online editing and voice tag website.
+                        Join the world of free, easy, fast and reliable music tags online editing  website.
                     </p>
                     <a href="{{url('upload')}}" id="Upload-btn">Upload</a>
                     @if($user == false)
@@ -65,8 +65,8 @@
             <section>
                 <div class="section-text">
                     <h2>Edit your music tags</h2>
-                    <p>With our free editor you can easily edit or update you music tags, just upload your mp3 files and we will take care of it.
-                        <br>mp3tager can change mp3 cover art, artist, album, title, year etc, just give it a try .
+                    <p>With our free editor you can easily edit or update you music and video tags, just upload your mp3 or mp4 files and we will take care of it.
+                        <br>mp3tager can change mp3 cover art, artist, album, title, year etc, add watermark to mp4 using logo or text, just give it a try .
                     </p>
                 </div>
                 <div class="section-img section-img-2"></div>
@@ -114,7 +114,7 @@
                 <div class="section-text">
                     <h2>Easy to Download</h2>
                     <p>
-                        With just a simple click you get your updated mp3 files downloaded to your mobile phone or Pc, if you edit multiple files, you can download it as zip files for your updated mp3 files.
+                        With just a simple click you get your updated mp3 or mp4 files downloaded to your mobile phone or Pc, if you edit multiple files, you can download it as zip files for your updated mp3 files.
                         If you don't want want to be in a hurry to download the updated file, we can save it for you using our server storage or your own google drive storage, it's just
                         your choice
                     </p>

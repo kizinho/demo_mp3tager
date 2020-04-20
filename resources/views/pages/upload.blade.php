@@ -1,27 +1,27 @@
 @section('title')
-<title>Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files {{date('Y')}}</title>
-<meta name="description" content="Upload and use this free online editor tool for editing mp3 files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files " />
-<meta name="keywords" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files" />
+<title>Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4 files {{date('Y')}}</title>
+<meta name="description" content="Upload and use this free online editor tool for editing mp3 and Mp4  files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files " />
+<meta name="keywords" content="Upload mp3 -  join two mp3 and Mp4  files online | mp3 tager for editing mp3 files" />
 <meta name="apple-mobile-web-app-title" content="Mp3Tager" />
 <meta property="fb:app_id" content="" />
 <meta name="theme-color" content="#08192D"/>
-<meta property="og:title" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files" />
-<meta property="og:description" content=" Upload and use this free online editor tool for editing mp3 files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files " />
+<meta property="og:title" content="Upload mp3 -  join two mp3 and Mp4  files online | mp3 tager for editing mp3 files" />
+<meta property="og:description" content=" Upload and use this free online editor tool for editing mp3 and Mp4  files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files " />
 <meta property="og:url" content="{{url('/')}}" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Mp3Tager" />
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@mp3tager">
-<meta name="twitter:title" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files">
-<meta name="twitter:description" content="Upload and use this free online editor tool for editing mp3 files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files">
+<meta name="twitter:title" content="Upload mp3 -  join two mp3   files online | mp3 tager for editing mp3 and Mp4  files">
+<meta name="twitter:description" content="Upload and use this free online editor tool for editing mp3 and Mp4  files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files">
 <link rel="canonical" href="{{url('/')}}" />
 <meta property="og:image" content="{{asset('logo/logo.png') }}" />
-<meta property="og:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files">
+<meta property="og:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3and Mp4   files">
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
-<meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files" />
+<meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files" />
 
 <link rel="stylesheet" href="{{asset('css/upload.css')}}">
 <link rel="stylesheet" href="{{asset('dropzone/dropzone.min.css')}}">
@@ -30,8 +30,8 @@
     {
     "@context": "https://schema.org",
     "@type": "Upload",
-    "name": "Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files {{date('Y')}}",
-    "description": "Upload and use this free online editor tool for editing mp3 files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files",
+    "name": "Upload mp3 -  join two mp3 and Mp4  files online | mp3 tager for editing mp3 files {{date('Y')}}",
+    "description": "Upload and use this free online editor tool for editing mp3 and Mp4  files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files",
     "provider": {
     "@type": "Organization",
     "name": "Mp3tager",
@@ -75,9 +75,9 @@
                                 </div>
 
                                 <div class="alert alert-info small" role="alert">
-                                    Allowed file types: MP3
+                                    Allowed file types: MP3 , MP4
                                 </div>
-                                <div class="alert alert-secondary small text-center " >Mp3 Edited this year: &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
+                                <div class="alert alert-secondary small text-center " >Mp3 & Mp4 Edited this year: &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
             <div class="tab-pane fade" id="links" role="tabpanel" aria-labelledby="links-tab">
                 <!-- Strat of inside search bar -->
                 <div class="data-field data-field-search">
-                    <p>Please enter a valid audio url</p>
+                    <p>Please enter a valid audio url or Video Url {supports Youtube link}</p>
                     <form id="link">
                         <input class="col col-sm-12" id="url" placeholder="domain.com/song.mp3" required>
 
@@ -103,11 +103,11 @@
                 <!-- End of inside search bar -->
             </div>
         </div>
-        Mp3tager is the best online editing tool to change your mp3 tags like cover art and join two mp3 files . Using this platform you can upload and edit your mp3 tags or join another mp3 . You can upload mutiple mp3 files and edit all at once
+        Mp3tager is the best online editing tool to change your mp3 and Mp4 tags like watermark on mp4, cover art and join two mp3 files . Using this platform you can upload and edit your mp3 tags or join another mp3 . You can upload mutiple mp3 files and edit all at once
         Download your updated files by using our easy download button .
         <br/>  <br/>
         <small>
-            Mp3tager you can now change your mp3 files by adding pictures to mp3 tag, changing mp3tag title, changing mp3tag album, changing mp3tag artist and joining mp3 voice tag . 
+            Mp3tager you can now change your mp3 and Mp4 files by adding pictures to mp3 or Mp4 tag, changing mp3tag title, changing mp3tag album, changing mp3tag artist and joining mp3 voice tag . 
         </small>
     </div>
 </div>
@@ -122,7 +122,7 @@ Dropzone.options.myUpload = {
     parallelUploads: 6,
     maxFiles: 6,
     timeout: 3000000,
-    acceptedFiles: '.mp3',
+    acceptedFiles: '.mp3',.'mp4',
     addRemoveLinks: true,
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

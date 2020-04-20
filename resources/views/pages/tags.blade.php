@@ -1,28 +1,28 @@
 
 @section('title')
-<title>Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files {{date('Y')}}</title>
-<meta name="description" content="Upload and use this free online editor tool for editing mp3 files   , join mp3  or voice tag , editing of mp3 tags like changing the cover art , album, title, of any mp3 files " />
-<meta name="keywords" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files" />
+<title>Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files {{date('Y')}}</title>
+<meta name="description" content="Upload and use this free online editor tool for editing mp3 and Mp4  files   , join mp3  or voice tag , editing of mp3 tags like changing the cover art , album, title, of any mp3 files " />
+<meta name="keywords" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files" />
 <meta name="apple-mobile-web-app-title" content="Mp3Tager" />
 <meta property="fb:app_id" content="" />
 <meta name="theme-color" content="#08192D"/>
-<meta property="og:title" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files" />
-<meta property="og:description" content="Upload and use this free online editor tool for editing mp3 files   , join mp3  or voice tag , editing of mp3 tags like changing the cover art , album, title, of any mp3 files " />
+<meta property="og:title" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files" />
+<meta property="og:description" content="Upload and use this free online editor tool for editing mp3 and Mp4  files   , join mp3  or voice tag , editing of mp3 tags like changing the cover art , album, title, of any mp3 files " />
 <meta property="og:url" content="{{url('/')}}" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Mp3Tager" />
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@mp3tager">
-<meta name="twitter:title" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files">
-<meta name="twitter:description" content="Upload and use this free online editor tool for editing mp3 files   , join mp3  or voice tag , editing of mp3 tags like changing the cover art , album, title, of any mp3 files ">
+<meta name="twitter:title" content="Upload mp3 -  join two mp3 and Mp4  files online | mp3 tager for editing mp3 files">
+<meta name="twitter:description" content="Upload and use this free online editor tool for editing mp3 and Mp4  files   , join mp3  or voice tag , editing of mp3 tags like changing the cover art , album, title, of any mp3 files ">
 <link rel="canonical" href="{{url('/')}}" />
 <meta property="og:image" content="{{asset('logo/logo.png') }}" />
-<meta property="og:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files">
+<meta property="og:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files">
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
-<meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 files" />
+<meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files" />
 <link rel="stylesheet" href="{{asset('css/tags.css')}}">
 @endsection
 @extends('layouts.app')
@@ -83,8 +83,9 @@
                     <select name="joinSelect[{{$key}}]" ><!-- variable here -->
                         <option value="0">none</option>
                         <option value="1">at beginning</option>
-                         <option value="0">at middle(coming soon)</option>
+                        <option value="0">at middle(coming soon)</option>
                         <option value="2">at end</option>
+                        <option value="4">at beginning & end</option>
                     </select>
                 </div>
             </div>
@@ -286,17 +287,17 @@
                 }
                 if (data.data['status'] === 422) {
                     var message = data.data['message'];
-                   
+
                     toastr.error(message, {timeOut: 50000});
 
                     return false;
                 }
-                 if (data.data['status'] === 200) {
-                let url = data.data['data'];
-                window.location.href = "{{url('/downloads')}}?" + url;
-              
-                return false;
-            }
+                if (data.data['status'] === 200) {
+                    let url = data.data['data'];
+                    window.location.href = "{{url('/downloads')}}?" + url;
+
+                    return false;
+                }
             }
 
         });
