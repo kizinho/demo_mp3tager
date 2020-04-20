@@ -122,7 +122,7 @@ Dropzone.options.myUpload = {
     parallelUploads: 6,
     maxFiles: 6,
     timeout: 3000000,
-    acceptedFiles: '.mp3',.'mp4',
+    acceptedFiles: '.mp3,.mp4',
     addRemoveLinks: true,
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
