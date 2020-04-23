@@ -276,6 +276,7 @@ class UploadController extends Controller {
 //                session()->flash('message.content', 'Invalid Response');
 //                return redirect()->route('upload');
 //            }
+
             return [
                 'data' => $res
             ];
