@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>
-
+                @if($tag->mime_type == 'mp3')
             <div class="tag-field">
                 <div class="row">
                     <div class="col-sm">
@@ -83,7 +83,7 @@
                     <select name="joinSelect[{{$key}}]" ><!-- variable here -->
                         <option value="0">none</option>
                         <option value="1">at beginning</option>
-                        <option value="0">at middle(coming soon)</option>
+                        <option value="3">at middle</option>
                         <option value="2">at end</option>
                         <option value="4">at beginning & end</option>
                     </select>
@@ -217,7 +217,11 @@
                     </div>
                 </div>
             </div>
-
+  @else
+  
+ dd 
+  
+  @endif
             @endforeach
             <div class="tag-field tag-responsive tag-field-save">
                 <div class="row">
