@@ -257,3 +257,221 @@ body,html{
   text-align: left;
 }
 }
+*{
+    margin: 0px;padding: 0px;box-sizing: border-box;
+}
+.waterMarkcont{
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    width: 90%;
+  }
+  .waterMarkBtn{
+    padding: 0px 20px 10px !important;
+    height: 100%;
+    line-height: 40px;
+    display: inline-block;
+    color: #fff;
+    cursor: pointer;
+    background: #777;
+    margin: 0px;
+    border-radius: 5px 0px 0px 5px;
+  }
+  .waterMarkImgUrl{
+    padding: 5px 10px 5px 10px !important;
+    width:100%;
+    color: #777;
+    font-size: 14px;
+    outline: none;
+    border-radius: 0px 5px 5px 0px !important;
+  }
+
+  .watermarkSelect{
+      padding-left: 50px;
+  }
+  .watermarkSelect select{
+    margin:auto;
+    width:150px;
+    height:40px;
+    padding: 10px;
+    cursor: pointer;
+    border:none;
+    color:#fff;
+    background:#747d8c;
+    text-transform: capitalize;
+    border-radius: 5px;
+ 
+  }
+  .waterMarkTxt{
+      display: none;
+  }
+  .inptColor{
+    width: 100%;
+    height: 40px;
+    background: none;
+    outline: none;
+    border:1px solid #ccc;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+
+  .control-cont input{
+    width: 80% !important;
+  }
+
+.contorlRange{
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+.contorlRange input{
+  height: 100%;
+}
+.contorlRange label:last-child{
+  padding: 0px;
+
+}
+.contorlRange label:first-child{
+  padding-top: 0;
+}
+.contorlRange label{
+  margin: 0px 10px;
+  height: 100%;
+  line-height: 40px;
+}
+.contorlRange label:first-child{
+  margin-left: 0px;
+}
+.contorlRangeBtn{
+  padding-left:50px;
+  margin-top:10px ;
+}
+.contorlRangeBtn button{
+  padding: 10px 20px;
+  color: #fff;
+  background: none;
+  background: #054e78;
+  border: none;
+  border-radius: 3px;
+}
+.contorlRangeBtn button:hover{
+  opacity: .8;
+}
+.rangeHolder{
+  background: #fff;
+  color: #777;
+  display: inline-block;
+  padding: 0px 10px 0px 0px;
+  font-size: 12px;
+}
+.btnRangclear{
+  cursor: pointer;
+  color: #f94f2d;
+  font-size: 18px;
+}
+.val-cont{
+  display: inline-flex;
+  align-items: center;
+  background:#fff;
+  padding: 3px 5px 3px 10px;
+  margin: 5px;
+  border-radius: 3px;
+  
+}
+
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 7.3px 0;
+  background: none;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 11.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: rgba(48, 113, 169, 0.78);
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
+  border: 1.8px solid #00001e;
+  height: 26px;
+  width: 26px;
+  border-radius: 15px;
+  background: #254175;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7.5px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: rgba(54, 126, 189, 0.78);
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 11.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: rgba(48, 113, 169, 0.78);
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
+  border: 1.8px solid #00001e;
+  height: 26px;
+  width: 26px;
+  border-radius: 15px;
+  background: #254175;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 11.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: rgba(42, 100, 149, 0.78);
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: rgba(48, 113, 169, 0.78);
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
+  border: 1.8px solid #00001e;
+  height: 26px;
+  width: 26px;
+  border-radius: 15px;
+  background: #254175;
+  cursor: pointer;
+  height: 11.4px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: rgba(48, 113, 169, 0.78);
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: rgba(54, 126, 189, 0.78);
+}
+
+
+
+  @media screen and (max-width:576px){
+    .watermarkSelect{
+      padding-left: 0px;
+      margin: 10px auto;
+    }
+  }

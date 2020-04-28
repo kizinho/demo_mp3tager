@@ -75,9 +75,9 @@
                                 </div>
 
                                 <div class="alert alert-info small" role="alert">
-                                    Allowed file types: MP3 , MP4
+                                    Allowed file types: MP3 , MP4 , Mov , M4a , 3gp , 3g2 , Mj2
                                 </div>
-                                <div class="alert alert-secondary small text-center " >Mp3 & Mp4 Edited this year: &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
+                                <div class="alert alert-secondary small text-center " >Mp3 , Mp4 Mov , M4a , 3gp , 3g2 &  Mj2 Edited this year: &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
                             </div>
                         </div>
                     </div>
@@ -122,7 +122,7 @@ Dropzone.options.myUpload = {
     parallelUploads: 6,
     maxFiles: 6,
     timeout: 3000000,
-    acceptedFiles: '.mp3,.mp4',
+    acceptedFiles: '.mp3,.mp4,.mov,.m4a,.3gp,.3g2,.mj2',
     addRemoveLinks: true,
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -24,6 +24,7 @@
 <meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
 <meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files" />
 <link rel="stylesheet" href="{{asset('css/tags.css')}}">
+
 @endsection
 @extends('layouts.app')
 @section('content')
@@ -51,7 +52,7 @@
                     </div>
                 </div>
             </div>
-                @if($tag->mime_type == 'mp3')
+            @if($tag->mime_type == 'mp3')
             <div class="tag-field">
                 <div class="row">
                     <div class="col-sm">
@@ -66,29 +67,35 @@
                     </div>
                 </div>
             </div>
-            <div class="tag-field tag-field-join" data-render="{{ $loop->iteration }}"> <!-- variable here -->
-                <div class="row">
-                    <div class="col-sm">
-                        <label class="tag-responsive-p">Join Voice Tag or Join Another Song ?</label>
-                        <input type="file" id="mp3-file-2-{{ $loop->iteration }}" name="viocetag[{{$key}}]" data-type='txt'  class="d-nn" accept=".mp3"> <!-- variable here -->
-                    </div>
 
-                    <div class="col-sm browse-btn-cont">
-                        <label for="mp3-file-2-{{ $loop->iteration }}" id="lbl-{{ $loop->iteration }}" class="browse-btn browse-btn-js">Browse</label> <!-- variable here -->
-                        <input type="text" placeholder="mp3 ,  wav"  class="song-txt-title"  id="aud-text2-{{ $loop->iteration }}" readonly> <!-- variable here -->
-                    </div>
-                </div>
-                <!--------------------------------------- selection -------------------------->
-                <div class="select-btn optionSelect" data-render="{{ $loop->iteration }}"> <!-- variable here -->
-                    <select name="joinSelect[{{$key}}]" ><!-- variable here -->
-                        <option value="0">none</option>
-                        <option value="1">at beginning</option>
-                        <option value="3">at middle</option>
-                        <option value="2">at end</option>
-                        <option value="4">at beginning & end</option>
-                    </select>
-                </div>
+            <!--------------------------------------- start selection -------------------------->
+    <div class="tag-field tag-field-join" data-render="{{$key}}"> <!-- variable here -->
+      <div class="row">
+          <div class="col-sm" data-render="{{$key}}"> <!-- variable here -->
+            <label class="tag-responsive-p">Join Voice Tag or Join Another Song ? (optional)</label>
+            <input type="file" id="mp3Browser-{{$key}}"  data-type='txt' name="viocetag[{{$key}}]"  class="d-nn" accept=".mp3"> <!-- variable here -->
+            <!-- =============Range section================ -->
+            <div class="contorlRange">
+              <label class="currentPosition">0</label>
+              <input type="range" name="" id="songRange-{{$key}}" class="songRange" min="0" max="{{$tag->seconds}}" value="0">
+              <label>{{$tag->seconds}}</label>
             </div>
+            <div class="contorlRangeBtn my-2">
+              <button type="button" class="setRangeBtn">Add Join Point {secs}</button>
+            </div>
+             <!-- =============End Range section================ -->
+         </div>
+         <div class="col-sm browse-btn-cont align-self-center">
+            <label for=""  class="browse-btn browse-btn-js">Browse</label> <!-- variable here -->
+            <input type="text" placeholder="mp3 ,  wav"  class="song-txt-title"  id="aud-text-{{$key}}" readonly> <!-- variable here -->
+            <!-- =================Browse section=============== -->
+            <div class="rangeValue my-2" id="rangeValue-{{$key}}" data-render="{{$key}}"><!-- variable here -->
+                <input type="hidden" name="joinSelect[{{$key}}]" class="holder" id="holder-{{$key}}" ><!-- variable here -->
+            </div>
+      </div>
+    </div>
+  </div>
+      <!--------------------------------------- End selection -------------------------->
 
             <div class="tag-field tag-field-img"  data-render="{{ $loop->iteration }}"> <!-- variable here -->
                 <div class="row">
@@ -102,8 +109,50 @@
                     </div>
                 </div>
             </div>
-
-
+            @else 
+          <!-- =========== watermark ===========-->
+<div class="tag-field tag-responsive">
+    <div class="row align-items-center">
+      <div class="col-sm-6">
+        <div class="watermarkSelect">[ optional ]
+          <select class="markSelect" name="watermark[{{$key}}]" data-render="{{ $loop->iteration }}"> <!-- variable here -->
+              <option value="" selected disabled>Add WaterMark </option>
+              <option value="1">logo top left</option>
+              <option value="2">logo top Right</option>
+              <option value="3">logo bottom left</option>
+              <option value="4">logo bottom Right</option>
+              <option value="5">Text top Left</option>
+              <option value="6">Text top Right</option>
+              <option value="7">Text bottom left</option>
+              <option value="8">Text bottom Right</option>
+              <option value="9">Moving Text</option>
+        </select>
+          </select>
+      </div>
+       
+      </div>
+      <div class="col-sm-6">
+        <div class="waterMarkcont" id="waterMarkcont-{{ $loop->iteration }}"> <!-- variable here -->
+          <label class="waterMarkBtn">Browse</label>
+          <input type="text"  readonly placeholder="png , jpeg , jpg" class="waterMarkImgUrl">
+          <input type="file" name="watermark_image[{{$key}}]"  class="waterMarkfile" accept=".png,.jpg,.jpeg" style="display: none;">
+        </div>
+        <div class="waterMarkTxt" id="waterMarkTxt-{{ $loop->iteration }}"> <!-- variable here -->
+        <input type="text" name="watermark_text[{{$key}}]" placeholder="Enter your watermark text">
+        <div class="row control-cont">
+          <div class="col-sm-6 my-2">
+            <input type="color" name="watermark_color[{{$key}}]" data-selected-color='#000000' class="inptColor" >
+          </div>
+          <div class="col-sm-6 my-2">
+            <input type="text" name="watermark_font[{{$key}}]" placeholder="font size eg 20,40" data-font-size="40" class="logo-fnt-size" name="">
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- ===========End of watermark ===========-->
+            @endif
 
 
             <div class="tag-field tag-responsive">
@@ -186,6 +235,7 @@
                     </div>
                 </div>
             </div>
+            @if($tag->mime_type == 'mp3')
             <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm">
@@ -217,17 +267,15 @@
                     </div>
                 </div>
             </div>
-  @else
-  
- dd 
-  
-  @endif
+
+
+            @endif
             @endforeach
             <div class="tag-field tag-responsive tag-field-save">
                 <div class="row">
                     <div class="col-sm">
                         <div class="lbl-sel-data">
-                            <label for="temp-data">(save data for 10 mins)</label>
+                            <label for="temp-data">(save data for 24 hrs)</label>
                             <input type="radio" name="saveData" value="0" id='temp-data' class="temp-data-chk" checked='checked'>
                             <label for="temp-data" class="temp-data">✔</label>
                         </div>
@@ -308,5 +356,97 @@
     });
 
 </script> 
+<script>
+       $('.waterMarkfile').change(function(e){
+      $(this).prev().val(e.target.files[0].name)
+  })
+  $('.waterMarkBtn').click(function(){
+      $(this).next().next().click();
+  })
+  $('.markSelect').change(function(){
+    var  renderIndex = $(this).attr('data-render');
+    var selectMarkOption1 = `#waterMarkcont-${renderIndex}`
+    var selectMarkOption2 = `#waterMarkTxt-${renderIndex}`
+    if($(this).val()==1||$(this).val()==2 || $(this).val()==3 || $(this).val()==4){
+      $(`${selectMarkOption1}`).css('display' , 'flex')
+      $(`${selectMarkOption2}`).css('display' , 'none')
+    }else if($(this).val()==5 || $(this).val()==6 || $(this).val()==7 || $(this).val()==8 || $(this).val()==9){
+      $(`${selectMarkOption1}`).css('display' , 'none')
+      $(`${selectMarkOption2}`).css('display' , 'block')
+    }
+  })
+
+  $('.inptColor').change(function(){
+  $(this).attr("data-selected-color" , $(this).val() )
+  })
+  $('.logo-fnt-size').keyup(function(){
+  $(this).attr("data-font-size" , $(this).val() )
+  })
+
+
+
+  //--------------- End of water mark section---------------
+
+$("input[type = file]").change(function(e){
+  var parentIndex = $(this).parent().parent().parent().attr('data-render');
+  var txtclear="#aud-text-"+parentIndex;
+  if($(this).attr('data-type')=='txt')
+  $(txtclear).val(e.target.files[0].name);
+})
+$("input[type = file]").change(function(e){
+  var parentIndexImg = $(this).parent().parent().parent().attr('data-render');
+  var mylbltext="#img-text-"+parentIndexImg; 
+  if($(this).attr('data-type')=='img')
+  $(mylbltext).val(e.target.files[0].name);
+})
+
+
+var rangValusAray =[];
+$('.setRangeBtn').click(function(){
+  var rangBtnIndex =  $(this).parent().parent().attr("data-render");
+  var rangId = `songRange-${rangBtnIndex}`;
+  var appendId = `rangeValue-${rangBtnIndex}`
+  var holderId = `holder-${rangBtnIndex}`
+  rangValue = $(`#${rangId}`).val()
+  if(rangValusAray[rangBtnIndex]==null){
+  var currntArry = [];
+  currntArry.push(rangValue)
+  rangValusAray.push(currntArry)
+  }
+  else{
+    var oldarr = rangValusAray[rangBtnIndex];
+    oldarr.push(rangValue)
+  }
+  var child  = `<p class="val-cont"><span class="rangeHolder">${rangValue}</span><span class="btnRangclear fas fa-times-circle" data-range-index="${rangValue}"></span></p>`
+      $(`#${appendId}`).append(child)
+      $(`#${holderId}`).attr("value" , rangValusAray[rangBtnIndex])
+    })
+$(document).click(function(e){
+        if(e.target.classList.contains("btnRangclear")){
+          var holderIdIndex = e.target.parentNode.parentNode.getAttribute('data-render');
+          var holderIdVal = `holder-${holderIdIndex}`
+           e.target.parentNode.remove();
+           var targetItem = e.target.getAttribute("data-range-index");
+           var delElement =  rangValusAray[holderIdIndex].indexOf(targetItem);
+           rangValusAray[holderIdIndex].splice(delElement , 1)
+           $(`#${holderIdVal}`).attr("value" , rangValusAray[holderIdIndex])
+
+        }
+      })
+
+$('.songRange').change(function(){
+      document.querySelectorAll('.songRange')
+      $(this).prev().text($(this).val())
+      var rangeFileIndex = $(this).parent().parent().attr("data-render");
+      var rangeFileId = `mp3Browser-${rangeFileIndex}`
+       this.parentNode.parentNode.parentNode.children[1].children[0].setAttribute('for' , rangeFileId)
+        if($(this).val()==0){
+          this.parentNode.parentNode.parentNode.children[1].children[0].setAttribute('for' , "")
+          this.parentNode.parentNode.parentNode.children[1].children[1].value='';
+        }else{
+          this.parentNode.parentNode.parentNode.children[1].children[0].setAttribute('for' , rangeFileId)
+        }
+})
+</script>
 @endsection
 @endsection

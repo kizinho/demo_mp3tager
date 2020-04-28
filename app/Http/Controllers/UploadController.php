@@ -162,7 +162,8 @@ class UploadController extends Controller {
 
     public function tagPost(Request $request) {
         $input = $request->all();
-
+ 
+     
 //        
 //        
 //        
@@ -270,13 +271,13 @@ class UploadController extends Controller {
             ]);
 
             $res = json_decode($response->getBody());
-//            if ($res->status == 401) {
-//                session()->flash('message.level', 'error');
-//                session()->flash('message.color', 'red');
-//                session()->flash('message.content', 'Invalid Response');
-//                return redirect()->route('upload');
-//            }
-
+              //dd($res);
+            if ($res->status == 401) {
+                session()->flash('message.level', 'error');
+                session()->flash('message.color', 'red');
+                session()->flash('message.content', 'Invalid Response');
+                return redirect()->route('upload');
+            }
             return [
                 'data' => $res
             ];
