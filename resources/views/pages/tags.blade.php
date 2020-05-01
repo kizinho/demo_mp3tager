@@ -141,10 +141,10 @@
         <input type="text" name="watermark_text[{{$key}}]" placeholder="Enter your watermark text">
         <div class="row control-cont">
           <div class="col-sm-6 my-2">
-            <input type="color" name="watermark_color[{{$key}}]" data-selected-color='#000000' class="inptColor" >
+              <input type="color" name="watermark_color[{{$key}}]" data-selected-color='#000000' class="inptColor" required>
           </div>
           <div class="col-sm-6 my-2">
-            <input type="text" name="watermark_font[{{$key}}]" placeholder="font size eg 20,40" data-font-size="40" class="logo-fnt-size" name="">
+              <input type="text" name="watermark_font[{{$key}}]" value="40" placeholder="font size eg 20,40" data-font-size="40" class="logo-fnt-size" name="">
           </div>
         </div>
         </div>
@@ -161,7 +161,7 @@
                         <label>Title</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Enter Title' name="title[{{$key}}]" value="{{$tag->title}}" >
+                        <input type="text" placeholder='Enter Title' name="title[{{$key}}]" value="{{$tag->title}}" required>
                     </div>
                 </div>
             </div>
@@ -185,6 +185,7 @@
                     </div>
                 </div>
             </div>
+             @if($tag->mime_type == 'mp3')
             <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm">
@@ -195,6 +196,7 @@
                     </div>
                 </div>
             </div>
+             @endif
             <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm">
@@ -215,6 +217,8 @@
                     </div>
                 </div>
             </div>
+             
+            @if($tag->mime_type == 'mp3')
             <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm">
@@ -235,7 +239,6 @@
                     </div>
                 </div>
             </div>
-            @if($tag->mime_type == 'mp3')
             <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm">

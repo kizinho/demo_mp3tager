@@ -46,6 +46,7 @@
             <br/>
             <a href="{{url('tags?' . $key . '='.$download->slug)}}"> Edit  <i class="fa fa-pen"></i></a>
             <br/> <br/>
+            @if($download->mime_type == 'mp3')
             <audio controls style="width:100%">
                 <source src="{{url('tag-downloads/'.$download->slug)}}" type="audio/ogg">
                 <source src="{{url('tag-downloads/'.$download->slug)}}" type="audio/mpeg">
@@ -61,6 +62,22 @@
                   </audio>
 
             </textarea>
+            @else
+            <video style="width:100%" controls>
+                <source src="{{url('tag-downloads/'.$download->slug)}}" type="video/mp4">
+                <source src="{{url('tag-downloads/'.$download->slug)}}" type="video/ogg">
+                Your browser does not support HTML video.
+            </video>
+            <br/> <br/>
+            <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
+               <video style="width:100%" controls>
+                <source src="{{url('tag-downloads/'.$download->slug)}}" type="video/mp4">
+                <source src="{{url('tag-downloads/'.$download->slug)}}" type="video/ogg">
+                Your browser does not support HTML video.
+            </video>
+
+            </textarea>
+            @endif
 
             <button class="embd-btn">copy embedded code</button>
         </div> 

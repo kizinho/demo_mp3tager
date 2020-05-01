@@ -9,7 +9,7 @@
         <label id="chk-list-hide"><i class="fa fa-bars"></i></label>
         <ul>
             <li><a class="@if(request()->path() == '/') active @endif" href="{{url('/')}}" class="active">home</a></li>
-            <li><a class="start-upload-btn @if(request()->path() == 'upload') active @endif @if(request()->path() == 'tags') active @endif" href="{{url('upload')}}" >Start Uploading</a></li>
+            <li><a class="start-upload-btn @if(request()->path() == 'upload') active @endif @if(request()->path() == 'tags') active @endif @if(request()->path() == 'downloads') active @endif" href="{{url('upload')}}" >Start Uploading</a></li>
           <li><a class="@if(request()->path() == 'how-it-works') active @endif @if(request()->path() == 'how-it-works') active @endif" href="{{url('how-it-works')}}" class="start-upload-btn">How it Works?</a></li>
             
             <li>

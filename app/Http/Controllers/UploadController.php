@@ -44,21 +44,6 @@ class UploadController extends Controller {
                     continue;
                 }
             }
-
-//            $output [] = [
-//                'name' => 'field_name',
-//                'contents' => \request()->get('field_name')
-//            ];
-//
-//            $output [] = [
-//                'name' => 'field_name_2',
-//                'contents' => \request()->get('field_name_2')
-//            ];
-//            $output [] = [
-//                'name' => 'field_name_3',
-//                'contents' => \request()->get('field_name_3')
-//            ];
-
             $url = config('app.naijacrawl_api') . '/upload-tag';
             $client = new Client();
             $response = $client->request('POST', $url, [
@@ -143,7 +128,7 @@ class UploadController extends Controller {
                 session()->flash('message.content', 'Invalid Response');
                 return redirect()->route('upload');
             }
-        
+
             if ($res->status == 455) {
                 abort(455);
             }
@@ -162,48 +147,6 @@ class UploadController extends Controller {
 
     public function tagPost(Request $request) {
         $input = $request->all();
- 
-     
-//        
-//        
-//        
-//          if ($request->hasFile('viocetag') || $request->hasFile('coverart')) {
-//            if (!empty($request->viocetag)) {
-//                $voicetags = $request->file('viocetag');
-//                $output = [];
-//                foreach ($voicetags as $key => $value) {
-//                    if (!is_array($value)) {
-//                        $output[] = [
-//                            'name' => 'voicetag[]',
-//                            'contents' => fopen($value->getPathname(), 'r'),
-//                            'filename' => $value->getClientOriginalName()
-//                        ];
-//                        continue;
-//                    }
-//                }
-//            }
-//            if (!empty($request->coverart)) {
-//                $coverarts = $request->file('coverart');
-//                foreach ($coverarts as $key => $cover) {
-//                    if (!is_array($cover)) {
-//                        $output[] = [
-//                            'name' => 'coverart[]',
-//                            'contents' => fopen($cover->getPathname(), 'r'),
-//                            'filename' => $cover->getClientOriginalName()
-//                        ];
-//                        continue;
-//                    }
-//                }
-//            }
-//        } else {
-//            $output[] = [
-//                            'name' => 'input[]',
-//                            'contents' => $input
-//                        ];
-//        }
-//
-
-
 
         if ($request->hasFile('viocetag')) {
             $voicetags = $request->file('viocetag');
@@ -232,6 +175,19 @@ class UploadController extends Controller {
                 }
             }
         }
+        if ($request->hasFile('watermark_image')) {
+            $watermark_image = $request->file('watermark_image');
+            foreach ($watermark_image as $keyt => $water) {
+                if (!is_array($water)) {
+                    $output[] = [
+                        'name' => 'watermark_image[' . $keyt . ']',
+                        'contents' => fopen($water->getPathname(), 'r'),
+                        'filename' => $water->getClientOriginalName()
+                    ];
+                    continue;
+                }
+            }
+        }
 
         $output [] = [
             'name' => 'data',
@@ -252,7 +208,11 @@ class UploadController extends Controller {
                         'encoder_settings' => $request->encoder_settings,
                         'path' => $request->path,
                         'user_id' => $request->user_id,
-                        'saveData' => $request->saveData
+                        'saveData' => $request->saveData,
+                        'watermark' => $request->watermark,
+                        'watermark_text' => $request->watermark_text,
+                        'watermark_color' => $request->watermark_color,
+                        'watermark_font' => $request->watermark_font,
                     ]
             ),
         ];
@@ -271,7 +231,7 @@ class UploadController extends Controller {
             ]);
 
             $res = json_decode($response->getBody());
-              //dd($res);
+            //dd($res);
             if ($res->status == 401) {
                 session()->flash('message.level', 'error');
                 session()->flash('message.color', 'red');
