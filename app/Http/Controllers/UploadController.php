@@ -122,7 +122,7 @@ class UploadController extends Controller {
             ]);
 
             $res = json_decode($response->getBody());
-            dd($res);
+
             if ($res->status == 401) {
                 session()->flash('message.level', 'error');
                 session()->flash('message.color', 'red');
@@ -232,7 +232,7 @@ class UploadController extends Controller {
             ]);
 
             $res = json_decode($response->getBody());
-            //dd($res);
+            dd($res);
             if ($res->status == 401) {
                 session()->flash('message.level', 'error');
                 session()->flash('message.color', 'red');
