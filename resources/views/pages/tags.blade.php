@@ -127,7 +127,6 @@
               <option value="8">Text bottom Right</option>
               <option value="9">Moving Text</option>
         </select>
-          </select>
       </div>
        
       </div>
