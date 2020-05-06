@@ -54,7 +54,7 @@ class UploadController extends Controller {
             ]);
 
             $data = \GuzzleHttp\json_decode($response->getBody());
-     
+  
             return [
                 'data' => $data
             ];
@@ -122,7 +122,6 @@ class UploadController extends Controller {
             ]);
 
             $res = json_decode($response->getBody());
-            
             if ($res->status == 401) {
                 session()->flash('message.level', 'error');
                 session()->flash('message.color', 'red');
