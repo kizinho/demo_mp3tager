@@ -12,8 +12,14 @@ class AuthController extends Controller {
         $this->middleware('login');
     }
 
-    public function signUp() {
-        return view('pages.signup');
+    public function signUp(Request $request) {
+        $ref = $request->ref;
+        if (!empty($ref)) {
+            $data['ref'] = $request->ref;
+        } else {
+            $data['ref'] = null;
+        }
+        return view('pages.signup', $data);
     }
 
     public function signIn() {
@@ -35,6 +41,11 @@ class AuthController extends Controller {
             ]);
 
             $res = json_decode($response->getBody());
+            if ($res->status == 200) {
+                $token = $res->token->user;
+                session(['token' => $token]);
+                session()->flash('login.content', 'Welcome');
+            }
             return [
                 'data' => $res
             ];

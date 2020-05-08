@@ -11,10 +11,11 @@ body{
     margin-top: -25px !important;
   }
   .Mycontainer{
-   flex:1;
+   /*flex:1;*/
   margin:auto; 
+   min-height:100vh;
+ 
   }
-
 
 
 .error-content,.error-content-dup{
@@ -68,6 +69,9 @@ body{
 
 
 
+    .error-content{
+            margin:auto;
+        }
 
 
 
@@ -137,6 +141,7 @@ body{
       height: 338px;
       padding-top: 10px;
       padding-left: 20px;
+      margin-top:50px;
     }
     .error-content h1{
         font-size: 70px;
@@ -159,7 +164,9 @@ body{
   @media screen and (max-width:786px){
     .error-content{
         width: 400px;
+    
         height: 227px;
+        margin-top:50px;
       }
       .error-content-dup{
         width: auto;
@@ -200,13 +207,14 @@ body{
        margin: 0px;
    }
 
-  }
+  }/*  save and load*/
   
   @media screen and (max-width:446px){
     .error-content{
         width: 300px;
         height: 170px;
         padding-top: 0px;
+        margin-top:50px;
     }
     .footer {
     height: 120px !important;

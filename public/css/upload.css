@@ -41,7 +41,7 @@ body,html{
 
 .container{
     padding: 0px !important;
-    flex:1;
+    min-height:100vh;
 }
 .tabs-container{
     background: #fff;

@@ -11,10 +11,11 @@ body{
     margin-top: -25px !important;
   }
   .Mycontainer{
-   flex:1;
+    min-height:100vh;
    margin:auto; 
   }
 .notfound-content,.notfound-content-dup{
+    margin:auto;
     margin-top: 70px;
     background:url('../images/notfound.jpg');
     background-size: cover;
@@ -24,8 +25,11 @@ body{
     padding-left: 50px;
     display: flex;
     justify-content: center;
+   
+
     
 }
+
 .notfound-content-dup h1{
     color:#ccc;
     font-size:50px;
@@ -70,16 +74,8 @@ body{
     align-items: center;
     padding:0px;
     margin-top: -220px;
-    margin-left: 10px;
+    margin-left: auto;
 }
-
-
-
-
-
-
-
-
 
 
 

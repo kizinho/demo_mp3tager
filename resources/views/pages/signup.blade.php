@@ -43,6 +43,8 @@
                     <label><i class="fas fa-lock"></i></label>
                     <input type="password" id="confirm_password" placeholder="confirm Password" required >
                 </div>
+                
+            <input type='hidden' id="ref" value="{{$ref}}" class="form-control">
                 <div class="form-field form-field-sigup">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" name="customCheck1" class="custom-control-input" id="customCheck1" onclick="if (this.checked)">
@@ -89,7 +91,8 @@
                 email: jQuery('#email').val(),
                 password: jQuery('#password').val(),
                 confirm_password: jQuery('#confirm_password').val(),
-                actions: jQuery('#actions').val()
+                actions: jQuery('#actions').val(),
+                ref: jQuery('#ref').val()
             },
             success: function (data) {
                 if (data.data['status'] === 401) {
@@ -106,7 +109,7 @@
                     jQuery.each(data.data['message'], function (key, value) {
                         var message = ('' + value + '');
                         toastr.options.onHidden = function () {
-                            window.location.href = "{{url('/signin')}}";
+                            window.location.href = "{{url('/dashboard')}}";
                         };
                         toastr.success(message, {timeOut: 50000});
                     });

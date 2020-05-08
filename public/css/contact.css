@@ -6,12 +6,12 @@ body{
   margin-top: -25px !important;
 }
 .Mycontainer{
- flex:1;
+   min-height:100vh;
 }
 .contact-info{
   text-align: center;
   color: #fff;
-  margin-top: 20px;
+  margin-top: 80px;
 }
 .contactus-content{
   width: 100%;

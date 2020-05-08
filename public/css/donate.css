@@ -4,7 +4,7 @@ body{
     height: 100vh;
   }
   .Mycontainer{
-    flex:1;
+      min-height:100vh;
   }
 .donate-content{
     background-image: url('../images/donate.png');

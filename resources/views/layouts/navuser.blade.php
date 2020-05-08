@@ -1,7 +1,7 @@
 <!-- partial:assets/new-cryptotrades-dash/partials/_navbar.html -->
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="/"><img src="{{asset('logo/logo.png') }}" alt="logo"/></a>
+        <a class="navbar-brand brand-logo" href="/"><img src="{{asset('logo/logo.png') }}" width="40px" alt="logo"/></a>
         <a class="navbar-brand brand-logo-mini" href="/"><img src="{{asset('logo/logo.png') }}" alt="logo"/></a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -36,13 +36,13 @@
                         Settings
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="{{ route('logout') }}" class="dropdown-item"
+                    <a href="{{ url('logout') }}" class="dropdown-item"
                        onclick="event.preventDefault();
                                document.getElementById('logout-form').submit();">
                         <i class="fas fa-power-off text-warning"></i>
                         Logout</a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
 
@@ -72,50 +72,56 @@
                         <p class="name">
                             @if(session()->has('login.content'))
                             {!! session('login.content') !!}
-                            @endif {{Auth::user()->username}}
+                            @endif {{$user->username}}
                         </p>
                         <p class="designation">
-                            {{$user->username}}
+                           {{$user->username}}
                         </p>
                     </div>
                 </div>
             </li>
        
-            <li class="nav-item @if(request()->path() == 'home') active @endif">
-                <a class="nav-link " href="{{url('home')}}">
+            <li class="nav-item @if(request()->path() == 'dashboard') active @endif">
+                <a class="nav-link " href="{{url('dashboard')}}">
                     <i class="fa fa-home menu-icon"></i>
                     <span class="menu-title">Dashboard</span>
                 </a>
             </li>
-          
-            <li class="nav-item @if(request()->path() == 'deposit') active @endif">
-                <a class="nav-link" href="{{url('storage-mangement')}}">
-                    <i class="fa fa-share-square menu-icon"></i>
-                    <span class="menu-title">Storage Management</span>
+            <li class="nav-item @if(request()->path() == 'add-storage') active @endif">
+                <a class="nav-link" href="{{url('add-storage')}}">
+                    <i class="fa fa-database menu-icon"></i>
+                    <span class="menu-title">Choose Preferred Storage</span>
                 </a>
             </li>
-            <li class="nav-item  @if(request()->path() == 'withdraw') active @endif">
+           
+            <li class="nav-item  @if(request()->path() == 'my-files') active @endif">
                 <a class="nav-link" href="{{url('my-files')}}">
-                    <i class="fa fa-download menu-icon"></i>
+                    <i class="fa fa-file menu-icon"></i>
                     <span class="menu-title">My Files</span>
                 </a>
             </li>
-            <li class="nav-item @if(request()->path() == 'deposit_list') active @endif">
-                <a class="nav-link" href="{{url('deposit_list')}}">
-                    <i class="fa fa-list menu-icon"></i>
-                    <span class="menu-title">Deposit List</span>
+             <li class="nav-item @if(request()->path() == 'upload') active @endif">
+                <a class="nav-link" href="{{url('upload')}}">
+                    <i class="fa fa-upload menu-icon"></i>
+                    <span class="menu-title">Upload File</span>
                 </a>
             </li>
-              <li class="nav-item @if(request()->path() == 'withdraw_history') active @endif">
-                <a class="nav-link" href="{{url('withdraw_history')}}">
-                    <i class="fa fa-money-bill menu-icon"></i>
-                    <span class="menu-title">Withdraw History</span>
+            <li class="nav-item @if(request()->path() == 'discover') active @endif">
+                <a class="nav-link" href="{{url('discover')}}">
+                    <i class="fa fa-file-archive menu-icon"></i>
+                    <span class="menu-title">Discover</span>
                 </a>
             </li>
-            <li class="nav-item @if(request()->path() == 'earnings') active @endif">
-                <a class="nav-link" href="{{url('earnings')}}">
-                    <i class="fa fa-list-ol menu-icon"></i>
-                    <span class="menu-title">Earnings</span>
+              <li class="nav-item @if(request()->path() == 'upload-youtube') active @endif">
+                <a class="nav-link" href="{{url('upload-youtube')}}">
+                    <i class="fa fa-link menu-icon"></i>
+                    <span class="menu-title">Upload Youtube Url Mp3</span>
+                </a>
+            </li>
+            <li class="nav-item @if(request()->path() == 'transactions') active @endif">
+                <a class="nav-link" href="{{url('transactions')}}">
+                    <i class="fa fa-sort-amount-up menu-icon"></i>
+                    <span class="menu-title">Transactions History</span>
                 </a>
             </li>
             <li class="nav-item @if(request()->path() == 'referals') active @endif">
@@ -124,12 +130,7 @@
                     <span class="menu-title">Referrals</span>
                 </a>
             </li>
-            <li class="nav-item @if(request()->path() == 'referallinks') active @endif">
-                <a class="nav-link" href="{{url('referallinks')}}">
-                    <i class="fa fa-bullhorn menu-icon"></i>
-                    <span class="menu-title">Promotional Banners</span>
-                </a>
-            </li>
+           
              <li class="nav-item @if(request()->path() == 'edit_account') active @endif">
                 <a class="nav-link" href="{{url('edit_account')}}">
                     <i class="fa fa-cogs menu-icon"></i>
@@ -138,14 +139,14 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('logout') }}"
+                <a class="nav-link" href="{{ url('logout') }}"
                    onclick="event.preventDefault();
                              document.getElementById('logout-form').submit();">
 
                     <i class="fa fa-arrow-circle-right menu-icon"></i>
                     <span class="menu-title">Logout</span>
                 </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                <form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
             </li>

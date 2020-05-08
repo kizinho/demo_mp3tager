@@ -11,7 +11,7 @@ body,html{
 
 .Mycontainer{
   padding: 0;
-  flex: 1;
+    min-height:100vh;
 
 }
 .form-container{
@@ -122,60 +122,6 @@ body,html{
   display:none;
 }
 
-
-#google_translate_element{
-  position: relative;
-}
-.goog-logo-link{
-  display: none;
-}
-.goog-logo-link #text{
-  display: none;
-}
-.goog-te-gadget{
-  font-size: 0px !important;
-}
-.goog-te-gadget div{
-  display: inline;
-}
-
-.goog-te-gadget div select{
-width: 131px;
-height: 35px;
-background-color: #08192D !important;
-color: #fff;
-padding: 2px;
-outline: none;border:none;
-}
-.goog-te-gadget div select option{
-  background-color: #08192D;
-
-}
-.goog-te-gadget div select option:hover{
-  cursor: pointer;
-}
-.goog-te-gadget div select:hover{
-  background-color: #DA0353 !important;
-  cursor: pointer;
-}}
-
-@media (max-width:896px) {
-  .navbar .logo{
-    margin-left: -20px;
-    font-size: 16px;
-    line-height: 60px;
-    margin-top: -25px !important ;
-  }
-  .navbar .logo i{
-    top:-5px !important;
-    left: 15px;
-    font-size: 28px;
-    line-height: 70px;
-  }
-  .navbar .logo span{
-    font-size: 18px;
-  }
-}
 @media (max-width:1000px) {
   .form-container{
       margin-top: 70px !important;
@@ -222,60 +168,4 @@ outline: none;border:none;
   }
 }
 
-@media (max-width:976px) {
-  /* navbar */
-  .navbar{
-  display: flex;
-  justify-content: center;
-  position: relative;
-}
-.navbar .logo{
-  margin-top: 0px !important ;
-}
 
-.nav-links .fa-bars{
-  display: block;
-}
-.nav-links ul li {
-  display:block;
-  width: 100%;
-  padding: 10px 0px !important;
-}
-.nav-links ul li:hover{
-  background: #636e72;
-  cursor: pointer;
-  border-left: 4px solid #DA0353;
-}
-.nav-links ul li:hover a{
-  transition: .5s;
-  padding-left: 40px;
-  color: #DA0353;
-  border:none;
-  font-weight: bold
-}
-.navbar .nav-links ul li a:hover{
-  border:none !important;
-  color: #DA0353;
-  background: none !important;
-}
-.nav-links ul{
-  padding-left: 0px !important;
-  position: absolute;
-  left: 0;
-  top: 80px;
-  width: 100%;
-  height: 100vh;
-  background: #000;
-  z-index: 20;
-  margin-top: -20px;
-  transition: all 1s ease-out;
-  text-align: center;
-  clip-path:circle(100px at 90% -40%);
-  pointer-events:none;
-}
-.fade-nav{
-  transition: all 2s ease-out;
-  clip-path:circle(1500px at 90% -40%) !important;
-  pointer-events:all !important;}
-}
-}
