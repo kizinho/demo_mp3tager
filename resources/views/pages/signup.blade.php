@@ -105,6 +105,13 @@
                     });
                     return false;
                 }
+                 if (data.data['status'] === 422) {
+                        var message = data.data['message'];
+                        toastr.error(message, {timeOut: 50000});
+
+                        return false;
+                    }
+                
                 if (data.data['status'] === 200) {
                     jQuery.each(data.data['message'], function (key, value) {
                         var message = ('' + value + '');
