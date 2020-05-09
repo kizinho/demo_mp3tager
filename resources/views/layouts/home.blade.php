@@ -7,6 +7,7 @@
     
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <meta name="csrf-token" content="{{ csrf_token() }}">
  <!-- Main Page Title -->
     <!-- Favicons -->
     <link rel="icon" href="{{asset('logo/logo.png') }}">
@@ -97,6 +98,21 @@ function googleTranslateElementInit() {
     }).catch(swal.noop);
 </script>
 @endif
+ <script>
+//
+///*Register Service Worker if it is supported*/
+//if ('serviceWorker' in navigator) {
+//    window.addEventListener('load', () => {
+//        navigator.serviceWorker.register('/mp3sw.js').then(event => {
+//        }).catch((err) => {
+//            console.log(err);
+//        });
+//    });
+//} else {
+//    console.log('No service worker');
+//}
+
+    </script>
     @yield('script')
 </body>
 </html>

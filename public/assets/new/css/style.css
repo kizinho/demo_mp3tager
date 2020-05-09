@@ -118,6 +118,78 @@
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
 
+@media only screen and (max-width: 992px) {
+
+
+    .toast-top-right {
+        min-width: 250px!important;
+        margin-left: -125px!important;
+        text-align: center!important;
+        border-radius: 2px!important;
+        padding: 16px!important;
+        position: fixed!important;
+        z-index: 1!important;
+        left: 50%!important;
+        top: 50%!important;
+        bottom: 30px!important;
+        font-size: 17px!important;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+}
+@media only screen and (min-width: 993px) {
+    .toast-top-right {
+        min-width: 250px!important;
+        margin-left: -125px!important;
+        text-align: center!important;
+        border-radius: 2px!important;
+        padding: 16px!important;
+        position: fixed!important;
+        z-index: 1!important;
+        left: 50%!important;
+        top: 60%!important;
+        bottom: 30px!important;
+        font-size: 17px!important;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }   
+}
+
+
+
+.modal
+{
+    position: fixed;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: Black;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    -moz-opacity: 0.8;
+}
+.mcenter
+{
+    z-index: 1000;
+    margin: 300px auto;
+    padding: 10px;
+    width: 130px;
+    background-color: #ddd;
+    border-radius: 10px;
+    filter: alpha(opacity=100);
+    opacity: 1;
+    -moz-opacity: 1;
+}
+.mcenter img
+{
+    height: 100px;
+    width: 100px;
+}
+a.p {
+    color: #DA0353!important;
+}
 @import url('../../../../external.html?link=https://fonts.googleapis.com/css?family=Baloo+Bhai&amp;display=swap');
 
 @-moz-keyframes flash {

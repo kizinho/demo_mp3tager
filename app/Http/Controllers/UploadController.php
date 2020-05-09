@@ -54,7 +54,7 @@ class UploadController extends Controller {
             ]);
 
             $data = \GuzzleHttp\json_decode($response->getBody());
-  
+
             return [
                 'data' => $data
             ];
@@ -83,7 +83,7 @@ class UploadController extends Controller {
                 ],
                 'multipart' => $output
             ]);
-               
+
             $data = \GuzzleHttp\json_decode($response->getBody());
 
             return [
@@ -294,13 +294,13 @@ class UploadController extends Controller {
         }
     }
 
-    public function downloadTag($slug) {
-        $data_array = $slug;
-
-        $output = [
-            'contents' => $data_array
-        ];
-
+    public function downloadTag(Request $request, $slug) {
+        $link = $request->server('HTTP_REFERER');
+        $input = $request->all();
+        $ip = $request->getClientIp();
+        $input['slug'] = $slug;
+        $input['link'] = $link;
+        $input['ip'] = $ip;
         try {
             $client = new Client();
             $headers = [
@@ -310,11 +310,10 @@ class UploadController extends Controller {
             $url = config('app.naijacrawl_api') . '/tag-download';
             $response = $client->request('GET', $url, [
                 'headers' => $headers,
-                'query' => $output
+                'query' => $input
             ]);
 
             $res = json_decode($response->getBody());
-
             if ($res->status == 455) {
                 abort(455);
             }

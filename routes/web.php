@@ -42,5 +42,8 @@ Route::get('how-it-works', 'PageController@how')->name('how-it-works');
 //dashboard user
 Route::group(['middleware' => 'token'], function() {
     Route::get('dashboard', 'UserHomeController@index')->name('dashboard');
+    Route::get('add-storage', 'UserHomeController@addStorage')->name('add-storage');
+    Route::post('add-storage', 'UserHomeController@PostStorage');
+     Route::post('add-drive', 'UserHomeController@PostDrive');
 });
 

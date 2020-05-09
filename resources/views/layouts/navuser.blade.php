@@ -38,11 +38,11 @@
                     <div class="dropdown-divider"></div>
                     <a href="{{ url('logout') }}" class="dropdown-item"
                        onclick="event.preventDefault();
-                               document.getElementById('logout-form').submit();">
+                               document.getElementById('logout-form1').submit();">
                         <i class="fas fa-power-off text-warning"></i>
                         Logout</a>
 
-                    <form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form1" action="{{ url('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
 
