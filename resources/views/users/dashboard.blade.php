@@ -399,17 +399,23 @@
                     <div class="col-md-12" style="padding-top: 10px;">
                         <div class="card">
                             <div class="card-body p-0">
-                                <h5 class="card-title header-title border-bottom p-3 mb-0" style="background: #fff; color: #111; border-left: 4px solid #FF5E6D">Recent Upload Task</h5>
+                                <h5 class="card-title header-title border-bottom p-3 mb-0" style="background: #fff; color: #111; border-left: 4px solid #FF5E6D">
+                                    @if(empty($recent_task)) No Recent Uploaded Task  @else  Recent Uploaded Task @endif
+                                </h5>
                                 @foreach($recent_task as $key => $task)
                                 <div class="media px-3 py-2 border-bottom ">
                                     <div class="media-body">
                                         <h5 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>{{$task->title}}</b></h5>
                                         <span class="text-muted">{{$task->size}} - <b>{{$task->mime_type}}</b></span>
+                                        <br/>
+                                        <b>
+                                            <span class="text-muted">{{ date('F d, Y', strtotime($task->created_at)) }} {{ date('g:i A', strtotime($task->created_at)) }}</span>
+                                        </b>
                                     </div>
                                     <a class="p" href="{{url('downloads?' . $key . '='.$task->slug)}}" > <li class="fa fa-download " style="font-size: 18px; margin-top: 14px;"> {{App\Http\Controllers\Converter::number_format_short(intval($task->downloads))}}</li></a> &nbsp;&nbsp;
-                                     <a class="p" href="{{url('tags?' . $key . '='.$task->slug)}}" > <li class="fa fa-edit " style="font-size: 18px; margin-top: 14px;"></li></a> &nbsp;&nbsp;
-                                   
-                                     <a class="p" href="{{url('analytics/'.$task->slug)}}" > <li class="fa fa-sort-amount-up" style="font-size: 20px; margin-top: 14px;"></li></a>
+                                    <a class="p" href="{{url('tags?' . $key . '='.$task->slug)}}" > <li class="fa fa-edit " style="font-size: 18px; margin-top: 14px;"></li></a> &nbsp;&nbsp;
+
+                                    <a class="p" href="{{url('analytics/'.$task->slug)}}" > <li class="fa fa-sort-amount-up" style="font-size: 20px; margin-top: 14px;"></li></a>
                                 </div>
                                 @endforeach
                             </div>
