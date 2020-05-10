@@ -159,15 +159,8 @@
                                     <p>you've chosed our server to
                                         save your data
                                     </p>
-                                    <select class="storage-selec" id="size" required>
-                                        @if(!empty($user_storages)) <option value="{{$user_storages->size}}">{{number_format($user_storages->size)}} MB</option> @endif
-                                        <option value="100">100 MB</option>
-                                        <option value="200">200 MB</option>
-                                        <option value="300">400 MB</option>
-                                        <option value="400">400 MB</option>
-                                        <option value="500">500 MB</option>
-                                        <option value="700">700 MB</option>
-                                    </select>
+                                    <input type="hidden" id="size" value="700">
+                                    
                                     <input type="submit" class="btn btn-success" value="save and close">
                                 </div>
                             </form>

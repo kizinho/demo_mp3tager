@@ -16,7 +16,7 @@
         font-weight: 400;
     }
 
-    meter {
+    meter-bar {
 
         display: block;
         margin: 0 auto;
@@ -37,7 +37,7 @@
         box-shadow: 0 5px 5px -5px #333 inset;
     }
 
-    meter::-webkit-meter-bar {
+    meter-bar::-webkit-meter-bar-bar {
 
         background: none; /* Important to get rid of default background. */
         background-color: whiteSmoke;
@@ -45,7 +45,7 @@
         box-shadow: 0 5px 5px -5px #333 inset;
     }
 
-    meter::-webkit-meter-optimum-value {
+    meter-bar::-webkit-meter-bar-optimum-value {
 
         transition: width .5s;
         box-shadow: 0 5px 5px -5px #999 inset;
@@ -64,7 +64,7 @@
         background-size: 100% 100%;
     }
 
-    meter::-webkit-meter-optimum-value:hover {
+    meter-bar::-webkit-meter-bar-optimum-value:hover {
 
         background-image: linear-gradient( 90deg, 
             #8bcf69 20%, 
@@ -81,7 +81,7 @@
         width: 100% !important; /* !important keyword used to override the inline style in ebkit browsers. */
     }
 
-    meter::-moz-meter-bar {
+    meter-bar::-moz-meter-bar-bar {
 
         box-shadow: 0 5px 5px -5px #999 inset;
 
@@ -165,7 +165,7 @@
         color: #666;
     }
 
-    .meter-gauge {
+    .meter-bar-gauge {
 
         border: 1px solid #ccc;
         border-radius: 3px;
@@ -179,7 +179,7 @@
         display: block;
     }
 
-    .meter-gauge > span {
+    .meter-bar-gauge > span {
 
         height: inherit;  
         box-shadow: 0 5px 5px -5px #999 inset;
@@ -239,12 +239,18 @@
 
                                     <div class="col-6">
                                         <h6><a  class="btn btn-warning btn-sm text-white" href="{{url('my-plan')}}"><i class="fa fa-sub "></i> My Plan</a></h6>
-                                        <p>Basic</p>
+                                        <p>
+                                            <!--                                            check plan-->
+                                            Basic
+                                        </p>
                                     </div>
 
                                     <div class="col-6">
                                         <h6><a  class="btn btn-warning btn-sm text-white" href="{{url('add-storage')}}"><i class="fa fa-sub "></i> My Storage</a></h6>
-                                        <p>Google Drive</p>
+                                        <p>
+                                            @if(empty($user_storages))  No Storage @else {{$user_storages->user_storage->name}}  @endif    
+
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -258,20 +264,43 @@
 
 
                                 <h4 class="card-title mb-0">Disk Usage</h4>
-
+                                <!--                                 check plan     -->
                                 <p>
-                                    Mp3tager <span class="free-space">64.54 GB free out of 120.47 GB</span></p>
+                                    @if(empty($user_storages))  No Storage @else {{$user_storages->user_storage->name}}  @endif 
+                                    <span class="free-space">
+                                        @if(empty($user_storages))  
+                                        0 Mb
 
-                                <meter value="55.93" min="0" max="120.47" title="GB">
-                                    <div class="meter-gauge">
-                                        <span style="width: 46.42%;">Disk Usage - 55.93GB out of 120GB</span>
+                                        @else 
+
+                                        {{$user_spaces}} free out of  {{$user_storages->size}} Mb
+                                        @endif 
+
+                                    </span></p>
+                                @if(empty($user_storages))  
+                                <meter-bar value="0" min="0" max="0" title="MB">
+                                    <div class="meter-bar-gauge">
+                                        <span style="width: 0%;">Disk Usage - 0 MB out of 0 MB</span>
                                     </div>
-                                </meter>  
+                                </meter-bar>  
 
+                                @else 
+
+                                <meter-bar value="{{$user_spaces_string}}" min="0" max="{{$user_storages->size}}" title="MB">
+                                    <div class="meter-bar-gauge">
+                                        <span style="width: {{$user_load_space}}%;">Disk Usage - {{$user_spaces}} out of {{$user_storages->size}} Mb</span>
+                                    </div>
+                                </meter-bar>  
+                                @endif 
                                 <ul class="swatch">
-                                    <li class="swatch__elem">Mp3<span class="used-space">670.5 MB</span></li>
-                                    <li class="swatch__elem">Mp4<span class="used-space">10.1 GB</span></li>
-                                </ul>  
+                                    @if(!empty($user_ex[0]))
+                                    <li class="swatch__elem">{{$user_ex[0]}} 
+                                        <span class="used-space">{{$user_ex_size[0]}}</span></li>
+                                    @endif
+                                    @if(!empty($user_ex[1]))
+                                    <li class="swatch__elem">{{$user_ex[1]}}<span class="used-space">{{$user_ex_size[1]}}</span></li>
+                                    @endif
+                                </ul> 
 
 
                             </div>
@@ -366,39 +395,42 @@
                             </div>
                         </div>
                     </div>
-
-
-
+                   
                     <div class="col-md-12" style="padding-top: 10px;">
                         <div class="card">
                             <div class="card-body p-0">
                                 <h5 class="card-title header-title border-bottom p-3 mb-0" style="background: #fff; color: #111; border-left: 4px solid #FF5E6D">Recent Upload Task</h5>
-                                <!-- stat 1 -->
-                                <div class="media px-3 py-2 border-bottom btn-light">
+                                 <div class="media px-3 py-2 border-bottom ">
                                     <div class="media-body">
-                                        <h4 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>wizkik ft ddj mp3</b></h4>
-                                        <span class="text-muted">14 mb</span>
-                                    </div>
-                                    <li class="fa fa-sort-amount-up" style="font-size: 24px; margin-top: 14px;"></li>
-                                </div>
-
-                                <!-- stat 2 -->
-                                <div class="media px-3 py-2 border-bottom">
-                                    <div class="media-body">
-                                        <h4 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>wizkik ft ddj mp3</b></h4>
+                                        <h5 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>wizkik ft ddj mp3</b></h5>
                                         <span class="text-muted">34mb</span>
                                     </div>
-                                    <li class="fa fa-sort-amount-up" style="font-size: 24px; margin-top: 14px;"></li>
+                                       <li class="fa fa-download" style="font-size: 18px; margin-top: 14px;"> 0 </li>&nbsp;&nbsp;
+                                    <li class="fa fa-sort-amount-up" style="font-size: 20px; margin-top: 14px;"></li>
                                 </div>
-
-                                <!-- stat 3 -->
-                                <div class="media px-3 py-2 btn-light">
+                                 <div class="media px-3 py-2 border-bottom">
                                     <div class="media-body">
-                                        <h4 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>wizkik ft ddj mp3</b></h4>
-                                        <span class="text-muted">23 mb</span>
+                                        <h5 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>wizkik ft ddj mp3</b></h5>
+                                        <span class="text-muted">34mb</span>
                                     </div>
-                                    <li class="fa fa-download" style="font-size: 18px; margin-top: 14px;"> 0 </li>&nbsp;&nbsp;
-                                    <li class="fa fa-sort-amount-up" style="font-size: 24px; margin-top: 14px;"></li>
+                                       <li class="fa fa-download" style="font-size: 18px; margin-top: 14px;"> 0 </li>&nbsp;&nbsp;
+                                    <li class="fa fa-sort-amount-up" style="font-size: 20px; margin-top: 14px;"></li>
+                                </div>
+                                 <div class="media px-3 py-2 border-bottom ">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>wizkik ft ddj mp3</b></h5>
+                                        <span class="text-muted">34mb</span>
+                                    </div>
+                                       <li class="fa fa-download" style="font-size: 18px; margin-top: 14px;"> 0 </li>&nbsp;&nbsp;
+                                    <li class="fa fa-sort-amount-up" style="font-size: 20px; margin-top: 14px;"></li>
+                                </div>
+                                 <div class="media px-3 py-2 border-bottom">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>wizkik ft ddj mp3</b></h5>
+                                        <span class="text-muted">34mb</span>
+                                    </div>
+                                       <li class="fa fa-download" style="font-size: 18px; margin-top: 14px;"> 0 </li>&nbsp;&nbsp;
+                                    <li class="fa fa-sort-amount-up" style="font-size: 20px; margin-top: 14px;"></li>
                                 </div>
                             </div>
                         </div>

@@ -18,23 +18,27 @@ class UserHomeController extends Controller {
                 'Accept' => 'application/json',
                 'API-Key' => env('API_KEY')
             ];
-            $url = config('app.naijacrawl_api') . '/get_storage';
+            $url = config('app.naijacrawl_api') . '/get_dashboard';
             $response = $client->request('GET', $url, [
                 'headers' => $headers
             ]);
 
             $res = json_decode($response->getBody());
-            $data['storages'] = $res->data->storage;
+          //  dd($res);
             $data['user_storages'] = $res->data->user_storage;
-
-            return view('users.add-storage', $data);
+            $data['user_spaces'] = $res->data->user_space;
+            $data['user_spaces_string'] = $res->data->user_space_string;
+            $data['user_load_space'] = $res->data->user_load_space;
+            $data['user_ex'] = $res->data->user_ex_name;
+             $data['user_ex_size'] = $res->data->user_ex_size;
+            return view('users.dashboard', $data);
         } catch (RequestException $res) {
             return [
                 'status' => 422,
                 'message' => 'Server Busy',
             ];
         }
-    
+
 
         return view('users.dashboard');
     }
