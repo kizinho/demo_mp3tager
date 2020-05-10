@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return view('welcome');
+    $token = Session::get('token');
+    if (empty($token)) {
+        return view('welcome');
+    } else {
+        return redirect('dashboard');
+    }
 });
 Route::get('offline', function () {
     return view('pages.offline');
