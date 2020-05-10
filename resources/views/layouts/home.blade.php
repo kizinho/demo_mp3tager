@@ -99,18 +99,18 @@ function googleTranslateElementInit() {
 </script>
 @endif
  <script>
-//
-///*Register Service Worker if it is supported*/
-//if ('serviceWorker' in navigator) {
-//    window.addEventListener('load', () => {
-//        navigator.serviceWorker.register('/mp3sw.js').then(event => {
-//        }).catch((err) => {
-//            console.log(err);
-//        });
-//    });
-//} else {
-//    console.log('No service worker');
-//}
+
+/*Register Service Worker if it is supported*/
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/mp3sw.js').then(event => {
+        }).catch((err) => {
+            console.log(err);
+        });
+    });
+} else {
+    console.log('No service worker');
+}
 
     </script>
     @yield('script')
