@@ -44,6 +44,8 @@ Route::group(['middleware' => 'token'], function() {
     Route::get('dashboard', 'UserHomeController@index')->name('dashboard');
     Route::get('add-storage', 'UserHomeController@addStorage')->name('add-storage');
     Route::post('add-storage', 'UserHomeController@PostStorage');
-     Route::post('add-drive', 'UserHomeController@PostDrive');
+    Route::post('add-drive', 'UserHomeController@PostDrive');
+    //my files
+    Route::get('my-files', 'UserHomeController@myFile')->name('my-files');
 });
 

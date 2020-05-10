@@ -345,7 +345,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-inline-block pt-3">
                                         <div class="d-md-flex">
-                                            <h2 class="mb-0">545444</h2>
+                                            <h2 class="mb-0">{{number_format($total_task)}}</h2>
 
                                         </div>
                                         <small class="text-gray">Your total Uploads</small>
@@ -364,7 +364,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-inline-block pt-3">
                                         <div class="d-md-flex">
-                                            <h2 class="mb-0">545444</h2>
+                                            <h2 class="mb-0">{{number_format($pending_task)}}</h2>
 
                                         </div>
                                         <small class="text-gray">Your Pending Task</small>
@@ -383,7 +383,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-inline-block pt-3">
                                         <div class="d-md-flex">
-                                            <h2 class="mb-0">545444</h2>
+                                            <h2 class="mb-0">{{number_format($completed_task)}}</h2>
 
                                         </div>
                                         <small class="text-gray">Your Completed Task</small>
@@ -395,43 +395,21 @@
                             </div>
                         </div>
                     </div>
-                   
+
                     <div class="col-md-12" style="padding-top: 10px;">
                         <div class="card">
                             <div class="card-body p-0">
                                 <h5 class="card-title header-title border-bottom p-3 mb-0" style="background: #fff; color: #111; border-left: 4px solid #FF5E6D">Recent Upload Task</h5>
-                                 <div class="media px-3 py-2 border-bottom ">
+                                @foreach($recent_task as $task)
+                                <div class="media px-3 py-2 border-bottom ">
                                     <div class="media-body">
-                                        <h5 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>wizkik ft ddj mp3</b></h5>
-                                        <span class="text-muted">34mb</span>
+                                        <h5 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>{{$task->title}}</b></h5>
+                                        <span class="text-muted">{{$task->size}} - <b>{{$task->mime_type}}</b></span>
                                     </div>
-                                       <li class="fa fa-download" style="font-size: 18px; margin-top: 14px;"> 0 </li>&nbsp;&nbsp;
+                                    <li class="fa fa-download" style="font-size: 18px; margin-top: 14px;"> {{App\Http\Controllers\Converter::number_format_short(intval($task->downloads))}}</li>&nbsp;&nbsp;
                                     <li class="fa fa-sort-amount-up" style="font-size: 20px; margin-top: 14px;"></li>
                                 </div>
-                                 <div class="media px-3 py-2 border-bottom">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>wizkik ft ddj mp3</b></h5>
-                                        <span class="text-muted">34mb</span>
-                                    </div>
-                                       <li class="fa fa-download" style="font-size: 18px; margin-top: 14px;"> 0 </li>&nbsp;&nbsp;
-                                    <li class="fa fa-sort-amount-up" style="font-size: 20px; margin-top: 14px;"></li>
-                                </div>
-                                 <div class="media px-3 py-2 border-bottom ">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>wizkik ft ddj mp3</b></h5>
-                                        <span class="text-muted">34mb</span>
-                                    </div>
-                                       <li class="fa fa-download" style="font-size: 18px; margin-top: 14px;"> 0 </li>&nbsp;&nbsp;
-                                    <li class="fa fa-sort-amount-up" style="font-size: 20px; margin-top: 14px;"></li>
-                                </div>
-                                 <div class="media px-3 py-2 border-bottom">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>wizkik ft ddj mp3</b></h5>
-                                        <span class="text-muted">34mb</span>
-                                    </div>
-                                       <li class="fa fa-download" style="font-size: 18px; margin-top: 14px;"> 0 </li>&nbsp;&nbsp;
-                                    <li class="fa fa-sort-amount-up" style="font-size: 20px; margin-top: 14px;"></li>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
