@@ -18,6 +18,7 @@ class SuperAdmin {
         $token = session('token');
 
         $check = Cache::get($token);
+        dd($check);
         $array = $check->data->roles;
         dd($array);
 
