@@ -53,7 +53,15 @@ Route::group(['middleware' => 'token'], function() {
     //my files
     Route::get('my-files', 'UserHomeController@myFile')->name('my-files');
     Route::post('my-files', 'UserHomeController@myFile');
-    
+
     Route::delete('my-files', 'UserHomeController@myDelete');
+    Route::get('discover', 'UserHomeController@discover')->name('dicover');
+    Route::post('discover', 'UserHomeController@discover');
+    //logout
+    Route::post('logout', 'UserHomeController@logout');
+    Route::group(['middleware' => 'super_admin'], function() {
+        Route::get('all-files', 'UserHomeController@allFile')->name('all-files');
+        Route::post('all-files', 'UserHomeController@allFile');
+    });
 });
 

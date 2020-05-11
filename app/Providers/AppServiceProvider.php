@@ -51,6 +51,7 @@ class AppServiceProvider extends ServiceProvider {
                 if (empty($res)) {
                     View::share('user', false);
                 } else {
+
                     View::share('user', $res->data);
                 }
             }

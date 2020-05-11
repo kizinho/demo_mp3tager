@@ -174,7 +174,6 @@
                                         we need to authenticate with
                                         your google drive account
                                     </p>
-                                    <label>Please type your Google mail Account</label>
                                     <input type="submit" class="btn btn-success" value="Click to Procceed">
                                 </div>
                             </form>

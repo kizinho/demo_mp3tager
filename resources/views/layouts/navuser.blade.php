@@ -100,6 +100,17 @@
                     <span class="menu-title">My Files</span>
                 </a>
             </li>
+            @foreach($user->roles as $role)
+
+            @if($role->name == 'SuperAdmin')
+             <li class="nav-item  @if(request()->path() == 'all-files') active @endif">
+                <a class="nav-link" href="{{url('all-files')}}">
+                    <i class="fa fa-cloud-upload-alt menu-icon"></i>
+                    <span class="menu-title">All Uploaded Files</span>
+                </a>
+            </li>
+            @endif
+            @endforeach
              <li class="nav-item @if(request()->path() == 'upload') active @endif">
                 <a class="nav-link" href="{{url('upload')}}">
                     <i class="fa fa-upload menu-icon"></i>

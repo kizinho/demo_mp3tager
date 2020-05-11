@@ -27,6 +27,11 @@
               <div class="form-field">
                 <h3 class="signin-h3">Log in and start saving your files forever</h3>
               </div>
+                  @if(session()->has('message.verify'))
+                    <div class="alert alert-{{ session('message.verify') }}"> 
+                        {!! session('message.content') !!}
+                    </div>
+                    @endif
                 <div class="form-field">
                     <label><i class="far fa-user"></i></label>
                     <input type="text" id="username" placeholder="Username"  required>

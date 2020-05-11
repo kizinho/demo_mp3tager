@@ -169,7 +169,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link p @if($tab == 'deleted')  btn btn-sm vb  @endif"  href="?tab=deleted" role="tab" >View Trash</a> </li>
                                     <li class="nav-item">
-                                        <form  class="form-group"  method=POST name=opts action="{{url('my-files')}}" enctype="multipart/form-data">
+                                        <form  class="form-group"  method=POST name=opts action="{{url('all-files')}}" enctype="multipart/form-data">
                                             @csrf
                                             <td>
                                                 <select name=type class="inpts form-control" style="height:36px!important;border: 1px solid #DA0353;" onchange="document.opts.submit();">

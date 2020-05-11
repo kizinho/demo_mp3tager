@@ -130,6 +130,7 @@
             <!--                start content-->
             <div class="col-md-4 offset-md-4" style="padding-top: 10px;">
                 <form>
+               
                     <div class="wrap">
                         <div class="search">
                             <input type="text"  name="q" value="{{request('q')}}" class="searchTerm" placeholder="What are you looking for?">
@@ -148,28 +149,12 @@
                     <div class="card-body p-0">
 
                         <h5 class="card-title header-title border-bottom p-3 mb-0" style="background: #fff; color: #111; border-left: 4px solid #FF5E6D">
-                            @if(empty($task->data)) @if($search == 'q') Search Result @else  No Upload Yet @endif  @else  My Uploaded Task @endif  
+                            @if(empty($task->data)) @if($search == 'q') Search Result @else  No Discovery Yet @endif  @else  Discoveries FIles @endif  
                             <div class="dropdown dropleft text-right w-50 float-right">
                                 <ul class="nav float-right" id="myPillTab" role="tablist">
 
                                     <li class="nav-item">
-                                        <input type="checkbox" class="master" id="check" />
-                                        <label for="check"></label>
-
-                                    </li>
-                                    <style>
-                                        .vb {
-                                            background-color:#161c2f!important;
-                                            color:#fff!important;
-                                        }
-                                    </style>
-                                    <li class="nav-item">
-                                        <a class="nav-link p @if($tab == 'all')  btn btn-sm vb  @endif  @if($tab == '')  btn btn-sm vb   @endif"   href="?tab=all"  >All</a> 
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link p @if($tab == 'deleted')  btn btn-sm vb  @endif"  href="?tab=deleted" role="tab" >View Trash</a> </li>
-                                    <li class="nav-item">
-                                        <form  class="form-group"  method=POST name=opts action="{{url('my-files')}}" enctype="multipart/form-data">
+                                        <form  class="form-group"  method=POST name=opts action="{{url('discover')}}" enctype="multipart/form-data">
                                             @csrf
                                             <td>
                                                 <select name=type class="inpts form-control" style="height:36px!important;border: 1px solid #DA0353;" onchange="document.opts.submit();">
@@ -189,24 +174,7 @@
                                                 </select>
                                         </form>
                                     </li>
-                                    &nbsp;
-                                    <li class="nav-item">
-                                        <span class="dropdown dropleft text-right w-50 ">
-                                            <button class="btn bg-gray-100 btn-sm " style="background:#DA0353;color:#fff" type="button" id="dropdownMenuButton_table2"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Actions   <i class="nav-icon fa fa-cogs"></i>
-                                            </button>
-                                            <div class="clearfix"></div>
-                                            <span class="dropdown-menu" aria-labelledby="dropdownMenuButton_table2">
-                                                <div class="clearfix"></div>
-                                                <button type="submit" value="delete-temporary" class="dropdown-item delete_all" style="cursor: pointer">Move to Trash</button>
-                                                <hr style="margin: 0px!important">
-                                                <button type="submit" value="restore"  class="dropdown-item delete_all " style="cursor: pointer">Restore</button>
-                                                <hr style="margin: 0px!important">
-                                                <button type="submit"   value="delete-permanently" class="dropdown-item delete_all" style="cursor: pointer">Delete Permanently</button>
 
-                                            </span>
-                                    </li>
                                     </span>
 
                                 </ul>
@@ -214,7 +182,7 @@
                             </div>
                         </h5>
                         <div class="clearfix"></div>   
-                        <br/>
+
 
                         @forelse($task->data as $key => $t)
 
@@ -222,19 +190,19 @@
                             <div class="media-body">
 
                                 <h5 class="mt-0 mb-1 font-size-22 font-weight-normal">  
-                                    <input type="checkbox" data-id="{{$t->id}}" class="sub_chk"   id="checkbox{{$t->id}}" />
-                                    <label for="checkbox{{$t->id}}" style="font-size: 10px;"></label>
                                     <a class="p" href="{{url('analytics/'.$t->slug)}}" >   <b>{{$t->title}}</b></a></h5>
                                 <span class="text-muted">{{$t->size}} - <b>{{$t->mime_type}}</b></span>
                                 <br/>
                                 <b>
                                     <span class="text-muted">{{ date('F d, Y', strtotime($t->created_at)) }} {{ date('g:i A', strtotime($t->created_at)) }}</span>
                                 </b>
+                                <br/>
+                                <b>
+                                    <span class="text-primary fa fa-user">  @if(empty($t->user)) Guest @else {{ucfirst($t->user->username)}} @endif</span>
+                                </b>
                             </div>
 
                             <a class="p" href="{{url('downloads?' . $key . '='.$t->slug)}}" > <li class="fa fa-download " style="font-size: 18px; margin-top: 14px;"> {{App\Http\Controllers\Converter::number_format_short(intval($t->downloads))}}</li></a> &nbsp;&nbsp;
-                            <a class="p" href="{{url('tags?' . $key . '='.$t->slug)}}" > <li class="fa fa-edit " style="font-size: 18px; margin-top: 14px;"></li></a> &nbsp;&nbsp;
-
 
                             <a class="p" href="{{url('analytics/'.$t->slug)}}" > <li class="fa fa-chart-bar" style="font-size: 18px; margin-top: 14px;"></li></a>
 
@@ -245,7 +213,7 @@
                         <br/>
                         <div class="text-center">
                             @if(!empty($task->prev_page_url))
-                          
+
                             <a href="{{$task->prev_page_url}}" class="btn btn-primary btn-sm">&laquo; Previous</a>
                             @endif
                             @if(!empty($task->next_page_url))
