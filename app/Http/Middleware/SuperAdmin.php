@@ -19,6 +19,7 @@ class SuperAdmin {
 
         $check = Cache::get($token);
         $array = $check->data->roles;
+        dd($array);
 
         $string = 'SuperAdmin';
         foreach ($array as $value) {
