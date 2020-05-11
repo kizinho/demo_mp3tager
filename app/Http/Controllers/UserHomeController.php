@@ -169,7 +169,9 @@ class UserHomeController extends Controller {
 
             $res = json_decode($response->getBody());
             $data['task'] = $res->data->task;
-            //dd($data);
+            $data['tab'] = $res->data->tab;
+            $data['search'] = $res->data->search;
+            $data['type'] = $res->data->type;
             return view('users.my-files', $data);
         } catch (RequestException $res) {
             return [
@@ -177,9 +179,35 @@ class UserHomeController extends Controller {
                 'message' => 'Server Busy',
             ];
         }
+    }
 
+    public function myDelete(Request $request) {
+        $input = $request->all();
+        $token = Session::get('token');
+        try {
+            $client = new Client();
+            $headers = [
+                'Authorization' => $token,
+                'Content-Type' => 'application/x-www-form-urlencoded',
+                'Accept' => 'application/json',
+                'API-Key' => env('API_KEY')
+            ];
+            $url = config('app.naijacrawl_api') . '/get_files';
+            $response = $client->request('DELETE', $url, [
+                'headers' => $headers,
+                'query' => $input
+            ]);
 
-        return view('users.dashboard');
+            $res = json_decode($response->getBody());
+            return [
+                'data' => $res
+            ];
+        } catch (RequestException $res) {
+            return [
+                'status' => 422,
+                'message' => 'Server Busy',
+            ];
+        }
     }
 
 }

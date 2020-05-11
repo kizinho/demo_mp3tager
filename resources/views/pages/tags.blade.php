@@ -34,7 +34,7 @@
 
         <form id="savetag" enctype="multipart/form-data"> 
             @if($user == false)
-            <input type="hidden"  name='user_id' value="789">
+            <input type="hidden"  name='user_id' value="">
             @else
             <input type="hidden"  name='user_id' value="{{ $user->id }}">
 
@@ -272,7 +272,28 @@
 
 
             @endif
+             <!-- =================is private section======================= -->
+            @if(!empty($user))
+  <div class="tag-field tag-responsive">
+    <div class="row justify-content-center">
+        <h4 class="py-1">Is Private ?</ا3>
+     </div>
+      <div class="row private-selector">
+        <div class="inputGroup">
+            <input id="pns-{{$key}}" name="ps[{{$key}}]" value="0" type="radio" checked/><!-- variable here -->
+          <label for="pns-{{$key}}">No</label><!-- variable here -->
+        </div>
+        <div class="inputGroup">
+            <input id="pys-{{$key}}" name="ps[{{$key}}]" value="1" type="radio"/> <!-- variable here -->
+          <label for="pys-{{$key}}">Yes</label><!-- variable here -->
+        </div>
+      </div>
+    </div>
+            @endif
+<!-- =================End is private section======================= -->
+            
             @endforeach
+           
             <div class="tag-field tag-responsive tag-field-save">
                 <div class="row">
                     <div class="col-sm">

@@ -405,7 +405,7 @@
                                 @foreach($recent_task as $key => $task)
                                 <div class="media px-3 py-2 border-bottom ">
                                     <div class="media-body">
-                                        <h5 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>{{$task->title}}</b></h5>
+                                        <a class="p" href="{{url('analytics/'.$task->slug)}}" >  <h5 class="mt-0 mb-1 font-size-22 font-weight-normal"><b>{{$task->title}}</b></h5></a>
                                         <span class="text-muted">{{$task->size}} - <b>{{$task->mime_type}}</b></span>
                                         <br/>
                                         <b>

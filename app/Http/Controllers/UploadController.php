@@ -147,7 +147,6 @@ class UploadController extends Controller {
 
     public function tagPost(Request $request) {
         $input = $request->all();
-
         if ($request->hasFile('viocetag')) {
             $voicetags = $request->file('viocetag');
             $output = [];
@@ -213,6 +212,7 @@ class UploadController extends Controller {
                         'watermark_text' => $request->watermark_text,
                         'watermark_color' => $request->watermark_color,
                         'watermark_font' => $request->watermark_font,
+                        'ps' => $request->ps
                     ]
             ),
         ];

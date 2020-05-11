@@ -52,5 +52,8 @@ Route::group(['middleware' => 'token'], function() {
     Route::post('add-drive', 'UserHomeController@PostDrive');
     //my files
     Route::get('my-files', 'UserHomeController@myFile')->name('my-files');
+    Route::post('my-files', 'UserHomeController@myFile');
+    
+    Route::delete('my-files', 'UserHomeController@myDelete');
 });
 
