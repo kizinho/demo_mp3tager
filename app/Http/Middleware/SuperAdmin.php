@@ -15,9 +15,9 @@ class SuperAdmin {
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        $token = $request->session()->get('token');
+        $token = session('token');
+        dd($token);
         $check = Cache::get($token);
-        dd($check);
         $array = $check->data->roles;
         $string = 'SuperAdmin';
         foreach ($array as $value) {
