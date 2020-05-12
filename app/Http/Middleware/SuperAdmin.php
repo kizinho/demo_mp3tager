@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Cache;
 use Closure;
-use Illuminate\Support\Facades\Config;
+
 class SuperAdmin {
 
     /**
@@ -16,7 +16,8 @@ class SuperAdmin {
      */
     public function handle($request, Closure $next) {
         $token = $request->session()->get('token');
-        $check = Cache::has(Config::get($token));
+        $check = Cache::get($token);
+        dd($check);
         $array = $check->data->roles;
         $string = 'SuperAdmin';
         foreach ($array as $value) {
