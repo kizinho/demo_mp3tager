@@ -77,7 +77,7 @@
                                 <div class="alert alert-info small" role="alert">
                                     Allowed file types: MP3 , MP4 , Mov , M4a , 3gp , 3g2 , Mj2
                                 </div>
-                                <div class="alert alert-secondary small text-center " >Mp3 , Mp4 Mov , M4a , 3gp , 3g2 &  Mj2 Edited this year: &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
+                                <div class="alert alert-secondary small text-center " >Mp3 , Mp4, Mov , M4a , 3gp , 3g2 &  Mj2 Edited this year: &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
                             </div>
                         </div>
                     </div>

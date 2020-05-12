@@ -59,6 +59,8 @@ Route::group(['middleware' => 'token'], function() {
     Route::post('discover', 'UserHomeController@discover');
     //logout
     Route::post('logout', 'UserHomeController@logout');
+    
+    Route::get('upload-youtube', 'UserHomeController@uploadYoutube')->name('upload-youtube');
     Route::group(['middleware' => 'super_admin'], function() {
         Route::get('all-files', 'UserHomeController@allFile')->name('all-files');
         Route::post('all-files', 'UserHomeController@allFile');

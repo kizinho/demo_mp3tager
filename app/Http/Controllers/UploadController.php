@@ -67,21 +67,16 @@ class UploadController extends Controller {
     }
 
     public function storeLink(Request $request) {
-
+        $input = $request->all();
         try {
-            $output = [];
-
-            $output [] = [
-                'name' => 'url',
-                'contents' => $request->url
+            $headers = [
+                'API-Key' => env('API_KEY')
             ];
             $url = config('app.naijacrawl_api') . '/upload-tag-link';
             $client = new Client();
             $response = $client->request('POST', $url, [
-                'headers' => [
-                    'API-Key' => env('API_KEY')
-                ],
-                'multipart' => $output
+                'headers' => $headers,
+                'query' => $input
             ]);
 
             $data = \GuzzleHttp\json_decode($response->getBody());

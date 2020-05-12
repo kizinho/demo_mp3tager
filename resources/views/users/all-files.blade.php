@@ -148,7 +148,7 @@
                     <div class="card-body p-0">
 
                         <h5 class="card-title header-title border-bottom p-3 mb-0" style="background: #fff; color: #111; border-left: 4px solid #FF5E6D">
-                            @if(empty($task->data)) @if($search == 'q') Search Result @else  No Upload Yet @endif  @else  My Uploaded Task @endif  
+                            @if(empty($task->data)) @if($search == 'q') Search Result @else  No File Yet @endif  @else All Uploaded Task @endif  
                             <div class="dropdown dropleft text-right w-50 float-right">
                                 <ul class="nav float-right" id="myPillTab" role="tablist">
 
@@ -349,7 +349,7 @@
                                 if (data.data['status'] === 200) {
                                     var message = data.data['message'];
                                     toastr.options.onHidden = function () {
-                                        window.location.href = "{{url('/my-files')}}";
+                                        window.location.href = "{{url('/all-files')}}";
                                     };
                                     toastr.success(message, {timeOut: 50000});
 

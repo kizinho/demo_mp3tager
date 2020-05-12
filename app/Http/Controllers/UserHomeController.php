@@ -36,6 +36,8 @@ class UserHomeController extends Controller {
             $data['completed_task'] = $res->data->completed_task;
             $data['total_task'] = $res->data->total_task;
             $data['recent_task'] = $res->data->recent_task;
+            $data['all_task'] = $res->data->all_task;
+            $data['trash_task'] = $res->data->trash_task;
             return view('users.dashboard', $data);
         } catch (RequestException $res) {
             return [
@@ -230,7 +232,8 @@ class UserHomeController extends Controller {
             ];
         }
     }
- //all files
+
+    //all files
 
     public function allFile(Request $request) {
         $input = $request->all();
@@ -272,6 +275,7 @@ class UserHomeController extends Controller {
             ];
         }
     }
+
     public function myDelete(Request $request) {
         $input = $request->all();
         $token = Session::get('token');
@@ -300,7 +304,9 @@ class UserHomeController extends Controller {
             ];
         }
     }
-
+    public function uploadYoutube() {
+           return view('users.upload-youtube'); 
+    }
     public function logout() {
         $token = session('token');
         Cache::forget($token);

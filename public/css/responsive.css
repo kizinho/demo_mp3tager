@@ -14,13 +14,15 @@ body{
     line-height: 40px;
   }
 }
-
-
-@media (max-width:896px) {
+@media (max-width:1000px) {
   /* navbar */
   .navbar{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   position: relative;
   }
 
@@ -38,6 +40,8 @@ body{
   border-left: 4px solid #DA0353;
 }
 .nav-links ul li:hover a{
+  -webkit-transition: .5s;
+  -o-transition: .5s;
   transition: .5s;
   padding-left: 40px;
   color: #DA0353;
@@ -50,6 +54,10 @@ body{
   background: none !important;
 }
 .nav-links ul{
+   display:none;
+}
+.fade-nav{
+  display: block !important;
   padding-left: 0px !important;
   position: absolute;
   left: 0;
@@ -59,15 +67,12 @@ body{
   background: #000;
   z-index: 20;
   margin-top: -20px;
+  -webkit-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
   transition: all 1s ease-out;
   text-align: center;
-  clip-path:circle(100px at 90% -40%);
-  pointer-events:none;
+ 
 }
-.fade-nav{
-  transition: all 2s ease-out;
-  clip-path:circle(1500px at 90% -40%) !important;
-  pointer-events:all !important;}
 }
 @media screen and (max-width:750px) {
 
@@ -92,6 +97,8 @@ body{
     margin-left: -20px !important;
   }
   .tag-field-save .lbl-sel-data{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
   }
   .tag-field-save .lbl-sel-data label:first-child{

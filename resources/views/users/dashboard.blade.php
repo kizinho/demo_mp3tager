@@ -395,7 +395,49 @@
                             </div>
                         </div>
                     </div>
+                    @foreach($user->roles as $role)
 
+                    @if($role->name == 'SuperAdmin')
+                    <div class="col-md-6 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-0">All Uploaded Files</h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-inline-block pt-3">
+                                        <div class="d-md-flex">
+                                            <h2 class="mb-0">{{number_format($all_task)}}</h2>
+
+                                        </div>
+                                        <small class="text-gray">Total Uploads</small>
+                                    </div>
+                                    <div class="d-inline-block">
+                                        <i class="fas fa-upload text-warning icon-lg"></i>                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 grid-margin">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-0">All Trashed Files</h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-inline-block pt-3">
+                                        <div class="d-md-flex">
+                                            <h2 class="mb-0">{{number_format($trash_task)}}</h2>
+
+                                        </div>
+                                        <small class="text-gray">Total Trashed</small>
+                                    </div>
+                                    <div class="d-inline-block">
+                                        <i class="fas fa-ban text-warning icon-lg"></i>                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    @endforeach
                     <div class="col-md-12" style="padding-top: 10px;">
                         <div class="card">
                             <div class="card-body p-0">
