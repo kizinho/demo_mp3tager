@@ -2,8 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Support\Facades\Cache;
 use Closure;
+use GuzzleHttp\Client;
 
 class SuperAdmin {
 
@@ -16,9 +16,17 @@ class SuperAdmin {
      */
     public function handle($request, Closure $next) {
         $token = session('token');
-        dd($token);
-        $check = Cache::get($token);
-        $array = $check->data->roles;
+        $headers = [
+            'Authorization' => $token
+        ];
+        $client = new Client();
+        $url = config('app.naijacrawl_api') . '/token';
+        $response = $client->request('GET', $url, [
+            'headers' => $headers
+        ]);
+
+        $res = json_decode($response->getBody());
+        $array = $res->data->roles;
         $string = 'SuperAdmin';
         foreach ($array as $value) {
             if (strpos($string, $value->name) !== FALSE) {
