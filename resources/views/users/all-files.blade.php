@@ -230,6 +230,10 @@
                                 <b>
                                     <span class="text-muted">{{ date('F d, Y', strtotime($t->created_at)) }} {{ date('g:i A', strtotime($t->created_at)) }}</span>
                                 </b>
+                                   <br/>
+                                <b>
+                                    <span class="text-primary fa fa-user">  @if(empty($t->user)) Guest @else {{ucfirst($t->user->username)}} @endif</span>
+                                </b>
                             </div>
 
                             <a class="p" href="{{url('downloads?' . $key . '='.$t->slug)}}" > <li class="fa fa-download " style="font-size: 18px; margin-top: 14px;"> {{App\Http\Controllers\Converter::number_format_short(intval($t->downloads))}}</li></a> &nbsp;&nbsp;
