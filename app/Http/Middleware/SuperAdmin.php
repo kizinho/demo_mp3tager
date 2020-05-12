@@ -16,6 +16,7 @@ class SuperAdmin {
      */
     public function handle($request, Closure $next) {
         $token = $request->session()->get('token');
+        dd($token);
         $check = Cache::get($token);
         $array = $check->data->roles;
         $string = 'SuperAdmin';
