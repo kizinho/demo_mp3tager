@@ -31,7 +31,9 @@
 <!-- Start of tags pages -->
 <div class="Mycontainer">
     <div class="upload-container">
-
+        @php
+        $user_login = isset($user->id) ? $user->id : '';
+        @endphp
         <form id="savetag" enctype="multipart/form-data"> 
             @if($user == false)
             <input type="hidden"  name='user_id' value="">
@@ -42,7 +44,16 @@
 
             @csrf
             @foreach($details as $key => $tag)
-
+            @if($tag->is_private == true && $tag->user_id !== $user_login  )
+             <div class="tag-field-head alert alert-success">
+                <div class="row">
+                    <div class="col-sm tag-title">
+                        <label class="tag-responsive-p " id="title"><span class='badge badge-primary'> {{ $tag->title }} is protected</span></label>
+                    </div>
+                </div>
+            </div>
+           
+            @else
             <input type="hidden"  name='id[{{$key}}]' value="{{ $tag->id }}">
             <input type="hidden"  name='path[{{$key}}]' value="{{ $tag->path }}">
             <div class="tag-field-head alert alert-success">
@@ -280,18 +291,18 @@
                 </div>
                 <div class="row private-selector">
                     <div class="inputGroup">
-                        <input id="pns-{{$key}}" name="ps[{{$key}}]" value="0" type="radio" checked/><!-- variable here -->
+                        <input id="pns-{{$key}}" name="ps[{{$key}}]" value="0" type="radio"  {{ $tag->is_private  == false ? 'checked' : '' }}/><!-- variable here -->
                         <label for="pns-{{$key}}">No</label><!-- variable here -->
                     </div>
                     <div class="inputGroup">
-                        <input id="pys-{{$key}}" name="ps[{{$key}}]" value="1" type="radio"/> <!-- variable here -->
+                        <input id="pys-{{$key}}" name="ps[{{$key}}]" value="1" type="radio" {{ $tag->is_private  == true ? 'checked' : '' }}/> <!-- variable here -->
                         <label for="pys-{{$key}}">Yes</label><!-- variable here -->
                     </div>
                 </div>
             </div>
             @endif
-         @if($tag->mime_type =='mp3' || $tag->mime_type =='mp4')
-         @else
+            @if($tag->mime_type =='mp3' || $tag->mime_type =='mp4')
+            @else
             <!-- =================End is private section======================= -->
             <div class="tag-field tag-responsive">
                 <div class="row align-items-center">
@@ -304,7 +315,7 @@
                     <div class="col-sm-6">
 
                         <select class="markSelect form-control" name="extension[{{$key}}]"         @if($tag->mime_type !=='mp3' || $tag->mime_type !=='mp4') required  @endif> <!-- variable here -->
-                            <option value="" selected disabled>Check your File Extension </option>
+                                <option value="" selected disabled>Check your File Extension </option>
                             <option value="mp3">Mp3</option>
                             <option value="mp4">Mp4</option>
                         </select>
@@ -312,6 +323,8 @@
                 </div>
             </div>
             @endif
+            @endif
+
             @endforeach
 
             <div class="tag-field tag-responsive tag-field-save">

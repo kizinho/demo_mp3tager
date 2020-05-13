@@ -31,9 +31,19 @@
 <div class="Mycontainer">
     <div class="msg-content">
         <p class="bg-success text-center text-white p-2 mt-5">your settings saved successfully <i class="fas fa-thumbs-up"></i></p>
-
+        @php
+        $user_login = isset($user->id) ? $user->id : '';
+        @endphp
         @foreach($details as $key => $download)
-
+        @if($download->is_private == true && $download->user_id !== $user_login  )
+      <div class="download-songs " style="background-color: #d4edda; color: #000">
+            <div class="row">
+                <div class="col-sm tag-title">
+                    <label class="tag-responsive-p " id="title"><span class='badge badge-primary'> {{ $download->title }} is protected</span></label>
+                </div>
+            </div>
+        </div>
+        @else
         <div class="download-songs " style="background-color: #d4edda; color: #000">
 
             <span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$download->file_name}}
@@ -82,7 +92,7 @@
             <button class="embd-btn">copy embedded code</button>
         </div> 
 
-
+        @endif
         @endforeach
         @if(count($details) >1 )
         <div class="download-songs" style="background-color: #000"><a href="{{url('batch-downloads?'.$url)}}"> Batch Download All  <i class="fa fa-download"></i></a> &nbsp;<span class="badge badge-primary"><a href="{{url('tags?'.$url)}}"> Edit  <i class="fa fa-pen"></i></a></span></div> 
