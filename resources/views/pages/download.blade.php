@@ -54,7 +54,11 @@
             <button class="badge badge-primary down-btn-item clip-btn"> copy <i class="fas fa-copy"></i></button> link to clipborad 
             <input type="text" style="opacity: 0;">
             <br/>
-            <a href="{{url('tags?' . $key . '='.$download->slug)}}"> Edit  <i class="fa fa-pen"></i></a>
+            @if($download->user_id == $user_login)
+              <a href="{{url('tags?' . $key . '='.$download->slug)}}"> Edit  <i class="fa fa-pen"></i></a>
+         
+           @endif
+            
             <br/> <br/>
             @if($download->mime_type == 'mp3')
             <audio controls style="width:100%">

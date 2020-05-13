@@ -44,6 +44,7 @@
 
             @csrf
             @foreach($details as $key => $tag)
+            
             @if($tag->is_private == true && $tag->user_id !== $user_login  )
              <div class="tag-field-head alert alert-success">
                 <div class="row">
@@ -53,7 +54,7 @@
                 </div>
             </div>
            
-            @else
+            @elseif($tag->user_id == $user_login)
             <input type="hidden"  name='id[{{$key}}]' value="{{ $tag->id }}">
             <input type="hidden"  name='path[{{$key}}]' value="{{ $tag->path }}">
             <div class="tag-field-head alert alert-success">
