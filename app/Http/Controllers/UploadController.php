@@ -207,7 +207,8 @@ class UploadController extends Controller {
                         'watermark_text' => $request->watermark_text,
                         'watermark_color' => $request->watermark_color,
                         'watermark_font' => $request->watermark_font,
-                        'ps' => $request->ps
+                        'ps' => $request->ps,
+                        'extension' => $request->extension
                     ]
             ),
         ];

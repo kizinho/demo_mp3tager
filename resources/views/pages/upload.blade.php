@@ -169,7 +169,7 @@ Dropzone.options.myUpload = {
                     $(".modal").hide();
 
                 };
-                toastr.error(message, {timeOut: 50000});
+                toastr.info(message, {timeOut: 50000});
 
                 return false;
             }
@@ -239,7 +239,7 @@ Dropzone.options.myUpload = {
                     toastr.options.onHidden = function () {
                       
                     };
-                    toastr.error(message, {timeOut: 50000});
+                    toastr.info(message, {timeOut: 50000});
 
                     return false;
                 }

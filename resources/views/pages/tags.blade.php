@@ -272,28 +272,48 @@
 
 
             @endif
-             <!-- =================is private section======================= -->
+            <!-- =================is private section======================= -->
             @if(!empty($user))
-  <div class="tag-field tag-responsive">
-    <div class="row justify-content-center">
-        <h4 class="py-1">Is Private ?</ا3>
-     </div>
-      <div class="row private-selector">
-        <div class="inputGroup">
-            <input id="pns-{{$key}}" name="ps[{{$key}}]" value="0" type="radio" checked/><!-- variable here -->
-          <label for="pns-{{$key}}">No</label><!-- variable here -->
-        </div>
-        <div class="inputGroup">
-            <input id="pys-{{$key}}" name="ps[{{$key}}]" value="1" type="radio"/> <!-- variable here -->
-          <label for="pys-{{$key}}">Yes</label><!-- variable here -->
-        </div>
-      </div>
-    </div>
+            <div class="tag-field tag-responsive">
+                <div class="row justify-content-center">
+                    <h4 class="py-1">Is Private ?</ا3>
+                </div>
+                <div class="row private-selector">
+                    <div class="inputGroup">
+                        <input id="pns-{{$key}}" name="ps[{{$key}}]" value="0" type="radio" checked/><!-- variable here -->
+                        <label for="pns-{{$key}}">No</label><!-- variable here -->
+                    </div>
+                    <div class="inputGroup">
+                        <input id="pys-{{$key}}" name="ps[{{$key}}]" value="1" type="radio"/> <!-- variable here -->
+                        <label for="pys-{{$key}}">Yes</label><!-- variable here -->
+                    </div>
+                </div>
+            </div>
             @endif
-<!-- =================End is private section======================= -->
-            
+         @if($tag->mime_type =='mp3' || $tag->mime_type =='mp4')
+         @else
+            <!-- =================End is private section======================= -->
+            <div class="tag-field tag-responsive">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="watermarkSelect">Invalid FIle Extension
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+
+                        <select class="markSelect form-control" name="extension[{{$key}}]"         @if($tag->mime_type !=='mp3' || $tag->mime_type !=='mp4') required  @endif> <!-- variable here -->
+                            <option value="" selected disabled>Check your File Extension </option>
+                            <option value="mp3">Mp3</option>
+                            <option value="mp4">Mp4</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            @endif
             @endforeach
-           
+
             <div class="tag-field tag-responsive tag-field-save">
                 <div class="row">
                     <div class="col-sm">
