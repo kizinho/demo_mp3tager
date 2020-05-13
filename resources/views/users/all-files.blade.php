@@ -179,7 +179,7 @@
                                                     <option value="mp3" {{$type == 'mp3' ? 'selected' : '' }}> Mp3</option>
                                                     <option value="mp4" {{$type == 'mp4' ? 'selected' : '' }} > Mp4</option>
                                                     <option value="pending" {{$type == 'pending' ? 'selected' : '' }} > Pending</option>
-                                                    <option value="completed" {{$type == 'completed' ? 'completed' : '' }}> Completed</option>
+                                                    <option value="completed" {{$type == 'completed' ? 'selected' : '' }}> Completed</option>
                                                     <option value="size" {{$type == 'size' ? 'selected' : '' }}> Size</option>
                                                     <option value="week" {{$type == 'week' ? 'selected' : '' }}> This Week</option>
                                                     <option value="download" {{$type == 'download' ? 'selected' : '' }}> Downloads</option>
