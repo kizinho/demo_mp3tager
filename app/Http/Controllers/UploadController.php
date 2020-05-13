@@ -44,6 +44,10 @@ class UploadController extends Controller {
                     continue;
                 }
             }
+            $output [] = [
+                'name' => 'user_id',
+                'contents' => $request->user_id
+            ];
             $url = config('app.naijacrawl_api') . '/upload-tag';
             $client = new Client();
             $response = $client->request('POST', $url, [

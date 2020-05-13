@@ -21,6 +21,7 @@
                         <div class="data-field data-field-search">
                             <p>Please enter a valid youtube link for your mp3</p>
                             <form id="link">
+                                <input type="hidden"  id='user_id' value="{{ $user->id }}">
                                 <input class="form-control" id="url" placeholder="https://youtu.be/mRQTIrmFOEA" required>
                                 <input class="form-control" value="mp3" type="hidden" id="action" placeholder="" required>
                                 <br/>
@@ -65,6 +66,7 @@
                 type: 'POST',
                 data: {
                     url: jQuery('#url').val(),
+                    user_id: jQuery('#user_id').val(),
                     action: jQuery('#action').val()
                 },
                 success: function (responseText) {

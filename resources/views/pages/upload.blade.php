@@ -57,7 +57,13 @@
             <div class="tab-pane fade show active" id="files" role="tabpanel" aria-labelledby="files">
                 <!-- Strat of inside  file choose -->
                 <form class="section-container">
-                    <input type="hidden" name="user_token" id="user_token" value="testnn">
+                    @if($user == false)
+                    <input type="hidden"  id='user_id' value="">
+                    @else
+                    <input type="hidden"  id='user_id' value="{{ $user->id }}">
+
+                    @endif
+
                     <div class="data-field">
 
                         <div class="card text-left dropzone dropzone-area " id="myUpload">
@@ -95,6 +101,13 @@
                 <div class="data-field data-field-search">
                     <p>Please enter a valid audio url or Video Url {supports Youtube link}</p>
                     <form id="link">
+                           @if($user == false)
+                    <input type="hidden"  id='user_id' value="">
+                    @else
+                    <input type="hidden"  id='user_id' value="{{ $user->id }}">
+
+                    @endif
+
                         <input class="col col-sm-12" id="url" placeholder="domain.com/song.mp3" required>
 
                         <input type="submit"  id="submit-file"  value="Go"><i class="fas fa-sign-in-alt"></i>
@@ -141,7 +154,7 @@ Dropzone.options.myUpload = {
 
         this.on("sendingmultiple", function (data, xhr, formData) {
             $(".modal").show();
-            formData.append("user_token", jQuery("#user_token").val());
+            formData.append("user_id", jQuery("#user_id").val());
             $.each(data, function (key, el) {
                 formData.append(el.name, el.value);
             });
@@ -220,14 +233,15 @@ Dropzone.options.myUpload = {
             url: "{{url('/upload-link')}}",
             type: 'POST',
             data: {
-                url: jQuery('#url').val()
+                url: jQuery('#url').val(),
+                 user_id: jQuery('#user_id').val(),
             },
             success: function (responseText) {
                 if (responseText.data['status'] === 401) {
                     jQuery.each(responseText.data['message'], function (key, value) {
                         var message = ('' + value + '');
                         toastr.options.onHidden = function () {
-                           
+
                         };
                         toastr.error(message, {timeOut: 50000});
                     });
@@ -237,13 +251,13 @@ Dropzone.options.myUpload = {
                 if (responseText.data['status'] === 422) {
                     var message = responseText.data['message'];
                     toastr.options.onHidden = function () {
-                      
+
                     };
                     toastr.info(message, {timeOut: 50000});
 
                     return false;
                 }
-                
+
                 if (responseText.data['status'] === 200) {
                     let url = responseText.data['data'];
                     window.location.href = "{{url('/tags')}}?" + url;
