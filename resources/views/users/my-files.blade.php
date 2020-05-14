@@ -343,9 +343,10 @@
                                     return false;
                                 }
                                 if (data.data['status'] === 200) {
+                                     var currenturl = window.location.href;
                                     var message = data.data['message'];
                                     toastr.options.onHidden = function () {
-                                        window.location.href = "{{url('/my-files')}}";
+                                        window.location.href = currenturl ;
                                     };
                                     toastr.success(message, {timeOut: 50000});
 
