@@ -1,0 +1,191 @@
+$primary-color: #CD6133;
+$primary-color-light: #F0BA86;
+$background-color: #E5E5E6;
+$text-color: #545D65;
+$primary-color-blue: #0267C1;
+
+*{
+    font-family: 'Signika', sans-serif;
+}
+body{
+    color: $text-color;
+}
+.logo{
+    color: $text-color;
+    .logo__icon{
+        color: $primary-color;
+    }
+}
+.btn--cta{
+    background-color: $primary-color;
+    color: lighten($color: $primary-color, $amount: 50);
+    border-radius: 1.8rem;
+}
+.btn--signup{
+    background-color: $primary-color;
+    color: lighten($color: $primary-color, $amount: 50);
+}
+
+header{
+    margin-top: 6rem;
+}
+.heading{
+    .heading__header-text{
+        font-size: 2rem;
+        font-weight: bold;
+        @media screen and (min-width: 576px){
+            font-size: 3rem;
+        }
+    }
+    .heading__header-info{
+        font-size: 1.4rem;
+        color: lighten($color: $text-color, $amount: 10);
+    }
+}
+.heading-image{
+    text-align: center;
+    @media screen and (min-width: 576px){
+        text-align: right;
+    }
+}
+.introduction{
+    margin-top: 12rem;
+    background-image: url(../images/dark-1850120_960_720.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    padding: 9rem 0;
+    .introduction__text{
+        font-size: 1.4rem;
+        color: $background-color;
+    }
+}
+.features{
+    .personalize{
+        margin-bottom: 9rem;
+    }
+    margin-top: 12rem;
+    .feature__heading{
+        font-weight: bold;
+        font-size: 1.9rem;
+        @media screen and (min-width: 576px){
+            font-size: 2.5rem;
+        }
+
+    }
+    .feature__text{
+        font-size: 1rem;
+        @media screen and (min-width: 576px){
+            font-size: 1.1rem;
+        }
+        color: lighten($color: $text-color, $amount: 10);
+    }
+    .feature-list{
+       li{
+           font-size: 1.1rem;
+           color: lighten($color: $text-color, $amount: 10);
+            .feature-list__icon{
+                background-color: lighten($color: $primary-color-blue, $amount: 55);
+                color: $primary-color-blue;
+            }
+       }
+    }
+}
+.benefits{
+    background-color: lighten($color: $background-color, $amount: 5);
+    margin-top: 12rem;
+    padding: 9rem 0;
+}
+.benefit{
+    .benefit__image{
+        text-align: center;
+        img{
+            width: 100px;
+            height: 100px;
+        }
+
+    }
+    .benefit__heading{
+        font-weight: bold;
+    }
+}
+.footer{
+    margin-top: 12rem;
+
+    .footer__heading{
+        font-weight: bold;
+    }
+    .footer__link{
+        color: $text-color;
+    }
+}
+
+// Pricing
+.price-section{
+    margin-top: 12rem;
+}
+.pricing{
+    background-color: lighten($color: $background-color, $amount: 7);
+    height: 20rem;
+    @media screen and (max-width: 768px){
+        margin-bottom: 1rem;
+    }
+    .pricing__name{
+        font-size: .9rem;
+        color: darken($color: $background-color, $amount: 40);
+    }
+    .pricing__fee{
+        h2{
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+    }
+    .pricing__getstarted-button{
+        .btn--get-started{
+            background-color: $primary-color;
+            color: lighten($color: $primary-color, $amount: 50);
+        }
+    }
+    .plan-features{
+        color: darken($color: $background-color, $amount: 40);
+        font-size: .8rem;
+       
+        li{
+            margin-bottom: .3rem;
+            .plan__icon{
+                color: $primary-color-blue;
+                margin-right: .2rem;
+                font-size: .7rem;
+            }
+        }
+    }
+}
+
+// Log in
+.login-page, .signup-page, .how-it-works{
+    margin-top: 10rem;
+}
+
+.form-label{
+    color: darken($color: $background-color, $amount: 40);
+}
+.form-input{
+    padding-left: 2rem;
+    color: darken($color: $background-color, $amount: 40);
+}
+.input__icon{
+    color: darken($color: $background-color, $amount: 20);
+    position: relative;
+    top: -1.8rem;
+    left: .7rem;
+}
+
+main.upload-page{
+    margin-top: 7rem;
+}
+.dropzone {
+    min-height: 150px;
+    border: 3px dashed #DA0353!important;
+    background: #f5f5f5!important;
+    padding: 20px;
+}

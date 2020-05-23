@@ -1,0 +1,218 @@
+* {
+  font-family: 'Signika', sans-serif;
+}
+
+body {
+  color: #545D65;
+}
+
+.logo {
+  color: #545D65;
+}
+
+.logo .logo__icon {
+  color: #CD6133;
+}
+
+.btn--cta {
+  background-color: #CD6133;
+  color: white;
+  border-radius: 1.8rem;
+}
+
+.btn--signup {
+  background-color: #CD6133;
+  color: white;
+}
+
+header {
+  margin-top: 6rem;
+}
+
+.heading .heading__header-text {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 576px) {
+  .heading .heading__header-text {
+    font-size: 3rem;
+  }
+}
+
+.heading .heading__header-info {
+  font-size: 1.4rem;
+  color: #6b7781;
+}
+
+.heading-image {
+  text-align: center;
+}
+
+@media screen and (min-width: 576px) {
+  .heading-image {
+    text-align: right;
+  }
+}
+
+.introduction {
+  margin-top: 12rem;
+  background-image: url(../images/dark-1850120_960_720.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  padding: 9rem 0;
+}
+
+.introduction .introduction__text {
+  font-size: 1.4rem;
+  color: #E5E5E6;
+}
+
+.features {
+  margin-top: 12rem;
+}
+
+.features .personalize {
+  margin-bottom: 9rem;
+}
+
+.features .feature__heading {
+  font-weight: bold;
+  font-size: 1.9rem;
+}
+
+@media screen and (min-width: 576px) {
+  .features .feature__heading {
+    font-size: 2.5rem;
+  }
+}
+
+.features .feature__text {
+  font-size: 1rem;
+  color: #6b7781;
+}
+
+@media screen and (min-width: 576px) {
+  .features .feature__text {
+    font-size: 1.1rem;
+  }
+}
+
+.features .feature-list li {
+  font-size: 1.1rem;
+  color: #6b7781;
+}
+
+.features .feature-list li .feature-list__icon {
+  background-color: #ddefff;
+  color: #0267C1;
+}
+
+.benefits {
+  background-color: #f2f2f3;
+  margin-top: 12rem;
+  padding: 9rem 0;
+}
+
+.benefit .benefit__image {
+  text-align: center;
+}
+
+.benefit .benefit__image img {
+  width: 100px;
+  height: 100px;
+}
+
+.benefit .benefit__heading {
+  font-weight: bold;
+}
+
+.footer {
+  margin-top: 12rem;
+}
+
+.footer .footer__heading {
+  font-weight: bold;
+}
+
+.footer .footer__link {
+  color: #545D65;
+}
+
+.price-section {
+  margin-top: 12rem;
+}
+
+.pricing {
+  background-color: #f7f7f8;
+  height: 20rem;
+}
+
+@media screen and (max-width: 768px) {
+  .pricing {
+    margin-bottom: 1rem;
+  }
+}
+
+.pricing .pricing__name {
+  font-size: .9rem;
+  color: #7d7d82;
+}
+
+.pricing .pricing__fee h2 {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.pricing .pricing__getstarted-button .btn--get-started {
+  background-color: #CD6133;
+  color: white;
+}
+
+.pricing .plan-features {
+  color: #7d7d82;
+  font-size: .8rem;
+}
+
+.pricing .plan-features li {
+  margin-bottom: .3rem;
+}
+
+.pricing .plan-features li .plan__icon {
+  color: #0267C1;
+  margin-right: .2rem;
+  font-size: .7rem;
+}
+
+.login-page, .signup-page, .how-it-works {
+  margin-top: 10rem;
+}
+
+.form-label {
+  color: #7d7d82;
+}
+
+.form-input {
+  padding-left: 2rem;
+  color: #7d7d82;
+}
+
+.input__icon {
+  color: #b1b1b4;
+  position: relative;
+  top: -1.8rem;
+  left: .7rem;
+}
+
+main.upload-page {
+  margin-top: 7rem;
+}
+
+.dropzone {
+  min-height: 150px;
+  border: 3px dashed #DA0353 !important;
+  background: #f5f5f5 !important;
+  padding: 20px;
+}
+/*# sourceMappingURL=main.css.map */

@@ -27,21 +27,26 @@
 @endsection
 @extends('layouts.app')
 @section('content')
-<link rel="stylesheet" href="{{asset('css/policy.css')}}">
-<!-- --------------Start of Body----------->
-<div class="Mycontainer">
-    <div class="policy-content">
-
-        <h2>How It Works?.</h2>
-        <p>
-            Please watch the video and see how mp3tager works. Using mp3tager you can change ID3 tags of any mp3 files.
-
-            You can change mp3 tags like (comments, album, artist, year, genre, cover art). We also made it possible for you to join another song or add a voice tag to any mp3 files, once done save your files and download the updated files.</p>
-
-
-        <iframe width="100%" height="515" src="https://www.youtube.com/embed/AvnW4Huk8u4?autoplay=1 " frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
-    </div>
-
-</div>
+<main class="how-it-works">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-5">
+                    <article>
+                        <p>
+                            Please watch the video and see how mp3tager works. Using mp3tager you can change ID3 tags of
+                            any mp3 files. You can change mp3 tags like (comments, album, artist, year, genre, cover
+                            art). We also made it possible for you to join another song or add a voice tag to any mp3
+                            files, once done save your files and download the updated files.
+                        </p>
+                    </article>
+                </div>
+                <div class="col-sm-6 col-md-7">
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/AvnW4Huk8u4" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </main>
 
 @endsection

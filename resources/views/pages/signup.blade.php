@@ -7,58 +7,61 @@
 <meta name="theme-color" content="#08192D"/>
 <meta property="og:description" content="Mp3tag Register" />
 <title>Mp3tag - Register Page</title>
-<link rel="stylesheet" href="{{asset('css/formStyle.css')}}">
 @endsection
 
 @extends('layouts.app')
 @section('content')
-<div class="Mycontainer">
-    <div class="form-container">
-        <div class="side-form-box">
-            <img src="{{asset('images/signup.jpg')}}" alt="band">
-            <p class="signup-p">already member ? <a href="{{url('signin')}}">sign in</a></p>
-        </div>
-        <div class="form-box">
-            <form id='register'>
+<main class="signup-page">
+        <section class="signup">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="p-4">
+                            <h5 class="mb-5 text-center">
+                                Create an account
+                            </h5>
+                            <img src="{{asset('images/developers-doing-discussion-about-wireframe-1.jpg')}}" class="img-fluid"
+                                width="500px">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="login-form">
+                            <form action="#" id='register'>
+                                <div class="form-group">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" name="username" id="username" class="form-control form-input">
+                                    <i class="input__icon fas fa-user"></i>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" name="email" id="email" class="form-control form-input">
+                                    <i class="input__icon fas fa-envelope"></i>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" name="password" id="password"
+                                        class="form-control form-input">
+                                    <i class="input__icon fas fa-key"></i>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cpassword" class="form-label">Confirm Password</label>
+                                    <input type="cpassword" name="cpassword" id="cpassword"
+                                        class="form-control form-input">
+                                    <i class="input__icon fas fa-key"></i>
+                                </div>
+                                <input type='hidden' id="ref" value="{{$ref}}" class="form-control">
+                                <div class="form-group">
+                                    <button class="btn btn-primary px-5 py-2">Sign Up</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-                <div class="form-field">
-                    <h3>Join the amazing world of Mp3tag Editing</h3>
-                    <br>
-                    <p>create an account and let us save your file forever </p>
-                </div>
-                <div class="form-field form-field-sigup">
-                    <label><i class="far fa-user"></i></label>
-                    <input type="hidden"  id="actions" value="tag">
-                    <input type="text" id="username" placeholder="Username"  required>
-                </div>
-                <div class="form-field form-field-sigup">
-                    <label><i class="far fa-envelope"></i></label>
-                    <input type="email" id="email" placeholder="mail"  required>
-                </div>
-                <div class="form-field form-field-sigup">
-                    <label><i class="fas fa-key"></i></label>
-                    <input type="password" id="password" placeholder="Password" required >
-                </div>
-                <div class="form-field form-field-sigup">
-                    <label><i class="fas fa-lock"></i></label>
-                    <input type="password" id="confirm_password" placeholder="confirm Password" required >
-                </div>
-                
-            <input type='hidden' id="ref" value="{{$ref}}" class="form-control">
-                <div class="form-field form-field-sigup">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="customCheck1" class="custom-control-input" id="customCheck1" onclick="if (this.checked)">
-                        <label class="custom-control-label" for="customCheck1">I agree to all <a class="p" href="{{url('tos')}}">Terms</a></label> 
-                    </div> 
-</div>
-            
-        <div class="form-field form-field-sigup">
-            <input type="submit" value="Sign Up">
-        </div>
-    </form>
-</div>
-</div>
-</div>
+
 @section('script')
 <script>
     /*

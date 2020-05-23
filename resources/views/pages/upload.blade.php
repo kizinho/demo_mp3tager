@@ -23,8 +23,8 @@
 <meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
 <meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files" />
 
-<link rel="stylesheet" href="{{asset('css/upload.css')}}">
 <link rel="stylesheet" href="{{asset('dropzone/dropzone.min.css')}}">
+  
 
 <script type="application/ld+json">
     {
@@ -43,6 +43,7 @@
 @extends('layouts.app')
 @section('content')
 <!-- --------------Start of Body----------->
+<main class="upload-page">
 <div class="container">
     <div class="tabs-container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -88,8 +89,8 @@
                         </div>
                     </div>
 
-                    <div class="data-field data-field-btn ">
-                        <input type="submit" id="submit-file"  value="upload">
+                    <div class="data-field data-field-btn mt-3">
+                        <input type="submit" id="submit-file"  value="upload" class="btn btn-success px-5 mb-3">
                     </div>
 
                 </form>
@@ -98,7 +99,7 @@
             </div>
             <div class="tab-pane fade" id="links" role="tabpanel" aria-labelledby="links-tab">
                 <!-- Strat of inside search bar -->
-                <div class="data-field data-field-search">
+                <div class="data-field data-field-search mt-3">
                     <p>Please enter a valid audio url or Video Url {supports Youtube link}</p>
                     <form id="link">
                            @if($user == false)
@@ -108,9 +109,9 @@
 
                     @endif
 
-                        <input class="col col-sm-12" id="url" placeholder="domain.com/song.mp3" required>
+                        <input class="col col-sm-12 form-control" id="url" placeholder="domain.com/song.mp3" required>
 
-                        <input type="submit"  id="submit-file"  value="Go"><i class="fas fa-sign-in-alt"></i>
+                        <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  id="submit-file">Go <i class="fas fa-sign-in-alt"></i> </button>
                     </form>
                 </div>
                 <!-- End of inside search bar -->
@@ -124,6 +125,7 @@
         </small>
     </div>
 </div>
+</main>
 @section('script')
 <script src="{{asset('dropzone/dropzone.min.js')}}"></script>
 <script>

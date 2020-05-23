@@ -7,58 +7,54 @@
 <meta name="theme-color" content="#08192D"/>
 <meta property="og:description" content="Mp3tag Login" />
 <title>Mp3tag - Login Page</title>
-<link rel="stylesheet" href="{{asset('css/formStyle.css')}}">
- <style media="screen">
-    body{height: 100vh;}
-     .side-form-box p{margin-top:20px;text-align:center;font-size:15px;margin-left: -10px;}
-     .form-field input[type='submit']{flex-basis:50%;margin: auto;margin-top: 10px;}
-    </style>
+
 @endsection
 
 @extends('layouts.app')
 @section('content')
-<div class="Mycontainer">
-    <div class="form-container form-container-sginin">
-        <div class="side-form-box">
-          <img src="{{asset('images/signin1.png')}}" alt="music band">
-        </div>
-        <div class="form-box">
-            <form id="login">
-              <div class="form-field">
-                <h3 class="signin-h3">Log in and start saving your files forever</h3>
-              </div>
-                  @if(session()->has('message.verify'))
-                    <div class="alert alert-{{ session('message.verify') }}"> 
+
+<main class="login-page">
+        <section class="login-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="p-4 text-center">
+                            <h5 class="mb-5">
+                                Please Log in
+                            </h5>
+                            <img src="{{asset('images/concept-of-remote-team.png')}}" class="img-fluid" width="300px">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="login-form">
+                        @if(session()->has('message.verify'))
+                    <div class="alert alert-{{ session('message.verify') }} mb-4"> 
                         {!! session('message.content') !!}
                     </div>
                     @endif
-                <div class="form-field">
-                    <label><i class="far fa-user"></i></label>
-                    <input type="text" id="username" placeholder="Username"  required>
-                </div>
-                <div class="form-field">
-                    <label><i class="fas fa-key"></i></label>
-                    <input type="password" id="password" placeholder="Password" required >
-                </div>
-             
-                        <div class="form-field">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input"  name="remember"  id="customCheck1" >
-                                    <label class="custom-control-label" for="customCheck1">Remember me</label>
-                                </div> 
-                              
-                      
+                            <form action="#" id="login">
+                                <div class="form-group">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" name="username" id="username" class="form-control form-input">
+                                    <i class="input__icon fas fa-user"></i>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" name="password" id="password"
+                                        class="form-control form-input">
+                                    <i class="input__icon fas fa-key"></i>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary px-5 py-2">Log In</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                <div class="form-field">
-                    <input type="submit" value="Sign in">
                 </div>
-                <div class="side-form-box">
-                <p>not a member ? <a href="{{url('signup')}}">sign up</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+            </div>
+        </section>
+    </main>
+
 @section('script')
  <script>
             /*
