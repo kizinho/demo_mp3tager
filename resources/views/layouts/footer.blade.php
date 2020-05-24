@@ -12,7 +12,7 @@
                                 146 Nike Lake Road, Enugu State, Nigeria
                             </span>
                             <span class="contact-address__email d-block mb-2">
-                                contact@mp3tager.com
+                                info@mp3tager.com
                             </span>
                         </address>
 
@@ -26,16 +26,16 @@
                     <div class="company-details">
                         <ul class="nav">
                             <li class="nav-item mr-md-2">
-                                <a href="#" class="footer__link nav-link px-0">About us</a>
+                                <a href="{{url('about-us')}}" class="footer__link nav-link px-0">About us</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="footer__link nav-link">Pricing</a>
+                                <a href="{{url('pricing')}}" class="footer__link nav-link">Pricing</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="footer__link nav-link">Privacy Policy</a>
+                                <a href="{{url('privacy-policy')}}" class="footer__link nav-link">Privacy Policy</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="footer__link nav-link">Terms & Conditions</a>
+                                <a href="{{url('tos')}}" class="footer__link nav-link">Terms & Conditions</a>
                             </li>
                         </ul>
 
@@ -44,10 +44,13 @@
             </div>
             <div class="text-center">
                 <p>
-                    <a class="logo" href="#">
+                    <a class="logo" href="{{url('/')}}">
                         <i class="fas fa-compact-disc logo__icon"></i>
                         Mp3Tager
-                    </a> 2020 &copy All Rights Reserved
+                    </a>
+                    
+                    Copyright © 2020-{{date('Y')}} Theme by Kizsoft, powered by <a class="" href="https://kizzsoft.com" target="_blank">Kizsoft Solution Service</a>
+   
                 </p>
             </div>
         </div>

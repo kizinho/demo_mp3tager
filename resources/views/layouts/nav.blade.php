@@ -54,18 +54,19 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav m-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item @if(request()->path() == '/') active @endif">
                         <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pricing.html">Pricing</a>
+                    <li class="nav-item @if(request()->path() == 'pricing') active @endif">
+                        <a class="nav-link" href="{{url('pricing')}}">Pricing</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @if(request()->path() == 'upload') active @endif">
                         <a class="nav-link" href="{{url('upload')}}">Start Editing</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @if(request()->path() == 'how-it-works') active @endif">
                         <a class="nav-link" href="{{url('how-it-works')}}">How it works</a>
                     </li>
+                     <li id="google_translate_element"></li>
                 </ul>
                 <ul class="navbar-nav ml-md-auto">
                     <li class="nav-item mr-md-3">

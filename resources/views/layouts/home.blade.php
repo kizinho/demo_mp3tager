@@ -61,7 +61,17 @@
   <script src="{{ asset('assets/new/js/settings.js')}}"></script>
   <script src="{{ asset('assets/new/js/todolist.js')}}"></script>
 
-     <script type="text/javascript">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161752442-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-161752442-1');
+</script>
+
+    <script type="text/javascript">
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
 }
@@ -83,7 +93,17 @@ function googleTranslateElementInit() {
                 return confirm("Are you sure?");
             });
         </script>
-        
+        <script>
+   
+  setInterval(function () {
+    if ($('html').hasClass('translated-ltr')) {
+      $('.navbar').css('margin-top', '30px');
+    } else {
+      $('.navbar').css('margin-top', '30px');
+    }
+  }, 3000);
+   
+        </script>
 @if(session()->has('message.level'))
 <script type="text/javascript">
     swal({

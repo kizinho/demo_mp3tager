@@ -162,7 +162,7 @@
                 </form>
             </li>
 
-
+  <li class="nav-item nav-link" id="google_translate_element"></li>
 
 
 

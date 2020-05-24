@@ -44,6 +44,8 @@ Route::get('tos', 'PageController@tos')->name('tos');
 Route::get('about-us', 'PageController@aboutUs')->name('about-us');
 Route::get('contact-us', 'PageController@contactUs')->name('contact-us');
 Route::get('how-it-works', 'PageController@how')->name('how-it-works');
+//pricing
+Route::get('pricing', 'PageController@pricing')->name('pricing');
 //dashboard user
 Route::group(['middleware' => 'token'], function() {
     Route::get('dashboard', 'UserHomeController@index')->name('dashboard');

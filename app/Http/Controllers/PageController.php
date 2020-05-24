@@ -17,10 +17,17 @@ class PageController extends Controller {
     public function aboutUs() {
         return view('pages.about');
     }
-  public function contactUs() {
+
+    public function contactUs() {
         return view('pages.contact');
     }
-      public function how() {
+
+    public function how() {
         return view('pages.how-it-works');
     }
+
+    public function pricing() {
+        return view('pages.pricing');
+    }
+
 }

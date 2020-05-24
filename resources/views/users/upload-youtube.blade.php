@@ -26,7 +26,7 @@
                                 <input class="form-control" value="mp3" type="hidden" id="action" placeholder="" required>
                                 <br/>
                                 <div class="text-center">
-                                    <button type="submit"  class="btn btn-success" id="submit-file"  style="background:#DA0353;color:#fff">Go <i class="fas fa-sign-in-alt"></i></button>
+                                    <button type="submit"  class="btn btn-success" id="submit-file"  style="background:#CD6133;color:#fff">Go <i class="fas fa-sign-in-alt"></i></button>
                                 </div>
                             </form>
                         </div>

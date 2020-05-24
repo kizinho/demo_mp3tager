@@ -185,7 +185,116 @@ main.upload-page{
 }
 .dropzone {
     min-height: 150px;
-    border: 3px dashed #DA0353!important;
+    border: 3px dashed $primary-color;
     background: #f5f5f5!important;
     padding: 20px;
 }
+
+
+@media only screen and (max-width: 992px) {
+
+
+    .toast-top-right {
+        min-width: 250px!important;
+        margin-left: -125px!important;
+        text-align: center!important;
+        border-radius: 2px!important;
+        padding: 16px!important;
+        position: fixed!important;
+        z-index: 1!important;
+        left: 50%!important;
+        top: 50%!important;
+        bottom: 30px!important;
+        font-size: 17px!important;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+}
+@media only screen and (min-width: 993px) {
+    .toast-top-right {
+        min-width: 250px!important;
+        margin-left: -125px!important;
+        text-align: center!important;
+        border-radius: 2px!important;
+        padding: 16px!important;
+        position: fixed!important;
+        z-index: 1!important;
+        left: 50%!important;
+        top: 60%!important;
+        bottom: 30px!important;
+        font-size: 17px!important;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }   
+}
+
+
+
+.modal
+{
+    position: fixed;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: Black;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    -moz-opacity: 0.8;
+}
+.mcenter
+{
+    z-index: 1000;
+    margin: 300px auto;
+    padding: 10px;
+    width: 130px;
+    background-color: #ddd;
+    border-radius: 10px;
+    filter: alpha(opacity=100);
+    opacity: 1;
+    -moz-opacity: 1;
+}
+.mcenter img
+{
+    height: 100px;
+    width: 100px;
+}
+
+
+#google_translate_element{
+  position: relative;
+}
+.goog-logo-link{
+  display: none;
+}
+.goog-logo-link #text{
+  display: none;
+}
+.goog-te-gadget{
+  font-size: 0px !important;
+}
+.goog-te-gadget div{
+  display: inline;
+}
+
+.goog-te-gadget div select{
+width: 131px;
+height: 35px;
+border: 1px solid $background-color !important;
+color: #000;
+padding: 2px;
+outline: none;border:none;
+}
+.goog-te-gadget div select option{
+border: 1px solid $background-color;
+
+}
+.goog-te-gadget div select option:hover{
+  cursor: pointer;
+}
+.goog-te-gadget div select:hover{
+ border: 1px solid $background-color !important;
+  cursor: pointer;
+}
+

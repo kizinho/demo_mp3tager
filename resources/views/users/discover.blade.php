@@ -19,7 +19,7 @@
 
     .searchTerm {
         width: 100%;
-        border: 3px solid #DA0353;
+        border: 3px solid #CD6133;
         border-right: none;
         padding: 5px;
         height: 36px;
@@ -29,14 +29,14 @@
     }
 
     .searchTerm:focus{
-        color: #DA0353;
+        color: #CD6133;
     }
 
     .searchButton {
         width: 40px;
         height: 36px;
-        border: 1px solid #DA0353;
-        background: #DA0353;
+        border: 1px solid #CD6133;
+        background: #CD6133;
         text-align: center;
         color: #fff;
         border-radius: 0 5px 5px 0;
@@ -84,7 +84,7 @@
         top: .15em; left: .22em;
         font-size: 1.3em;
         line-height: 0.8;
-        color: #DA0353;
+        color: #CD6133;
         transition: all .2s;
         font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
     }
@@ -118,7 +118,7 @@
 
     /* hover style just for information */
     label:hover:before {
-        border: 2px solid #DA0353!important;
+        border: 2px solid #CD6133!important;
     }
 </style>
 <div class="main-panel">
@@ -157,7 +157,7 @@
                                         <form  class="form-group"  method=POST name=opts action="{{url('discover')}}" enctype="multipart/form-data">
                                             @csrf
                                             <td>
-                                                <select name=type class="inpts form-control" style="height:36px!important;border: 1px solid #DA0353;" onchange="document.opts.submit();">
+                                                <select name=type class="inpts form-control" style="height:36px!important;border: 1px solid #CD6133;" onchange="document.opts.submit();">
                                                     <option value="" selected disabled>Sort by</option>
                                                     <option value="1" {{$type == '1' ? 'selected' : '' }} >By Mp3tager Server</option>
                                                     <option value="2" {{$type == '2' ? 'selected' : '' }}>Google Server</option>

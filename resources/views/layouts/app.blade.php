@@ -18,8 +18,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Signika&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/font.css')}}">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <!-- <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('css/responsive.css')}}"> -->
     <link rel="stylesheet" href="{{asset('css/aos.css')}}">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
     
