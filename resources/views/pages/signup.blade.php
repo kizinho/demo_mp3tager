@@ -49,9 +49,14 @@
                                         class="form-control form-input">
                                     <i class="input__icon fas fa-key"></i>
                                 </div>
+                               
+                                <div class="custom-control custom-checkbox mb-4">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Accept our <a href="#">Terms & Conditions</a></label>
+                                </div>
                                 <input type='hidden' id="ref" value="{{$ref}}" class="form-control">
                                 <div class="form-group">
-                                    <button class="btn btn-primary px-5 py-2">Sign Up</button>
+                                    <button class="btn btn-primary px-5 py-2">Sign Up</button> <a href="{{url('signin')}}" class="btn ml-3"> Log In</a>
                                 </div>
                             </form>
                         </div>

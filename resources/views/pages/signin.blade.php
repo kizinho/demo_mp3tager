@@ -44,8 +44,15 @@
                                         class="form-control form-input">
                                     <i class="input__icon fas fa-key"></i>
                                 </div>
-                                <div class="form-group">
-                                    <button class="btn btn-primary px-5 py-2">Log In</button>
+                                <div class="custom-control custom-checkbox mb-4">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Remember me</label>
+                                </div>
+                                <div class="form-group"> 
+                                    <button class="btn btn-primary px-5 py-2">Log In</button> <a href="{{url('signup')}}" class="btn"> Create Account</a>
+                                </div>
+                                <div class="mt-4 note">
+                                    <span><bold>Note:</bold> You can login with your Naijacrawl credentials</span>
                                 </div>
                             </form>
                         </div>
