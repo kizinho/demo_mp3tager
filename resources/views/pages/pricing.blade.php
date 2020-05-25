@@ -27,26 +27,137 @@
 @endsection
 @extends('layouts.app')
 @section('content')
-<main class="how-it-works">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-md-5">
-                    <article>
-                        <p>
-                            Please watch the video and see how mp3tager works. Using mp3tager you can change ID3 tags of
-                            any mp3 files. You can change mp3 tags like (comments, album, artist, year, genre, cover
-                            art). We also made it possible for you to join another song or add a voice tag to any mp3
-                            files, once done save your files and download the updated files.
-                        </p>
-                    </article>
-                </div>
-                <div class="col-sm-6 col-md-7">
-                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/AvnW4Huk8u4" frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
+<main>
+        <section class="price-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 mb-4">
+                        <div class="pricing rounded p-3">
+                            <h5 class="pricing__name mb-3 text-center">
+                                Basic
+                            </h5>
+                            <div class="pricing__fee mb-3 text-center">
+                                <h2>
+                                    FREE
+                                </h2>
+                            </div>
+                            <div class="pricing__getstarted-button mb-4">
+                                <a href="#" class="btn btn--get-started w-100">Get Started</a>
+                            </div>
+                            <div class="plan-features">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <i class="fas fa-check plan__icon"></i> 750MB storage space
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check plan__icon"></i> 1 simultanous edit
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check plan__icon"></i> Save on Google Drive
+                                    </li>
+                                    <li>
+                                        Delete in-active files after - 1 Month
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 mb-4">
+                        <div class="pricing rounded p-3">
+                            <h5 class="pricing__name mb-3 text-center">
+                                Premium
+                            </h5>
+                            <div class="pricing__fee mb-3 text-center">
+                                <h2>
+                                    &#8358;500/mo
+                                </h2>
+                            </div>
+                            <div class="pricing__getstarted-button mb-4">
+                                <a href="#" class="btn btn--get-started w-100">Get Started</a>
+                            </div>
+                            <div class="plan-features">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <i class="fas fa-check plan__icon"></i> 2GB storage space
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check plan__icon"></i> 3 simultanous edit
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check plan__icon"></i> Save on Google Drive
+                                    </li>
+                                    <li>
+                                        Never delete in-active files
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 mb-4">
+                        <div class="pricing rounded p-3">
+                            <h5 class="pricing__name mb-3 text-center">
+                                Professional
+                            </h5>
+                            <div class="pricing__fee mb-3 text-center">
+                                <h2>
+                                    &#8358;1000/mo
+                                </h2>
+                            </div>
+                            <div class="pricing__getstarted-button mb-4">
+                                <a href="#" class="btn btn--get-started w-100">Get Started</a>
+                            </div>
+                            <div class="plan-features">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <i class="fas fa-check plan__icon"></i> 3GB storage space
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check plan__icon"></i> 4 simultanous edit
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check plan__icon"></i> Save on Google Drive
+                                    </li>
+                                    <li>
+                                        Never delete in-active files
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 mb-4">
+                        <div class="pricing rounded p-3">
+                            <h5 class="pricing__name mb-3 text-center">
+                                Business
+                            </h5>
+                            <div class="pricing__fee mb-3 text-center">
+                                <h2>
+                                    &#8358;3000/mo
+                                </h2>
+                            </div>
+                            <div class="pricing__getstarted-button mb-4">
+                                <a href="#" class="btn btn--get-started w-100">Get Started</a>
+                            </div>
+                            <div class="plan-features">
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <i class="fas fa-check plan__icon"></i> 5GB storage space
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check plan__icon"></i> 5 simultanous edit
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-check plan__icon"></i> Save on Google Drive
+                                    </li>
+                                    <li>
+                                        Never delete in-active files
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
 @endsection
