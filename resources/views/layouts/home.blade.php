@@ -94,15 +94,15 @@ function googleTranslateElementInit() {
             });
         </script>
         <script>
-   
+   $(document).ready(function () {
   setInterval(function () {
     if ($('html').hasClass('translated-ltr')) {
       $('.navbar').css('margin-top', '30px');
     } else {
-      $('.navbar').css('margin-top', '30px');
+      $('.navbar').css('margin-top', '0px');
     }
   }, 3000);
-   
+   });
         </script>
 @if(session()->has('message.level'))
 <script type="text/javascript">
