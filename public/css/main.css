@@ -144,9 +144,20 @@ header {
   margin-top: 12rem;
 }
 
+.recommended-text {
+  font-size: .8rem;
+  text-align: center;
+  color: #7d7d82;
+  margin-bottom: .3rem;
+}
+
 .pricing {
   background-color: #f7f7f8;
   height: 23rem;
+}
+
+.pricing.pricing--recommended {
+  background-color: #f8e1ca;
 }
 
 @media screen and (max-width: 768px) {

@@ -124,9 +124,18 @@ header{
 .price-section{
     margin-top: 12rem;
 }
+.recommended-text{
+    font-size: .8rem;
+    text-align: center;
+    color: darken($color: $background-color, $amount: 40);
+    margin-bottom: .3rem;
+}
 .pricing{
     background-color: lighten($color: $background-color, $amount: 7);
     height: 23rem;
+    &.pricing--recommended{
+        background-color: lighten($color: $primary-color-light, $amount: 15);
+    }
     @media screen and (max-width: 768px){
         margin-bottom: 1rem;
     }
