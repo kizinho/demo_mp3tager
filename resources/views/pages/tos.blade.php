@@ -106,7 +106,7 @@
                                     Greetings our dear esteemed users and welcome to our Terms and Conditions of Use.
                                     This
                                     is important and affects your legal rights, so please read them and our <a
-                                        href="privacypolicy.html">Privacy Policy</a> carefully. Hope you’re ready?
+                                        href="{{url('privacy-policy')}}">Privacy Policy</a> carefully. Hope you’re ready?
                                     comfortably. Let’s ride…
                                 </p>
                             </div>

@@ -28,6 +28,7 @@
                         <div class="login-form">
                             <form action="#" id='register'>
                                 <div class="form-group">
+                                     <input type="hidden"  id="actions" value="tag">
                                     <label for="username" class="form-label">Username</label>
                                     <input type="text" name="username" id="username" class="form-control form-input">
                                     <i class="input__icon fas fa-user"></i>
@@ -45,7 +46,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="cpassword" class="form-label">Confirm Password</label>
-                                    <input type="cpassword" name="cpassword" id="cpassword"
+                                    <input type="password" name="cpassword" id="confirm_password"
                                         class="form-control form-input">
                                     <i class="input__icon fas fa-key"></i>
                                 </div>
