@@ -1,13 +1,13 @@
 
 @section('title')
-<title>MP3tager | How it Works</title>
-<meta name="description" content="How it Works" />
-<meta name="keywords" content="How it Works" />
+<title>MP3tager | Pricing</title>
+<meta name="description" content="pricing" />
+<meta name="keywords" content="pricing" />
 <meta name="apple-mobile-web-app-title" content="Mp3Tager" />
 <meta property="fb:app_id" content="" />
 <meta name="theme-color" content="#08192D"/>
-<meta property="og:title" content="How it Works" />
-<meta property="og:description" content="How it Works" />
+<meta property="og:title" content="pricing" />
+<meta property="og:description" content="pricing" />
 <meta property="og:url" content="{{url('/')}}" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Mp3Tager" />
@@ -17,12 +17,12 @@
 <meta name="twitter:description" content="How it Works">
 <link rel="canonical" href="{{url('/')}}" />
 <meta property="og:image" content="{{asset('logo/logo.png') }}" />
-<meta property="og:image:alt" content="How it Works">
+<meta property="og:image:alt" content="pricing">
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
-<meta name="twitter:image:alt" content="How it Works" />
+<meta name="twitter:image:alt" content="pricing" />
 
 @endsection
 @extends('layouts.app')
@@ -40,7 +40,9 @@
                                 <h2>
                                     FREE
                                 </h2>
+                               
                             </div>
+                            
                             <div class="pricing__getstarted-button mb-4">
                                 <a href="#" class="btn btn--get-started w-100">Get Started</a>
                             </div>
@@ -71,9 +73,18 @@
                                 <h2>
                                     &#8358;500/mo
                                 </h2>
+                                <div class="pricing__discount">
+                                    save 20% on the first year
+                                </div>
                             </div>
                             <div class="pricing__getstarted-button mb-4">
                                 <a href="#" class="btn btn--get-started w-100">Get Started</a>
+                                <div class="pricing__amount-to-pay">
+                                    <span>
+                                        pay &#8358;5,000.56 - renews at &#8358;7,000.00/yr
+                                    </span>
+                                </div>
+
                             </div>
                             <div class="plan-features">
                                 <ul class="list-unstyled">
@@ -102,9 +113,17 @@
                                 <h2>
                                     &#8358;1000/mo
                                 </h2>
+                                <div class="pricing__discount">
+                                    save 20% on the first year
+                                </div>
                             </div>
                             <div class="pricing__getstarted-button mb-4">
                                 <a href="#" class="btn btn--get-started w-100">Get Started</a>
+                                <div class="pricing__amount-to-pay">
+                                    <span>
+                                        pay &#8358;5,000.56 - renews at &#8358;7,000.00/yr
+                                    </span>
+                                </div>
                             </div>
                             <div class="plan-features">
                                 <ul class="list-unstyled">
@@ -133,9 +152,17 @@
                                 <h2>
                                     &#8358;3000/mo
                                 </h2>
+                                <div class="pricing__discount">
+                                    save 20% on the first year
+                                </div>
                             </div>
                             <div class="pricing__getstarted-button mb-4">
                                 <a href="#" class="btn btn--get-started w-100">Get Started</a>
+                                <div class="pricing__amount-to-pay">
+                                    <span>
+                                        pay &#8358;5,000.56 - renews at &#8358;7,000.00/yr
+                                    </span>
+                                </div>
                             </div>
                             <div class="plan-features">
                                 <ul class="list-unstyled">

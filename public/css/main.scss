@@ -126,7 +126,7 @@ header{
 }
 .pricing{
     background-color: lighten($color: $background-color, $amount: 7);
-    height: 20rem;
+    height: 23rem;
     @media screen and (max-width: 768px){
         margin-bottom: 1rem;
     }
@@ -139,11 +139,21 @@ header{
             font-weight: bold;
             font-size: 1.5rem;
         }
+        .pricing__discount{
+            font-size: .8rem;
+            color: $primary-color;
+        }
     }
     .pricing__getstarted-button{
         .btn--get-started{
             background-color: $primary-color;
             color: lighten($color: $primary-color, $amount: 50);
+        }
+        .pricing__amount-to-pay{
+            font-size: .8rem;
+            color: darken($color: $background-color, $amount: 30);
+            margin-top: .7rem;
+
         }
     }
     .plan-features{
