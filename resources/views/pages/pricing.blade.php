@@ -65,7 +65,10 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3 mb-4">
-                        <div class="pricing rounded p-3">
+                        <div class="recommended-text">
+                            <span>RECOMMENDED</span>
+                        </div>
+                        <div class="pricing pricing--recommended rounded p-3">
                             <h5 class="pricing__name mb-3 text-center">
                                 Premium
                             </h5>
