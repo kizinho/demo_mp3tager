@@ -146,7 +146,7 @@ header {
 
 .pricing {
   background-color: #f7f7f8;
-  height: 20rem;
+  height: 23rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -165,9 +165,20 @@ header {
   font-size: 1.5rem;
 }
 
+.pricing .pricing__fee .pricing__discount {
+  font-size: .8rem;
+  color: #CD6133;
+}
+
 .pricing .pricing__getstarted-button .btn--get-started {
   background-color: #CD6133;
   color: white;
+}
+
+.pricing .pricing__getstarted-button .pricing__amount-to-pay {
+  font-size: .8rem;
+  color: #97979b;
+  margin-top: .7rem;
 }
 
 .pricing .plan-features {

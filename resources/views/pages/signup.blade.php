@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="cpassword" class="form-label">Confirm Password</label>
-                                    <input type="cpassword" name="cpassword" id="cpassword"
+                                    <input type="password" name="cpassword" id="cpassword"
                                         class="form-control form-input">
                                     <i class="input__icon fas fa-key"></i>
                                 </div>
