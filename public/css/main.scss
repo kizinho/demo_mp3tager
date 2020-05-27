@@ -133,6 +133,7 @@ header{
 .pricing{
     background-color: lighten($color: $background-color, $amount: 7);
     height: 23rem;
+    position: relative;
     &.pricing--recommended{
         background-color: lighten($color: $primary-color-light, $amount: 15);
     }
@@ -176,6 +177,17 @@ header{
                 margin-right: .2rem;
                 font-size: .7rem;
             }
+        }
+    }
+    .plan__current-plan{
+        position: absolute;
+        bottom: .5rem;
+        font-size: .8rem;
+        color: darken($color: $background-color, $amount: 40);
+        i{
+            font-size: .7rem;
+            background-color: lighten($color: $primary-color-blue, $amount: 50);
+            color: $primary-color-blue;
         }
     }
 }

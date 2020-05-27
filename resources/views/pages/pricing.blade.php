@@ -62,6 +62,9 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="plan__current-plan">
+                                <i class="fas fa-check p-1 rounded-circle"></i> <span>current plan</span>                            
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3 mb-4">
@@ -92,7 +95,7 @@
                             <div class="plan-features">
                                 <ul class="list-unstyled">
                                     <li>
-                                        <i class="fas fa-check plan__icon"></i> 2GB storage space
+                                        <i class="fas fa-check plan__icon"></i> 3GB storage space
                                     </li>
                                     <li>
                                         <i class="fas fa-check plan__icon"></i> 3 simultanous edit
@@ -105,6 +108,9 @@
                                     </li>
                                 </ul>
                             </div>
+                            <div class="plan__current-plan">
+                                <i class="fas fa-check p-1 rounded-circle"></i> <span>current plan</span>                            
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3 mb-4">
@@ -114,7 +120,7 @@
                             </h5>
                             <div class="pricing__fee mb-3 text-center">
                                 <h2>
-                                    &#8358;1000/mo
+                                    &#8358;1500/mo
                                 </h2>
                                 <div class="pricing__discount">
                                     save 20% on the first year
@@ -131,7 +137,7 @@
                             <div class="plan-features">
                                 <ul class="list-unstyled">
                                     <li>
-                                        <i class="fas fa-check plan__icon"></i> 3GB storage space
+                                        <i class="fas fa-check plan__icon"></i> 9GB storage space
                                     </li>
                                     <li>
                                         <i class="fas fa-check plan__icon"></i> 4 simultanous edit
@@ -143,6 +149,9 @@
                                         Never delete in-active files
                                     </li>
                                 </ul>
+                            </div>
+                            <div class="plan__current-plan">
+                                <i class="fas fa-check p-1 rounded-circle"></i> <span>current plan</span>                            
                             </div>
                         </div>
                     </div>
@@ -170,7 +179,7 @@
                             <div class="plan-features">
                                 <ul class="list-unstyled">
                                     <li>
-                                        <i class="fas fa-check plan__icon"></i> 5GB storage space
+                                        <i class="fas fa-check plan__icon"></i> 16GB storage space
                                     </li>
                                     <li>
                                         <i class="fas fa-check plan__icon"></i> 5 simultanous edit
@@ -182,6 +191,9 @@
                                         Never delete in-active files
                                     </li>
                                 </ul>
+                            </div>
+                            <div class="plan__current-plan">
+                                <i class="fas fa-check p-1 rounded-circle"></i> <span>current plan</span>                            
                             </div>
                         </div>
                     </div>
