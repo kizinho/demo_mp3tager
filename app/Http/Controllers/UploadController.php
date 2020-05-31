@@ -62,11 +62,23 @@ class UploadController extends Controller {
             return [
                 'data' => $data
             ];
-        } catch (RequestException $data) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $data) {
+
+            if ($data->hasResponse()) {
+                $response = $data->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Server Error',
+                    ];
+                }
+                if ($response->getStatusCode() == 404) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Page not found',
+                    ];
+                }
+            }
         }
     }
 
@@ -88,11 +100,23 @@ class UploadController extends Controller {
             return [
                 'data' => $data
             ];
-        } catch (RequestException $data) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $data) {
+
+            if ($data->hasResponse()) {
+                $response = $data->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Server Error',
+                    ];
+                }
+                if ($response->getStatusCode() == 404) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Page not found',
+                    ];
+                }
+            }
         }
     }
 
@@ -136,11 +160,23 @@ class UploadController extends Controller {
 
             Cache::forget('countupload');
             return view('pages.tags', $data);
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Server Error',
+                    ];
+                }
+                if ($response->getStatusCode() == 404) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Page not found',
+                    ];
+                }
+            }
         }
     }
 
@@ -241,11 +277,23 @@ class UploadController extends Controller {
             return [
                 'data' => $res
             ];
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Server Error',
+                    ];
+                }
+                if ($response->getStatusCode() == 404) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Page not found',
+                    ];
+                }
+            }
         }
     }
 
@@ -286,11 +334,17 @@ class UploadController extends Controller {
             $data['url'] = $res->url;
 
             return view('pages.download', $data);
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
         }
     }
 
@@ -318,11 +372,17 @@ class UploadController extends Controller {
                 abort(455);
             }
             return response()->download($res->file);
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
         }
     }
 
@@ -355,11 +415,17 @@ class UploadController extends Controller {
                 abort(455);
             }
             return response()->download($res->file)->deleteFileAfterSend(true);
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
         }
     }
 

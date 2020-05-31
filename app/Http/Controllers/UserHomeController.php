@@ -39,15 +39,18 @@ class UserHomeController extends Controller {
             $data['all_task'] = $res->data->all_task;
             $data['trash_task'] = $res->data->trash_task;
             return view('users.dashboard', $data);
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
         }
-
-
-        return view('users.dashboard');
     }
 
     public function addStorage() {
@@ -70,11 +73,17 @@ class UserHomeController extends Controller {
             $data['user_storages'] = $res->data->user_storage;
 
             return view('users.add-storage', $data);
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
         }
     }
 
@@ -100,17 +109,20 @@ class UserHomeController extends Controller {
 
             $res = json_decode($response->getBody());
 
-//            if ($res->status == 455) {
-//                abort(455);
-//            }
             return [
                 'data' => $res
             ];
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
         }
     }
 
@@ -142,11 +154,17 @@ class UserHomeController extends Controller {
             return [
                 'data' => $res
             ];
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
         }
     }
 
@@ -185,11 +203,17 @@ class UserHomeController extends Controller {
             $data['search'] = $res->data->search;
             $data['type'] = $res->data->type;
             return view('users.my-files', $data);
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
         }
     }
 
@@ -225,11 +249,17 @@ class UserHomeController extends Controller {
             $data['search'] = $res->data->search;
             $data['type'] = $res->data->type;
             return view('users.discover', $data);
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
         }
     }
 
@@ -268,11 +298,17 @@ class UserHomeController extends Controller {
             $data['search'] = $res->data->search;
             $data['type'] = $res->data->type;
             return view('users.all-files', $data);
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
         }
     }
 
@@ -297,16 +333,24 @@ class UserHomeController extends Controller {
             return [
                 'data' => $res
             ];
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
         }
     }
+
     public function uploadYoutube() {
-           return view('users.upload-youtube'); 
+        return view('users.upload-youtube');
     }
+
     public function logout() {
         $token = session('token');
         Cache::forget($token);

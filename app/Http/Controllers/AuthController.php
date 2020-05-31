@@ -49,11 +49,23 @@ class AuthController extends Controller {
             return [
                 'data' => $res
             ];
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Server Error',
+                    ];
+                }
+                if ($response->getStatusCode() == 404) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Page not found',
+                    ];
+                }
+            }
         }
     }
 
@@ -81,11 +93,23 @@ class AuthController extends Controller {
             return [
                 'data' => $res
             ];
-        } catch (RequestException $res) {
-            return [
-                'status' => 422,
-                'message' => 'Server Busy',
-            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Server Error',
+                    ];
+                }
+                if ($response->getStatusCode() == 404) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Page not found',
+                    ];
+                }
+            }
         }
     }
 
