@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
-
+use Illuminate\Pagination\LengthAwarePaginator;
 class UserHomeController extends Controller {
 
     public function index() {
@@ -360,5 +360,6 @@ class UserHomeController extends Controller {
         session()->flash('message.content', 'You have been succesfully logged out! , lets see you back again');
         return redirect('signin');
     }
+
 
 }

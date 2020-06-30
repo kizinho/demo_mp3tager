@@ -94,7 +94,7 @@ $(".deleted").on("submit", function () {
         }).catch(swal.noop);
     </script>
     @endif
-     <script>
+<!--     <script>
 
 /*Register Service Worker if it is supported*/
 if ('serviceWorker' in navigator) {
@@ -108,7 +108,7 @@ if ('serviceWorker' in navigator) {
     console.log('No service worker');
 }
 
-    </script>
+    </script>-->
     @yield('script')
 </body>
 </html>

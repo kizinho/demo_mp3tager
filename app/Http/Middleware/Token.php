@@ -18,7 +18,22 @@ class Token {
     public function handle($request, Closure $next) {
         $token = session('token');
         if (Cache::has($token)) {
-            $res = Cache::get($token);
+            $headers = [
+                'Authorization' => $token
+            ];
+            $client = new Client();
+            $url = config('app.naijacrawl_api') . '/token';
+            $response = $client->request('GET', $url, [
+                'headers' => $headers
+            ]);
+            $r = json_decode($response->getBody());
+            if(empty($r)){
+              Cache::forget($token);   
+            }
+            else {
+              $res = Cache::get($token);   
+            }
+            
         } else {
             $headers = [
                 'Authorization' => $token
@@ -33,7 +48,8 @@ class Token {
             Cache::put($token, $res, 525600);
         }
         if (empty($res)) {
-           return redirect('/signin');
+            Cache::forget($token);
+            return redirect('/signin');
         } else {
             return $next($request);
         }
