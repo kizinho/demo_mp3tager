@@ -52,7 +52,7 @@ class UploadController extends Controller {
                     continue;
                 }
             }
-            if (config('app.test') == 'test') {
+            if (config('app.env') !== 'production') {
                 $data = [
                     'status' => 411,
                     'message' => 'Sorry uploading on demo not allow please use our live mp3tager editor'
@@ -127,7 +127,7 @@ class UploadController extends Controller {
                 'headers' => $headers,
                 'query' => $input
             ]);
-            if (config('app.test') == 'test') {
+            if (config('app.env') !== 'production') {
                 $data = [
                     'status' => 411,
                     'message' => 'Sorry uploading on demo not allow please use our live mp3tager editor'

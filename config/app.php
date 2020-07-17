@@ -51,7 +51,6 @@ return [
     'tag_path' => env('TAG_SAVE_PATH'),
     'color_site' => env('SITE_COLOR'),
     'logo' => env('SITE_LOGO_PATH'),
-    'test' => env('APP_STATE'),
     /*
       |--------------------------------------------------------------------------
       | Application Timezone
