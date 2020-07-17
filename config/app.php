@@ -48,11 +48,10 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
     'asset_url' => env('ASSET_URL', null),
     'naijacrawl_api' => env('NAIJACRAWL_API'),
-	
-	'tag_path' => env('TAG_SAVE_PATH'),
-	'color_site' => env('SITE_COLOR'),
-	'logo' => env('SITE_LOGO_PATH'),
-	'test' => env('APP_STATE'),
+    'tag_path' => env('TAG_SAVE_PATH'),
+    'color_site' => env('SITE_COLOR'),
+    'logo' => env('SITE_LOGO_PATH'),
+    'test' => env('APP_STATE'),
     /*
       |--------------------------------------------------------------------------
       | Application Timezone
@@ -205,6 +204,5 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        
     ],
 ];
