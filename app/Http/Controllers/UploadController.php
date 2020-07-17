@@ -52,7 +52,15 @@ class UploadController extends Controller {
                     continue;
                 }
             }
-
+            if (config('app.test') == 'test') {
+                $data = [
+                    'status' => 411,
+                    'message' => 'Sorry uploading on demo not allow please use our live mp3tager editor'
+                ];
+                return [
+                    'data' => $data
+                ];
+            }
             $url = config('app.naijacrawl_api') . '/mp3-upload-tag';
             $client = new Client();
             $response = $client->request('POST', $url, [
@@ -119,7 +127,15 @@ class UploadController extends Controller {
                 'headers' => $headers,
                 'query' => $input
             ]);
-
+            if (config('app.test') == 'test') {
+                $data = [
+                    'status' => 411,
+                    'message' => 'Sorry uploading on demo not allow please use our live mp3tager editor'
+                ];
+                return [
+                    'data' => $data
+                ];
+            }
             $data = json_decode($response->getBody());
             if (empty($data)) {
                 $data = [
@@ -410,7 +426,7 @@ class UploadController extends Controller {
                 return redirect()->route('upload');
             }
             $data['details'] = $res->details;
-            $name =  public_path(config('app.tag_path').'/' . $res->path);
+            $name = public_path(config('app.tag_path') . '/' . $res->path);
             $data['url'] = $res->url;
             if (!file_exists($name)) {
                 copy($res->file, $name);
