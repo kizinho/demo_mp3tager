@@ -326,6 +326,7 @@ class UploadController extends Controller {
             ]);
 
             $res = json_decode($response->getBody());
+            dd($res);
             if (empty($res)) {
                 $data = [
                     'status' => 411,
