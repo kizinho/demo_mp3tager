@@ -1,65 +1,53 @@
-body,html{
-    font-family: 'Roboto';
-    background: rgb(29, 63, 102);
-    height: 100vh;
-  }
+.Mycontainer {
+  margin-top: 7rem; }
 
+.msg-content {
+  margin-top: 100px; }
 
-.Mycontainer{
-    padding:0px !important;
-    min-height:100vh;
-    /*save andload*/
-}
-.msg-content{
-
-    margin-top: 100px;
-
-}
-.msg-content p:first-child,.download-songs{
-    background: #fff;
-    border-radius: 5px;
-    text-transform: capitalize;
-    color: white;
-    text-align: center;
-    width: 700px;
-    margin: 20px auto;
-    transition: .5s;
-}
-
-.download-songs{
-    background: #535c68;
-    padding:5px  20px;
-}
-
-.download-songs a{
-    text-transform: uppercase;
-    color: #33d9b2;
-    text-decoration: none;
-}
-.support-btn{
-  margin-top: 100px;
+.msg-content p:first-child, .download-songs {
+  background: #fff;
+  border-radius: 5px;
+  text-transform: capitalize;
+  color: white;
   text-align: center;
-}
-.support-btn a{
+  width: 700px;
+  margin: 20px auto;
+  transition: .5s; }
+
+.download-songs {
+  background: #535c68;
+  padding: 5px  20px; }
+
+.download-songs a {
+  text-transform: uppercase;
+  color: #33d9b2;
+  text-decoration: none; }
+
+.support-btn {
+  margin-top: 100px;
+  text-align: center; }
+
+.support-btn a {
   border-radius: 3px;
   background: #60a3bc;
   padding: 10px 30px;
-    text-transform: uppercase;
-    color: #fff;
-    text-decoration: none;
-    transition: .3s;
-}
-.support-btn a:hover{
-  background: #3c6382;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  transition: .3s; }
 
-}
+.support-btn a:hover {
+  background: #3c6382; }
 
-.embd-txt{
-  margin: 10px auto; display: block; font-size: 14px;color: #777;
+.embd-txt {
+  margin: 10px auto;
+  display: block;
+  font-size: 14px;
+  color: #777;
   resize: both;
-  overflow: auto;
-}
-.embd-btn{
+  overflow: auto; }
+
+.embd-btn {
   display: inline-block;
   margin: 10px auto;
   padding: 5px 20px;
@@ -69,59 +57,20 @@ body,html{
   outline: none;
   border-radius: 3px;
   text-transform: capitalize;
-  font-weight: 500;
-}
-.embd-btn:hover{
-  opacity: .8;
-}
+  font-weight: 500; }
 
+.embd-btn:hover {
+  opacity: .8; }
 
-
-
-.down-btn-item{
+.down-btn-item {
   background: none;
-  border:none;
+  border: none;
   color: #00bfa0;
-  outline : none;
+  outline: none;
   text-transform: uppercase;
-  margin-right: 5px;
-}
+  margin-right: 5px; }
 
-
-
-@media (min-width:850px) {
-  .navbar .logo{
-    margin-top: -15px;
-  }
-
-}
-
-@media (max-width:850px) {
-  .msg-content p:first-child,.download-songs{
-    width: 300px;
-  }
-  .navbar .logo{
-    margin-left: -20px;
-    font-size: 16px;
-    line-height: 60px;
-    margin-top: -15px;
-  }
-  .navbar .logo i{
-    top:-5px !important;
-    left: 15px;
-    font-size: 28px;
-    line-height: 70px;
-  }
-  .navbar .logo span{
-    font-size: 18px;
-  }
-}
-@media (max-width:750px) {
-.navbar .logo{
-  margin-top: 0px;
-}
-.msg-content p:first-child,.download-songs{
-  font-size: 12px;
-  width:fit-content;
-}
-}
+@media (max-width: 750px) {
+  .msg-content p:first-child, .download-songs {
+    font-size: 12px;
+    width: fit-content; } }

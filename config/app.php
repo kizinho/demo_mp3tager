@@ -48,6 +48,10 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
     'asset_url' => env('ASSET_URL', null),
     'naijacrawl_api' => env('NAIJACRAWL_API'),
+	
+	'tag_path' => env('TAG_SAVE_PATH'),
+	'color_site' => env('SITE_COLOR'),
+	'logo' => env('SITE_LOGO_PATH'),
     /*
       |--------------------------------------------------------------------------
       | Application Timezone

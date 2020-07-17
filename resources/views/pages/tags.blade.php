@@ -23,6 +23,7 @@
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
 <meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files" />
+
 <link rel="stylesheet" href="{{asset('css/tags.css')}}">
 
 @endsection
@@ -31,30 +32,13 @@
 <!-- Start of tags pages -->
 <div class="Mycontainer">
     <div class="upload-container">
-        @php
-        $user_login = isset($user->id) ? $user->id : '';
-        @endphp
+       
         <form id="savetag" enctype="multipart/form-data"> 
-            @if($user == false)
-            <input type="hidden"  name='user_id' value="">
-            @else
-            <input type="hidden"  name='user_id' value="{{ $user->id }}">
-
-            @endif
-
-            @csrf
+           
+           @csrf
             @foreach($details as $key => $tag)
             
-            @if($tag->is_private == true && $tag->user_id !== $user_login  )
-             <div class="tag-field-head alert alert-success">
-                <div class="row">
-                    <div class="col-sm tag-title">
-                        <label class="tag-responsive-p " id="title"><span class='badge badge-primary'> {{ $tag->title }} is protected</span></label>
-                    </div>
-                </div>
-            </div>
-           
-            @elseif($tag->user_id == $user_login)
+            
             <input type="hidden"  name='id[{{$key}}]' value="{{ $tag->id }}">
             <input type="hidden"  name='path[{{$key}}]' value="{{ $tag->path }}">
             <div class="tag-field-head alert alert-success">
@@ -250,7 +234,9 @@
                     </div>
                 </div>
             </div>
-            <div class="tag-field tag-responsive">
+                  <input type="hidden" placeholder='Encoded by' name="encoded_by[{{$key}}]" value=" {{$tag->encoded_by}}">
+                  
+<!--            <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm">
                         <label>Encoded by</label>
@@ -259,8 +245,10 @@
                         <input type="text" placeholder='Encoded by' name="encoded_by[{{$key}}]" value=" {{$tag->encoded_by}}">
                     </div>
                 </div>
-            </div>
-            <div class="tag-field tag-responsive">
+            </div>-->
+                 <input type="hidden" placeholder='Composer' name="composer[{{$key}}]" value=" {{$tag->composer}}">
+                   
+<!--            <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm">
                         <label>Composer</label>
@@ -269,8 +257,10 @@
                         <input type="text" placeholder='Composer' name="composer[{{$key}}]" value=" {{$tag->composer}}">
                     </div>
                 </div>
-            </div>
-
+            </div>-->
+                   <input type="hidden" placeholder='Encoder Settings' name="encoder_settings[{{$key}}]" value=" {{$tag->encoder_settings}}">
+                  
+<!--
             <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm">
@@ -280,28 +270,11 @@
                         <input type="text" placeholder='Encoder Settings' name="encoder_settings[{{$key}}]" value=" {{$tag->encoder_settings}}">
                     </div>
                 </div>
-            </div>
+            </div>-->
 
 
             @endif
-            <!-- =================is private section======================= -->
-            @if(!empty($user))
-            <div class="tag-field tag-responsive">
-                <div class="row justify-content-center">
-                    <h4 class="py-1">Is Private ?</ا3>
-                </div>
-                <div class="row private-selector">
-                    <div class="inputGroup">
-                        <input id="pns-{{$key}}" name="ps[{{$key}}]" value="0" type="radio"  {{ $tag->is_private  == false ? 'checked' : '' }}/><!-- variable here -->
-                        <label for="pns-{{$key}}">No</label><!-- variable here -->
-                    </div>
-                    <div class="inputGroup">
-                        <input id="pys-{{$key}}" name="ps[{{$key}}]" value="1" type="radio" {{ $tag->is_private  == true ? 'checked' : '' }}/> <!-- variable here -->
-                        <label for="pys-{{$key}}">Yes</label><!-- variable here -->
-                    </div>
-                </div>
-            </div>
-            @endif
+           
             @if($tag->mime_type =='mp3' || $tag->mime_type =='mp4')
             @else
             <!-- =================End is private section======================= -->
@@ -324,26 +297,10 @@
                 </div>
             </div>
             @endif
-            @endif
 
             @endforeach
 
-            <div class="tag-field tag-responsive tag-field-save">
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="lbl-sel-data">
-                            <label for="temp-data">(save data for 24 hrs)</label>
-                            <input type="radio" name="saveData" value="0" id='temp-data' class="temp-data-chk" @if($user == false) checked='checked' @endif>
-                                   <label for="temp-data" class="temp-data">✔</label>
-                        </div>
-                        <div class="lbl-sel-data">
-                            <label for="forever-data" >(save data forever)</label>
-                            <input type="radio" name="saveData" value="1" id='forever-data' class="forever-data-chk" @if(!empty($user)) checked='checked' @endif >
-                                   <label for="forever-data" class="forever-data">✔</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
 
             <div class="tag-field tag-responsive">
                 <div class="row">
@@ -395,6 +352,13 @@
                     return false;
                 }
                 if (data.data['status'] === 422) {
+                    var message = data.data['message'];
+
+                    toastr.error(message, {timeOut: 50000});
+
+                    return false;
+                }
+                if (data.data['status'] === 411) {
                     var message = data.data['message'];
 
                     toastr.error(message, {timeOut: 50000});

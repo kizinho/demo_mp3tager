@@ -183,7 +183,6 @@ class TrackBout {
                     ]);
                     $res = json_decode($response->getBody());
                     $bout = $res;
-                
                 }
             }
         } catch (\GuzzleHttp\Exception\RequestException $res) {

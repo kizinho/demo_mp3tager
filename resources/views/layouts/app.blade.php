@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-     <link rel="manifest" href="{{url('/manifest.json')}}">
+    <link rel="manifest" href="{{url('/manifest.json')}}">
     <!-- Favicons -->
     <link rel="icon" href="{{asset('logo/icon.png') }}">
     <link rel="shortcut icon" href="{{asset('logo/icon.png') }}">
@@ -20,14 +20,24 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="{{asset('css/aos.css')}}">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <link href="{{ asset('sweetalert/sweetalert.css')}}" rel="stylesheet" />
     <style>
         .toast {
             opacity: 0.9!important;
         }
+        .dropzone {
+            border: 3px dashed  {{config('app.color_site')}};
 
+        }
+        .btn-success {
+            background-color: {{config('app.color_site')}} !important;
+            border-color: {{config('app.color_site')}} !important;
+        }
+        .logo .logo__icon {
+            color: {{config('app.color_site')}} !important;
+        }
     </style>
 
 </head>
@@ -41,19 +51,21 @@
     </div>
     @include('layouts.footer')
     <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161752442-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161752442-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-  gtag('config', 'UA-161752442-1');
-</script>
+    gtag('config', 'UA-161752442-1');
+    </script>
 
     <script type="text/javascript">
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-}
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -67,10 +79,10 @@ function googleTranslateElementInit() {
     <script src="{{ asset('sweetalert/sweetalert.min.js')}}"></script>
 
     <script>
-$(".deleted").on("submit", function () {
+        $(".deleted").on("submit", function () {
 
-    return confirm("Are you sure?");
-});
+            return confirm("Are you sure?");
+        });
     </script>
 
     <script>

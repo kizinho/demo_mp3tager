@@ -31,62 +31,48 @@
 <div class="Mycontainer">
     <div class="msg-content">
         <p class="bg-success text-center text-white p-2 mt-5">your settings saved successfully <i class="fas fa-thumbs-up"></i></p>
-        @php
-        $user_login = isset($user->id) ? $user->id : '';
-        @endphp
+      
         @foreach($details as $key => $download)
-        @if($download->is_private == true && $download->user_id !== $user_login  )
-      <div class="download-songs " style="background-color: #d4edda; color: #000">
-            <div class="row">
-                <div class="col-sm tag-title">
-                    <label class="tag-responsive-p " id="title"><span class='badge badge-primary'> {{ $download->title }} is protected</span></label>
-                </div>
-            </div>
-        </div>
-        @else
+        
         <div class="download-songs " style="background-color: #d4edda; color: #000">
 
             <span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$download->file_name}}
 
         </div>
-        <div class="download-songs">click <a href="{{url('tag-downloads/'.$download->slug)}}"> Here  <i class="fa fa-download"></i> </a> to download your file
+        <div class="download-songs">click <a href="{{url('contents/'.$download->slug)}}"> Here  <i class="fa fa-download"></i> </a> to download your file
             <span class="badge badge-danger">{{$download->size}}</span> 
             <button class="badge badge-primary down-btn-item clip-btn"> copy <i class="fas fa-copy"></i></button> link to clipborad 
             <input type="text" style="opacity: 0;">
             <br/>
-            @if($download->user_id == $user_login)
-              <a href="{{url('tags?' . $key . '='.$download->slug)}}"> Edit  <i class="fa fa-pen"></i></a>
-         
-           @endif
-            
+          
             <br/> <br/>
             @if($download->mime_type == 'mp3')
-            <audio controls style="width:100%">
-                <source src="{{url('tag-downloads/'.$download->slug)}}" type="audio/ogg">
-                <source src="{{url('tag-downloads/'.$download->slug)}}" type="audio/mpeg">
+            <audio controls style="width:100%" loop>
+                <source src="{{url('contents/'.$download->slug)}}" type="audio/ogg">
+                <source src="{{url('contents/'.$download->slug)}}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
 
             <br/> <br/>
             <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
-                <audio controls style="width:100%">
-                    <source src="{{url('tag-downloads/'.$download->slug)}}" type="audio/ogg">
-                    <source src="{{url('tag-downloads/'.$download->slug)}}" type="audio/mpeg">
+                <audio controls style="width:100%" loop>
+                    <source src="{{url('contents/'.$download->slug)}}" type="audio/ogg">
+                    <source src="{{url('contents/'.$download->slug)}}" type="audio/mpeg">
                   Your browser does not support the audio element.
                   </audio>
 
             </textarea>
             @else
-            <video style="width:100%" controls>
-                <source src="{{url('tag-downloads/'.$download->slug)}}" type="video/mp4">
-                <source src="{{url('tag-downloads/'.$download->slug)}}" type="video/ogg">
+            <video style="width:100%" controls loop>
+                <source src="{{url('contents/'.$download->slug)}}" type="video/mp4">
+                <source src="{{url('contents/'.$download->slug)}}" type="video/ogg">
                 Your browser does not support HTML video.
             </video>
             <br/> <br/>
             <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
-               <video style="width:100%" controls>
-                <source src="{{url('tag-downloads/'.$download->slug)}}" type="video/mp4">
-                <source src="{{url('tag-downloads/'.$download->slug)}}" type="video/ogg">
+               <video style="width:100%" controls loop>
+                <source src="{{url('contents/'.$download->slug)}}" type="video/mp4">
+                <source src="{{url('contents/'.$download->slug)}}" type="video/ogg">
                 Your browser does not support HTML video.
             </video>
 
@@ -96,15 +82,8 @@
             <button class="embd-btn">copy embedded code</button>
         </div> 
 
-        @endif
         @endforeach
-        @if(count($details) >1 )
-        <div class="download-songs" style="background-color: #000"><a href="{{url('batch-downloads?'.$url)}}"> Batch Download All  <i class="fa fa-download"></i></a> &nbsp;<span class="badge badge-primary"><a href="{{url('tags?'.$url)}}"> Edit  <i class="fa fa-pen"></i></a></span></div> 
-
-        @endif
-
-        <div class="support-btn"><a href="{{url('donate')}}">Support Us</a></div> 
-        <br/> <br/>
+      
     </div>
 
 </div>

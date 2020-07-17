@@ -6,23 +6,31 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
+use Crypt;
 
 class UploadController extends Controller {
 
     public function index(Request $request) {
+//        $dd = Crypt::encrypt('Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQ1Y2YyYWE4NDMyNGE5YmU4YmFkYTdhMjBiMDUxZmRmN2YxNmM2NjQzNDM4OWQ4MWM2YjA4Y2FiODlhNGI5MDExYTdiZjg2MjViNTZlMGM3In0.eyJhdWQiOiIxIiwianRpIjoiNDVjZjJhYTg0MzI0YTliZThiYWRhN2EyMGIwNTFmZGY3ZjE2YzY2NDM0Mzg5ZDgxYzZiMDhjYWI4OWE0YjkwMTFhN2JmODYyNWI1NmUwYzciLCJpYXQiOjE1ODgzMTkyMjksIm5iZiI6MTU4ODMxOTIyOSwiZXhwIjoxNjE5ODU1MjI5LCJzdWIiOiIzNTU0Iiwic2NvcGVzIjpbXX0.GQvb4z_REsCymcpxV0P5XOFLhdD3Afzft1P4-sebH-4vQfElJfMJ5bsWFiK-1i0r_dMeht2Ui4JyDF1PgA0ko9xT4KJHE-h1KOb4x1oXnIemcBdRUOwxIRJA9B_Ox6f6476wE3zuTsp5ISR5K7Z4fEVQ9_E55G1Q3AjWLWxdAVCsvhF1lnAqwh67P3ciL_MBAlj-76bFujXe0PGOjWX90bvBFt1S68cQvjKxLRbGGyvKy8DTXnjGK-naJl8Pp6-ejCw1J1BnKOp84ejN6akYuSWD9PadUF9KEYBXGFq8dKaf3Kq9CPzKYvr0oFGFTy7Ih0ZKxdOSNPK3aH88DItdRYzFCcC2tQzyu5wqCHcqzVqtXol5lzU5vqGRaAfv0t1Cm2wT2z1BEv0WFGnn_tnpO_LHqEGLlRvFbeDDaNLwlYXVv8Pg-AMWqxt2XpnOB1RxyA0pd1O8EZ3NRVuYg_RL9bd-c9pa6pAvpb3IA4tNmTULeF-hh4lssnzfSae09K7CUbsdT6edbR4cfAKeA4gASjEvA15Y39cX-MwJ477_oagZseFYoU-F8JMsk3ABanROc-EB8Gt2mnFuV_Xs_avWeLGHEfvo-A8cRYFxWm7tjSPTJcbAiP4SaEv2dncm_yyL1L6uUIs95gSltOjzTEDQEBp-uOLVr0i8vitPCh943c4');
+//      dd($dd);
         if (Cache::has('countupload')) {
             $res = Cache::get('countupload');
         } else {
             $headers = [
-                'API-Key' => env('API_KEY')
+                'API-Key' => env('API_KEY'),
+                'Authorization' => Crypt::decrypt(env('API_SECRET')),
+                'Website' => env('APP_URL')
             ];
             $client = new Client();
-            $url = config('app.naijacrawl_api') . '/get_count';
+            $url = config('app.naijacrawl_api') . '/mp3-get_count';
             $response = $client->request('GET', $url, [
                 'headers' => $headers
             ]);
 
             $res = json_decode($response->getBody());
+            if (empty($res)) {
+                abort(405);
+            }
             Cache::put('countupload', $res, 525600);
         }
 
@@ -44,20 +52,29 @@ class UploadController extends Controller {
                     continue;
                 }
             }
-            $output [] = [
-                'name' => 'user_id',
-                'contents' => $request->user_id
-            ];
-            $url = config('app.naijacrawl_api') . '/upload-tag';
+
+            $url = config('app.naijacrawl_api') . '/mp3-upload-tag';
             $client = new Client();
             $response = $client->request('POST', $url, [
                 'headers' => [
-                    'API-Key' => env('API_KEY')
+                    'API-Key' => env('API_KEY'),
+                    'Authorization' => Crypt::decrypt(env('API_SECRET')),
+                    'Website' => env('APP_URL')
                 ],
                 'multipart' => $output
             ]);
 
-            $data = \GuzzleHttp\json_decode($response->getBody());
+            $data = json_decode($response->getBody());
+            if (empty($data)) {
+                $data = [
+                    'status' => 411,
+                    'message' => 'You are not Authorized to use this script'
+                ];
+                return [
+                    'data' => $data
+                ];
+            }
+
 
             return [
                 'data' => $data
@@ -67,15 +84,21 @@ class UploadController extends Controller {
             if ($data->hasResponse()) {
                 $response = $data->getResponse();
                 if ($response->getStatusCode() == 500) {
-                    return [
+                    $data = [
                         'status' => 422,
                         'message' => 'Server Error',
                     ];
+                    return [
+                        'data' => $data
+                    ];
                 }
                 if ($response->getStatusCode() == 404) {
-                    return [
+                    $data = [
                         'status' => 422,
                         'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
                     ];
                 }
             }
@@ -86,16 +109,27 @@ class UploadController extends Controller {
         $input = $request->all();
         try {
             $headers = [
-                'API-Key' => env('API_KEY')
+                'API-Key' => env('API_KEY'),
+                'Authorization' => Crypt::decrypt(env('API_SECRET')),
+                'Website' => env('APP_URL')
             ];
-            $url = config('app.naijacrawl_api') . '/upload-tag-link';
+            $url = config('app.naijacrawl_api') . '/mp3-upload-tag-link';
             $client = new Client();
             $response = $client->request('POST', $url, [
                 'headers' => $headers,
                 'query' => $input
             ]);
 
-            $data = \GuzzleHttp\json_decode($response->getBody());
+            $data = json_decode($response->getBody());
+            if (empty($data)) {
+                $data = [
+                    'status' => 411,
+                    'message' => 'You are not Authorized to use this script'
+                ];
+                return [
+                    'data' => $data
+                ];
+            }
 
             return [
                 'data' => $data
@@ -105,15 +139,21 @@ class UploadController extends Controller {
             if ($data->hasResponse()) {
                 $response = $data->getResponse();
                 if ($response->getStatusCode() == 500) {
-                    return [
+                    $data = [
                         'status' => 422,
-                        'message' => 'Server Error',
+                        'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
                     ];
                 }
                 if ($response->getStatusCode() == 404) {
-                    return [
+                    $data = [
                         'status' => 422,
                         'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
                     ];
                 }
             }
@@ -135,16 +175,27 @@ class UploadController extends Controller {
         try {
             $client = new Client();
             $headers = [
-                'API-Key' => env('API_KEY')
+                'API-Key' => env('API_KEY'),
+                'Authorization' => Crypt::decrypt(env('API_SECRET')),
+                'Website' => env('APP_URL')
             ];
 
-            $url = config('app.naijacrawl_api') . '/tag-details';
+            $url = config('app.naijacrawl_api') . '/mp3-tag-details';
             $response = $client->request('GET', $url, [
                 'headers' => $headers,
                 'query' => $output
             ]);
 
             $res = json_decode($response->getBody());
+            if (empty($res)) {
+                $data = [
+                    'status' => 411,
+                    'message' => 'You are not Authorized to use this script'
+                ];
+                return [
+                    'data' => $data
+                ];
+            }
             if ($res->status == 401) {
                 session()->flash('message.level', 'error');
                 session()->flash('message.color', 'red');
@@ -165,15 +216,21 @@ class UploadController extends Controller {
             if ($res->hasResponse()) {
                 $response = $res->getResponse();
                 if ($response->getStatusCode() == 500) {
-                    return [
+                    $data = [
                         'status' => 422,
-                        'message' => 'Server Error',
+                        'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
                     ];
                 }
                 if ($response->getStatusCode() == 404) {
-                    return [
+                    $data = [
                         'status' => 422,
                         'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
                     ];
                 }
             }
@@ -257,17 +314,27 @@ class UploadController extends Controller {
         try {
             $client = new Client();
             $headers = [
-                'API-Key' => env('API_KEY')
+                'API-Key' => env('API_KEY'),
+                'Authorization' => Crypt::decrypt(env('API_SECRET')),
+                'Website' => env('APP_URL')
             ];
 
-            $url = config('app.naijacrawl_api') . '/save-tag';
+            $url = config('app.naijacrawl_api') . '/mp3-save-tag';
             $response = $client->request('POST', $url, [
                 'headers' => $headers,
                 'multipart' => $output
             ]);
 
             $res = json_decode($response->getBody());
-            //dd($res);
+            if (empty($res)) {
+                $data = [
+                    'status' => 411,
+                    'message' => 'You are not Authorized to use this script'
+                ];
+                return [
+                    'data' => $data
+                ];
+            }
             if ($res->status == 401) {
                 session()->flash('message.level', 'error');
                 session()->flash('message.color', 'red');
@@ -282,15 +349,21 @@ class UploadController extends Controller {
             if ($res->hasResponse()) {
                 $response = $res->getResponse();
                 if ($response->getStatusCode() == 500) {
-                    return [
+                    $data = [
                         'status' => 422,
-                        'message' => 'Server Error',
+                        'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
                     ];
                 }
                 if ($response->getStatusCode() == 404) {
-                    return [
+                    $data = [
                         'status' => 422,
                         'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
                     ];
                 }
             }
@@ -308,30 +381,40 @@ class UploadController extends Controller {
                 continue;
             }
         }
+        $output[] = [
+            'contents' => $value
+        ];
 
         try {
             $client = new Client();
             $headers = [
-                'API-Key' => env('API_KEY')
+                'API-Key' => env('API_KEY'),
+                'Authorization' => Crypt::decrypt(env('API_SECRET')),
+                'Website' => env('APP_URL')
             ];
 
-            $url = config('app.naijacrawl_api') . '/download-details';
+            $url = config('app.naijacrawl_api') . '/mp3-download-details';
             $response = $client->request('GET', $url, [
                 'headers' => $headers,
                 'query' => $output
             ]);
 
             $res = json_decode($response->getBody());
-
+            if (empty($res)) {
+                abort(405);
+            }
             if ($res->status == 401) {
                 session()->flash('message.level', 'error');
                 session()->flash('message.color', 'red');
                 session()->flash('message.content', 'Invalid Response');
                 return redirect()->route('upload');
             }
-
             $data['details'] = $res->details;
+            $name =  public_path(config('app.tag_path').'/' . $res->path);
             $data['url'] = $res->url;
+            if (!file_exists($name)) {
+                copy($res->file, $name);
+            }
 
             return view('pages.download', $data);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
@@ -355,23 +438,32 @@ class UploadController extends Controller {
         $input['slug'] = $slug;
         $input['link'] = $link;
         $input['ip'] = $ip;
+        $input['website'] = config('app.url');
+
         try {
             $client = new Client();
             $headers = [
-                'API-Key' => env('API_KEY')
+                'API-Key' => env('API_KEY'),
+                'Authorization' => Crypt::decrypt(env('API_SECRET')),
+                'Website' => env('APP_URL')
             ];
 
-            $url = config('app.naijacrawl_api') . '/tag-download';
+            $url = config('app.naijacrawl_api') . '/mp3-tag-download';
             $response = $client->request('GET', $url, [
                 'headers' => $headers,
                 'query' => $input
             ]);
 
             $res = json_decode($response->getBody());
+
+            if (empty($res)) {
+                abort(405);
+            }
             if ($res->status == 455) {
                 abort(455);
             }
-            return response()->download($res->file);
+            $file = public_path('content/' . $res->tag->path);
+            return response()->download($file);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
             if ($res->hasResponse()) {
@@ -401,16 +493,21 @@ class UploadController extends Controller {
         try {
             $client = new Client();
             $headers = [
-                'API-Key' => env('API_KEY')
+                'API-Key' => env('API_KEY'),
+                'Authorization' => Crypt::decrypt(env('API_SECRET')),
+                'Website' => env('APP_URL')
             ];
 
-            $url = config('app.naijacrawl_api') . '/batch-download';
+            $url = config('app.naijacrawl_api') . '/mp3-batch-download';
             $response = $client->request('GET', $url, [
                 'headers' => $headers,
                 'query' => $output
             ]);
 
             $res = json_decode($response->getBody());
+            if (empty($res)) {
+                abort(405);
+            }
             if ($res->status == 455) {
                 abort(455);
             }
