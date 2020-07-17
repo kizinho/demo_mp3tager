@@ -342,8 +342,7 @@ class UploadController extends Controller {
             ]);
 
             $res = json_decode($response->getBody());
-            dd($res);
-            if (empty($res)) {
+           if (empty($res)) {
                 $data = [
                     'status' => 411,
                     'message' => 'You are not Authorized to use this script'
