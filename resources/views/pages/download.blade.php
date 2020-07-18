@@ -16,12 +16,12 @@
 <meta name="twitter:title" content="Upload mp3 -  join two mp3 and Mp4  files online | mp3 tager for editing mp3 files">
 <meta name="twitter:description" content="Upload and use this free online editor tool for editing mp3 and Mp4  files   , join mp3  or voice tag , editing of mp3 tags like changing the cover art , album, title, of any mp3 files ">
 <link rel="canonical" href="{{url('/')}}" />
-<meta property="og:image" content="{{asset('logo/logo.png') }}" />
+<meta property="og:image" content="{{url(config('app.logo'))}}" />
 <meta property="og:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files">
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
+<meta name="twitter:image" content="{{url(config('app.logo'))}}" />
 <meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files" />
 <link rel="stylesheet" href="{{asset('css/download.css')}}">
 @endsection

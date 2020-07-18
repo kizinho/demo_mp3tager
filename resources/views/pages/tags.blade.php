@@ -16,12 +16,12 @@
 <meta name="twitter:title" content="Upload mp3 -  join two mp3 and Mp4  files online | mp3 tager for editing mp3 files">
 <meta name="twitter:description" content="Upload and use this free online editor tool for editing mp3 and Mp4  files   , join mp3  or voice tag , editing of mp3 tags like changing the cover art , album, title, of any mp3 files ">
 <link rel="canonical" href="{{url('/')}}" />
-<meta property="og:image" content="{{asset('logo/logo.png') }}" />
+<meta property="og:image" content="{{url(config('app.logo'))}}" />
 <meta property="og:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files">
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta name="twitter:image" content="{{asset('logo/logo.png') }}" />
+<meta name="twitter:image" content="{{url(config('app.logo'))}}" />
 <meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files" />
 
 <link rel="stylesheet" href="{{asset('css/tags.css')}}">
@@ -166,7 +166,7 @@
                         <label>Artist</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Enter Artist Name' name="artist[{{$key}}]" value=" {{$tag->artist}}">
+                        <input type="text" placeholder='Enter Artist Name' name="artist[{{$key}}]" value=" {{$tag->artist}}" required>
                     </div>
                 </div>
             </div>
@@ -176,7 +176,7 @@
                         <label>Album</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Album' name="album[{{$key}}]" value=" {{$tag->album}}">
+                        <input type="text" placeholder='Album' name="album[{{$key}}]" value=" {{$tag->album}}" required>
                     </div>
                 </div>
             </div>
@@ -187,7 +187,7 @@
                         <label>Track Number</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Track Number' name="track_number[{{$key}}]" value=" {{$tag->track_number}}">
+                        <input type="text" placeholder='Track Number' name="track_number[{{$key}}]" value=" {{$tag->track_number}}" required>
                     </div>
                 </div>
             </div>
@@ -198,7 +198,7 @@
                         <label>Genre</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='Genre' name="genre[{{$key}}]" value=" {{$tag->genre}}">
+                        <input type="text" placeholder='Genre' name="genre[{{$key}}]" value=" {{$tag->genre}}" required>
                     </div>
                 </div>
             </div>
@@ -208,7 +208,7 @@
                         <label>Comments</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='comments' name="comments[{{$key}}]" value=" {{$tag->comments}}">
+                        <input type="text" placeholder='comments' name="comments[{{$key}}]" value=" {{$tag->comments}}" required>
                     </div>
                 </div>
             </div>
@@ -220,7 +220,7 @@
                         <label>Year</label>
                     </div>
                     <div class="col-sm">
-                        <input type="text" placeholder='year' name="year[{{$key}}]" value=" {{$tag->year}}">
+                        <input type="text" placeholder='year' name="year[{{$key}}]" value=" {{$tag->year}}" required>
                     </div>
                 </div>
             </div>
@@ -234,7 +234,7 @@
                     </div>
                 </div>
             </div>
-                  <input type="hidden" placeholder='Encoded by' name="encoded_by[{{$key}}]" value=" {{$tag->encoded_by}}">
+                  <input type="hidden" placeholder='Encoded by' name="encoded_by[{{$key}}]" value=" {{$tag->encoded_by}}" required>
                   
 <!--            <div class="tag-field tag-responsive">
                 <div class="row">

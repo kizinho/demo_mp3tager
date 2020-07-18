@@ -7,12 +7,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="manifest" href="{{url('/manifest.json')}}">
     <!-- Favicons -->
-    <link rel="icon" href="{{asset('logo/icon.png') }}">
-    <link rel="shortcut icon" href="{{asset('logo/icon.png') }}">
-    <link rel="apple-touch-icon"   href="{{asset('logo/icon.png') }}">
-    <link rel="apple-touch-icon"  href="{{asset('logo/icon.png') }}">
-    <link rel="apple-touch-icon"  href="{{asset('logo/icon.png') }}">
-    <link rel="apple-touch-icon"  href="{{asset('logo/icon.png') }}">
+    <link rel="icon" href="{{url(config('app.logo'))}}">
+    <link rel="shortcut icon" href="{{url(config('app.logo'))}}">
+    <link rel="apple-touch-icon"   href="{{url(config('app.logo'))}}">
+    <link rel="apple-touch-icon"  href="{{url(config('app.logo'))}}">
+    <link rel="apple-touch-icon"  href="{{url(config('app.logo'))}}">
+    <link rel="apple-touch-icon"  href="{{url(config('app.logo'))}}">
     @yield('title')
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Signika&display=swap" rel="stylesheet">
