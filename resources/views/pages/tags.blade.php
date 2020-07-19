@@ -351,6 +351,13 @@
                     });
                     return false;
                 }
+                 if (data.data['status'] === 409) {
+                    jQuery.each(data.data['message'], function (key, value) {
+                        var message = ('' + value + '');
+                        toastr.error(message, {timeOut: 50000});
+                    });
+                    return false;
+                }
                 if (data.data['status'] === 422) {
                     var message = data.data['message'];
 
