@@ -11,7 +11,7 @@ use Crypt;
 class UploadController extends Controller {
 
     public function index(Request $request) {
-
+ 
         if (Cache::has('countupload')) {
             $res = Cache::get('countupload');
         } else {
@@ -365,8 +365,8 @@ class UploadController extends Controller {
                 $response = $res->getResponse();
                 if ($response->getStatusCode() == 500) {
                     $data = [
-                        'status' => 422,
-                        'message' => 'Page not found',
+                        'status' => 500,
+                        'message' => 'Server Error',
                     ];
                     return [
                         'data' => $data
@@ -374,7 +374,7 @@ class UploadController extends Controller {
                 }
                 if ($response->getStatusCode() == 404) {
                     $data = [
-                        'status' => 422,
+                        'status' => 404,
                         'message' => 'Page not found',
                     ];
                     return [
