@@ -32,13 +32,13 @@
 <!-- Start of tags pages -->
 <div class="Mycontainer">
     <div class="upload-container">
-       
+
         <form id="savetag" enctype="multipart/form-data"> 
-           
-           @csrf
+
+            @csrf
             @foreach($details as $key => $tag)
-            
-            
+
+
             <input type="hidden"  name='id[{{$key}}]' value="{{ $tag->id }}">
             <input type="hidden"  name='path[{{$key}}]' value="{{ $tag->path }}">
             <div class="tag-field-head alert alert-success">
@@ -234,47 +234,47 @@
                     </div>
                 </div>
             </div>
-                  <input type="hidden" placeholder='Encoded by' name="encoded_by[{{$key}}]" value=" {{$tag->encoded_by}}" required>
-                  
-<!--            <div class="tag-field tag-responsive">
-                <div class="row">
-                    <div class="col-sm">
-                        <label>Encoded by</label>
-                    </div>
-                    <div class="col-sm">
-                        <input type="text" placeholder='Encoded by' name="encoded_by[{{$key}}]" value=" {{$tag->encoded_by}}">
-                    </div>
-                </div>
-            </div>-->
-                 <input type="hidden" placeholder='Composer' name="composer[{{$key}}]" value=" {{$tag->composer}}">
-                   
-<!--            <div class="tag-field tag-responsive">
-                <div class="row">
-                    <div class="col-sm">
-                        <label>Composer</label>
-                    </div>
-                    <div class="col-sm">
-                        <input type="text" placeholder='Composer' name="composer[{{$key}}]" value=" {{$tag->composer}}">
-                    </div>
-                </div>
-            </div>-->
-                   <input type="hidden" placeholder='Encoder Settings' name="encoder_settings[{{$key}}]" value=" {{$tag->encoder_settings}}">
-                  
-<!--
-            <div class="tag-field tag-responsive">
-                <div class="row">
-                    <div class="col-sm">
-                        <label>Encoder Settings</label>
-                    </div>
-                    <div class="col-sm">
-                        <input type="text" placeholder='Encoder Settings' name="encoder_settings[{{$key}}]" value=" {{$tag->encoder_settings}}">
-                    </div>
-                </div>
-            </div>-->
+            <input type="hidden" placeholder='Encoded by' name="encoded_by[{{$key}}]" value=" {{$tag->encoded_by}}" required>
+
+            <!--            <div class="tag-field tag-responsive">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label>Encoded by</label>
+                                </div>
+                                <div class="col-sm">
+                                    <input type="text" placeholder='Encoded by' name="encoded_by[{{$key}}]" value=" {{$tag->encoded_by}}">
+                                </div>
+                            </div>
+                        </div>-->
+            <input type="hidden" placeholder='Composer' name="composer[{{$key}}]" value=" {{$tag->composer}}">
+
+            <!--            <div class="tag-field tag-responsive">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label>Composer</label>
+                                </div>
+                                <div class="col-sm">
+                                    <input type="text" placeholder='Composer' name="composer[{{$key}}]" value=" {{$tag->composer}}">
+                                </div>
+                            </div>
+                        </div>-->
+            <input type="hidden" placeholder='Encoder Settings' name="encoder_settings[{{$key}}]" value=" {{$tag->encoder_settings}}">
+
+            <!--
+                        <div class="tag-field tag-responsive">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label>Encoder Settings</label>
+                                </div>
+                                <div class="col-sm">
+                                    <input type="text" placeholder='Encoder Settings' name="encoder_settings[{{$key}}]" value=" {{$tag->encoder_settings}}">
+                                </div>
+                            </div>
+                        </div>-->
 
 
             @endif
-           
+
             @if($tag->mime_type =='mp3' || $tag->mime_type =='mp4')
             @else
             <!-- =================End is private section======================= -->
@@ -300,7 +300,7 @@
 
             @endforeach
 
-           
+
 
             <div class="tag-field tag-responsive">
                 <div class="row">
@@ -351,7 +351,7 @@
                     });
                     return false;
                 }
-                 if (data.data['status'] === 409) {
+                if (data.data['status'] === 409) {
                     jQuery.each(data.data['message'], function (key, value) {
                         var message = ('' + value + '');
                         toastr.error(message, {timeOut: 50000});
@@ -359,6 +359,20 @@
                     return false;
                 }
                 if (data.data['status'] === 422) {
+                    var message = data.data['message'];
+
+                    toastr.error(message, {timeOut: 50000});
+
+                    return false;
+                }
+                if (data.data['status'] === 404) {
+                    var message = data.data['message'];
+
+                    toastr.error(message, {timeOut: 50000});
+
+                    return false;
+                }
+                if (data.data['status'] === 500) {
                     var message = data.data['message'];
 
                     toastr.error(message, {timeOut: 50000});
