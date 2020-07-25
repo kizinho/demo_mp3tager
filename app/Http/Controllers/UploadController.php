@@ -12,21 +12,36 @@ class UploadController extends Controller {
 
     public function index(Request $request) {
 
-//        $dd = Crypt::encrypt('Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQ1Y2YyYWE4NDMyNGE5YmU4YmFkYTdhMjBiMDUxZmRmN2YxNmM2NjQzNDM4OWQ4MWM2YjA4Y2FiODlhNGI5MDExYTdiZjg2MjViNTZlMGM3In0.eyJhdWQiOiIxIiwianRpIjoiNDVjZjJhYTg0MzI0YTliZThiYWRhN2EyMGIwNTFmZGY3ZjE2YzY2NDM0Mzg5ZDgxYzZiMDhjYWI4OWE0YjkwMTFhN2JmODYyNWI1NmUwYzciLCJpYXQiOjE1ODgzMTkyMjksIm5iZiI6MTU4ODMxOTIyOSwiZXhwIjoxNjE5ODU1MjI5LCJzdWIiOiIzNTU0Iiwic2NvcGVzIjpbXX0.GQvb4z_REsCymcpxV0P5XOFLhdD3Afzft1P4-sebH-4vQfElJfMJ5bsWFiK-1i0r_dMeht2Ui4JyDF1PgA0ko9xT4KJHE-h1KOb4x1oXnIemcBdRUOwxIRJA9B_Ox6f6476wE3zuTsp5ISR5K7Z4fEVQ9_E55G1Q3AjWLWxdAVCsvhF1lnAqwh67P3ciL_MBAlj-76bFujXe0PGOjWX90bvBFt1S68cQvjKxLRbGGyvKy8DTXnjGK-naJl8Pp6-ejCw1J1BnKOp84ejN6akYuSWD9PadUF9KEYBXGFq8dKaf3Kq9CPzKYvr0oFGFTy7Ih0ZKxdOSNPK3aH88DItdRYzFCcC2tQzyu5wqCHcqzVqtXol5lzU5vqGRaAfv0t1Cm2wT2z1BEv0WFGnn_tnpO_LHqEGLlRvFbeDDaNLwlYXVv8Pg-AMWqxt2XpnOB1RxyA0pd1O8EZ3NRVuYg_RL9bd-c9pa6pAvpb3IA4tNmTULeF-hh4lssnzfSae09K7CUbsdT6edbR4cfAKeA4gASjEvA15Y39cX-MwJ477_oagZseFYoU-F8JMsk3ABanROc-EB8Gt2mnFuV_Xs_avWeLGHEfvo-A8cRYFxWm7tjSPTJcbAiP4SaEv2dncm_yyL1L6uUIs95gSltOjzTEDQEBp-uOLVr0i8vitPCh943c4');
-//      dd($dd); 
         if (Cache::has('countupload')) {
             $res = Cache::get('countupload');
         } else {
-            $client_details = static::client();
-            $url = config('app.naijacrawl_api') . '/mp3-get_count';
-            $response = $client_details['client']->request('GET', $url, [
-                'headers' => $client_details['headers']
-            ]);
-            $res = json_decode($response->getBody());
-            if (empty($res)) {
-                abort(405);
+            try {
+                $client_details = static::client();
+                $url = config('app.naijacrawl_api') . '/mp3-get_count';
+                $response = $client_details['client']->request('GET', $url, [
+                    'headers' => $client_details['headers']
+                ]);
+                $res = json_decode($response->getBody());
+
+                if (empty($res)) {
+                    abort(405);
+                }
+                Cache::put('countupload', $res, 525600);
+            } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+                if ($res->hasResponse()) {
+                    $response = $res->getResponse();
+                    if ($response->getStatusCode() == 500) {
+                        abort(500);
+                    }
+                    if ($response->getStatusCode() == 405) {
+                        abort(405);
+                    }
+                    if ($response->getStatusCode() == 404) {
+                        abort(404);
+                    }
+                }
             }
-            Cache::put('countupload', $res, 525600);
         }
         $data['count_upload'] = $res->data;
         return view('pages.upload', $data);
@@ -90,6 +105,15 @@ class UploadController extends Controller {
                         'data' => $data
                     ];
                 }
+                if ($response->getStatusCode() == 405) {
+                    $data = [
+                        'status' => 422,
+                        'message' => 'User Not Authorized to use this script',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
+                }
                 if ($response->getStatusCode() == 404) {
                     $data = [
                         'status' => 422,
@@ -144,6 +168,15 @@ class UploadController extends Controller {
                     $data = [
                         'status' => 422,
                         'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
+                }
+                if ($response->getStatusCode() == 405) {
+                    $data = [
+                        'status' => 422,
+                        'message' => 'User Not Authorized to use this script',
                     ];
                     return [
                         'data' => $data
@@ -223,6 +256,15 @@ class UploadController extends Controller {
                     $data = [
                         'status' => 422,
                         'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
+                }
+                if ($response->getStatusCode() == 405) {
+                    $data = [
+                        'status' => 422,
+                        'message' => 'User Not Authorized to use this script',
                     ];
                     return [
                         'data' => $data
@@ -355,6 +397,15 @@ class UploadController extends Controller {
                         'data' => $data
                     ];
                 }
+                if ($response->getStatusCode() == 405) {
+                    $data = [
+                        'status' => 422,
+                        'message' => 'User Not Authorized to use this script',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
+                }
             }
         }
     }
@@ -410,6 +461,9 @@ class UploadController extends Controller {
                 if ($response->getStatusCode() == 404) {
                     abort(404);
                 }
+                if ($response->getStatusCode() == 405) {
+                    abort(404);
+                }
             }
         }
     }
@@ -425,11 +479,10 @@ class UploadController extends Controller {
             ]);
 
             $res = json_decode($response->getBody());
-           
+
             return [
                 'data' => $res
             ];
-
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
             if ($res->hasResponse()) {
@@ -447,6 +500,15 @@ class UploadController extends Controller {
                     $data = [
                         'status' => 404,
                         'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
+                }
+                if ($response->getStatusCode() == 405) {
+                    $data = [
+                        'status' => 422,
+                        'message' => 'User Not Authorized to use this script',
                     ];
                     return [
                         'data' => $data
@@ -493,6 +555,9 @@ class UploadController extends Controller {
                 if ($response->getStatusCode() == 404) {
                     abort(404);
                 }
+                if ($response->getStatusCode() == 405) {
+                    abort(405);
+                }
             }
         }
     }
@@ -534,6 +599,9 @@ class UploadController extends Controller {
                 }
                 if ($response->getStatusCode() == 404) {
                     abort(404);
+                }
+                if ($response->getStatusCode() == 405) {
+                    abort(405);
                 }
             }
         }
