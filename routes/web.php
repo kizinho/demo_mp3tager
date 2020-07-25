@@ -24,3 +24,4 @@ Route::get('downloads', 'UploadController@downloads')->name('downloads');
 Route::get('contents/{slug}', 'UploadController@downloadTag')->name('content');
 Route::get('batch-downloads', 'UploadController@downloadBatch')->name('batch-downloads');
 
+Route::get('get-tags', 'UploadController@tagGet')->name('get-tags');

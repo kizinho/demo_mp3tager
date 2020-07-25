@@ -38,8 +38,8 @@
             @csrf
             @foreach($details as $key => $tag)
 
-
-            <input type="hidden"  name='id[{{$key}}]' value="{{ $tag->id }}">
+            <input type="hidden"  id='id'  value="{{ $tag->id }}">
+            <input type="hidden"  name='id[{{$key}}]'  value="{{ $tag->id }}">
             <input type="hidden"  name='path[{{$key}}]' value="{{ $tag->path }}">
             <div class="tag-field-head alert alert-success">
                 <div class="row">
@@ -386,15 +386,37 @@
 
                     return false;
                 }
-                if (data.data['status'] === 200) {
-                    let url = data.data['data'];
-                    window.location.href = "{{url('/downloads')}}?" + url;
 
-                    return false;
-                }
+                let id = jQuery('#id').val();
+                checkProgress(id);
             }
 
         });
+
+
+        function checkProgress(id) {
+            var check = setInterval(function () {
+                jQuery.ajax({
+                    url: "{{url('get-tags')}}",
+                    data: {id: id},
+                    method: 'GET',
+                    success: function (data) {
+                        if (data.data['status'] === 200) {
+                            let url = data.data['data'];
+                            /*Finish*/
+                            clearInterval(check);
+                            window.location.href = "{{url('/downloads')}}?" + url;
+
+                            return false;
+                        }
+
+                    }
+
+                });
+            }, 6000);
+
+        }
+
     });
 
 </script> 

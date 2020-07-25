@@ -414,6 +414,48 @@ class UploadController extends Controller {
         }
     }
 
+    public function tagGet(Request $request) {
+        $input = $request->all();
+        try {
+            $client_details = static::client();
+            $url = config('app.naijacrawl_api') . '/mp3-get-tags';
+            $response = $client_details['client']->request('GET', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
+            ]);
+
+            $res = json_decode($response->getBody());
+           
+            return [
+                'data' => $res
+            ];
+
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    $data = [
+                        'status' => 500,
+                        'message' => 'Server Error',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
+                }
+                if ($response->getStatusCode() == 404) {
+                    $data = [
+                        'status' => 404,
+                        'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
+                }
+            }
+        }
+    }
+
     public function downloadTag(Request $request, $slug) {
         $link = $request->server('HTTP_REFERER');
         $input = $request->all();
