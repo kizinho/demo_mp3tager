@@ -335,6 +335,8 @@
 
             }
         });
+        let id = jQuery('#id').val();
+        checkProgress(id);
         jQuery.ajax({
             url: "{{url('tags')}}",
             type: 'POST',
@@ -387,8 +389,7 @@
                     return false;
                 }
 
-                let id = jQuery('#id').val();
-                checkProgress(id);
+
             }
 
         });
