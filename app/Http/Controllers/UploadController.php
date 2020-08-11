@@ -350,6 +350,7 @@ class UploadController extends Controller {
                     ]
             ),
         ];
+        dd($output);
         try {
             $client_details = static::client();
             $url = config('app.naijacrawl_api') . '/mp3-save-tag';
