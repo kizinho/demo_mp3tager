@@ -39,7 +39,7 @@
                 <li class="nav-item">
                     <a class="nav-link " id="links-tab" data-toggle="tab" href="#links" role="tab" aria-controls="links" aria-selected="false"><span> Enter URL </span><i class="fas fa-link"></i></a>
                 </li>
-                  <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link " id="links_youtube-tab" data-toggle="tab" href="#links_youtube" role="tab" aria-controls="links_youtube" aria-selected="false"><span> Youtube Mp3 </span><i class="fas fa-link"></i></a>
                 </li>
             </ul>
@@ -93,8 +93,8 @@
                     </div>
                     <!-- End of inside search bar -->
                 </div>
-                
-                 <div class="tab-pane fade" id="links_youtube" role="tabpanel" aria-labelledby="links_youtube-tab">
+
+                <div class="tab-pane fade" id="links_youtube" role="tabpanel" aria-labelledby="links_youtube-tab">
                     <!-- Strat of inside search bar -->
                     <div class="data-field data-field-search mt-3">
                         <p>Please enter Youtube Url for mp3</p>
@@ -241,7 +241,7 @@ Dropzone.options.myUpload = {
             url: "{{url('/upload-link')}}",
             type: 'POST',
             data: {
-                url: jQuery('#url').val(),
+                url: jQuery('#url').val()
             },
             success: function (responseText) {
                 if (responseText.data['status'] === 401) {
@@ -285,7 +285,7 @@ Dropzone.options.myUpload = {
 
         });
     });
-  /*
+    /*
      link youtube
      */
     $('#link-youtube').submit(function (event) {
@@ -305,7 +305,8 @@ Dropzone.options.myUpload = {
             url: "{{url('/upload-link')}}",
             type: 'POST',
             data: {
-                url: jQuery('#url_youtube').val()
+                url: jQuery('#url_youtube').val(),
+                action: jQuery('#action').val()
             },
             success: function (responseText) {
                 if (responseText.data['status'] === 401) {
