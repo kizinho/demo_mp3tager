@@ -100,7 +100,7 @@
                         <p>Please enter Youtube Url for mp3</p>
                         <form id="link-youtube">
                             <input class="form-control" value="mp3" type="hidden" id="action" placeholder="" required>
-                            <input class="col col-sm-12 form-control" id="url" placeholder="https://youtu.be/B8OMxVrDduU" required>
+                            <input class="col col-sm-12 form-control" id="url_youtube" placeholder="https://youtu.be/B8OMxVrDduU" required>
 
                             <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  id="submit-file">Go <i class="fas fa-sign-in-alt"></i> </button>
                         </form>
@@ -305,7 +305,7 @@ Dropzone.options.myUpload = {
             url: "{{url('/upload-link')}}",
             type: 'POST',
             data: {
-                url: jQuery('#url').val(),
+                url: jQuery('#url_youtube').val()
             },
             success: function (responseText) {
                 if (responseText.data['status'] === 401) {
