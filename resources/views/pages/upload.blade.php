@@ -39,6 +39,9 @@
                 <li class="nav-item">
                     <a class="nav-link " id="links-tab" data-toggle="tab" href="#links" role="tab" aria-controls="links" aria-selected="false"><span> Enter URL </span><i class="fas fa-link"></i></a>
                 </li>
+                  <li class="nav-item">
+                    <a class="nav-link " id="links_youtube-tab" data-toggle="tab" href="#links_youtube" role="tab" aria-controls="links_youtube" aria-selected="false"><span> Youtube Mp3 </span><i class="fas fa-link"></i></a>
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="files" role="tabpanel" aria-labelledby="files">
@@ -80,10 +83,24 @@
                 <div class="tab-pane fade" id="links" role="tabpanel" aria-labelledby="links-tab">
                     <!-- Strat of inside search bar -->
                     <div class="data-field data-field-search mt-3">
-                        <p>Please enter a valid audio url or Video Url {supports Youtube link}</p>
+                        <p>Please enter a valid audio url or Video Url {supports Youtube link Mp4}</p>
                         <form id="link">
 
                             <input class="col col-sm-12 form-control" id="url" placeholder="domain.com/song.mp3" required>
+
+                            <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  id="submit-file">Go <i class="fas fa-sign-in-alt"></i> </button>
+                        </form>
+                    </div>
+                    <!-- End of inside search bar -->
+                </div>
+                
+                 <div class="tab-pane fade" id="links_youtube" role="tabpanel" aria-labelledby="links_youtube-tab">
+                    <!-- Strat of inside search bar -->
+                    <div class="data-field data-field-search mt-3">
+                        <p>Please enter Youtube Url for mp3</p>
+                        <form id="link-youtube">
+                            <input class="form-control" value="mp3" type="hidden" id="action" placeholder="" required>
+                            <input class="col col-sm-12 form-control" id="url" placeholder="https://youtu.be/B8OMxVrDduU" required>
 
                             <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  id="submit-file">Go <i class="fas fa-sign-in-alt"></i> </button>
                         </form>
@@ -208,6 +225,70 @@ Dropzone.options.myUpload = {
      link
      */
     $('#link').submit(function (event) {
+        event.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function () {
+                $(".modal").show();
+            },
+            complete: function () {
+                $(".modal").hide();
+            }
+        });
+        jQuery.ajax({
+            url: "{{url('/upload-link')}}",
+            type: 'POST',
+            data: {
+                url: jQuery('#url').val(),
+            },
+            success: function (responseText) {
+                if (responseText.data['status'] === 401) {
+                    jQuery.each(responseText.data['message'], function (key, value) {
+                        var message = ('' + value + '');
+                        toastr.options.onHidden = function () {
+
+                        };
+                        toastr.error(message, {timeOut: 50000});
+                    });
+
+                    return false;
+                }
+                if (responseText.data['status'] === 411) {
+                    var message = responseText.data['message'];
+                    toastr.options.onHidden = function () {
+                        $('.dz-preview').remove();
+                        $(".modal").hide();
+
+                    };
+                    toastr.info(message, {timeOut: 50000});
+
+                    return false;
+                }
+                if (responseText.data['status'] === 422) {
+                    var message = responseText.data['message'];
+                    toastr.options.onHidden = function () {
+
+                    };
+                    toastr.info(message, {timeOut: 50000});
+
+                    return false;
+                }
+
+                if (responseText.data['status'] === 200) {
+                    let url = responseText.data['data'];
+                    window.location.href = "{{url('/tags')}}?" + url;
+                    return false;
+                }
+            }
+
+        });
+    });
+  /*
+     link youtube
+     */
+    $('#link-youtube').submit(function (event) {
         event.preventDefault();
         $.ajaxSetup({
             headers: {

@@ -16,7 +16,9 @@
                     <li class="nav-item @if(request()->path() == '/') active @endif">
                         <a class="nav-link" href="{{url('upload')}}">Start Editing</a>
                     </li>
-                   
+                    <li class="nav-item @if(request()->path() == 'my-files') active @endif">
+                        <a class="nav-link" href="{{url('my-files')}}">My Files</a>
+                    </li>
                      <li id="google_translate_element"></li>
                 </ul>
                 

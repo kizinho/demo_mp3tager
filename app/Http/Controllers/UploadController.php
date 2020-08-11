@@ -236,6 +236,8 @@ class UploadController extends Controller {
             }
 
             $data['details'] = $res->tags;
+            $data['tag_settings'] = $res->data->tag_settings;
+
 
             Cache::forget('countupload');
             return view('pages.tags', $data);
@@ -342,7 +344,9 @@ class UploadController extends Controller {
                         'watermark_color' => $request->watermark_color,
                         'watermark_font' => $request->watermark_font,
                         'ps' => $request->ps,
-                        'extension' => $request->extension
+                        'extension' => $request->extension,
+                        'tager_setting_active' => $request->tager_setting_active,
+                        'tager_setting_active_text' => $request->tager_setting_active_text
                     ]
             ),
         ];

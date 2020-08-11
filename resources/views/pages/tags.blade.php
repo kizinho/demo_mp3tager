@@ -25,7 +25,76 @@
 <meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files" />
 
 <link rel="stylesheet" href="{{asset('css/tags.css')}}">
+<style>
 
+
+    input[type="checkbox"] { 
+        position: absolute;
+        opacity: 0;
+    }
+
+    /* Normal Track */
+    input[type="checkbox"].ios-switch + div {
+        vertical-align: middle;
+        border: 1px solid #cd6133;
+        border-radius: 999px;
+        background-color: rgba(0, 0, 0, 0.1);
+        -webkit-transition-duration: .4s;
+        -webkit-transition-property: background-color, box-shadow;
+        box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    /* Checked Track (Blue) */
+    input[type="checkbox"].ios-switch:checked + div {
+
+        background-position: 0 0;
+        background-color: #cd6133;
+        border: 1px solid #cd6133;
+        box-shadow: inset 0 0 0 10px #cd6133;
+    }
+
+    /* Tiny Track */
+    input[type="checkbox"].tinyswitch.ios-switch + div {
+        width: 34px;    height: 18px;
+    }
+
+
+
+    /* Normal Knob */
+    input[type="checkbox"].ios-switch + div > div {
+        float: left;
+        width: 18px; height: 18px;
+        border-radius: inherit;
+        background: #ffffff;
+        -webkit-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+        -webkit-transition-duration: 0.4s;
+        -webkit-transition-property: transform, background-color, box-shadow;
+        -moz-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+        -moz-transition-duration: 0.4s;
+        -moz-transition-property: transform, background-color;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+        margin-top: 1px;
+        margin-left: 1px;
+    }
+
+
+    /* Tiny Knob */
+    input[type="checkbox"].tinyswitch.ios-switch + div > div {
+        width: 16px; height: 16px;
+        margin-top: 1px;
+    }
+
+    /* Checked Tiny Knob (Blue Style) */
+    input[type="checkbox"].tinyswitch.ios-switch:checked + div > div {
+        -webkit-transform: translate3d(16px, 0, 0);
+        -moz-transform: translate3d(16px, 0, 0);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px #cd6133;
+    }
+
+</style>
 @endsection
 @extends('layouts.app')
 @section('content')
@@ -81,6 +150,7 @@
                         </div>
                         <!-- =============End Range section================ -->
                     </div>
+                    @if(empty($tag_settings) || $tag_settings->active == false)
                     <div class="col-sm browse-btn-cont align-self-center">
                         <label for=""  class="browse-btn browse-btn-js">Browse</label> <!-- variable here -->
                         <input type="text" placeholder="mp3 ,  wav"  class="song-txt-title"  id="aud-text-{{$key}}" readonly> <!-- variable here -->
@@ -89,10 +159,24 @@
                             <input type="hidden" name="joinSelect[{{$key}}]" class="holder" id="holder-{{$key}}" ><!-- variable here -->
                         </div>
                     </div>
+                    @else
+                    <div class="col-sm browse-btn-cont align-self-center">
+                        <!-- =================Browse section=============== -->
+                        <label class="tag-responsive-p"> Tager Setting</label>
+
+                        <div class="mb-1">
+                            <label> <input type="checkbox"  value="{{$tag_settings->active }}"  name="tager_setting_active" @if($tag_settings->active == true)  checked='checked' @endif class="ios-switch green tinyswitch"  /><div><div></div></div></label>
+
+                        </div>
+                        <div class="rangeValue my-2" id="rangeValue-{{$key}}" data-render="{{$key}}"><!-- variable here -->
+                            <input type="hidden" name="joinSelect[{{$key}}]" class="holder" id="holder-{{$key}}" ><!-- variable here -->
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
             <!--------------------------------------- End selection -------------------------->
-
+            @if(empty($tag_settings) || $tag_settings->active == false)
             <div class="tag-field tag-field-img"  data-render="{{ $loop->iteration }}"> <!-- variable here -->
                 <div class="row">
                     <div class="col-sm">
@@ -105,6 +189,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             @else 
             <!-- =========== watermark ===========-->
             <div class="tag-field tag-responsive">
@@ -127,11 +212,22 @@
 
                     </div>
                     <div class="col-sm-6">
+                        @if(empty($tag_settings) || $tag_settings->active == false)
+
                         <div class="waterMarkcont" id="waterMarkcont-{{ $loop->iteration }}"> <!-- variable here -->
                             <label class="waterMarkBtn">Browse</label>
                             <input type="text"  readonly placeholder="png , jpeg , jpg" class="waterMarkImgUrl">
                             <input type="file" name="watermark_image[{{$key}}]"  class="waterMarkfile" accept=".png,.jpg,.jpeg" style="display: none;">
                         </div>
+                        @else
+                        <div class="waterMarkcont  mb-1" id="waterMarkcont-{{ $loop->iteration }}">
+
+                            <label>Use image <input type="checkbox"  name="tager_setting_active" class="ios-switch green tinyswitch"  /><div><div></div></div></label>
+
+                        </div>
+
+                        @endif
+                        @if(empty($tag_settings) || $tag_settings->active == false)
                         <div class="waterMarkTxt" id="waterMarkTxt-{{ $loop->iteration }}"> <!-- variable here -->
                             <input type="text" name="watermark_text[{{$key}}]" placeholder="Enter your watermark text">
                             <div class="row control-cont">
@@ -139,10 +235,24 @@
                                     <input type="color" name="watermark_color[{{$key}}]" data-selected-color='#000000' class="inptColor" required>
                                 </div>
                                 <div class="col-sm-6 my-2">
-                                    <input type="text" name="watermark_font[{{$key}}]" value="40" placeholder="font size eg 20,40" data-font-size="40" class="logo-fnt-size" name="">
+                                    <input type="text" name="watermark_font[{{$key}}]" value="23" placeholder="font size eg 20,40" data-font-size="23" class="logo-fnt-size" name="">
                                 </div>
                             </div>
                         </div>
+                        @else
+                        <div class="waterMarkTxt" id="waterMarkTxt-{{ $loop->iteration }}"> <!-- variable here -->
+
+                            <label>Use text <input type="checkbox"  name="tager_setting_active_text" class="ios-switch green tinyswitch"  /><div><div></div></div></label>
+
+                            <input type="hidden" value="{{$tag_settings->water_text}}" name="watermark_text[{{$key}}]" placeholder="Enter your watermark text">
+
+                            <input type="hidden" value="{{$tag_settings->water_color}}" name="watermark_color[{{$key}}]" data-selected-color='{{$tag_settings->water_color}}' class="inptColor" required>
+
+                            <input type="hidden" value="{{$tag_settings->water_font}}"  name="watermark_font[{{$key}}]" value="{{$tag_settings->water_font}}" placeholder="font size eg 20,40" data-font-size="{{$tag_settings->water_font}}" class="logo-fnt-size">
+                        </div>
+                        @endif
+
+
                     </div>
                 </div>
             </div>
@@ -192,6 +302,7 @@
                 </div>
             </div>
             @endif
+            @if(empty($tag_settings) || $tag_settings->active == false)
             <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm">
@@ -212,7 +323,7 @@
                     </div>
                 </div>
             </div>
-
+            @endif
             @if($tag->mime_type == 'mp3')
             <div class="tag-field tag-responsive">
                 <div class="row">
@@ -224,6 +335,7 @@
                     </div>
                 </div>
             </div>
+            @if(empty($tag_settings) || $tag_settings->active == false)
             <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm">
@@ -273,6 +385,7 @@
                         </div>-->
 
 
+            @endif
             @endif
 
             @if($tag->mime_type =='mp3' || $tag->mime_type =='mp4')
