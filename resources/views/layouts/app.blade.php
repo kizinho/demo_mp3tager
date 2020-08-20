@@ -38,6 +38,32 @@
         .logo .logo__icon {
             color: {{config('app.color_site')}} !important;
         }
+           a.text-ads {
+            border: 1px solid #212121!important;
+            height: 90%!important;
+            display: block!important;
+            margin-bottom: 6px!important;
+            display: -moz-box!important;
+            display: -ms-flexbox!important;
+            display: -webkit-flex!important;
+            display: flex!important;
+            text-align: center!important;
+            line-height: 28px!important;
+            align-items: center!important;
+            justify-content: center!important;
+            border-radius: 30px!important;
+            -webkit-box-sizing: border-box!important;
+            -moz-box-sizing: border-box!important;
+            box-sizing: border-box!important;
+            white-space: nowrap!important;
+            overflow: hidden!important;
+            text-overflow: ellipsis!important;
+            text-decoration: none!important;
+            color:#222!important;
+            font-weight: normal!important;
+            font-family: arial,sans-serif!important;
+            font-size: 20px!important;
+        }
     </style>
 
 </head>

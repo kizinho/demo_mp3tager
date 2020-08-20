@@ -446,7 +446,23 @@ class UploadController extends Controller {
                 return redirect()->route('upload');
             }
             $data['details'] = $res->details;
-            $name = public_path(config('app.tag_path') . '/' . $res->path);
+            $now = time();
+            $timeFolder = date('Y', $now) . '/' . date('m', $now) . '/';
+            if (!empty(config('app.tag_path'))) {
+                $path_dir = public_path() . '/' . config('app.tag_path') . '/' . $timeFolder;
+                $data['download_path'] = config('app.tag_path') . 's/';
+            } elseif (!empty(config('app.main_site'))) {
+                $path_dir = $_SERVER['DOCUMENT_ROOT'] . '/' . (config('app.main_site') . '/' . $timeFolder);
+                $data['download_path'] = config('app.main_site_url') . '/' . config('app.main_site') . '/';
+            } else {
+                session()->flash('message.level', 'error');
+                session()->flash('message.color', 'red');
+                session()->flash('message.content', "You didn't provide any path to save your file, please kindly do that");
+                return redirect()->route('upload');
+            }
+            $directory = static::enryStorageDir($path_dir);
+            $name = $directory . $res->path;
+            //dd($name
             $data['url'] = $res->url;
             if (!file_exists($name)) {
                 copy($res->file, $name);
@@ -520,7 +536,97 @@ class UploadController extends Controller {
         }
     }
 
-    public function downloadTag(Request $request, $slug) {
+    public function downloadTag(Request $request, $path, $folder, $year, $month, $slug) {
+        $link = $request->server('HTTP_REFERER');
+        $input = $request->all();
+        $input['path_slug'] = $year . '/' . $month . '/';
+        $ip = $request->getClientIp();
+        $input['slug'] = $slug;
+        $input['link'] = $link;
+        $input['ip'] = $ip;
+        $input['website'] = config('app.url');
+
+        try {
+            $client_details = static::client();
+            $url = config('app.naijacrawl_api') . '/mp3-tag-download';
+            $response = $client_details['client']->request('GET', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
+            ]);
+
+            $res = json_decode($response->getBody());
+
+            if (empty($res)) {
+                abort(405);
+            }
+            if ($res->status == 455) {
+                abort(455);
+            }
+            $file = public_path(config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path);
+            return response()->download($file);
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+                if ($response->getStatusCode() == 405) {
+                    abort(405);
+                }
+            }
+        }
+    }
+
+    public function downloadTagG(Request $request, $path, $year, $month, $slug) {
+        $link = $request->server('HTTP_REFERER');
+        $input = $request->all();
+        $input['path_slug'] = $year . '/' . $month . '/';
+        $ip = $request->getClientIp();
+        $input['slug'] = $slug;
+        $input['link'] = $link;
+        $input['ip'] = $ip;
+        $input['website'] = config('app.url');
+
+        try {
+            $client_details = static::client();
+            $url = config('app.naijacrawl_api') . '/mp3-tag-download';
+            $response = $client_details['client']->request('GET', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
+            ]);
+
+            $res = json_decode($response->getBody());
+
+            if (empty($res)) {
+                abort(405);
+            }
+            if ($res->status == 455) {
+                abort(455);
+            }
+            $file = public_path(config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path);
+            return response()->download($file);
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+                if ($response->getStatusCode() == 405) {
+                    abort(405);
+                }
+            }
+        }
+    }
+
+    public function downloadTags(Request $request, $path, $slug) {
         $link = $request->server('HTTP_REFERER');
         $input = $request->all();
         $ip = $request->getClientIp();
@@ -545,7 +651,7 @@ class UploadController extends Controller {
             if ($res->status == 455) {
                 abort(455);
             }
-            $file = public_path('content/' . $res->tag->path);
+            $file = public_path(config('app.tag_path') . '/' . $res->tag->path);
             return response()->download($file);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
@@ -620,6 +726,15 @@ class UploadController extends Controller {
             'headers' => $headers,
             'client' => $client
         ];
+    }
+
+    public static function enryStorageDir($default_directory, $abs = true) {
+        $dir = $default_directory;
+        $absPath = $dir;
+        if (!is_dir($absPath)) {
+            mkdir($absPath, 0777, true);
+        }
+        return ($abs ? $absPath : $dir);
     }
 
 }

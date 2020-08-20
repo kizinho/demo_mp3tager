@@ -21,7 +21,10 @@ Route::post('upload-link', 'UploadController@storeLink');
 Route::get('tags', 'UploadController@tag')->name('tags');
 Route::post('tags', 'UploadController@tagPost');
 Route::get('downloads', 'UploadController@downloads')->name('downloads');
-Route::get('contents/{slug}', 'UploadController@downloadTag')->name('content');
+Route::get('{path}/{slug}', 'UploadController@downloadTags')->name('content');
+//wih date
+Route::get('{path}/{year}/{month}/{slug}', 'UploadController@downloadTagG');
+Route::get('{path}/{folder}/{year}/{month}/{slug}', 'UploadController@downloadTag');
 Route::get('batch-downloads', 'UploadController@downloadBatch')->name('batch-downloads');
 
 Route::get('get-tags', 'UploadController@tagGet')->name('get-tags');

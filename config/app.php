@@ -51,6 +51,17 @@ return [
     'tag_path' => env('TAG_SAVE_PATH'),
     'color_site' => env('SITE_COLOR'),
     'logo' => env('SITE_LOGO_PATH'),
+    'ads_enable' => env('ADS_ENABLE'),
+    'text_ad' => env('TEXT_ADS_NAME'),
+    'text_ad_link' => env('TEXT_ADS_LINK'),
+    'text_ad_1' => env('TEXT_ADS_1_NAME'),
+    'text_ad_link_1' => env('TEXT_ADS_1_LINK'),
+    'banner_ad_image' => env('BANNER_ADS_IMAGE'),
+    'banner_ad_image_link' => env('BANNER_ADS_CLICK_LINK'),
+    'banner_ad_image_width' => env('BANNER_ADS_IMAGE_WIDTH'),
+    'banner_ad_image_height' => env('BANNER_ADS_IMAGE_HEIGHT'),
+    'main_site'=> env('TAG_SAVE_PATH_MAIN_SITE'),
+    'main_site_url'=> env('MAIN_SITE_URL'),
     /*
       |--------------------------------------------------------------------------
       | Application Timezone

@@ -101,8 +101,10 @@
 <!-- Start of tags pages -->
 <div class="Mycontainer">
     <div class="upload-container">
-
-        <form id="savetag" enctype="multipart/form-data"> 
+        @if(config('app.ads_enable') == true)
+        @include('layouts.banner')
+        @endif
+        <form id="savetag" enctype="multipart/form-data" autocomplete="on"> 
 
             @csrf
             @foreach($details as $key => $tag)
@@ -175,6 +177,9 @@
                     @endif
                 </div>
             </div>
+            @if(config('app.ads_enable') == true)
+            @include('layouts.banner')
+            @endif
             <!--------------------------------------- End selection -------------------------->
             @if(empty($tag_settings) || $tag_settings->active == false)
             <div class="tag-field tag-field-img"  data-render="{{ $loop->iteration }}"> <!-- variable here -->
@@ -211,6 +216,9 @@
                         </div>
 
                     </div>
+                    @if(config('app.ads_enable') == true)
+                    @include('layouts.text')
+                    @endif
                     <div class="col-sm-6">
                         @if(empty($tag_settings) || $tag_settings->active == false)
 
@@ -413,7 +421,9 @@
 
             @endforeach
 
-
+            @if(config('app.ads_enable') == true)
+            @include('layouts.text')
+            @endif
 
             <div class="tag-field tag-responsive">
                 <div class="row">

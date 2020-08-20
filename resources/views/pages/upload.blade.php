@@ -32,6 +32,10 @@
 <main class="upload-page">
     <div class="container">
         <div class="tabs-container">
+            @if(config('app.ads_enable') == true)
+            @include('layouts.banner')
+            @endif
+
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active " id="files-tab" data-toggle="tab" href="#files" role="tab" aria-controls="files" aria-selected="true"><span> Upload Files </span><i class="far fa-folder-open"></i></a>
@@ -51,8 +55,9 @@
                         <div class="data-field">
 
                             <div class="card text-left dropzone dropzone-area " id="myUpload">
-
-
+                                @if(config('app.ads_enable') == true)
+                                @include('layouts.banner')
+                                @endif
                                 <div class="card-body">
 
                                     <div  class="fallback">
@@ -67,6 +72,9 @@
                                     <div class="alert alert-info small" role="alert">
                                         Allowed file types: MP3 , MP4 , Mov , M4a , 3gp , 3g2 , Mj2
                                     </div>
+                                    @if(config('app.ads_enable') == true)
+                                    @include('layouts.text')
+                                    @endif
                                     <div class="alert alert-secondary small text-center " >Mp3 , Mp4, Mov , M4a , 3gp , 3g2 &  Mj2 Edited this year: &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
                                 </div>
                             </div>
@@ -108,6 +116,9 @@
                     <!-- End of inside search bar -->
                 </div>
             </div>
+            @if(config('app.ads_enable') == true)
+            @include('layouts.banner')
+            @endif
             {{config('app.name')}} is the best online editing tool to change your mp3 and Mp4 tags like watermark on mp4, cover art and join two mp3 files . 
             Using this platform you can upload and edit your mp3 tags or join another mp3 .
             Download your updated files by using our easy download button .
@@ -115,6 +126,10 @@
             <small>
                 {{config('app.name')}} you can now change your mp3 and Mp4 files by adding pictures to mp3 or Mp4 tag, changing mp3tag title, changing mp3tag album, changing mp3tag artist and joining mp3 voice tag . 
             </small>
+            @if(config('app.ads_enable') == true)
+            @include('layouts.text')
+            @endif
+
         </div>
     </div>
 </main>
