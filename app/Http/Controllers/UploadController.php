@@ -563,6 +563,9 @@ class UploadController extends Controller {
                 abort(455);
             }
             $file = public_path(config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path);
+            if (!file_exists($file)) {
+                abort(455);
+            }
             return response()->download($file);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
@@ -608,6 +611,9 @@ class UploadController extends Controller {
                 abort(455);
             }
             $file = public_path(config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path);
+            if (!file_exists($file)) {
+                abort(455);
+            }
             return response()->download($file);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
@@ -652,6 +658,9 @@ class UploadController extends Controller {
                 abort(455);
             }
             $file = public_path(config('app.tag_path') . '/' . $res->tag->path);
+            if (!file_exists($file)) {
+                abort(455);
+            }
             return response()->download($file);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
