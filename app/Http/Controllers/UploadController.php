@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
 use Crypt;
-
+use Illuminate\Support\Str;
 class UploadController extends Controller {
 
     public function index(Request $request) {
@@ -735,6 +735,42 @@ class UploadController extends Controller {
             'headers' => $headers,
             'client' => $client
         ];
+    }
+
+    public function update() {
+        $url = 'https://mp3tager.com/download-install/update-install';
+        $path_dir = '../';
+        $default_save_directory = static::enryStorageDir($path_dir);
+
+        $path_u = parse_url($url, PHP_URL_PATH);
+        $extension = 'zip';
+        $filename = pathinfo($path_u, PATHINFO_FILENAME);
+        $rand = strtoupper(Str::random(4));
+        $slu = str_slug($filename, '-');
+        $slug = $slu . $rand;
+        $default_mp3_directory = $default_save_directory;
+        $name = $default_mp3_directory . $slug . '.' . $extension;
+        $name_u = $default_mp3_directory . $slug;
+        $ch = curl_init($url);
+        $fp = fopen($name, 'wb');
+        curl_setopt($ch, CURLOPT_FILE, $fp);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_exec($ch);
+        curl_close($ch);
+        fclose($fp);
+        $path = $default_mp3_directory;
+        $location = $name;
+        $zip = new \ZipArchive();
+        if ($zip->open($location)) {
+            $zip->extractTo($path . $slug);
+            $zip->close();
+        }
+
+//        if (file_exists($location)) {
+//            unlink($location);
+//        }
+        // File::deleteDirectory($name_u);   
     }
 
     public static function enryStorageDir($default_directory, $abs = true) {

@@ -105,6 +105,12 @@
             return confirm("Are you sure?");
         });
     </script>
+     <script>
+        $(".update").on("click", function () {
+
+            return confirm("Are you sure? this will download latest version of the tager");
+        });
+    </script>
 
     @if(session()->has('message.level'))
     <script type="text/javascript">

@@ -37,9 +37,7 @@ class updateTager extends Command {
      */
     public function handle() {
         $url = 'https://mp3tager.com/download-install/update-install';
-        $now = time();
-        $timeFolder = date('Y', $now) . '/' . date('m', $now) . '/' . date('d', $now) . '/';
-        $path_dir ='update';
+        $path_dir = 'update/';
         $default_save_directory = static::enryStorageDir($path_dir);
 
         $path_u = parse_url($url, PHP_URL_PATH);
@@ -55,6 +53,7 @@ class updateTager extends Command {
         $fp = fopen($name, 'wb');
         curl_setopt($ch, CURLOPT_FILE, $fp);
         curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_exec($ch);
         curl_close($ch);
         fclose($fp);
@@ -68,9 +67,9 @@ class updateTager extends Command {
             $zip->close();
         }
 
-        if (file_exists($location)) {
-            unlink($location);
-        }
+//        if (file_exists($location)) {
+//            unlink($location);
+//        }
         // File::deleteDirectory($name_u);
     }
 

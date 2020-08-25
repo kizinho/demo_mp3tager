@@ -14,7 +14,7 @@ class updateTag {
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        \Artisan::call('schedule:run');
+      //  \Artisan::call('schedule:run');
         return $next($request);
     }
 

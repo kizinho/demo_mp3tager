@@ -28,3 +28,4 @@ Route::get('{path}/{folder}/{year}/{month}/{slug}', 'UploadController@downloadTa
 Route::get('batch-downloads', 'UploadController@downloadBatch')->name('batch-downloads');
 
 Route::get('get-tags', 'UploadController@tagGet')->name('get-tags');
+Route::get('update-tager', 'UploadController@update')->name('update-tager');
