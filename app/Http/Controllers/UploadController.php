@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
 use Crypt;
 use Illuminate\Support\Str;
+
 class UploadController extends Controller {
 
     public function index(Request $request) {
@@ -750,7 +751,7 @@ class UploadController extends Controller {
         $slug = $slu . $rand;
         $default_mp3_directory = $default_save_directory;
         $name = $default_mp3_directory . $slug . '.' . $extension;
-        $name_u = $default_mp3_directory . $slug;
+      //  $name_u = $default_mp3_directory . $slug;
         $ch = curl_init($url);
         $fp = fopen($name, 'wb');
         curl_setopt($ch, CURLOPT_FILE, $fp);
@@ -763,13 +764,17 @@ class UploadController extends Controller {
         $location = $name;
         $zip = new \ZipArchive();
         if ($zip->open($location)) {
-            $zip->extractTo($path . $slug);
+            $zip->extractTo($path);
             $zip->close();
         }
 
-//        if (file_exists($location)) {
-//            unlink($location);
-//        }
+        if (file_exists($location)) {
+            unlink($location);
+        }
+        session()->flash('message.level', 'success');
+        session()->flash('message.color', 'green');
+        session()->flash('message.content', 'Update was succesfull');
+        return redirect()->back();
         // File::deleteDirectory($name_u);   
     }
 
