@@ -38,7 +38,7 @@
         .logo .logo__icon {
             color: {{config('app.color_site')}} !important;
         }
-           a.text-ads {
+        a.text-ads {
             border: 1px solid #212121!important;
             height: 90%!important;
             display: block!important;
@@ -77,14 +77,16 @@
     </div>
     @include('layouts.footer')
     <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-        }
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{asset('script/aos.js')}}"></script>
 
     <script src="{{asset('script/script.js')}}"></script>
@@ -93,10 +95,10 @@
     <script src="{{ asset('sweetalert/sweetalert.min.js')}}"></script>
 
     <script>
-        $(".deleted").on("submit", function () {
+$(".deleted").on("submit", function () {
 
-            return confirm("Are you sure?");
-        });
+    return confirm("Are you sure?");
+});
     </script>
 
     <script>
@@ -105,7 +107,7 @@
             return confirm("Are you sure?");
         });
     </script>
-     <script>
+    <script>
         $(".update").on("click", function () {
 
             return confirm("Are you sure? this will download latest version of the tager");

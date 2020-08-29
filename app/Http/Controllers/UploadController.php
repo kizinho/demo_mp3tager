@@ -563,7 +563,17 @@ class UploadController extends Controller {
             if ($res->status == 455) {
                 abort(455);
             }
-            $file = public_path(config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path);
+            if (!empty(config('app.tag_path'))) {
+                $download_path = public_path() . '/' . config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path;
+            } elseif (!empty(config('app.main_site'))) {
+                $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path;
+            } else {
+                session()->flash('message.level', 'error');
+                session()->flash('message.color', 'red');
+                session()->flash('message.content', "You didn't provide any path to save your file, please kindly do that");
+                return redirect()->back();
+            }
+            $file = $download_path;
             if (!file_exists($file)) {
                 abort(455);
             }
@@ -611,7 +621,17 @@ class UploadController extends Controller {
             if ($res->status == 455) {
                 abort(455);
             }
-            $file = public_path(config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path);
+            if (!empty(config('app.tag_path'))) {
+                $download_path = public_path() . '/' . config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path;
+            } elseif (!empty(config('app.main_site'))) {
+                $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path;
+            } else {
+                session()->flash('message.level', 'error');
+                session()->flash('message.color', 'red');
+                session()->flash('message.content', "You didn't provide any path to save your file, please kindly do that");
+                return redirect()->back();
+            }
+            $file = $download_path;
             if (!file_exists($file)) {
                 abort(455);
             }
@@ -658,6 +678,7 @@ class UploadController extends Controller {
             if ($res->status == 455) {
                 abort(455);
             }
+
             $file = public_path(config('app.tag_path') . '/' . $res->tag->path);
             if (!file_exists($file)) {
                 abort(455);
@@ -725,6 +746,100 @@ class UploadController extends Controller {
         }
     }
 
+    //my files
+    public function myFile(Request $request) {
+        $input = $request->all();
+        if ($request->q) {
+            $input['url_path'] = url('my-files?q=' . $request->q);
+        } elseif ($request->tab) {
+            $input['url_path'] = url('my-files?tab=' . $request->tab);
+        } elseif ($request->type) {
+            $input['url_path'] = url('my-files?type=' . $request->type);
+        } else {
+            $input['url_path'] = url('my-files');
+        }
+        $myfies = 'my_file' . $request->page . $request->url_path . $request->tab . $request->q . $request->type;
+        try {
+            if (Cache::has($myfies)) {
+                $res = Cache::get($myfies);
+            } else {
+                $client_details = static::client();
+                $url = config('app.naijacrawl_api') . '/get_files';
+                $response = $client_details['client']->request('GET', $url, [
+                    'headers' => $client_details['headers'],
+                    'query' => $input
+                ]);
+
+                $res = json_decode($response->getBody());
+                Cache::put($myfies, $res, 60);
+            }
+
+            $data['task'] = $res->data->task;
+            $data['tab'] = $res->data->tab;
+            $data['search'] = $res->data->search;
+            $data['type'] = $res->data->type;
+            return view('pages.my-files', $data);
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
+        }
+    }
+
+    public function myDelete(Request $request) {
+        $input = $request->all();
+        try {
+            $client_details = static::client();
+            $url = config('app.naijacrawl_api') . '/get_files';
+            $response = $client_details['client']->request('DELETE', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
+            ]);
+
+            $res = json_decode($response->getBody());
+            if ($request->action == 'delete-permanently') {
+                foreach ($res->data as $path) {
+
+                    if (!empty(config('app.tag_path'))) {
+                        $download_path = public_path() .'/'.config('app.tag_path') .'/' . $path;
+                    } elseif (!empty(config('app.main_site'))) {
+                        $download_path = $_SERVER['DOCUMENT_ROOT'] .'/'.config('app.tag_path') .'/' . $path;
+                    } else {
+                        session()->flash('message.level', 'error');
+                        session()->flash('message.color', 'red');
+                        session()->flash('message.content', "You didn't provide any path to save your file, please kindly do that");
+                        return redirect()->back();
+                    }
+                    $file = $download_path;
+                    if (file_exists($file)) {
+                        unlink($file);
+                    }
+                }
+            }
+            return [
+                'data' => $res
+            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
+        }
+    }
+
     public static function client() {
         $headers = [
             'API-Key' => env('API_KEY'),
@@ -751,7 +866,7 @@ class UploadController extends Controller {
         $slug = $slu . $rand;
         $default_mp3_directory = $default_save_directory;
         $name = $default_mp3_directory . $slug . '.' . $extension;
-      //  $name_u = $default_mp3_directory . $slug;
+        //  $name_u = $default_mp3_directory . $slug;
         $ch = curl_init($url);
         $fp = fopen($name, 'wb');
         curl_setopt($ch, CURLOPT_FILE, $fp);

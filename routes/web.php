@@ -26,6 +26,9 @@ Route::get('{path}/{slug}', 'UploadController@downloadTags')->name('content');
 Route::get('{path}/{year}/{month}/{slug}', 'UploadController@downloadTagG');
 Route::get('{path}/{folder}/{year}/{month}/{slug}', 'UploadController@downloadTag');
 Route::get('batch-downloads', 'UploadController@downloadBatch')->name('batch-downloads');
-
+//my files
+Route::get('my-files', 'UploadController@myFile')->name('my-files');
+Route::post('my-files', 'UploadController@myFile');
+Route::delete('my-files', 'UploadController@myDelete');
 Route::get('get-tags', 'UploadController@tagGet')->name('get-tags');
 Route::get('update-tager', 'UploadController@update')->name('update-tager');
