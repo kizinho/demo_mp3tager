@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
 use Crypt;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class UploadController extends Controller {
 
@@ -463,12 +464,19 @@ class UploadController extends Controller {
             }
             $directory = static::enryStorageDir($path_dir);
             $name = $directory . $res->path;
-            //dd($name
             $data['url'] = $res->url;
             if (!file_exists($name)) {
                 copy($res->file, $name);
             }
-
+            $data_post = Arr::pluck($res->details, 'id');
+            if (!empty(config('app.main_site'))) {
+                $input['ids'] = $data_post;
+                $url = config('app.naijacrawl_api') . '/mp3-remove';
+                $response = $client_details['client']->request('GET', $url, [
+                    'headers' => $client_details['headers'],
+                    'query' => $input
+                ]);
+            }
             return view('pages.download', $data);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
@@ -808,9 +816,9 @@ class UploadController extends Controller {
                 foreach ($res->data as $path) {
 
                     if (!empty(config('app.tag_path'))) {
-                        $download_path = public_path() .'/'.config('app.tag_path') .'/' . $path;
+                        $download_path = public_path() . '/' . config('app.tag_path') . '/' . $path;
                     } elseif (!empty(config('app.main_site'))) {
-                        $download_path = $_SERVER['DOCUMENT_ROOT'] .'/'.config('app.tag_path') .'/' . $path;
+                        $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.tag_path') . '/' . $path;
                     } else {
                         session()->flash('message.level', 'error');
                         session()->flash('message.color', 'red');
