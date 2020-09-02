@@ -396,7 +396,7 @@
             @endif
             @endif
 
-            @if($tag->mime_type =='mp3' || $tag->mime_type =='mp4')
+            @if($tag->mime_type =='mp3' || $tag->mime_type =='mp4' || $tag->mime_type =='mkv')
             @else
             <!-- =================End is private section======================= -->
             <div class="tag-field tag-responsive">
