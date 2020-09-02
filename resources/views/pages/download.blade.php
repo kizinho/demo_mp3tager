@@ -42,7 +42,7 @@
             <span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$download->file_name}}
 
         </div>
-        <div class="download-songs">click <a href="{{url($download_path.$download->time_folder.$download->slug)}}"> Here  <i class="fa fa-download"></i> </a> to download your file
+        <div class="download-songs">click <a @if($p == true) href="{{url($download_path.$download->slug)}}"  @else  href="{{url($download_path.$download->time_folder.$download->slug)}}" @endif> Here  <i class="fa fa-download"></i> </a> to download your file
             <span class="badge badge-danger">{{$download->size}}</span> 
             <button class="badge badge-primary down-btn-item clip-btn"> copy <i class="fas fa-copy"></i></button> link to clipborad 
             <input type="text" style="opacity: 0;">
@@ -51,31 +51,56 @@
             <br/> <br/>
             @if($download->mime_type == 'mp3')
             <audio controls style="width:100%" loop>
+                @if($p == true)
+                <source src="{{url($download_path.$download->slug)}}" type="audio/ogg">
+                <source src="{{url($download_path.$download->slug)}}" type="audio/mpeg">
+                @else
                 <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="audio/ogg">
                 <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="audio/mpeg">
+
+                @endif
                 Your browser does not support the audio element.
             </audio>
 
             <br/> <br/>
             <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
                 <audio controls style="width:100%" loop>
-                    <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="audio/ogg">
+                     @if($p == true)
+                      <source src="{{url($download_path.$download->slug)}}" type="audio/ogg">
+                    <source src="{{url($download_path.$download->slug)}}" type="audio/mpeg">
+                     @else
+                     <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="audio/ogg">
                     <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="audio/mpeg">
+                  
+                    @endif
                   Your browser does not support the audio element.
                   </audio>
 
             </textarea>
             @else
             <video style="width:100%" controls loop>
+                @if($p == true)
+                <source src="{{url($download_path.$download->slug)}}" type="video/mp4">
+                <source src="{{url($download_path.$download->slug)}}" type="video/ogg">
+                @else
                 <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="video/mp4">
                 <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="video/ogg">
+
+                @endif
                 Your browser does not support HTML video.
             </video>
             <br/> <br/>
             <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
                <video style="width:100%" controls loop>
-                <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="video/mp4">
+                  @if($p == true)
+                <source src="{{url($download_path.$download->slug)}}" type="video/mp4">
+                <source src="{{url($download_path.$download->slug)}}" type="video/ogg">
+                @else 
+                 <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="video/mp4">
                 <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="video/ogg">
+               
+                @endif
+                
                 Your browser does not support HTML video.
             </video>
 

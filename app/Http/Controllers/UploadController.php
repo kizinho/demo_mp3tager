@@ -448,13 +448,14 @@ class UploadController extends Controller {
                 return redirect()->route('upload');
             }
             $data['details'] = $res->details;
-            $now = time();
-            $timeFolder = date('Y', $now) . '/' . date('m', $now) . '/';
+            $timeFolder = $res->details[0]->time_folder;
             if (!empty(config('app.tag_path'))) {
                 $path_dir = public_path() . '/' . config('app.tag_path') . '/' . $timeFolder;
+                $path_dir2 = public_path() . '/' . config('app.tag_path') . '/';
                 $data['download_path'] = config('app.tag_path') . 's/';
             } elseif (!empty(config('app.main_site'))) {
                 $path_dir = $_SERVER['DOCUMENT_ROOT'] . '/' . (config('app.main_site') . '/' . $timeFolder);
+                $path_dir2 = $_SERVER['DOCUMENT_ROOT'] . '/' . (config('app.main_site') . '/');
                 $data['download_path'] = config('app.main_site_url') . '/' . config('app.main_site') . '/';
             } else {
                 session()->flash('message.level', 'error');
@@ -465,8 +466,22 @@ class UploadController extends Controller {
             $directory = static::enryStorageDir($path_dir);
             $name = $directory . $res->path;
             $data['url'] = $res->url;
+             if (file_exists($name)) {
+                 $data['p'] = false; 
+             }
+             else{
+                  $data['p'] = true;
+             }
             if (!file_exists($name)) {
-                copy($res->file, $name);
+                $directory2 = static::enryStorageDir($path_dir2);
+                $name2 = $directory2 . $res->path;
+                if (!file_exists($name2)) {
+                    try {
+                        copy($res->file, $name);
+                    } catch (\Exception $e) {
+                        abort(455);
+                    }
+                }
             }
             $data_post = Arr::pluck($res->details, 'id');
             if (!empty(config('app.main_site'))) {
