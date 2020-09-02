@@ -466,12 +466,6 @@ class UploadController extends Controller {
             $directory = static::enryStorageDir($path_dir);
             $name = $directory . $res->path;
             $data['url'] = $res->url;
-             if (file_exists($name)) {
-                 $data['p'] = false; 
-             }
-             else{
-                  $data['p'] = true;
-             }
             if (!file_exists($name)) {
                 $directory2 = static::enryStorageDir($path_dir2);
                 $name2 = $directory2 . $res->path;
@@ -483,6 +477,12 @@ class UploadController extends Controller {
                     }
                 }
             }
+             if (file_exists($name)) {
+                 $data['p'] = false; 
+             }
+             else{
+                  $data['p'] = true;
+             }
             $data_post = Arr::pluck($res->details, 'id');
             if (!empty(config('app.main_site'))) {
                 $input['ids'] = $data_post;
