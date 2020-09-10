@@ -196,6 +196,7 @@
             </div>
             @endif
             @else 
+            @if($tag->mime_type =='mp4' || $tag->mime_type =='mkv')
             <!-- =========== watermark ===========-->
             <div class="tag-field tag-responsive">
                 <div class="row align-items-center">
@@ -267,7 +268,7 @@
             <!-- ===========End of watermark ===========-->
             @endif
 
-
+            @endif
             <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm">
@@ -459,7 +460,9 @@
             }
         });
         let id = jQuery('#id').val();
-        checkProgress(id);
+        let ping = setInterval(function () {
+            checkProgress(id);
+        }, 6000);
         jQuery.ajax({
             url: "{{url('tags')}}",
             type: 'POST',
@@ -474,6 +477,7 @@
                         var message = ('' + value + '');
                         toastr.error(message, {timeOut: 50000});
                     });
+                    clearInterval(ping);
                     return false;
                 }
                 if (data.data['status'] === 409) {
@@ -481,64 +485,64 @@
                         var message = ('' + value + '');
                         toastr.error(message, {timeOut: 50000});
                     });
+                    clearInterval(ping);
                     return false;
                 }
                 if (data.data['status'] === 422) {
                     var message = data.data['message'];
 
                     toastr.error(message, {timeOut: 50000});
-
+                    clearInterval(ping);
                     return false;
                 }
                 if (data.data['status'] === 404) {
                     var message = data.data['message'];
 
                     toastr.error(message, {timeOut: 50000});
-
+                    clearInterval(ping);
                     return false;
                 }
                 if (data.data['status'] === 500) {
                     var message = data.data['message'];
 
                     toastr.error(message, {timeOut: 50000});
-
+                    clearInterval(ping);
                     return false;
                 }
                 if (data.data['status'] === 411) {
                     var message = data.data['message'];
 
                     toastr.error(message, {timeOut: 50000});
-
+                    clearInterval(ping);
                     return false;
                 }
-
+                if (data.data['status'] === 200) {
+                    toastr.info('taging still on progress... please wait', {timeOut: 50000});
+                    return false;
+                }
 
             }
 
         });
 
-
         function checkProgress(id) {
-            var check = setInterval(function () {
-                jQuery.ajax({
-                    url: "{{url('get-tags')}}",
-                    data: {id: id},
-                    method: 'GET',
-                    success: function (data) {
-                        if (data.data['status'] === 200) {
-                            let url = data.data['data'];
-                            /*Finish*/
-                            clearInterval(check);
-                            window.location.href = "{{url('/downloads')}}?" + url;
+            jQuery.ajax({
+                url: "{{url('get-tags')}}",
+                data: {id: id},
+                method: 'GET',
+                success: function (data) {
+                    if (data.data['status'] === 200) {
+                        let url = data.data['data'];
+                        /*Finish*/
+                        toastr.success('success please wait ... redirecting', {timeOut: 500});
+                        window.location.href = "{{url('/downloads')}}?" + url;
 
-                            return false;
-                        }
-
+                        return false;
                     }
 
-                });
-            }, 6000);
+                }
 
+            });
         }
 
     });

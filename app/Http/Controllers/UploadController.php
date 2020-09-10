@@ -477,12 +477,11 @@ class UploadController extends Controller {
                     }
                 }
             }
-             if (file_exists($name)) {
-                 $data['p'] = false; 
-             }
-             else{
-                  $data['p'] = true;
-             }
+            if (file_exists($name)) {
+                $data['p'] = false;
+            } else {
+                $data['p'] = true;
+            }
             $data_post = Arr::pluck($res->details, 'id');
             if (!empty(config('app.main_site'))) {
                 $input['ids'] = $data_post;
@@ -505,6 +504,55 @@ class UploadController extends Controller {
                 }
                 if ($response->getStatusCode() == 405) {
                     abort(404);
+                }
+            }
+        }
+    }
+
+    public function tagGetUpload(Request $request) {
+        $input = $request->all();
+        try {
+            $client_details = static::client();
+            $url = config('app.naijacrawl_api') . '/mp3-get-tags-upload';
+            $response = $client_details['client']->request('GET', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
+            ]);
+
+            $res = json_decode($response->getBody());
+            return [
+                'data' => $res
+            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    $data = [
+                        'status' => 500,
+                        'message' => 'Server Error',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
+                }
+                if ($response->getStatusCode() == 404) {
+                    $data = [
+                        'status' => 404,
+                        'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
+                }
+                if ($response->getStatusCode() == 405) {
+                    $data = [
+                        'status' => 422,
+                        'message' => 'User Not Authorized to use this script',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
                 }
             }
         }

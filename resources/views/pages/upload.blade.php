@@ -211,6 +211,7 @@ Dropzone.options.myUpload = {
 
             if (responseText.data['status'] === 200) {
                 let url = responseText.data['data'];
+                toastr.success('success please wait ... redirecting', {timeOut: 500});
                 window.location.href = "{{url('/tags')}}?" + url;
                 $(".modal").hide();
 
@@ -252,11 +253,28 @@ Dropzone.options.myUpload = {
                 $(".modal").hide();
             }
         });
+        let generateRandomString = (stringLength) => {
+            stringLength = typeof stringLength === 'number' ? stringLength : 20;
+            const possibleCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890';
+            let str = '';
+            for (let i = 0; i < stringLength; i++) {
+                const randomChar = possibleCharacters.charAt(
+                        Math.floor(Math.random() * possibleCharacters.length)
+                        );
+                str += randomChar;
+            }
+            return str;
+        };
+        let generator = generateRandomString(10);
+        let ping = setInterval(function () {
+            checkUpload(generator);
+        }, 6000);
         jQuery.ajax({
             url: "{{url('/upload-link')}}",
             type: 'POST',
             data: {
-                url: jQuery('#url').val()
+                url: jQuery('#url').val(),
+                random_string_upload: generator
             },
             success: function (responseText) {
                 if (responseText.data['status'] === 401) {
@@ -267,7 +285,7 @@ Dropzone.options.myUpload = {
                         };
                         toastr.error(message, {timeOut: 50000});
                     });
-
+                    clearInterval(ping);
                     return false;
                 }
                 if (responseText.data['status'] === 411) {
@@ -278,7 +296,7 @@ Dropzone.options.myUpload = {
 
                     };
                     toastr.info(message, {timeOut: 50000});
-
+                    clearInterval(ping);
                     return false;
                 }
                 if (responseText.data['status'] === 422) {
@@ -287,18 +305,17 @@ Dropzone.options.myUpload = {
 
                     };
                     toastr.info(message, {timeOut: 50000});
-
+                    clearInterval(ping);
                     return false;
                 }
-
                 if (responseText.data['status'] === 200) {
-                    let url = responseText.data['data'];
-                    window.location.href = "{{url('/tags')}}?" + url;
+                    toastr.info('upload still on progress... please wait', {timeOut: 50000});
                     return false;
                 }
             }
 
         });
+
     });
     /*
      link youtube
@@ -316,12 +333,29 @@ Dropzone.options.myUpload = {
                 $(".modal").hide();
             }
         });
+        let generateRandomString = (stringLength) => {
+            stringLength = typeof stringLength === 'number' ? stringLength : 20;
+            const possibleCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890';
+            let str = '';
+            for (let i = 0; i < stringLength; i++) {
+                const randomChar = possibleCharacters.charAt(
+                        Math.floor(Math.random() * possibleCharacters.length)
+                        );
+                str += randomChar;
+            }
+            return str;
+        };
+        let generator = generateRandomString(10);
+        let ping = setInterval(function () {
+            checkUpload(generator);
+        }, 6000);
         jQuery.ajax({
             url: "{{url('/upload-link')}}",
             type: 'POST',
             data: {
                 url: jQuery('#url_youtube').val(),
-                action: jQuery('#action').val()
+                action: jQuery('#action').val(),
+                random_string_upload: generator
             },
             success: function (responseText) {
                 if (responseText.data['status'] === 401) {
@@ -332,7 +366,7 @@ Dropzone.options.myUpload = {
                         };
                         toastr.error(message, {timeOut: 50000});
                     });
-
+                    clearInterval(ping);
                     return false;
                 }
                 if (responseText.data['status'] === 411) {
@@ -343,7 +377,7 @@ Dropzone.options.myUpload = {
 
                     };
                     toastr.info(message, {timeOut: 50000});
-
+                    clearInterval(ping);
                     return false;
                 }
                 if (responseText.data['status'] === 422) {
@@ -352,20 +386,39 @@ Dropzone.options.myUpload = {
 
                     };
                     toastr.info(message, {timeOut: 50000});
-
+                    clearInterval(ping);
                     return false;
                 }
 
                 if (responseText.data['status'] === 200) {
-                    let url = responseText.data['data'];
-                    window.location.href = "{{url('/tags')}}?" + url;
+                    toastr.info('upload still on progress... please wait', {timeOut: 50000});
                     return false;
                 }
             }
 
         });
-    });
 
+    });
+    function checkUpload(generator) {
+        jQuery.ajax({
+            url: "{{url('get-upload')}}",
+            data: {id: generator},
+            method: 'GET',
+            success: function (data) {
+                if (data.data['status'] === 200) {
+                    let url = data.data['data'];
+                    /*Finish*/
+                    toastr.success('success please wait ... redirecting', {timeOut: 500});
+                    window.location.href = "{{url('/tags')}}?" + url;
+
+                    return false;
+                }
+
+            }
+
+        });
+
+    }
 </script> 
 @endsection
 @endsection
