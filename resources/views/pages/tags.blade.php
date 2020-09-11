@@ -463,6 +463,9 @@
         let ping = setInterval(function () {
             checkProgress(id);
         }, 6000);
+        function clear_interval(interval) {
+            return clearInterval(interval);
+        }
         jQuery.ajax({
             url: "{{url('tags')}}",
             type: 'POST',
@@ -534,6 +537,7 @@
                     if (data.data['status'] === 200) {
                         let url = data.data['data'];
                         /*Finish*/
+                        clear_interval(ping);
                         toastr.success('success please wait ... redirecting', {timeOut: 500});
                         window.location.href = "{{url('/downloads')}}?" + url;
 

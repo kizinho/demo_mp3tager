@@ -269,6 +269,9 @@ Dropzone.options.myUpload = {
         let ping = setInterval(function () {
             checkUpload(generator);
         }, 6000);
+        function clear_interval(interval) {
+            return clearInterval(interval);
+        }
         jQuery.ajax({
             url: "{{url('/upload-link')}}",
             type: 'POST',
@@ -315,7 +318,27 @@ Dropzone.options.myUpload = {
             }
 
         });
+        function checkUpload(generator) {
+            jQuery.ajax({
+                url: "{{url('get-upload')}}",
+                data: {id: generator},
+                method: 'GET',
+                success: function (data) {
+                    if (data.data['status'] === 200) {
+                        let url = data.data['data'];
+                        /*Finish*/
+                        clear_interval(ping);
+                        toastr.success('success please wait ... redirecting', {timeOut: 500});
+                        window.location.href = "{{url('/tags')}}?" + url;
 
+                        return false;
+                    }
+
+                }
+
+            });
+
+        }
     });
     /*
      link youtube
@@ -349,6 +372,9 @@ Dropzone.options.myUpload = {
         let ping = setInterval(function () {
             checkUpload(generator);
         }, 6000);
+        function clear_interval(interval) {
+            return clearInterval(interval);
+        }
         jQuery.ajax({
             url: "{{url('/upload-link')}}",
             type: 'POST',
@@ -397,28 +423,28 @@ Dropzone.options.myUpload = {
             }
 
         });
+        function checkUpload(generator) {
+            jQuery.ajax({
+                url: "{{url('get-upload')}}",
+                data: {id: generator},
+                method: 'GET',
+                success: function (data) {
+                    if (data.data['status'] === 200) {
+                        let url = data.data['data'];
+                        /*Finish*/
+                        clear_interval(ping);
+                        toastr.success('success please wait ... redirecting', {timeOut: 500});
+                        window.location.href = "{{url('/tags')}}?" + url;
+                        return false;
+                    }
 
-    });
-    function checkUpload(generator) {
-        jQuery.ajax({
-            url: "{{url('get-upload')}}",
-            data: {id: generator},
-            method: 'GET',
-            success: function (data) {
-                if (data.data['status'] === 200) {
-                    let url = data.data['data'];
-                    /*Finish*/
-                    toastr.success('success please wait ... redirecting', {timeOut: 500});
-                    window.location.href = "{{url('/tags')}}?" + url;
-
-                    return false;
                 }
 
-            }
+            });
 
-        });
+        }
+    });
 
-    }
 </script> 
 @endsection
 @endsection
