@@ -39,3 +39,5 @@ Route::get('update-tager', 'UploadController@update')->name('update-tager');
 //zip
 Route::post('upload-zip-link', 'UploadController@storeZipLink');
 Route::post('upload-zip', 'UploadController@storeZip');
+//analytics
+Route::get('analytics/{slug}', 'UploadController@analytics')->name('analytics');

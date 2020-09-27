@@ -1154,4 +1154,52 @@ class UploadController extends Controller {
         return ($abs ? $absPath : $dir);
     }
 
+    public function analytics(Request $request, $slug) {
+        dd('dd');
+        $input = $request->all();
+        $input['url_path'] = url('analytics/' . $slug);
+        $input['slug'] = $slug;
+        $analytics = $slug . $request->page;
+        try {
+            if (Cache::has($analytics)) {
+                $res = Cache::get($analytics);
+            } else {
+                $client_details = static::client();
+                $url = config('app.naijacrawl_api') . '/analytics';
+                $response = $client_details['client']->request('GET', $url, [
+                    'headers' => $client_details['headers'],
+                    'query' => $input
+                ]);
+                $res = json_decode($response->getBody());
+                Cache::put($analytics, $res, 60);
+            }
+            $download_country_data = $res->data->download_country_data;
+            $download_title = 'Downloads';
+            $download_chart = new UserCharts($download_title);
+            $download_chart->labels($download_country_data->name);
+            $download_chart->dataset('Downloads', 'bar', $download_country_data->value);
+            $data['downloads'] = $download_chart;
+            //ref
+            $download_title_ref = 'Referrers';
+            $download_chart_ref = new UserCharts($download_title_ref);
+            $download_chart_ref->labels($download_country_data->ref_name);
+            $download_chart_ref->dataset('Downloads', 'pie', $download_country_data->ref_value);
+            $data['downloads_ref'] = $download_chart_ref;
+            $data['title'] = $res->data->title;
+            $data['downloads_table'] = $res->data->downloads_table;
+            return view('analytics', $data);
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
+        }
+    }
+
 }
