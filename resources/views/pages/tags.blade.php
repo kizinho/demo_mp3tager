@@ -107,18 +107,24 @@
         <form id="savetag" enctype="multipart/form-data" autocomplete="on"> 
 
             @csrf
+              <div id="accordion">
             @foreach($details as $key => $tag)
-
+           <div class="card-header-card" id="heading{{$key}}">
             <input type="hidden"  id='id'  value="{{ $tag->id }}">
             <input type="hidden"  name='id[{{$key}}]'  value="{{ $tag->id }}">
             <input type="hidden"  name='path[{{$key}}]' value="{{ $tag->path }}">
-            <div class="tag-field-head alert alert-success">
+             <a href="#" class=" @if($key == 0) @else collapsed @endif" data-toggle="collapse" data-target="#collapse{{$key}}" aria-expanded="@if($key == 0) true @else false @endif" aria-controls="collapse{{$key}}">
+                               
+            <div class="tag-field-head alert alert-success" >
                 <div class="row">
                     <div class="col-sm tag-title">
-                        <label class="tag-responsive-p " id="title"><span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$tag->file_name}}</label>
+                        <label class="tag-responsive-p " id="title"><span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$tag->file_name}}  <i class="fa fa-plus"></i> </label>
                     </div>
                 </div>
             </div>
+                 </a>
+              </div>
+            <article id="collapse{{$key}}" class="collapse @if($key == 0) show @endif" aria-labelledby="heading{{$key}}" data-parent="#accordion">
             @if($tag->mime_type == 'mp3')
             <div class="tag-field">
                 <div class="row">
@@ -419,9 +425,10 @@
                 </div>
             </div>
             @endif
-
+            <div class="clearfix"></div>
+            </article>
             @endforeach
-
+  </div>
             @if(config('app.ads_enable') == true)
             @include('layouts.text')
             @endif
@@ -459,7 +466,11 @@
 
             }
         });
-        let id = jQuery('#id').val();
+        var id_name = "";
+        $('input[name^="id"]').each(function () {
+            id_name = $(this).val() + "," + id_name;
+        });
+        var id = id_name.split(',');
         let ping = setInterval(function () {
             checkProgress(id);
         }, 6000);
@@ -536,11 +547,10 @@
                 success: function (data) {
                     if (data.data['status'] === 200) {
                         let url = data.data['data'];
-                        /*Finish*/
-                        clear_interval(ping);
                         toastr.success('success please wait ... redirecting', {timeOut: 500});
                         window.location.href = "{{url('/downloads')}}?" + url;
-
+                        /*Finish*/
+                        clear_interval(ping);
                         return false;
                     }
 
@@ -642,6 +652,37 @@
             this.parentNode.parentNode.parentNode.children[1].children[0].setAttribute('for', rangeFileId)
         }
     })
+</script>
+<script>
+    $(document).ready(function () {
+        // Add minus icon for collapse element which is open by default
+        $(".collapse.show").each(function () {
+            $(this).prev(".card-header-card").find(".fa").addClass("fa-minus").removeClass("fa-plus");
+        });
+
+        // Toggle plus minus icon on show hide of collapse element
+        $(".collapse").on('show.bs.collapse', function () {
+            $(this).prev(".card-header-card").find(".fa").removeClass("fa-plus").addClass("fa-minus");
+        }).on('hide.bs.collapse', function () {
+            $(this).prev(".card-header-card").find(".fa").removeClass("fa-minus").addClass("fa-plus");
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Get saved data from sessionStorage
+        let selectedCollapse = sessionStorage.getItem('selectedCollapse');
+        if (selectedCollapse !== null) {
+            $('.accordion .collapse').removeClass('show');
+            $(selectedCollapse).addClass('show');
+        }
+        //To set, which one will be opened
+        $('.accordion .btn-link').on('click', function () {
+            let target = $(this).data('target');
+            //Save data to sessionStorage
+            sessionStorage.setItem('selectedCollapse', target);
+        });
+    });
 </script>
 @endsection
 @endsection

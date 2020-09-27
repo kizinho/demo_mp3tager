@@ -32,4 +32,5 @@ Route::post('my-files', 'UploadController@myFile');
 Route::delete('my-files', 'UploadController@myDelete');
 Route::get('get-tags', 'UploadController@tagGet')->name('get-tags');
 Route::get('get-upload', 'UploadController@tagGetUpload')->name('get-upload');
+Route::get('get-upload-muitple', 'UploadController@tagGetUploadMutiple')->name('get-upload-muitple');
 Route::get('update-tager', 'UploadController@update')->name('update-tager');

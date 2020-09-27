@@ -46,6 +46,12 @@
                 <li class="nav-item">
                     <a class="nav-link " id="links_youtube-tab" data-toggle="tab" href="#links_youtube" role="tab" aria-controls="links_youtube" aria-selected="false"><span> Youtube Mp3 </span><i class="fas fa-link"></i></a>
                 </li>
+                 <li class="nav-item">
+                    <a class="nav-link " id="zip-tab" data-toggle="tab" href="#zip" role="tab" aria-controls="zip" aria-selected="false"><span> Zip </span><i class="fas fa-file-import"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="zip-link-tab" data-toggle="tab" href="#ziplink" role="tab" aria-controls="ziplink" aria-selected="false"><span> Zip Url </span><i class="fas fa-link"></i></a>
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="files" role="tabpanel" aria-labelledby="files">
@@ -65,12 +71,12 @@
                                     </div>
                                     <div class="dz-message"><h4>Drag & Drop Files Here</h4>
                                         <br/>
-                                        <span class="btn btn-success text-white padding">Choose Files</span>
+                                        <span class="btn btn-success text-white padding">Choose Files (up to 2GB)</span>
 
                                     </div>
 
                                     <div class="alert alert-info small" role="alert">
-                                        Allowed file types: MP3 , MP4 , MKV , Mov , M4a , 3gp , 3g2 , Mj2
+                                        Allowed file types: MP3 , MP4 , MKV , Mov , M4a , 3gp , 3g2 , Mj2 - up to 2GB
                                     </div>
                                     @if(config('app.ads_enable') == true)
                                     @include('layouts.text')
@@ -115,6 +121,32 @@
                     </div>
                     <!-- End of inside search bar -->
                 </div>
+                  <div class="tab-pane fade" id="zip" role="tabpanel" aria-labelledby="zip-tab">
+                    <!-- Strat of inside search bar -->
+                    <div class="data-field data-field-search mt-3">
+                        <p>Zip upload</p>
+                        <form id="zip">
+                           
+                            <input class="col col-sm-12 form-control" type="file" name="zip" accept=".zip" placeholder="domain.com/file.zip" required>
+
+                            <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  id="submit-file">Go <i class="fas fa-sign-in-alt"></i> </button>
+                        </form>
+                    </div>
+                    <!-- End of inside search bar -->
+                </div>
+                <div class="tab-pane fade" id="ziplink" role="tabpanel" aria-labelledby="ziplink-tab">
+                    <!-- Strat of inside search bar -->
+                    <div class="data-field data-field-search mt-3">
+                        <p>Zip upload Link</p>
+                        <form id="zip-link">
+                          
+                            <input class="col col-sm-12 form-control" type="text" id="url-zip"  placeholder="domain.com/file.zip" required>
+
+                            <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  id="submit-file">Go <i class="fas fa-sign-in-alt"></i> </button>
+                        </form>
+                    </div>
+                    <!-- End of inside search bar -->
+                </div>
             </div>
             @if(config('app.ads_enable') == true)
             @include('layouts.banner')
@@ -141,8 +173,9 @@ Dropzone.options.myUpload = {
     url: "{{url('upload')}}",
     autoProcessQueue: false,
     uploadMultiple: true,
-    parallelUploads: 1,
-    maxFiles: 1,
+    parallelUploads: 15,
+    maxFiles: 15,
+    maxFilesize: 2000,
     timeout: 3000000,
     acceptedFiles: '.mp3,.mp4,.mov,.m4a,.3gp,.3g2,.mj2',
     addRemoveLinks: true,
@@ -162,6 +195,27 @@ Dropzone.options.myUpload = {
         });
 
         this.on("sendingmultiple", function (data, xhr, formData) {
+            let generateRandomString = (stringLength) => {
+                stringLength = typeof stringLength === 'number' ? stringLength : 20;
+                const possibleCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890';
+                let str = '';
+                for (let i = 0; i < stringLength; i++) {
+                    const randomChar = possibleCharacters.charAt(
+                            Math.floor(Math.random() * possibleCharacters.length)
+                            );
+                    str += randomChar;
+                }
+                return str;
+            };
+            var count = dzClosure.files.length;
+            let generator = generateRandomString(10);
+            formData.append("random_string_upload", generator);
+            let ping = setInterval(function () {
+                checkUpload(count, generator);
+            }, 6000);
+            function clear_interval(interval) {
+                return clearInterval(interval);
+            }
             $(".modal").show();
             $.each(data, function (key, el) {
                 formData.append(el.name, el.value);
@@ -181,7 +235,7 @@ Dropzone.options.myUpload = {
                     };
                     toastr.error(message, {timeOut: 50000});
                 });
-
+                clearInterval(ping);
                 return false;
             }
             if (responseText.data['status'] === 411) {
@@ -192,7 +246,7 @@ Dropzone.options.myUpload = {
 
                 };
                 toastr.info(message, {timeOut: 50000});
-
+                clearInterval(ping);
                 return false;
             }
 
@@ -204,21 +258,40 @@ Dropzone.options.myUpload = {
 
                 };
                 toastr.info(message, {timeOut: 50000});
-
+                clearInterval(ping);
                 return false;
             }
 
 
             if (responseText.data['status'] === 200) {
-                let url = responseText.data['data'];
-                toastr.success('success please wait ... redirecting', {timeOut: 500});
-                window.location.href = "{{url('/tags')}}?" + url;
+                toastr.info('upload still in progress... please wait', {timeOut: 500});
                 $(".modal").hide();
 
                 return false;
             }
 
         });
+        function checkUpload(count, generator) {
+            jQuery.ajax({
+                url: "{{url('get-upload-muitple')}}",
+                data: {id: generator, count: count},
+                method: 'GET',
+                success: function (data) {
+                    if (data.data['status'] === 200) {
+                        let url = data.data['data'];
+                        toastr.success('success please wait ... redirecting', {timeOut: 500});
+                        window.location.href = "{{url('/tags')}}?" + url;
+                        /*Finish*/
+                        clear_interval(ping);
+                        return false;
+                    }
+
+                }
+
+            });
+
+        }
+
     }
 };
 </script>
@@ -312,7 +385,7 @@ Dropzone.options.myUpload = {
                     return false;
                 }
                 if (responseText.data['status'] === 200) {
-                    toastr.info('upload still on progress... please wait', {timeOut: 50000});
+                    toastr.info('upload still in progress... please wait', {timeOut: 50000});
                     return false;
                 }
             }
@@ -326,11 +399,10 @@ Dropzone.options.myUpload = {
                 success: function (data) {
                     if (data.data['status'] === 200) {
                         let url = data.data['data'];
-                        /*Finish*/
-                        clear_interval(ping);
                         toastr.success('success please wait ... redirecting', {timeOut: 500});
                         window.location.href = "{{url('/tags')}}?" + url;
-
+                        /*Finish*/
+                        clear_interval(ping);
                         return false;
                     }
 
@@ -417,7 +489,7 @@ Dropzone.options.myUpload = {
                 }
 
                 if (responseText.data['status'] === 200) {
-                    toastr.info('upload still on progress... please wait', {timeOut: 50000});
+                    toastr.info('upload still in progress... please wait', {timeOut: 50000});
                     return false;
                 }
             }
@@ -431,10 +503,10 @@ Dropzone.options.myUpload = {
                 success: function (data) {
                     if (data.data['status'] === 200) {
                         let url = data.data['data'];
-                        /*Finish*/
-                        clear_interval(ping);
                         toastr.success('success please wait ... redirecting', {timeOut: 500});
                         window.location.href = "{{url('/tags')}}?" + url;
+                        /*Finish*/
+                        clear_interval(ping);
                         return false;
                     }
 

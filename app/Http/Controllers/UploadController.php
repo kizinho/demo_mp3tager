@@ -63,6 +63,10 @@ class UploadController extends Controller {
                     continue;
                 }
             }
+            $output[] = [
+                'name' => 'random_string_upload',
+                'contents' => $request->random_string_upload
+            ];
             if (config('app.env') !== 'production') {
                 $data = [
                     'status' => 411,
@@ -448,40 +452,50 @@ class UploadController extends Controller {
                 return redirect()->route('upload');
             }
             $data['details'] = $res->details;
-            $timeFolder = $res->details[0]->time_folder;
-            if (!empty(config('app.tag_path'))) {
-                $path_dir = public_path() . '/' . config('app.tag_path') . '/' . $timeFolder;
-                $path_dir2 = public_path() . '/' . config('app.tag_path') . '/';
-                $data['download_path'] = config('app.tag_path') . 's/';
-            } elseif (!empty(config('app.main_site'))) {
-                $path_dir = $_SERVER['DOCUMENT_ROOT'] . '/' . (config('app.main_site') . '/' . $timeFolder);
-                $path_dir2 = $_SERVER['DOCUMENT_ROOT'] . '/' . (config('app.main_site') . '/');
-                $data['download_path'] = config('app.main_site_url') . '/' . config('app.main_site') . '/';
-            } else {
-                session()->flash('message.level', 'error');
-                session()->flash('message.color', 'red');
-                session()->flash('message.content', "You didn't provide any path to save your file, please kindly do that");
-                return redirect()->route('upload');
+            foreach ($res->details as $d) {
+                $timeFolder = $d->time_folder;
+                if (!empty(config('app.tag_path'))) {
+                    $path_dir = public_path() . '/' . config('app.tag_path') . '/' . $timeFolder;
+                    $path_dir2 = public_path() . '/' . config('app.tag_path') . '/';
+                    $data['download_path'] = config('app.tag_path') . 's/';
+                } elseif (!empty(config('app.main_site'))) {
+                    $path_dir = $_SERVER['DOCUMENT_ROOT'] . '/' . (config('app.main_site') . '/' . $timeFolder);
+                    $path_dir2 = $_SERVER['DOCUMENT_ROOT'] . '/' . (config('app.main_site') . '/');
+                    $data['download_path'] = config('app.main_site_url') . '/' . config('app.main_site') . '/';
+                } else {
+                    session()->flash('message.level', 'error');
+                    session()->flash('message.color', 'red');
+                    session()->flash('message.content', "You didn't provide any path to save your file, please kindly do that");
+                    return redirect()->route('upload');
+                }
             }
             $directory = static::enryStorageDir($path_dir);
-            $name = $directory . $res->path;
-            $data['url'] = $res->url;
-            if (!file_exists($name)) {
-                $directory2 = static::enryStorageDir($path_dir2);
-                $name2 = $directory2 . $res->path;
-                if (!file_exists($name2)) {
-                    try {
-                        copy($res->file, $name);
-                    } catch (\Exception $e) {
-                        abort(455);
+            foreach ($res->path as $p) {
+                $name = $directory . $p;
+                if (!file_exists($name)) {
+                    $directory2 = static::enryStorageDir($path_dir2);
+                    $name2 = $directory2 . $p;
+                    if (!file_exists($name2)) {
+                        try {
+                            foreach ($res->file as $f) {
+                                copy($f, $name);
+                            }
+                        } catch (\Exception $e) {
+                            abort(455);
+                        }
                     }
                 }
             }
+
+
+
             if (file_exists($name)) {
                 $data['p'] = false;
             } else {
                 $data['p'] = true;
             }
+
+
             $data_post = Arr::pluck($res->details, 'id');
             if (!empty(config('app.main_site'))) {
                 $input['ids'] = $data_post;
@@ -514,6 +528,55 @@ class UploadController extends Controller {
         try {
             $client_details = static::client();
             $url = config('app.naijacrawl_api') . '/mp3-get-tags-upload';
+            $response = $client_details['client']->request('GET', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
+            ]);
+
+            $res = json_decode($response->getBody());
+            return [
+                'data' => $res
+            ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    $data = [
+                        'status' => 500,
+                        'message' => 'Server Error',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
+                }
+                if ($response->getStatusCode() == 404) {
+                    $data = [
+                        'status' => 404,
+                        'message' => 'Page not found',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
+                }
+                if ($response->getStatusCode() == 405) {
+                    $data = [
+                        'status' => 422,
+                        'message' => 'User Not Authorized to use this script',
+                    ];
+                    return [
+                        'data' => $data
+                    ];
+                }
+            }
+        }
+    }
+
+    public function tagGetUploadMutiple(Request $request) {
+        $input = $request->all();
+        try {
+            $client_details = static::client();
+            $url = config('app.naijacrawl_api') . '/mp3-get-tags-upload-mutiple';
             $response = $client_details['client']->request('GET', $url, [
                 'headers' => $client_details['headers'],
                 'query' => $input

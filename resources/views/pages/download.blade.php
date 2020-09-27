@@ -34,36 +34,41 @@
         @include('layouts.banner')
         @endif
         <p class="bg-success text-center text-white p-2 mt-5">your settings saved successfully <i class="fas fa-thumbs-up"></i></p>
+        <div id="accordion">
+            @foreach($details as $key => $download)
+            <div class="card-header-card" id="heading{{$key}}">
+                <a href="#" class=" @if($key == 0) @else collapsed @endif" data-toggle="collapse" data-target="#collapse{{$key}}" aria-expanded="@if($key == 0) true @else false @endif" aria-controls="collapse{{$key}}">
 
-        @foreach($details as $key => $download)
+                    <div class="download-songs " style="background-color: #d4edda; color: #000">
 
-        <div class="download-songs " style="background-color: #d4edda; color: #000">
+                        <span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$download->file_name}} <i class="fa fa-plus"></i>
 
-            <span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$download->file_name}}
+                    </div>
+                </a>
+            </div>
+            <article id="collapse{{$key}}" class="collapse @if($key == 0) show @endif" aria-labelledby="heading{{$key}}" data-parent="#accordion">
+                <div class="download-songs">click <a @if($p == true) href="{{url($download_path.$download->slug)}}"  @else  href="{{url($download_path.$download->time_folder.$download->slug)}}" @endif> Here  <i class="fa fa-download"></i> </a> to download your file
+                    <span class="badge badge-danger">{{$download->size}}</span> 
+                    <button class="badge badge-primary down-btn-item clip-btn"> copy <i class="fas fa-copy"></i></button> link to clipborad 
+                    <input type="text" style="opacity: 0;">
+                    <br/>
 
-        </div>
-        <div class="download-songs">click <a @if($p == true) href="{{url($download_path.$download->slug)}}"  @else  href="{{url($download_path.$download->time_folder.$download->slug)}}" @endif> Here  <i class="fa fa-download"></i> </a> to download your file
-            <span class="badge badge-danger">{{$download->size}}</span> 
-            <button class="badge badge-primary down-btn-item clip-btn"> copy <i class="fas fa-copy"></i></button> link to clipborad 
-            <input type="text" style="opacity: 0;">
-            <br/>
+                    <br/> <br/>
+                    @if($download->mime_type == 'mp3')
+                    <audio controls style="width:100%" loop>
+                        @if($p == true)
+                        <source src="{{url($download_path.$download->slug)}}" type="audio/ogg">
+                        <source src="{{url($download_path.$download->slug)}}" type="audio/mpeg">
+                        @else
+                        <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="audio/ogg">
+                        <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="audio/mpeg">
 
-            <br/> <br/>
-            @if($download->mime_type == 'mp3')
-            <audio controls style="width:100%" loop>
-                @if($p == true)
-                <source src="{{url($download_path.$download->slug)}}" type="audio/ogg">
-                <source src="{{url($download_path.$download->slug)}}" type="audio/mpeg">
-                @else
-                <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="audio/ogg">
-                <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="audio/mpeg">
+                        @endif
+                        Your browser does not support the audio element.
+                    </audio>
 
-                @endif
-                Your browser does not support the audio element.
-            </audio>
-
-            <br/> <br/>
-            <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
+                    <br/> <br/>
+                    <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
                 <audio controls style="width:100%" loop>
                      @if($p == true)
                       <source src="{{url($download_path.$download->slug)}}" type="audio/ogg">
@@ -76,21 +81,21 @@
                   Your browser does not support the audio element.
                   </audio>
 
-            </textarea>
-            @else
-            <video style="width:100%" controls loop>
-                @if($p == true)
-                <source src="{{url($download_path.$download->slug)}}" type="video/mp4">
-                <source src="{{url($download_path.$download->slug)}}" type="video/ogg">
-                @else
-                <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="video/mp4">
-                <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="video/ogg">
+                    </textarea>
+                    @else
+                    <video style="width:100%" controls loop>
+                        @if($p == true)
+                        <source src="{{url($download_path.$download->slug)}}" type="video/mp4">
+                        <source src="{{url($download_path.$download->slug)}}" type="video/ogg">
+                        @else
+                        <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="video/mp4">
+                        <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="video/ogg">
 
-                @endif
-                Your browser does not support HTML video.
-            </video>
-            <br/> <br/>
-            <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
+                        @endif
+                        Your browser does not support HTML video.
+                    </video>
+                    <br/> <br/>
+                    <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
                <video style="width:100%" controls loop>
                   @if($p == true)
                 <source src="{{url($download_path.$download->slug)}}" type="video/mp4">
@@ -104,15 +109,18 @@
                 Your browser does not support HTML video.
             </video>
 
-            </textarea>
-            @endif
+                    </textarea>
+                    @endif
 
-            <button class="embd-btn">copy embedded code</button>
-        </div> 
-        @if(config('app.ads_enable') == true)
-        @include('layouts.text')
-        @endif
-        @endforeach
+                    <button class="embd-btn">copy embedded code</button>
+                </div> 
+                @if(config('app.ads_enable') == true)
+                @include('layouts.text')
+                @endif
+                <div class="clearfix"></div>
+            </article>
+            @endforeach
+        </div>
 
     </div>
 
@@ -144,6 +152,37 @@
 
 
     })
+</script>
+<script>
+    $(document).ready(function () {
+        // Add minus icon for collapse element which is open by default
+        $(".collapse.show").each(function () {
+            $(this).prev(".card-header-card").find(".fa").addClass("fa-minus").removeClass("fa-plus");
+        });
+
+        // Toggle plus minus icon on show hide of collapse element
+        $(".collapse").on('show.bs.collapse', function () {
+            $(this).prev(".card-header-card").find(".fa").removeClass("fa-plus").addClass("fa-minus");
+        }).on('hide.bs.collapse', function () {
+            $(this).prev(".card-header-card").find(".fa").removeClass("fa-minus").addClass("fa-plus");
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Get saved data from sessionStorage
+        let selectedCollapse = sessionStorage.getItem('selectedCollapse');
+        if (selectedCollapse !== null) {
+            $('.accordion .collapse').removeClass('show');
+            $(selectedCollapse).addClass('show');
+        }
+        //To set, which one will be opened
+        $('.accordion .btn-link').on('click', function () {
+            let target = $(this).data('target');
+            //Save data to sessionStorage
+            sessionStorage.setItem('selectedCollapse', target);
+        });
+    });
 </script>
 @endsection
 @endsection
