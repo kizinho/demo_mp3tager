@@ -83,6 +83,15 @@
 
                     </textarea>
                     @else
+                     @if($download->mime_type == 'jpg' || $download->mime_type == 'png' || $download->mime_type == 'jpeg' || $download->mime_type == 'gif')
+                        @if($p == true)
+                        
+              <img src="{{url($download_path.$download->slug)}}" width="300" height="150"/>
+                         @else
+                         
+              <img src="{{url($download_path.$download->time_folder.$download->slug)}}" width="300" height="150"/>
+                         @endif
+                    @else
                     <video style="width:100%" controls loop>
                         @if($p == true)
                         <source src="{{url($download_path.$download->slug)}}" type="video/mp4">
@@ -94,9 +103,18 @@
                         @endif
                         Your browser does not support HTML video.
                     </video>
+                    @endif
                     <br/> <br/>
                     <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
-               <video style="width:100%" controls loop>
+               @if($download->mime_type == 'jpg' || $download->mime_type == 'png' || $download->mime_type == 'jpeg' || $download->mime_type == 'gif')
+                        @if($p == true)
+                      <img src="{{url($download_path.$download->slug)}}" width="100" height="100"/>
+                         @else
+                          <img src="{{url($download_path.$download->time_folder.$download->slug)}}" width="100" height="100"/>
+                         @endif
+             
+                    @else
+                <video style="width:100%" controls loop>
                   @if($p == true)
                 <source src="{{url($download_path.$download->slug)}}" type="video/mp4">
                 <source src="{{url($download_path.$download->slug)}}" type="video/ogg">
@@ -108,6 +126,7 @@
                 
                 Your browser does not support HTML video.
             </video>
+              @endif
 
                     </textarea>
                     @endif

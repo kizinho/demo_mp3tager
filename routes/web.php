@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 //upload
 Route::get('/', 'UploadController@index')->name('/');
 Route::get('upload', 'UploadController@index')->name('upload');
+Route::get('image-editing', 'UploadController@imageEdit')->name('image-editing');
+
 Route::post('upload', 'UploadController@store');
 Route::post('upload-link', 'UploadController@storeLink');
 Route::get('tags', 'UploadController@tag')->name('tags');
@@ -34,3 +36,6 @@ Route::get('get-tags', 'UploadController@tagGet')->name('get-tags');
 Route::get('get-upload', 'UploadController@tagGetUpload')->name('get-upload');
 Route::get('get-upload-muitple', 'UploadController@tagGetUploadMutiple')->name('get-upload-muitple');
 Route::get('update-tager', 'UploadController@update')->name('update-tager');
+//zip
+Route::post('upload-zip-link', 'UploadController@storeZipLink');
+Route::post('upload-zip', 'UploadController@storeZip');

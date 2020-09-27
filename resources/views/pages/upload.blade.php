@@ -76,12 +76,12 @@
                                     </div>
 
                                     <div class="alert alert-info small" role="alert">
-                                        Allowed file types: MP3 , MP4 , MKV , Mov , M4a , 3gp , 3g2 , Mj2 - up to 2GB
+                                        Allowed file types:  jpg , png , jpeg
                                     </div>
                                     @if(config('app.ads_enable') == true)
                                     @include('layouts.text')
                                     @endif
-                                    <div class="alert alert-secondary small text-center " >Mp3 , Mp4, MKV , Mov , M4a , 3gp , 3g2 &  Mj2 Edited this year: &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
+                                    <div class="alert alert-secondary small text-center " >Mp3 , Mp4, MKV , Mov , M4a , 3gp , 3g2 , jpg , png , jpeg &  Mj2 Edited this year: &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
                                 </div>
                             </div>
                         </div>
@@ -151,12 +151,12 @@
             @if(config('app.ads_enable') == true)
             @include('layouts.banner')
             @endif
-            {{config('app.name')}} is the best online editing tool to change your mp3 and Mp4 tags like watermark on mp4, cover art and join two mp3 files . 
+            {{config('app.name')}} is the best online editing tool to change your mp3  , jpg , png , jpegand Mp4 tags like watermark on mp4, cover art and join two mp3 files . 
             Using this platform you can upload and edit your mp3 tags or join another mp3 .
             Download your updated files by using our easy download button .
             <br/>  <br/>
             <small>
-                {{config('app.name')}} you can now change your mp3 and Mp4 files by adding pictures to mp3 or Mp4 tag, changing mp3tag title, changing mp3tag album, changing mp3tag artist and joining mp3 voice tag . 
+                {{config('app.name')}} you can now change your mp3 , jpg , png , jpeg and Mp4 files by adding pictures to mp3 or Mp4 tag, changing mp3tag title, changing mp3tag album, changing mp3tag artist and joining mp3 voice tag . 
             </small>
             @if(config('app.ads_enable') == true)
             @include('layouts.text')
@@ -516,6 +516,196 @@ Dropzone.options.myUpload = {
 
         }
     });
+ /*
+     Zip link
+     */
+    $('#zip-link').submit(function (event) {
+        event.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function () {
+                $(".modal").show();
+            },
+            complete: function () {
+                $(".modal").hide();
+            }
+        });
+        let generateRandomString = (stringLength) => {
+            stringLength = typeof stringLength === 'number' ? stringLength : 20;
+            const possibleCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890';
+            let str = '';
+            for (let i = 0; i < stringLength; i++) {
+                const randomChar = possibleCharacters.charAt(
+                        Math.floor(Math.random() * possibleCharacters.length)
+                        );
+                str += randomChar;
+            }
+            return str;
+        };
+        let generator = generateRandomString(10);
+        let ping = setInterval(function () {
+            checkUpload(generator);
+        }, 6000);
+        function clear_interval(interval) {
+            return clearInterval(interval);
+        }
+        jQuery.ajax({
+            url: "{{url('/upload-zip-link')}}",
+            type: 'POST',
+            data: {
+                url: jQuery('#url-zip').val(),
+                random_string_upload: generator
+            },
+            success: function (responseText) {
+                if (responseText.data['status'] === 401) {
+                    jQuery.each(responseText.data['message'], function (key, value) {
+                        var message = ('' + value + '');
+                        toastr.options.onHidden = function () {
+
+                        };
+                        toastr.error(message, {timeOut: 50000});
+                    });
+                    clearInterval(ping);
+                    return false;
+                }
+                if (responseText.data['status'] === 422) {
+                    var message = responseText.data['message'];
+                    toastr.options.onHidden = function () {
+
+                    };
+                    toastr.info(message, {timeOut: 50000});
+                    clearInterval(ping);
+                    return false;
+                }
+
+                if (responseText.data['status'] === 200) {
+                    toastr.info('upload still in progress... please wait', {timeOut: 50000});
+                    return false;
+                }
+            }
+
+        });
+        function checkUpload(generator) {
+            jQuery.ajax({
+                url: "{{url('get-upload')}}",
+                data: {id: generator},
+                method: 'GET',
+                success: function (data) {
+                    if (data.data['status'] === 200) {
+                        let url = data.data['data'];
+                        toastr.success('success please wait ... redirecting', {timeOut: 500});
+                        window.location.href = "{{url('/tags')}}?" + url;
+                        /*Finish*/
+                        clear_interval(ping);
+                        return false;
+                    }
+
+                }
+
+            });
+        }
+    });
+
+
+
+    /*
+     zip
+     */
+    $('form#zip').submit(function (event) {
+        event.preventDefault();
+        var formData = new FormData($(this)[0]);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function () {
+                $(".modal").show();
+            },
+            complete: function () {
+                $(".modal").hide();
+            }
+        });
+        let generateRandomString = (stringLength) => {
+            stringLength = typeof stringLength === 'number' ? stringLength : 20;
+            const possibleCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890';
+            let str = '';
+            for (let i = 0; i < stringLength; i++) {
+                const randomChar = possibleCharacters.charAt(
+                        Math.floor(Math.random() * possibleCharacters.length)
+                        );
+                str += randomChar;
+            }
+            return str;
+        };
+        let generator = generateRandomString(10);
+        formData.append('random_string_upload', generator);
+        let ping = setInterval(function () {
+            checkUpload(generator);
+        }, 6000);
+        function clear_interval(interval) {
+            return clearInterval(interval);
+        }
+        jQuery.ajax({
+            url: "{{url('/upload-zip')}}",
+            type: 'POST',
+            data: formData,
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (responseText) {
+                if (responseText.data['status'] === 401) {
+                    jQuery.each(responseText.data['message'], function (key, value) {
+                        var message = ('' + value + '');
+                        toastr.options.onHidden = function () {
+
+                        };
+                        toastr.error(message, {timeOut: 50000});
+                    });
+                    clearInterval(ping);
+                    return false;
+                }
+                if (responseText.data['status'] === 422) {
+                    var message = responseText.data['message'];
+                    toastr.options.onHidden = function () {
+
+                    };
+                    toastr.info(message, {timeOut: 50000});
+                    clearInterval(ping);
+                    return false;
+                }
+
+                if (responseText.data['status'] === 200) {
+                    toastr.info('upload still in progress... please wait', {timeOut: 50000});
+                    return false;
+                }
+            }
+
+        });
+        function checkUpload(generator) {
+            jQuery.ajax({
+                url: "{{url('get-upload')}}",
+                data: {id: generator},
+                method: 'GET',
+                success: function (data) {
+                    if (data.data['status'] === 200) {
+                        let url = data.data['data'];
+                        toastr.success('success please wait ... redirecting', {timeOut: 500});
+                        window.location.href = "{{url('/tags')}}?" + url;
+                        /*Finish*/
+                        clear_interval(ping);
+                        return false;
+                    }
+
+                }
+
+            });
+        }
+    });
+
 
 </script> 
 @endsection

@@ -99,7 +99,7 @@
 @extends('layouts.app')
 @section('content')
 <!-- Start of tags pages -->
-<div class="Mycontainer">
+<div class="Mycontainer mt-5">
     <div class="upload-container">
         @if(config('app.ads_enable') == true)
         @include('layouts.banner')
@@ -202,7 +202,8 @@
             </div>
             @endif
             @else 
-            @if($tag->mime_type =='mp4' || $tag->mime_type =='mkv')
+            
+            @if($tag->mime_type =='mp4' || $tag->mime_type =='mkv' || $tag->mime_type =='jpg' || $tag->mime_type =='png' || $tag->mime_type =='jpeg' || $tag->mime_type =='gif')
             <!-- =========== watermark ===========-->
             <div class="tag-field tag-responsive">
                 <div class="row align-items-center">
@@ -285,6 +286,8 @@
                     </div>
                 </div>
             </div>
+            @if($tag->mime_type =='jpg' || $tag->mime_type =='png' || $tag->mime_type =='jpeg' || $tag->mime_type =='gif')
+            @else
             <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm">
@@ -305,6 +308,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             @if($tag->mime_type == 'mp3')
             <div class="tag-field tag-responsive">
                 <div class="row">
@@ -403,7 +407,7 @@
             @endif
             @endif
 
-            @if($tag->mime_type =='mp3' || $tag->mime_type =='mp4' || $tag->mime_type =='mkv')
+            @if($tag->mime_type =='mp3' || $tag->mime_type =='mp4' || $tag->mime_type =='mkv' || $tag->mime_type =='jpg' || $tag->mime_type =='png' || $tag->mime_type =='jpeg' || $tag->mime_type =='gif')
             @else
             <!-- =================End is private section======================= -->
             <div class="tag-field tag-responsive">
@@ -416,10 +420,15 @@
                     </div>
                     <div class="col-sm-6">
 
-                        <select class="markSelect form-control" name="extension[{{$key}}]"         @if($tag->mime_type !=='mp3' || $tag->mime_type !=='mp4') required  @endif> <!-- variable here -->
+                        <select class="markSelect form-control" name="extension[{{$key}}]"  @if($tag->mime_type !=='mp3' || $tag->mime_type !=='mp4') required  @endif> <!-- variable here -->
                                 <option value="" selected disabled>Check your File Extension </option>
                             <option value="mp3">Mp3</option>
                             <option value="mp4">Mp4</option>
+                             <option value="mkv">Mkv</option>
+                              <option value="png">png</option>
+                               <option value="jpg">jpg</option>
+                               <option value="gif">gif</option>
+                               <option value="jpeg">jpeg</option>
                         </select>
                     </div>
                 </div>

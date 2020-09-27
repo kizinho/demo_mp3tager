@@ -49,6 +49,43 @@ class UploadController extends Controller {
         return view('pages.upload', $data);
     }
 
+    public function imageEdit(Request $request) {
+
+        if (Cache::has('countupload')) {
+            $res = Cache::get('countupload');
+        } else {
+            try {
+                $client_details = static::client();
+                $url = config('app.naijacrawl_api') . '/mp3-get_count';
+                $response = $client_details['client']->request('GET', $url, [
+                    'headers' => $client_details['headers']
+                ]);
+                $res = json_decode($response->getBody());
+
+                if (empty($res)) {
+                    abort(405);
+                }
+                Cache::put('countupload', $res, 525600);
+            } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+                if ($res->hasResponse()) {
+                    $response = $res->getResponse();
+                    if ($response->getStatusCode() == 500) {
+                        abort(500);
+                    }
+                    if ($response->getStatusCode() == 405) {
+                        abort(405);
+                    }
+                    if ($response->getStatusCode() == 404) {
+                        abort(404);
+                    }
+                }
+            }
+        }
+        $data['count_upload'] = $res->data;
+        return view('pages.image-edit', $data);
+    }
+
     public function store(Request $request) {
         $files = $request->file('file');
         try {
@@ -195,6 +232,87 @@ class UploadController extends Controller {
                     ];
                     return [
                         'data' => $data
+                    ];
+                }
+            }
+        }
+    }
+
+    public function storeZipLink(Request $request) {
+        $input = $request->all();
+        try {
+            $url = config('app.naijacrawl_api') . '/mp3-upload-tag-zip-link';
+            $client_details = static::client();
+            $response = $client_details['client']->request('POST', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
+            ]);
+            $data = \GuzzleHttp\json_decode($response->getBody());
+
+            return [
+                'data' => $data
+            ];
+        } catch (\GuzzleHttp\Exception\RequestException $data) {
+
+            if ($data->hasResponse()) {
+                $response = $data->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Server Error',
+                    ];
+                }
+                if ($response->getStatusCode() == 404) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Page not found',
+                    ];
+                }
+            }
+        }
+    }
+
+    public function storeZip(Request $request) {
+        if ($request->hasFile('zip')) {
+            $output = [];
+            $file = $request->file('zip');
+            $output[] = [
+                'name' => 'file',
+                'contents' => fopen($file->getPathname(), 'r'),
+                'filename' => $file->getClientOriginalName()
+            ];
+        }
+
+        $output[] = [
+            'name' => 'random_string_upload',
+            'contents' => $request->random_string_upload
+        ];
+        try {
+            $url = config('app.naijacrawl_api') . '/mp3-upload-tag-zip';
+            $client_details = static::client();
+            $response = $client_details['client']->request('POST', $url, [
+                'headers' => $client_details['headers'],
+                'multipart' => $output
+            ]);
+            $data = \GuzzleHttp\json_decode($response->getBody());
+
+            return [
+                'data' => $data
+            ];
+        } catch (\GuzzleHttp\Exception\RequestException $data) {
+
+            if ($data->hasResponse()) {
+                $response = $data->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Server Error',
+                    ];
+                }
+                if ($response->getStatusCode() == 404) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Page not found',
                     ];
                 }
             }
