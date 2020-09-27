@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Cache;
 use Crypt;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use App\Charts\UserCharts;
 
 class UploadController extends Controller {
 
@@ -1155,7 +1156,6 @@ class UploadController extends Controller {
     }
 
     public function analytics(Request $request, $slug) {
-        dd('dd');
         $input = $request->all();
         $input['url_path'] = url('analytics/' . $slug);
         $input['slug'] = $slug;
@@ -1187,7 +1187,7 @@ class UploadController extends Controller {
             $data['downloads_ref'] = $download_chart_ref;
             $data['title'] = $res->data->title;
             $data['downloads_table'] = $res->data->downloads_table;
-            return view('analytics', $data);
+            return view('pages.analytics', $data);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
             if ($res->hasResponse()) {
