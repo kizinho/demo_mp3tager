@@ -589,7 +589,7 @@ Dropzone.options.myUpload = {
         });
         function checkUpload(generator) {
             jQuery.ajax({
-                url: "{{url('get-upload')}}",
+                url: "{{url('get-upload-m')}}",
                 data: {id: generator},
                 method: 'GET',
                 success: function (data) {
@@ -687,7 +687,7 @@ Dropzone.options.myUpload = {
         });
         function checkUpload(generator) {
             jQuery.ajax({
-                url: "{{url('get-upload')}}",
+                url: "{{url('get-upload-m')}}",
                 data: {id: generator},
                 method: 'GET',
                 success: function (data) {
