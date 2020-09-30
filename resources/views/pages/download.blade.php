@@ -138,7 +138,12 @@
                 @endif
                 <div class="clearfix"></div>
             </article>
+           
             @endforeach
+                 @if(count($details) >1 )
+                 <div class="download-songs " style="background-color:  {{config('app.color_site')}}"><a class="text-white" href="{{url('batch-downloads?'.$url)}}"> Batch Download All  <i class="fa fa-download"></i></a> &nbsp;</div> 
+
+        @endif
         </div>
 
     </div>

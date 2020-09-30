@@ -288,12 +288,50 @@ class UploadController extends Controller {
             'name' => 'random_string_upload',
             'contents' => $request->random_string_upload
         ];
+        $output[] = [
+            'name' => 'remove',
+            'contents' => $request->remove
+        ];
         try {
             $url = config('app.naijacrawl_api') . '/mp3-upload-tag-zip';
             $client_details = static::client();
             $response = $client_details['client']->request('POST', $url, [
                 'headers' => $client_details['headers'],
                 'multipart' => $output
+            ]);
+            $data = \GuzzleHttp\json_decode($response->getBody());
+
+            return [
+                'data' => $data
+            ];
+        } catch (\GuzzleHttp\Exception\RequestException $data) {
+
+            if ($data->hasResponse()) {
+                $response = $data->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Server Error',
+                    ];
+                }
+                if ($response->getStatusCode() == 404) {
+                    return [
+                        'status' => 422,
+                        'message' => 'Page not found',
+                    ];
+                }
+            }
+        }
+    }
+
+    public function remove(Request $request) {
+        $input = $request->all();
+        try {
+            $url = config('app.naijacrawl_api') . '/mp3-remove-file';
+            $client_details = static::client();
+            $response = $client_details['client']->request('POST', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
             ]);
             $data = \GuzzleHttp\json_decode($response->getBody());
 
@@ -571,6 +609,7 @@ class UploadController extends Controller {
                 return redirect()->route('upload');
             }
             $data['details'] = $res->details;
+            $data['url'] = $res->url;
             foreach ($res->details as $d) {
                 $timeFolder = $d->time_folder;
                 if (!empty(config('app.tag_path'))) {
@@ -641,7 +680,8 @@ class UploadController extends Controller {
             }
         }
     }
-   public function tagGetUploadM(Request $request) {
+
+    public function tagGetUploadM(Request $request) {
         $input = $request->all();
         try {
             $client_details = static::client();
@@ -867,7 +907,7 @@ class UploadController extends Controller {
             if (!empty(config('app.tag_path'))) {
                 $download_path = public_path() . '/' . config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path;
             } elseif (!empty(config('app.main_site'))) {
-                $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path;
+                $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.main_site') . '/' . $res->tag->time_folder . $res->tag->path;
             } else {
                 session()->flash('message.level', 'error');
                 session()->flash('message.color', 'red');
@@ -925,7 +965,7 @@ class UploadController extends Controller {
             if (!empty(config('app.tag_path'))) {
                 $download_path = public_path() . '/' . config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path;
             } elseif (!empty(config('app.main_site'))) {
-                $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path;
+                $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.main_site') . '/' . $res->tag->time_folder . $res->tag->path;
             } else {
                 session()->flash('message.level', 'error');
                 session()->flash('message.color', 'red');
@@ -1003,6 +1043,8 @@ class UploadController extends Controller {
     }
 
     public function downloadBatch(Request $request) {
+        $link = $request->server('HTTP_REFERER');
+        $ip = $request->getClientIp();
         $data_array = $request->all();
         $output = [];
         foreach ($data_array as $key => $value) {
@@ -1013,6 +1055,14 @@ class UploadController extends Controller {
                 continue;
             }
         }
+        $output[] = [
+            'name' => 'link',
+            'contents' => $link
+        ];
+        $output[] = [
+            'name' => 'ip',
+            'contents' => $ip
+        ];
 
         try {
             $client_details = static::client();
@@ -1023,13 +1073,34 @@ class UploadController extends Controller {
             ]);
 
             $res = json_decode($response->getBody());
-            if (empty($res)) {
-                abort(405);
+            $files = [];
+            foreach ($res->details as $value) {
+                if (!empty(config('app.tag_path'))) {
+                    $download_path = public_path() . '/' . config('app.tag_path') . '/' . $value->time_folder . $value->path;
+                } elseif (!empty(config('app.main_site'))) {
+                    $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.main_site') . '/' . $value->time_folder . $value->path;
+                } else {
+                    session()->flash('message.level', 'error');
+                    session()->flash('message.color', 'red');
+                    session()->flash('message.content', "You didn't provide any path to save your file, please kindly do that");
+                    return redirect()->back();
+                }
+                $file = $download_path;
+                if (!file_exists($file)) {
+                    abort(455);
+                }
+                $files[] = $download_path;
             }
-            if ($res->status == 455) {
-                abort(455);
+            $zipper = new \Madnest\Madzipper\Madzipper;
+            if (!empty(config('app.tag_path'))) {
+                $zip_path = public_path() . '/' . config('app.tag_path') . '/batch.zip';
+            } elseif (!empty(config('app.main_site'))) {
+                $zip_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.main_site') . '/batch.zip';
             }
-            return response()->download($res->file)->deleteFileAfterSend(true);
+
+            $zipper->make($zip_path)->add([$files]);
+            $zipper->close();
+            return response()->download($zip_path)->deleteFileAfterSend(true);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
             if ($res->hasResponse()) {

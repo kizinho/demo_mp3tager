@@ -24,7 +24,74 @@
 <meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files" />
 
 <link rel="stylesheet" href="{{asset('dropzone/dropzone.min.css')}}">
+<style>
 
+    input[type="checkbox"] { 
+        position: absolute;
+        opacity: 0;
+    }
+
+    /* Normal Track */
+    input[type="checkbox"].ios-switch + div {
+        vertical-align: middle;
+        border: 1px solid #cd6133;
+        border-radius: 999px;
+        background-color: rgba(0, 0, 0, 0.1);
+        -webkit-transition-duration: .4s;
+        -webkit-transition-property: background-color, box-shadow;
+        box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    /* Checked Track (Blue) */
+    input[type="checkbox"].ios-switch:checked + div {
+
+        background-position: 0 0;
+        background-color: #cd6133;
+        border: 1px solid #cd6133;
+        box-shadow: inset 0 0 0 10px #cd6133;
+    }
+
+    /* Tiny Track */
+    input[type="checkbox"].tinyswitch.ios-switch + div {
+        width: 34px;    height: 18px;
+    }
+
+
+
+    /* Normal Knob */
+    input[type="checkbox"].ios-switch + div > div {
+        float: left;
+        width: 18px; height: 18px;
+        border-radius: inherit;
+        background: #ffffff;
+        -webkit-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+        -webkit-transition-duration: 0.4s;
+        -webkit-transition-property: transform, background-color, box-shadow;
+        -moz-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+        -moz-transition-duration: 0.4s;
+        -moz-transition-property: transform, background-color;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+        margin-top: 1px;
+        margin-left: 1px;
+    }
+
+
+    /* Tiny Knob */
+    input[type="checkbox"].tinyswitch.ios-switch + div > div {
+        width: 16px; height: 16px;
+        margin-top: 1px;
+    }
+
+    /* Checked Tiny Knob (Blue Style) */
+    input[type="checkbox"].tinyswitch.ios-switch:checked + div > div {
+        -webkit-transform: translate3d(16px, 0, 0);
+        -moz-transform: translate3d(16px, 0, 0);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px #cd6133;
+    }
+</style>
 @endsection
 @extends('layouts.app')
 @section('content')
@@ -46,7 +113,7 @@
                 <li class="nav-item">
                     <a class="nav-link " id="links_youtube-tab" data-toggle="tab" href="#links_youtube" role="tab" aria-controls="links_youtube" aria-selected="false"><span> Youtube Mp3 </span><i class="fas fa-link"></i></a>
                 </li>
-                 <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link " id="zip-tab" data-toggle="tab" href="#zip" role="tab" aria-controls="zip" aria-selected="false"><span> Zip </span><i class="fas fa-file-import"></i></a>
                 </li>
                 <li class="nav-item">
@@ -87,7 +154,7 @@
                         </div>
 
                         <div class="data-field data-field-btn mt-3">
-                            <input type="submit" id="submit-file"  value="upload" class="btn btn-success px-5 mb-3">
+                            <input type="submit"   value="upload" class="btn btn-success px-5 mb-3">
                         </div>
 
                     </form>
@@ -99,10 +166,17 @@
                     <div class="data-field data-field-search mt-3">
                         <p>Please enter a valid audio url or Video Url {supports Youtube link Mp4}</p>
                         <form id="link">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dynamic_field">
+                                    <tr>
+                                        <td><input type="text" id="url" name="url[]" placeholder="domain.com/song.mp3" class="form-control name_list" required /></td>
+                                        <td><button type="button" name="add" id="add" class="btn btn-primary btn-xs"> <i class="fa fa-plus"></i></button></td>
+                                    </tr>
+                                </table>
+                                <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  >Go <i class="fas fa-sign-in-alt"></i> </button>
 
-                            <input class="col col-sm-12 form-control" id="url" placeholder="domain.com/song.mp3" required>
+                            </div>
 
-                            <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  id="submit-file">Go <i class="fas fa-sign-in-alt"></i> </button>
                         </form>
                     </div>
                     <!-- End of inside search bar -->
@@ -114,22 +188,32 @@
                         <p>Please enter Youtube Url for mp3</p>
                         <form id="link-youtube">
                             <input class="form-control" value="mp3" type="hidden" id="action" placeholder="" required>
-                            <input class="col col-sm-12 form-control" id="url_youtube" placeholder="https://youtu.be/B8OMxVrDduU" required>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dynamic_field_u">
+                                    <tr>
+                                        <td><input type="text" id="url_youtube" name="url_youtube[]" placeholder="https://youtu.be/B8OMxVrDduU" class="form-control name_list_u" required /></td>
+                                        <td><button type="button" name="url_youtube" id="add_u" class="btn btn-primary btn-xs"> <i class="fa fa-plus"></i></button></td>
+                                    </tr>
+                                </table>
+                                <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  >Go <i class="fas fa-sign-in-alt"></i> </button>
 
-                            <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  id="submit-file">Go <i class="fas fa-sign-in-alt"></i> </button>
+                            </div>
+
                         </form>
+
                     </div>
                     <!-- End of inside search bar -->
                 </div>
-                  <div class="tab-pane fade" id="zip" role="tabpanel" aria-labelledby="zip-tab">
+                <div class="tab-pane fade" id="zip" role="tabpanel" aria-labelledby="zip-tab">
                     <!-- Strat of inside search bar -->
                     <div class="data-field data-field-search mt-3">
                         <p>Zip upload</p>
                         <form id="zip">
-                           
-                            <input class="col col-sm-12 form-control" type="file" name="zip" accept=".zip" placeholder="domain.com/file.zip" required>
 
-                            <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  id="submit-file">Go <i class="fas fa-sign-in-alt"></i> </button>
+                            <input class="col col-sm-12 form-control" type="file" name="zip" accept=".zip" placeholder="domain.com/file.zip" required>
+                            <label class="mt-3"> Enable file removal from zip  <input type="checkbox"  id="remove" name="remove"  class="ios-switch green tinyswitch"  /><div><div></div></div> </label>
+                            <div class="clearfix"></div>
+                            <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  >Go <i class="fas fa-sign-in-alt"></i> </button>
                         </form>
                     </div>
                     <!-- End of inside search bar -->
@@ -139,10 +223,20 @@
                     <div class="data-field data-field-search mt-3">
                         <p>Zip upload Link</p>
                         <form id="zip-link">
-                          
-                            <input class="col col-sm-12 form-control" type="text" id="url-zip"  placeholder="domain.com/file.zip" required>
+                            <input class="form-control" value="mp3" type="hidden" id="action" placeholder="" required>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dynamic_field_zip">
+                                    <tr>
+                                        <td><input type="text" id="url-zip" name="url-zip[]" placeholder="domain.com/file.zip" class="form-control name_list_zip" required/></td>
+                                        <td><button type="button" name="url-zip" id="add_zip" class="btn btn-primary btn-xs"> <i class="fa fa-plus"></i></button></td>
+                                    </tr>
+                                </table>
+                                <label> Enable file removal from zip  <input type="checkbox"  id="remove" name="remove"  class="ios-switch green tinyswitch"  /><div><div></div></div> </label>
+                                <div class="clearfix"></div>
+                                <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  >Go <i class="fas fa-sign-in-alt"></i> </button>
 
-                            <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  id="submit-file">Go <i class="fas fa-sign-in-alt"></i> </button>
+                            </div>
+
                         </form>
                     </div>
                     <!-- End of inside search bar -->
@@ -151,7 +245,7 @@
             @if(config('app.ads_enable') == true)
             @include('layouts.banner')
             @endif
-            {{config('app.name')}} is the best online editing tool to change your mp3  , jpg , png , jpegand Mp4 tags like watermark on mp4, cover art and join two mp3 files . 
+            {{config('app.name')}} is the best online editing tool to change your mp3  , jpg , png , jpeg and Mp4 tags like watermark on mp4, cover art and join two mp3 files . 
             Using this platform you can upload and edit your mp3 tags or join another mp3 .
             Download your updated files by using our easy download button .
             <br/>  <br/>
@@ -166,134 +260,166 @@
     </div>
 </main>
 @section('script')
+<script>
+    var i = 1;
+    $('#add').click(function () {
+        i++;
+        $('#dynamic_field').append('<tr id="row' + i + '"><td><input type="text" id="url" name="url[]" placeholder="domain.com/song.mp3" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove btn-xs">X</button></td></tr>');
+    });
+
+    $(document).on('click', '.btn_remove', function () {
+        var button_id = $(this).attr("id");
+        $('#row' + button_id + '').remove();
+    });
+
+    $('#add_u').click(function () {
+        i++;
+        $('#dynamic_field_u').append('<tr id="row_u' + i + '"><td><input type="text"  id="url_youtube" name="url_youtube[]" placeholder="https://youtu.be/B8OMxVrDduU" class="form-control name_list_u" /></td><td><button type="button" name="remove_u" id="' + i + '" class="btn btn-danger btn-xs btn_remove_u">X</button></td></tr>');
+    });
+
+    $(document).on('click', '.btn_remove_u', function () {
+        var button_id = $(this).attr("id");
+        $('#row_u' + button_id + '').remove();
+    });
+
+    $('#add_zip').click(function () {
+        i++;
+        $('#dynamic_field_zip').append('<tr id="row_zip' + i + '"><td><input type="text"  id="url-zip" name="url-zip[]" placeholder="domain.com/file.zip" class="form-control name_list_u" /></td><td><button type="button" name="remove_zip" id="' + i + '" class="btn btn-danger btn-xs btn_remove_zip">X</button></td></tr>');
+    });
+
+    $(document).on('click', '.btn_remove_zip', function () {
+        var button_id = $(this).attr("id");
+        $('#row_zip' + button_id + '').remove();
+    });
+</script>
 <script src="{{asset('dropzone/dropzone.min.js')}}"></script>
 <script>
 
-Dropzone.options.myUpload = {
-    url: "{{url('upload')}}",
-    autoProcessQueue: false,
-    uploadMultiple: true,
-    parallelUploads: 15,
-    maxFiles: 15,
-    maxFilesize: 2000,
-    timeout: 3000000,
-    acceptedFiles: '.mp3,.mp4,.mov,.m4a,.3gp,.3g2,.mj2',
-    addRemoveLinks: true,
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
+    Dropzone.options.myUpload = {
+        url: "{{url('upload')}}",
+        autoProcessQueue: false,
+        uploadMultiple: true,
+        parallelUploads: 15,
+        maxFiles: 15,
+        maxFilesize: 2000,
+        timeout: 3000000,
+        acceptedFiles: '.mp3,.mp4,.mov,.m4a,.3gp,.3g2,.mj2',
+        addRemoveLinks: true,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
 
-    init: function () {
+        init: function () {
 
-        dzClosure = this;
-        document.getElementById("submit-file").addEventListener("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            dzClosure.processQueue();
+            dzClosure = this;
+            document.getElementById("submit-file").addEventListener("click", function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                dzClosure.processQueue();
 
 
-        });
-
-        this.on("sendingmultiple", function (data, xhr, formData) {
-            let generateRandomString = (stringLength) => {
-                stringLength = typeof stringLength === 'number' ? stringLength : 20;
-                const possibleCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890';
-                let str = '';
-                for (let i = 0; i < stringLength; i++) {
-                    const randomChar = possibleCharacters.charAt(
-                            Math.floor(Math.random() * possibleCharacters.length)
-                            );
-                    str += randomChar;
-                }
-                return str;
-            };
-            var count = dzClosure.files.length;
-            let generator = generateRandomString(10);
-            formData.append("random_string_upload", generator);
-            let ping = setInterval(function () {
-                checkUpload(count, generator);
-            }, 6000);
-            function clear_interval(interval) {
-                return clearInterval(interval);
-            }
-            $(".modal").show();
-            $.each(data, function (key, el) {
-                formData.append(el.name, el.value);
             });
-            console.log(formData);
 
-        });
-        this.on("success", function (file, responseText) {
+            this.on("sendingmultiple", function (data, xhr, formData) {
+                let generateRandomString = (stringLength) => {
+                    stringLength = typeof stringLength === 'number' ? stringLength : 20;
+                    const possibleCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890';
+                    let str = '';
+                    for (let i = 0; i < stringLength; i++) {
+                        const randomChar = possibleCharacters.charAt(
+                                Math.floor(Math.random() * possibleCharacters.length)
+                                );
+                        str += randomChar;
+                    }
+                    return str;
+                };
+                var count = dzClosure.files.length;
+                let generator = generateRandomString(10);
+                formData.append("random_string_upload", generator);
+                let ping = setInterval(function () {
+                    checkUpload(count, generator);
+                }, 6000);
+                function clear_interval(interval) {
+                    return clearInterval(interval);
+                }
+                $(".modal").show();
+                $.each(data, function (key, el) {
+                    formData.append(el.name, el.value);
+                });
+                console.log(formData);
 
-            if (responseText.data['status'] === 401) {
-                jQuery.each(responseText.data['message'], function (key, value) {
-                    var message = ('' + value + '');
+            });
+            this.on("success", function (file, responseText) {
+
+                if (responseText.data['status'] === 401) {
+                    jQuery.each(responseText.data['message'], function (key, value) {
+                        var message = ('' + value + '');
+                        toastr.options.onHidden = function () {
+                            $('.dz-preview').remove();
+                            $(".modal").hide();
+
+                        };
+                        toastr.error(message, {timeOut: 50000});
+                    });
+                    clearInterval(ping);
+                    return false;
+                }
+                if (responseText.data['status'] === 411) {
+                    var message = responseText.data['message'];
                     toastr.options.onHidden = function () {
                         $('.dz-preview').remove();
                         $(".modal").hide();
 
                     };
-                    toastr.error(message, {timeOut: 50000});
-                });
-                clearInterval(ping);
-                return false;
-            }
-            if (responseText.data['status'] === 411) {
-                var message = responseText.data['message'];
-                toastr.options.onHidden = function () {
-                    $('.dz-preview').remove();
+                    toastr.info(message, {timeOut: 50000});
+                    clearInterval(ping);
+                    return false;
+                }
+
+                if (responseText.data['status'] === 422) {
+                    var message = responseText.data['message'];
+                    toastr.options.onHidden = function () {
+                        $('.dz-preview').remove();
+                        $(".modal").hide();
+
+                    };
+                    toastr.info(message, {timeOut: 50000});
+                    clearInterval(ping);
+                    return false;
+                }
+
+
+                if (responseText.data['status'] === 200) {
+                    toastr.info('upload still in progress... please wait', {timeOut: 500});
                     $(".modal").hide();
 
-                };
-                toastr.info(message, {timeOut: 50000});
-                clearInterval(ping);
-                return false;
-            }
-
-            if (responseText.data['status'] === 422) {
-                var message = responseText.data['message'];
-                toastr.options.onHidden = function () {
-                    $('.dz-preview').remove();
-                    $(".modal").hide();
-
-                };
-                toastr.info(message, {timeOut: 50000});
-                clearInterval(ping);
-                return false;
-            }
-
-
-            if (responseText.data['status'] === 200) {
-                toastr.info('upload still in progress... please wait', {timeOut: 500});
-                $(".modal").hide();
-
-                return false;
-            }
-
-        });
-        function checkUpload(count, generator) {
-            jQuery.ajax({
-                url: "{{url('get-upload-muitple')}}",
-                data: {id: generator, count: count},
-                method: 'GET',
-                success: function (data) {
-                    if (data.data['status'] === 200) {
-                        let url = data.data['data'];
-                        toastr.success('success please wait ... redirecting', {timeOut: 500});
-                        window.location.href = "{{url('/tags')}}?" + url;
-                        /*Finish*/
-                        clear_interval(ping);
-                        return false;
-                    }
-
+                    return false;
                 }
 
             });
+            function checkUpload(count, generator) {
+                jQuery.ajax({
+                    url: "{{url('get-upload-muitple')}}",
+                    data: {id: generator, count: count},
+                    method: 'GET',
+                    success: function (data) {
+                        if (data.data['status'] === 200) {
+                            let url = data.data['data'];
+                            toastr.success('success please wait ... redirecting', {timeOut: 500});
+                            window.location.href = "{{url('/tags')}}?" + url;
+                            /*Finish*/
+                            clear_interval(ping);
+                            return false;
+                        }
+
+                    }
+
+                });
+
+            }
 
         }
-
-    }
-};
+    };
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -326,6 +452,16 @@ Dropzone.options.myUpload = {
                 $(".modal").hide();
             }
         });
+
+        var url_name = [];
+        $('input[name^="url"]').each(function () {
+            if ($(this).val()) {
+                url_name.push($(this).val());
+            }
+        });
+
+        var url = url_name;
+        var count = url_name.length;
         let generateRandomString = (stringLength) => {
             stringLength = typeof stringLength === 'number' ? stringLength : 20;
             const possibleCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890';
@@ -340,7 +476,7 @@ Dropzone.options.myUpload = {
         };
         let generator = generateRandomString(10);
         let ping = setInterval(function () {
-            checkUpload(generator);
+            checkUpload(generator, count);
         }, 6000);
         function clear_interval(interval) {
             return clearInterval(interval);
@@ -349,7 +485,7 @@ Dropzone.options.myUpload = {
             url: "{{url('/upload-link')}}",
             type: 'POST',
             data: {
-                url: jQuery('#url').val(),
+                url: url,
                 random_string_upload: generator
             },
             success: function (responseText) {
@@ -391,10 +527,10 @@ Dropzone.options.myUpload = {
             }
 
         });
-        function checkUpload(generator) {
+        function checkUpload(generator, count) {
             jQuery.ajax({
                 url: "{{url('get-upload')}}",
-                data: {id: generator},
+                data: {id: generator, count: count},
                 method: 'GET',
                 success: function (data) {
                     if (data.data['status'] === 200) {
@@ -440,9 +576,18 @@ Dropzone.options.myUpload = {
             }
             return str;
         };
+        var url_name = [];
+        $('input[name^="url_youtube"]').each(function () {
+            if ($(this).val()) {
+                url_name.push($(this).val());
+            }
+        });
+
+        var url = url_name;
+        var count = url_name.length;
         let generator = generateRandomString(10);
         let ping = setInterval(function () {
-            checkUpload(generator);
+            checkUpload(generator, count);
         }, 6000);
         function clear_interval(interval) {
             return clearInterval(interval);
@@ -451,7 +596,7 @@ Dropzone.options.myUpload = {
             url: "{{url('/upload-link')}}",
             type: 'POST',
             data: {
-                url: jQuery('#url_youtube').val(),
+                url: url,
                 action: jQuery('#action').val(),
                 random_string_upload: generator
             },
@@ -498,7 +643,7 @@ Dropzone.options.myUpload = {
         function checkUpload(generator) {
             jQuery.ajax({
                 url: "{{url('get-upload')}}",
-                data: {id: generator},
+                data: {id: generator, count: count},
                 method: 'GET',
                 success: function (data) {
                     if (data.data['status'] === 200) {
@@ -516,7 +661,7 @@ Dropzone.options.myUpload = {
 
         }
     });
- /*
+    /*
      Zip link
      */
     $('#zip-link').submit(function (event) {
@@ -544,6 +689,14 @@ Dropzone.options.myUpload = {
             }
             return str;
         };
+        var url_name = [];
+        $('input[name^="url-zip"]').each(function () {
+            if ($(this).val()) {
+                url_name.push($(this).val());
+            }
+        });
+
+        var url = url_name;
         let generator = generateRandomString(10);
         let ping = setInterval(function () {
             checkUpload(generator);
@@ -555,7 +708,8 @@ Dropzone.options.myUpload = {
             url: "{{url('/upload-zip-link')}}",
             type: 'POST',
             data: {
-                url: jQuery('#url-zip').val(),
+                url: url,
+                remove: jQuery('#remove').val(),
                 random_string_upload: generator
             },
             success: function (responseText) {
