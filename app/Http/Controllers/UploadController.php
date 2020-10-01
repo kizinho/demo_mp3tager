@@ -518,6 +518,7 @@ class UploadController extends Controller {
             'name' => 'zip_name',
             'contents' => $request->zip_name
         ];
+        
         try {
             $client_details = static::client();
             $url = config('app.naijacrawl_api') . '/mp3-save-tag';
@@ -632,24 +633,23 @@ class UploadController extends Controller {
                     session()->flash('message.content', "You didn't provide any path to save your file, please kindly do that");
                     return redirect()->route('upload');
                 }
-            }
+           
             $directory = static::enryStorageDir($path_dir);
-            foreach ($res->path as $p) {
-                $name = $directory . $p;
+            
+                $name = $directory . $d->path;
                 if (!file_exists($name)) {
                     $directory2 = static::enryStorageDir($path_dir2);
-                    $name2 = $directory2 . $p;
+                    $name2 = $directory2 . $d->path;
                     if (!file_exists($name2)) {
                         try {
-                            foreach ($res->file as $f) {
-                                copy($f, $name);
-                            }
+                                copy($res->folder.$d->path, $name);
+                           
                         } catch (\Exception $e) {
                             abort(455);
                         }
                     }
                 }
-            }
+          }
 
 
 
