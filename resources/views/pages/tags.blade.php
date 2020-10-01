@@ -324,6 +324,8 @@
                         </div>
                         @endif
                         @if(empty($tag_settings) || $tag_settings->active == false)
+                         @if($tag->mime_type =='jpg' || $tag->mime_type =='png' || $tag->mime_type =='jpeg' || $tag->mime_type =='gif')
+                         @else
                         <div class="tag-field tag-responsive">
                             <div class="row">
                                 <div class="col-sm">
@@ -344,6 +346,7 @@
                                 </div>
                             </div>
                         </div>
+                         @endif
                         @endif
                         @if($tag->mime_type == 'mp3')
                         <div class="tag-field tag-responsive">
@@ -445,6 +448,18 @@
                     </article>
                 </div>
                 @endforeach
+                @if(count($details) >1 )
+                <div class="tag-field tag-responsive mb-4">
+                    <div class="row">
+                        <div class="col-sm">
+                            <label class="text-muted">Give your Zip file a name</label>
+                        </div>
+                        <div class="col-sm">
+                            <input type="text" placeholder='zip name' name="zip_name"  required>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
             @if(config('app.ads_enable') == true)
             @include('layouts.text')
@@ -463,17 +478,12 @@
     </div>
 </div>
 @section('script')
-<!--  var name = $("input[name=name]").val();-->
-
-
-
 
 <script>
     function removeElement(elementId, callback){
     let element = document.getElementById(elementId);
-    let nextSibling = element.nextElementSibling
-
-            if (element){
+    let nextSibling = element.nextElementSibling;
+    if (element){
     if (confirm("Are you sure you want to remove this file?")){
     $.ajaxSetup({
     headers: {

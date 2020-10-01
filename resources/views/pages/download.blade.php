@@ -83,14 +83,14 @@
 
                     </textarea>
                     @else
-                     @if($download->mime_type == 'jpg' || $download->mime_type == 'png' || $download->mime_type == 'jpeg' || $download->mime_type == 'gif')
-                        @if($p == true)
-                        
-              <img src="{{url($download_path.$download->slug)}}" width="300" height="150"/>
-                         @else
-                         
-              <img src="{{url($download_path.$download->time_folder.$download->slug)}}" width="300" height="150"/>
-                         @endif
+                    @if($download->mime_type == 'jpg' || $download->mime_type == 'png' || $download->mime_type == 'jpeg' || $download->mime_type == 'gif')
+                    @if($p == true)
+
+                    <img src="{{url($download_path.$download->slug)}}" width="300" height="150"/>
+                    @else
+
+                    <img src="{{url($download_path.$download->time_folder.$download->slug)}}" width="300" height="150"/>
+                    @endif
                     @else
                     <video style="width:100%" controls loop>
                         @if($p == true)
@@ -138,12 +138,13 @@
                 @endif
                 <div class="clearfix"></div>
             </article>
-           
-            @endforeach
-                 @if(count($details) >1 )
-                 <div class="download-songs " style="background-color:  {{config('app.color_site')}}"><a class="text-white" href="{{url('batch-downloads?'.$url)}}"> Batch Download All  <i class="fa fa-download"></i></a> &nbsp;</div> 
 
-        @endif
+            @endforeach
+            @if(count($details) >1 )
+           
+            <div class="download-songs " style="background-color:  {{config('app.color_site')}}"><a class="text-white" href="{{url('zip-downloads?slug='.$zip)}}"> Batch Download All  <i class="fa fa-download"></i></a> &nbsp;</div> 
+     
+            @endif
         </div>
 
     </div>

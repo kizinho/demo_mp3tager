@@ -509,9 +509,14 @@ class UploadController extends Controller {
                         'ps' => $request->ps,
                         'extension' => $request->extension,
                         'tager_setting_active' => $request->tager_setting_active,
-                        'tager_setting_active_text' => $request->tager_setting_active_text
+                        'tager_setting_active_text' => $request->tager_setting_active_text,
+                        'zip_name' => $request->zip_name
                     ]
             ),
+        ];
+        $output [] = [
+            'name' => 'zip_name',
+            'contents' => $request->zip_name
         ];
         try {
             $client_details = static::client();
@@ -610,6 +615,7 @@ class UploadController extends Controller {
             }
             $data['details'] = $res->details;
             $data['url'] = $res->url;
+             $data['zip'] = $res->zip;
             foreach ($res->details as $d) {
                 $timeFolder = $d->time_folder;
                 if (!empty(config('app.tag_path'))) {
@@ -1043,33 +1049,15 @@ class UploadController extends Controller {
     }
 
     public function downloadBatch(Request $request) {
-        $link = $request->server('HTTP_REFERER');
-        $ip = $request->getClientIp();
-        $data_array = $request->all();
-        $output = [];
-        foreach ($data_array as $key => $value) {
-            if (!is_array($value)) {
-                $output[] = [
-                    'contents' => $value
-                ];
-                continue;
-            }
-        }
-        $output[] = [
-            'name' => 'link',
-            'contents' => $link
-        ];
-        $output[] = [
-            'name' => 'ip',
-            'contents' => $ip
-        ];
-
+        $input['link'] = $request->server('HTTP_REFERER');
+        $input['ip'] = $request->getClientIp();
+        $input['slug'] = $request->slug;
         try {
             $client_details = static::client();
             $url = config('app.naijacrawl_api') . '/mp3-batch-download';
             $response = $client_details['client']->request('GET', $url, [
                 'headers' => $client_details['headers'],
-                'query' => $output
+                'query' => $input
             ]);
 
             $res = json_decode($response->getBody());
@@ -1093,9 +1081,9 @@ class UploadController extends Controller {
             }
             $zipper = new \Madnest\Madzipper\Madzipper;
             if (!empty(config('app.tag_path'))) {
-                $zip_path = public_path() . '/' . config('app.tag_path') . '/batch.zip';
+                $zip_path = public_path() . '/' . config('app.tag_path') .'/'. $res->name.'.zip';
             } elseif (!empty(config('app.main_site'))) {
-                $zip_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.main_site') . '/batch.zip';
+                $zip_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.main_site') .'/'. $res->name.'.zip';
             }
 
             $zipper->make($zip_path)->add([$files]);

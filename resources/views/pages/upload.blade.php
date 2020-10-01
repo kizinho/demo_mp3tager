@@ -154,7 +154,7 @@
                         </div>
 
                         <div class="data-field data-field-btn mt-3">
-                            <input type="submit"   value="upload" class="btn btn-success px-5 mb-3">
+                            <input type="submit" id="submit-file"  value="upload" class="btn btn-success px-5 mb-3">
                         </div>
 
                     </form>
@@ -294,7 +294,10 @@
 </script>
 <script src="{{asset('dropzone/dropzone.min.js')}}"></script>
 <script>
-
+    let ping;
+    function clear_interval(interval) {
+        return clearInterval(interval);
+    }
     Dropzone.options.myUpload = {
         url: "{{url('upload')}}",
         autoProcessQueue: false,
@@ -336,12 +339,10 @@
                 var count = dzClosure.files.length;
                 let generator = generateRandomString(10);
                 formData.append("random_string_upload", generator);
-                let ping = setInterval(function () {
+                ping = setInterval(function () {
                     checkUpload(count, generator);
                 }, 6000);
-                function clear_interval(interval) {
-                    return clearInterval(interval);
-                }
+
                 $(".modal").show();
                 $.each(data, function (key, el) {
                     formData.append(el.name, el.value);

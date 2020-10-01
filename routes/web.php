@@ -28,7 +28,7 @@ Route::get('{path}/{slug}', 'UploadController@downloadTags')->name('content');
 //wih date
 Route::get('{path}/{year}/{month}/{slug}', 'UploadController@downloadTagG');
 Route::get('{path}/{folder}/{year}/{month}/{slug}', 'UploadController@downloadTag');
-Route::get('batch-downloads', 'UploadController@downloadBatch')->name('batch-downloads');
+Route::get('zip-downloads', 'UploadController@downloadBatch')->name('zip-downloads');
 //my files
 Route::get('my-files', 'UploadController@myFile')->name('my-files');
 Route::post('my-files', 'UploadController@myFile');
