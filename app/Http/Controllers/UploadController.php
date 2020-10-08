@@ -885,7 +885,6 @@ class UploadController extends Controller {
     }
 
     public function downloadTag(Request $request, $path, $folder, $year, $month, $slug) {
-        
         $link = $request->server('HTTP_REFERER');
         $input = $request->all();
         $input['path_slug'] = $year . '/' . $month . '/';
@@ -944,48 +943,6 @@ class UploadController extends Controller {
     }
 
     public function downloadTagG(Request $request, $path, $year, $month, $slug) {
-         if(!empty($request->zip)){
-        $input['link'] = $request->server('HTTP_REFERER');
-        $input['ip'] = $request->getClientIp();
-        $input['slug'] = $request->zip;
-              $client_details = static::client();
-            $url = config('app.naijacrawl_api') . '/mp3-batch-download';
-            $response = $client_details['client']->request('GET', $url, [
-                'headers' => $client_details['headers'],
-                'query' => $input
-            ]);
-
-            $res = json_decode($response->getBody());
-            $files = [];
-            foreach ($res->details as $value) {
-                if (!empty(config('app.tag_path'))) {
-                    $download_path = public_path() . '/' . config('app.tag_path') . '/' . $value->time_folder . $value->path;
-                } elseif (!empty(config('app.main_site'))) {
-                    $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.main_site') . '/' . $value->time_folder . $value->path;
-                } else {
-                    session()->flash('message.level', 'error');
-                    session()->flash('message.color', 'red');
-                    session()->flash('message.content', "You didn't provide any path to save your file, please kindly do that");
-                    return redirect()->back();
-                }
-                $file = $download_path;
-                if (!file_exists($file)) {
-                    abort(455);
-                }
-                $files[] = $download_path;
-            }
-            $zipper = new \Madnest\Madzipper\Madzipper;
-            if (!empty(config('app.tag_path'))) {
-                $zip_path = public_path() . '/' . config('app.tag_path') .'/'. $res->name.'.zip';
-            } elseif (!empty(config('app.main_site'))) {
-                $zip_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.main_site') .'/'. $res->name.'.zip';
-            }
-
-            $zipper->make($zip_path)->add([$files]);
-            $zipper->close();
-            return response()->download($zip_path)->deleteFileAfterSend(true);
-             
-         }
         $link = $request->server('HTTP_REFERER');
         $input = $request->all();
         $input['path_slug'] = $year . '/' . $month . '/';
@@ -994,7 +951,7 @@ class UploadController extends Controller {
         $input['link'] = $link;
         $input['ip'] = $ip;
         $input['website'] = config('app.url');
-        
+
         try {
             $client_details = static::client();
             $url = config('app.naijacrawl_api') . '/mp3-tag-download';
@@ -1092,7 +1049,6 @@ class UploadController extends Controller {
     }
 
     public function downloadBatch(Request $request) {
-
         $input['link'] = $request->server('HTTP_REFERER');
         $input['ip'] = $request->getClientIp();
         $input['slug'] = $request->slug;

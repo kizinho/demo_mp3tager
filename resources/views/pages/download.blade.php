@@ -141,12 +141,9 @@
 
             @endforeach
             @if(count($details) >1 )
-            @if(!empty(config('app.tag_path')))
+           
             <div class="download-songs " style="background-color:  {{config('app.color_site')}}"><a class="text-white" href="{{url('zip-downloads?slug='.$zip)}}"> Batch Download All  <i class="fa fa-download"></i></a> &nbsp;</div> 
-            @else 
-            <div class="download-songs " style="background-color:  {{config('app.color_site')}}"><a class="text-white" href="{{url(config('app.main_site_url') . '/' . config('app.main_site'). '/' .'zip-downloads?zip='.$zip)}}"> Batch Download All  <i class="fa fa-download"></i></a> &nbsp;</div> 
-
-            @endif
+     
             @endif
         </div>
 
