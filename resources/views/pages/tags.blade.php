@@ -240,7 +240,7 @@
                                     @else
                                     <div class="waterMarkcont  mb-1" id="waterMarkcont-{{ $loop->iteration }}">
 
-                                        <label>Use image <input type="checkbox"  name="tager_setting_active" class="ios-switch green tinyswitch"  /><div><div></div></div></label>
+                                        <label>Use image <input type="checkbox"  name="tager_setting_active_image" class="ios-switch green tinyswitch"  /><div><div></div></div></label>
 
                                     </div>
 

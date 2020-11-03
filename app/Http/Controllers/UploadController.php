@@ -25,7 +25,6 @@ class UploadController extends Controller {
                     'headers' => $client_details['headers']
                 ]);
                 $res = json_decode($response->getBody());
-
                 if (empty($res)) {
                     abort(405);
                 }
@@ -510,6 +509,7 @@ class UploadController extends Controller {
                         'extension' => $request->extension,
                         'tager_setting_active' => $request->tager_setting_active,
                         'tager_setting_active_text' => $request->tager_setting_active_text,
+                        'tager_setting_active_image' => $request->tager_setting_active_image,
                         'zip_name' => $request->zip_name
                     ]
             ),
@@ -518,7 +518,6 @@ class UploadController extends Controller {
             'name' => 'zip_name',
             'contents' => $request->zip_name
         ];
-        
         try {
             $client_details = static::client();
             $url = config('app.naijacrawl_api') . '/mp3-save-tag';
@@ -616,7 +615,7 @@ class UploadController extends Controller {
             }
             $data['details'] = $res->details;
             $data['url'] = $res->url;
-             $data['zip'] = $res->zip;
+            $data['zip'] = $res->zip;
             foreach ($res->details as $d) {
                 $timeFolder = $d->time_folder;
                 if (!empty(config('app.tag_path'))) {
@@ -624,8 +623,13 @@ class UploadController extends Controller {
                     $path_dir2 = public_path() . '/' . config('app.tag_path') . '/';
                     $data['download_path'] = config('app.tag_path') . 's/';
                 } elseif (!empty(config('app.main_site'))) {
-                    $path_dir = $_SERVER['DOCUMENT_ROOT'] . '/' . (config('app.main_site') . '/' . $timeFolder);
-                    $path_dir2 = $_SERVER['DOCUMENT_ROOT'] . '/' . (config('app.main_site') . '/');
+                    $url = $_SERVER['DOCUMENT_ROOT'];
+                    preg_match("/[^\/]+$/", $url, $matches);
+                    $newUrl = str_replace($matches[0], '', $url);
+                    $last = $newUrl . 'public_html';
+                    dd($last);
+                    $path_dir = $last . '/' . (config('app.main_site') . '/' . $timeFolder);
+                    $path_dir2 = $last . '/' . (config('app.main_site') . '/');
                     $data['download_path'] = config('app.main_site_url') . '/' . config('app.main_site') . '/';
                 } else {
                     session()->flash('message.level', 'error');
@@ -633,23 +637,22 @@ class UploadController extends Controller {
                     session()->flash('message.content', "You didn't provide any path to save your file, please kindly do that");
                     return redirect()->route('upload');
                 }
-           
-            $directory = static::enryStorageDir($path_dir);
-            
+
+                $directory = static::enryStorageDir($path_dir);
+
                 $name = $directory . $d->path;
                 if (!file_exists($name)) {
                     $directory2 = static::enryStorageDir($path_dir2);
                     $name2 = $directory2 . $d->path;
                     if (!file_exists($name2)) {
                         try {
-                                copy($res->folder.$d->path, $name);
-                           
+                            copy($res->folder . $d->path, $name);
                         } catch (\Exception $e) {
                             abort(455);
                         }
                     }
                 }
-          }
+            }
 
 
 
@@ -913,7 +916,11 @@ class UploadController extends Controller {
             if (!empty(config('app.tag_path'))) {
                 $download_path = public_path() . '/' . config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path;
             } elseif (!empty(config('app.main_site'))) {
-                $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.main_site') . '/' . $res->tag->time_folder . $res->tag->path;
+                $url = $_SERVER['DOCUMENT_ROOT'];
+                preg_match("/[^\/]+$/", $url, $matches);
+                $newUrl = str_replace($matches[0], '', $url);
+                $last = $newUrl . 'public_html';
+                $download_path = $last . '/' . config('app.main_site') . '/' . $res->tag->time_folder . $res->tag->path;
             } else {
                 session()->flash('message.level', 'error');
                 session()->flash('message.color', 'red');
@@ -971,7 +978,11 @@ class UploadController extends Controller {
             if (!empty(config('app.tag_path'))) {
                 $download_path = public_path() . '/' . config('app.tag_path') . '/' . $res->tag->time_folder . $res->tag->path;
             } elseif (!empty(config('app.main_site'))) {
-                $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.main_site') . '/' . $res->tag->time_folder . $res->tag->path;
+                $url = $_SERVER['DOCUMENT_ROOT'];
+                preg_match("/[^\/]+$/", $url, $matches);
+                $newUrl = str_replace($matches[0], '', $url);
+                $last = $newUrl . 'public_html';
+                $download_path = $last . '/' . config('app.main_site') . '/' . $res->tag->time_folder . $res->tag->path;
             } else {
                 session()->flash('message.level', 'error');
                 session()->flash('message.color', 'red');
@@ -1066,7 +1077,11 @@ class UploadController extends Controller {
                 if (!empty(config('app.tag_path'))) {
                     $download_path = public_path() . '/' . config('app.tag_path') . '/' . $value->time_folder . $value->path;
                 } elseif (!empty(config('app.main_site'))) {
-                    $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.main_site') . '/' . $value->time_folder . $value->path;
+                    $url = $_SERVER['DOCUMENT_ROOT'];
+                    preg_match("/[^\/]+$/", $url, $matches);
+                    $newUrl = str_replace($matches[0], '', $url);
+                    $last = $newUrl . 'public_html';
+                    $download_path = $last . '/' . config('app.main_site') . '/' . $value->time_folder . $value->path;
                 } else {
                     session()->flash('message.level', 'error');
                     session()->flash('message.color', 'red');
@@ -1081,9 +1096,13 @@ class UploadController extends Controller {
             }
             $zipper = new \Madnest\Madzipper\Madzipper;
             if (!empty(config('app.tag_path'))) {
-                $zip_path = public_path() . '/' . config('app.tag_path') .'/'. $res->name.'.zip';
+                $zip_path = public_path() . '/' . config('app.tag_path') . '/' . $res->name . '.zip';
             } elseif (!empty(config('app.main_site'))) {
-                $zip_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.main_site') .'/'. $res->name.'.zip';
+                $url = $_SERVER['DOCUMENT_ROOT'];
+                preg_match("/[^\/]+$/", $url, $matches);
+                $newUrl = str_replace($matches[0], '', $url);
+                $last = $newUrl . 'public_html';
+                $zip_path = $last . '/' . config('app.main_site') . '/' . $res->name . '.zip';
             }
 
             $zipper->make($zip_path)->add([$files]);
@@ -1170,7 +1189,11 @@ class UploadController extends Controller {
                     if (!empty(config('app.tag_path'))) {
                         $download_path = public_path() . '/' . config('app.tag_path') . '/' . $path;
                     } elseif (!empty(config('app.main_site'))) {
-                        $download_path = $_SERVER['DOCUMENT_ROOT'] . '/' . config('app.tag_path') . '/' . $path;
+                        $url = $_SERVER['DOCUMENT_ROOT'];
+                        preg_match("/[^\/]+$/", $url, $matches);
+                        $newUrl = str_replace($matches[0], '', $url);
+                        $last = $newUrl . 'public_html';
+                        $download_path = $last . '/' . config('app.tag_path') . '/' . $path;
                     } else {
                         session()->flash('message.level', 'error');
                         session()->flash('message.color', 'red');
@@ -1204,7 +1227,7 @@ class UploadController extends Controller {
         $headers = [
             'API-Key' => env('API_KEY'),
             'Authorization' => Crypt::decrypt(env('API_SECRET')),
-            'Website' => env('APP_URL')
+            'Website' => url('/')
         ];
         $client = new Client();
         return [
