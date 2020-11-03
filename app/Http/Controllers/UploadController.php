@@ -627,7 +627,6 @@ class UploadController extends Controller {
                     preg_match("/[^\/]+$/", $url, $matches);
                     $newUrl = str_replace($matches[0], '', $url);
                     $last = $newUrl . 'public_html';
-                    dd($last);
                     $path_dir = $last . '/' . (config('app.main_site') . '/' . $timeFolder);
                     $path_dir2 = $last . '/' . (config('app.main_site') . '/');
                     $data['download_path'] = config('app.main_site_url') . '/' . config('app.main_site') . '/';
