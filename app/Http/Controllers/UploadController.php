@@ -439,7 +439,11 @@ class UploadController extends Controller {
     }
 
     public function tagPost(Request $request) {
-        $input = $request->all();
+        if (empty($request->queue)) {
+            $job = 0;
+        } else {
+            $job = 1;
+        }
         if ($request->hasFile('viocetag')) {
             $voicetags = $request->file('viocetag');
             $output = [];
@@ -467,6 +471,20 @@ class UploadController extends Controller {
                 }
             }
         }
+        if ($request->hasFile('coverart_choice')) {
+            $coverartsvoice = $request->file('coverart_choice');
+            foreach ($coverartsvoice  as $keyc => $covervoice ) {
+                if (!is_array($covervoice)) {
+                    $output[] = [
+                        'name' => 'coverart_choice[' . $keyc . ']',
+                        'contents' => fopen($covervoice->getPathname(), 'r'),
+                        'filename' => $covervoice->getClientOriginalName()
+                    ];
+                    continue;
+                }
+            }
+        }
+
         if ($request->hasFile('watermark_image')) {
             $watermark_image = $request->file('watermark_image');
             foreach ($watermark_image as $keyt => $water) {
@@ -510,13 +528,18 @@ class UploadController extends Controller {
                         'tager_setting_active' => $request->tager_setting_active,
                         'tager_setting_active_text' => $request->tager_setting_active_text,
                         'tager_setting_active_image' => $request->tager_setting_active_image,
-                        'zip_name' => $request->zip_name
+                        'zip_name' => $request->zip_name,
+                        'job' => $job
                     ]
             ),
         ];
         $output [] = [
             'name' => 'zip_name',
             'contents' => $request->zip_name
+        ];
+        $output [] = [
+            'name' => 'url',
+            'contents' => url('/')
         ];
         try {
             $client_details = static::client();
@@ -1208,6 +1231,39 @@ class UploadController extends Controller {
             return [
                 'data' => $res
             ];
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
+        }
+    }
+
+    public function preview(Request $request) {
+        $link = $request->server('HTTP_REFERER');
+        $input = $request->all();
+        $ip = $request->getClientIp();
+        $input['slug'] = $request->view;
+        $input['link'] = $link;
+        $input['ip'] = $ip;
+        $input['website'] = config('app.url');
+
+        try {
+            $client_details = static::client();
+            $url = config('app.naijacrawl_api') . '/mp3-tag-download-view';
+            $response = $client_details['client']->request('GET', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
+            ]);
+
+            $res = json_decode($response->getBody());
+            return response()->download($res->file);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
             if ($res->hasResponse()) {

@@ -12,7 +12,16 @@ use Illuminate\Support\Facades\Route;
   | contains the "web" middleware group. Now create something great!
   |
  */
-
+Route::get('signin', 'AuthController@signIn')->name('signin');
+Route::post('signin', 'AuthController@signInPost');
+Route::get('{path}/{slug}', 'UploadController@downloadTags')->name('content');
+//wih date
+Route::get('{path}/{year}/{month}/{slug}', 'UploadController@downloadTagG');
+Route::get('{path}/{folder}/{year}/{month}/{slug}', 'UploadController@downloadTag');
+Route::get('zip-downloads', 'UploadController@downloadBatch')->name('zip-downloads');
+//my files
+Route::group(['middleware' => 'token'], function() {
+    
 //upload
 Route::get('/', 'UploadController@index')->name('/');
 Route::get('upload', 'UploadController@index')->name('upload');
@@ -24,12 +33,6 @@ Route::post('upload-link', 'UploadController@storeLink');
 Route::get('tags', 'UploadController@tag')->name('tags');
 Route::post('tags', 'UploadController@tagPost');
 Route::get('downloads', 'UploadController@downloads')->name('downloads');
-Route::get('{path}/{slug}', 'UploadController@downloadTags')->name('content');
-//wih date
-Route::get('{path}/{year}/{month}/{slug}', 'UploadController@downloadTagG');
-Route::get('{path}/{folder}/{year}/{month}/{slug}', 'UploadController@downloadTag');
-Route::get('zip-downloads', 'UploadController@downloadBatch')->name('zip-downloads');
-//my files
 Route::get('my-files', 'UploadController@myFile')->name('my-files');
 Route::post('my-files', 'UploadController@myFile');
 Route::delete('my-files', 'UploadController@myDelete');
@@ -43,4 +46,5 @@ Route::post('upload-zip-link', 'UploadController@storeZipLink');
 Route::post('upload-zip', 'UploadController@storeZip');
 Route::post('remove-file', 'UploadController@remove');
 
-
+Route::get('preview', 'UploadController@preview')->name('preview');
+});

@@ -147,16 +147,26 @@
                         <div class="tag-field tag-field-join" data-render="{{$key}}"> <!-- variable here -->
                             <div class="row">
                                 <div class="col-sm" data-render="{{$key}}"> <!-- variable here -->
-                                    <label class="tag-responsive-p">Join Voice Tag or Join Another Song ? (optional)</label>
+                                    
+                                    <label class="tag-responsive-p">
+                                        <audio controls style="width:100%;height:20px" loop>
+                     
+                            <source src="{{url('preview?view='.$tag->slug)}}" type="audio/ogg">
+                               <source src="{{url('preview?view='.$tag->slug)}}" type="audio/mpeg">
+                    
+                                    Your browser does not support the audio element.
+                                       </audio>
+
+                                        Join Voice Tag or Join Another Song ? (optional)</label>
                                     <input type="file" id="mp3Browser-{{$key}}"  data-type='txt' name="viocetag[{{$key}}]"  class="d-nn" accept=".mp3"> <!-- variable here -->
                                     <!-- =============Range section================ -->
                                     <div class="contorlRange">
-                                        <label class="currentPosition">0</label>
-                                        <input type="range" name="" id="songRange-{{$key}}" class="songRange" min="0" max="{{$tag->seconds}}" value="0">
-                                        <label>{{$tag->seconds}}</label>
+                                        <label class="currentPosition">00:00:00</label>
+                                        <input type="range" name="" id="songRange-{{$key}}" data-song-id="{{$key}}" class="songRange" min="00:00:00" max="{{$tag->seconds}}" value="0" step="1">
+                                        <label>{{$tag->duration}}</label>
                                     </div>
                                     <div class="contorlRangeBtn my-2">
-                                        <button type="button" class="setRangeBtn">Add Join Point {secs}</button>
+                                        <button type="button" class="setRangeBtn">Click to add tag point to song</button>
                                     </div>
                                     <!-- =============End Range section================ -->
                                 </div>
@@ -172,17 +182,31 @@
                                 @else
                                 <div class="col-sm browse-btn-cont align-self-center">
                                     <!-- =================Browse section=============== -->
-                                    <label class="tag-responsive-p"> Tager Setting</label>
 
                                     <div class="mb-1">
-                                        <label> <input type="checkbox"  value="{{$tag_settings->active }}"  name="tager_setting_active" @if($tag_settings->active == true)  checked='checked' @endif class="ios-switch green tinyswitch"  /><div><div></div></div></label>
+                                       
+                                        <label>Tager Setting <input type="checkbox"  value="{{$tag_settings->active }}"  name="tager_setting_active" @if($tag_settings->active == true)  checked='checked' @endif class="ios-switch green tinyswitch"  /><div><div></div></div></label>
+                                        <label> Select new Cover Art <input type="checkbox" id="cover_on{{ $loop->iteration }}" onclick="addImage({{ $loop->iteration }})"  name="cover_on" class="ios-switch green tinyswitch"  /><div><div></div></div></label>
 
                                     </div>
                                     <div class="rangeValue my-2" id="rangeValue-{{$key}}" data-render="{{$key}}"><!-- variable here -->
                                         <input type="hidden" name="joinSelect[{{$key}}]" class="holder" id="holder-{{$key}}" ><!-- variable here -->
                                     </div>
                                 </div>
+
                                 @endif
+                            </div>
+                        </div>
+                        <div class="tag-field tag-field-img" id="show-image{{ $loop->iteration }}"  data-render="{{ $loop->iteration }}" style="display:none"> <!-- variable here -->
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label class="tag-responsive-p">New cover Art image (up to 2Mb) </label>
+                                    <input type="file" id='img-file-{{ $loop->iteration }}' name="coverart_choice[{{$key}}]" data-type='img' class="d-nn" accept=".png,.jpg,.jpeg"> <!-- variable here -->
+                                </div>
+                                <div class="col-sm browse-btn-cont img-txt-style">
+                                    <label for="img-file-{{ $loop->iteration }}" class="browse-btn">Browse</label> <!-- variable here -->
+                                    <input type="text" placeholder="png , jpg , jpeg"   id="img-text-choice{{ $loop->iteration }}" readonly> <!-- variable here -->
+                                </div>
                             </div>
                         </div>
                         @if(config('app.ads_enable') == true)
@@ -324,8 +348,8 @@
                         </div>
                         @endif
                         @if(empty($tag_settings) || $tag_settings->active == false)
-                         @if($tag->mime_type =='jpg' || $tag->mime_type =='png' || $tag->mime_type =='jpeg' || $tag->mime_type =='gif')
-                         @else
+                        @if($tag->mime_type =='jpg' || $tag->mime_type =='png' || $tag->mime_type =='jpeg' || $tag->mime_type =='gif')
+                        @else
                         <div class="tag-field tag-responsive">
                             <div class="row">
                                 <div class="col-sm">
@@ -346,7 +370,7 @@
                                 </div>
                             </div>
                         </div>
-                         @endif
+                        @endif
                         @endif
                         @if($tag->mime_type == 'mp3')
                         <div class="tag-field tag-responsive">
@@ -464,7 +488,20 @@
             @if(config('app.ads_enable') == true)
             @include('layouts.text')
             @endif
+            <div class="tag-field tag-responsive">
 
+
+                <div class="row">
+                    <div class="col-sm">
+
+                        <label> Background Proccess  <input type="checkbox"  name="queue" class="ios-switch green tinyswitch"  /><div><div></div></div>Yes<br/>
+                            <small> We will mailed you when your files are done and ready to download  </small>
+                        </label>
+                    </div>
+                </div>
+
+
+            </div>
             <div class="tag-field tag-responsive">
                 <div class="row">
                     <div class="col-sm sub-btn-form">
@@ -591,6 +628,13 @@
             clearInterval(ping);
             return false;
             }
+            if (data.data['status'] === 201) {
+            var message = data.data['message'];
+            toastr.success(message, {timeOut: 50000});
+            window.location.href = "{{url('/upload')}}";
+            clearInterval(ping);
+            return false;
+            }
             if (data.data['status'] === 500) {
             var message = data.data['message'];
             toastr.error(message, {timeOut: 50000});
@@ -675,6 +719,12 @@
     if ($(this).attr('data-type') == 'img')
             $(mylbltext).val(e.target.files[0].name);
     })
+            $("input[type = file]").change(function (e) {
+    var parentIndexImgChoice = $(this).parent().parent().parent().attr('data-render');
+    var mylbltextChoice = "#img-text-choice" + parentIndexImgChoice;
+    if ($(this).attr('data-type') == 'img')
+            $(mylbltextChoice).val(e.target.files[0].name);
+    })
 
 
             var rangValusAray = [];
@@ -684,6 +734,7 @@
     var appendId = `rangeValue-${rangBtnIndex}`
             var holderId = `holder-${rangBtnIndex}`
             rangValue = $(`#${rangId}`).val()
+
             if (rangValusAray[rangBtnIndex] == null) {
     var currntArry = [];
     currntArry.push(rangValue)
@@ -692,7 +743,7 @@
     var oldarr = rangValusAray[rangBtnIndex];
     oldarr.push(rangValue)
     }
-    var child = `<p class="val-cont"><span class="rangeHolder">${rangValue}</span><span class="btnRangclear fas fa-times-circle" data-range-index="${rangValue}"></span></p>`
+    var child = `<p class="val-cont"><span class="rangeHolder">${toHhMmSs(rangValue)}</span><span class="btnRangclear fas fa-times-circle" data-range-index="${rangValue}"></span></p>`
             $(`#${appendId}`).append(child)
             $(`#${holderId}`).attr("value", rangValusAray[rangBtnIndex])
     })
@@ -722,6 +773,7 @@
     this.parentNode.parentNode.parentNode.children[1].children[0].setAttribute('for', rangeFileId)
     }
     })
+
 </script>
 <script>
             $(document).ready(function () {
@@ -750,7 +802,48 @@
     //Save data to sessionStorage
     sessionStorage.setItem('selectedCollapse', target);
     });
-    });
+    });</script>
+<script>
+    function addImage(index) {
+    var checkbox = document.getElementById('cover_on' + index);
+    if (checkbox.checked === true) {
+    $('#show-image' + index).show().fadeIn();
+    } else {
+    $('#show-image' + index).hide().fadeOut();
+    }
+    }
+</script> 
+
+<script>
+    window.onload = function(){
+
+    let allBars = document.querySelectorAll(".songRange")
+            allBars.forEach(bar => {
+            bar.addEventListener("change", selectBar)
+            });
+    function selectBar(){
+    let currentId = this.getAttribute("data-song-id")
+            let elmId = `songRange-${currentId}`
+            const rangeBar = document.getElementById(elmId)
+            let seconds = document.getElementById(elmId).value
+            let labelTxt = document.getElementById(elmId).previousElementSibling
+            labelTxt.textContent = toHhMmSs(seconds)
+
+
+    }
+
+    }
+    function toHhMmSs(secs){
+    let date = new Date(secs * 1000);
+    let hh = date.getUTCHours();
+    let mm = date.getUTCMinutes();
+    let ss = date.getSeconds();
+    if (hh < 10) {hh = "0" + hh; }
+    if (mm < 10) {mm = "0" + mm; }
+    if (ss < 10) {ss = "0" + ss; }
+    return t = hh + ":" + mm + ":" + ss;
+    }
+
 </script>
 @endsection
 @endsection
