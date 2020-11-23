@@ -14,11 +14,7 @@ use Illuminate\Support\Facades\Route;
  */
 Route::get('signin', 'AuthController@signIn')->name('signin');
 Route::post('signin', 'AuthController@signInPost');
-Route::get('{path}/{slug}', 'UploadController@downloadTags')->name('content');
-//wih date
-Route::get('{path}/{year}/{month}/{slug}', 'UploadController@downloadTagG');
-Route::get('{path}/{folder}/{year}/{month}/{slug}', 'UploadController@downloadTag');
-Route::get('zip-downloads', 'UploadController@downloadBatch')->name('zip-downloads');
+
 //my files
 Route::group(['middleware' => 'token'], function() {
     
@@ -48,3 +44,10 @@ Route::post('remove-file', 'UploadController@remove');
 
 Route::get('preview', 'UploadController@preview')->name('preview');
 });
+Route::get('{path}/{slug}', 'UploadController@downloadTags')->name('content');
+//wih date
+Route::get('{path}/{year}/{month}/{slug}', 'UploadController@downloadTagG');
+Route::get('{path}/{folder}/{year}/{month}/{slug}', 'UploadController@downloadTag');
+Route::get('zip-downloads', 'UploadController@downloadBatch')->name('zip-downloads');
+Route::get('embed-link', 'UploadController@embed')->name('embed-link');
+Route::get('playlist-embed', 'UploadController@embedList')->name('playlist-embed');

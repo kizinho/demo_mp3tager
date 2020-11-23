@@ -207,7 +207,7 @@
                                         <td><button type="button" name="url-zip" id="add_zip" class="btn btn-primary btn-xs"> <i class="fa fa-plus"></i></button></td>
                                     </tr>
                                 </table>
-                                <label> Enable file removal from zip  <input type="checkbox"  id="remove" name="remove"  class="ios-switch green tinyswitch"  /><div><div></div></div> </label>
+                                <label> Enable file removal from zip  <input type="checkbox"  id="remove_link" name="remove"  class="ios-switch green tinyswitch"  /><div><div></div></div> </label>
                                 <div class="clearfix"></div>
                                 <button type="submit" class="btn btn-success px-5 mt-3 mb-4"  >Go <i class="fas fa-sign-in-alt"></i> </button>
 
@@ -304,7 +304,7 @@
                 formData.append("random_string_upload", generator);
                 let ping = setInterval(function () {
                     checkUpload(count, generator);
-                }, 6000);
+                }, 12000);
                 function clear_interval(interval) {
                     return clearInterval(interval);
                 }
@@ -442,7 +442,7 @@
         let generator = generateRandomString(10);
         let ping = setInterval(function () {
             checkUpload(generator, count);
-        }, 6000);
+        }, 12000);
         function clear_interval(interval) {
             return clearInterval(interval);
         }
@@ -530,6 +530,12 @@
                 $(".modal").hide();
             }
         });
+         var checkbox = document.getElementById("remove_link");
+        if (checkbox.checked) {
+          var check_active = 1;
+        } else {
+           var check_active = '';
+        }
         var url_name = [];
         $('input[name^="url-zip"]').each(function () {
             if ($(this).val()) {
@@ -553,7 +559,7 @@
         let generator = generateRandomString(10);
         let ping = setInterval(function () {
             checkUpload(generator);
-        }, 6000);
+        }, 12000);
         function clear_interval(interval) {
             return clearInterval(interval);
         }
@@ -562,7 +568,7 @@
             type: 'POST',
             data: {
                 url: url,
-                remove: jQuery('#remove').val(),
+                remove: check_active,
                 random_string_upload: generator
             },
             success: function (responseText) {
@@ -651,7 +657,7 @@
         formData.append('random_string_upload', generator);
         let ping = setInterval(function () {
             checkUpload(generator);
-        }, 6000);
+        }, 12000);
         function clear_interval(interval) {
             return clearInterval(interval);
         }

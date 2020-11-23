@@ -151,8 +151,8 @@
                                     <label class="tag-responsive-p">
                                         <audio controls style="width:100%;height:20px" loop>
                      
-                            <source src="{{url('preview?view='.$tag->slug)}}" type="audio/ogg">
-                               <source src="{{url('preview?view='.$tag->slug)}}" type="audio/mpeg">
+                            <source src="{{$preview.$tag->path}}" type="audio/ogg">
+                               <source src="{{$preview.$tag->path}}" type="audio/mpeg">
                     
                                     Your browser does not support the audio element.
                                        </audio>
@@ -229,7 +229,7 @@
                         @endif
                         @else 
 
-                        @if($tag->mime_type =='mp4' || $tag->mime_type =='mkv' || $tag->mime_type =='jpg' || $tag->mime_type =='png' || $tag->mime_type =='jpeg' || $tag->mime_type =='gif')
+                        @if($tag->mime_type =='mp4' || $tag->mime_type =='webm' ||  $tag->mime_type =='mkv' || $tag->mime_type =='jpg' || $tag->mime_type =='png' || $tag->mime_type =='jpeg' || $tag->mime_type =='gif')
                         <!-- =========== watermark ===========-->
                         <div class="tag-field tag-responsive">
                             <div class="row align-items-center">
@@ -436,7 +436,7 @@
                         @endif
                         @endif
 
-                        @if($tag->mime_type =='mp3' || $tag->mime_type =='mp4' || $tag->mime_type =='mkv' || $tag->mime_type =='jpg' || $tag->mime_type =='png' || $tag->mime_type =='jpeg' || $tag->mime_type =='gif')
+                        @if($tag->mime_type =='mp3' || $tag->mime_type =='mp4' || $tag->mime_type =='webm' || $tag->mime_type =='mkv' || $tag->mime_type =='jpg' || $tag->mime_type =='png' || $tag->mime_type =='jpeg' || $tag->mime_type =='gif')
                         @else
                         <!-- =================End is private section======================= -->
                         <div class="tag-field tag-responsive">
@@ -587,7 +587,7 @@
     var id = id_name.split(',');
     let ping = setInterval(function () {
     checkProgress(id);
-    }, 6000);
+    }, 12000);
     function clear_interval(interval) {
     return clearInterval(interval);
     }

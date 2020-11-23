@@ -60,8 +60,9 @@ return [
     'banner_ad_image_link' => env('BANNER_ADS_CLICK_LINK'),
     'banner_ad_image_width' => env('BANNER_ADS_IMAGE_WIDTH'),
     'banner_ad_image_height' => env('BANNER_ADS_IMAGE_HEIGHT'),
-    'main_site'=> env('TAG_SAVE_PATH_MAIN_SITE'),
-    'main_site_url'=> env('MAIN_SITE_URL'),
+    'main_site' => env('TAG_SAVE_PATH_MAIN_SITE'),
+    'main_site_url' => env('MAIN_SITE_URL'),
+    'main_site_store' => env('MAIN_SITE_STORE'),
     /*
       |--------------------------------------------------------------------------
       | Application Timezone

@@ -398,6 +398,7 @@ class UploadController extends Controller {
             }
 
             $data['details'] = $res->tags;
+            $data['preview'] = $res->preview;
             $data['tag_settings'] = $res->data->tag_settings;
 
 
@@ -473,7 +474,7 @@ class UploadController extends Controller {
         }
         if ($request->hasFile('coverart_choice')) {
             $coverartsvoice = $request->file('coverart_choice');
-            foreach ($coverartsvoice  as $keyc => $covervoice ) {
+            foreach ($coverartsvoice as $keyc => $covervoice) {
                 if (!is_array($covervoice)) {
                     $output[] = [
                         'name' => 'coverart_choice[' . $keyc . ']',
@@ -649,7 +650,7 @@ class UploadController extends Controller {
                     $url = $_SERVER['DOCUMENT_ROOT'];
                     preg_match("/[^\/]+$/", $url, $matches);
                     $newUrl = str_replace($matches[0], '', $url);
-                    $last = $newUrl . 'public_html';
+                    $last = $newUrl . config('app.main_site_store');
                     $path_dir = $last . '/' . (config('app.main_site') . '/' . $timeFolder);
                     $path_dir2 = $last . '/' . (config('app.main_site') . '/');
                     $data['download_path'] = config('app.main_site_url') . '/' . config('app.main_site') . '/';
@@ -694,6 +695,7 @@ class UploadController extends Controller {
                     'query' => $input
                 ]);
             }
+              $data['ex'] = $res->ex;
             return view('pages.download', $data);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
@@ -941,7 +943,7 @@ class UploadController extends Controller {
                 $url = $_SERVER['DOCUMENT_ROOT'];
                 preg_match("/[^\/]+$/", $url, $matches);
                 $newUrl = str_replace($matches[0], '', $url);
-                $last = $newUrl . 'public_html';
+                $last = $newUrl . config('app.main_site_store');
                 $download_path = $last . '/' . config('app.main_site') . '/' . $res->tag->time_folder . $res->tag->path;
             } else {
                 session()->flash('message.level', 'error');
@@ -1003,7 +1005,7 @@ class UploadController extends Controller {
                 $url = $_SERVER['DOCUMENT_ROOT'];
                 preg_match("/[^\/]+$/", $url, $matches);
                 $newUrl = str_replace($matches[0], '', $url);
-                $last = $newUrl . 'public_html';
+                $last = $newUrl . config('app.main_site_store');
                 $download_path = $last . '/' . config('app.main_site') . '/' . $res->tag->time_folder . $res->tag->path;
             } else {
                 session()->flash('message.level', 'error');
@@ -1102,7 +1104,7 @@ class UploadController extends Controller {
                     $url = $_SERVER['DOCUMENT_ROOT'];
                     preg_match("/[^\/]+$/", $url, $matches);
                     $newUrl = str_replace($matches[0], '', $url);
-                    $last = $newUrl . 'public_html';
+                    $last = $newUrl . config('app.main_site_store');
                     $download_path = $last . '/' . config('app.main_site') . '/' . $value->time_folder . $value->path;
                 } else {
                     session()->flash('message.level', 'error');
@@ -1123,7 +1125,7 @@ class UploadController extends Controller {
                 $url = $_SERVER['DOCUMENT_ROOT'];
                 preg_match("/[^\/]+$/", $url, $matches);
                 $newUrl = str_replace($matches[0], '', $url);
-                $last = $newUrl . 'public_html';
+                $last = $newUrl . config('app.main_site_store');
                 $zip_path = $last . '/' . config('app.main_site') . '/' . $res->name . '.zip';
             }
 
@@ -1214,7 +1216,7 @@ class UploadController extends Controller {
                         $url = $_SERVER['DOCUMENT_ROOT'];
                         preg_match("/[^\/]+$/", $url, $matches);
                         $newUrl = str_replace($matches[0], '', $url);
-                        $last = $newUrl . 'public_html';
+                        $last = $newUrl . config('app.main_site_store');
                         $download_path = $last . '/' . config('app.tag_path') . '/' . $path;
                     } else {
                         session()->flash('message.level', 'error');
@@ -1264,6 +1266,81 @@ class UploadController extends Controller {
 
             $res = json_decode($response->getBody());
             return response()->download($res->file);
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
+        }
+    }
+
+//embed
+    public function embed(Request $request) {
+        $input['slug'] = $request->slug;
+        try {
+            $client_details = static::client();
+            $url = config('app.naijacrawl_api') . '/mp3-tag-embed';
+            $response = $client_details['client']->request('GET', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
+            ]);
+
+            $res = json_decode($response->getBody());
+            if ($res->status == 455) {
+                abort(455);
+            }
+            $data['tags'] = $res->tags;
+            if (!empty(config('app.tag_path'))) {
+                $data['download_path'] = config('app.tag_path') . 's/';
+            } elseif (!empty(config('app.main_site'))) {
+                $data['download_path'] = config('app.main_site_url') . '/' . config('app.main_site') . '/';
+            }
+
+            return view('pages.embed', $data);
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
+        }
+    }
+
+    public function embedList(Request $request) {
+        $input['slug'] = $request->slug;
+        try {
+            $client_details = static::client();
+            $url = config('app.naijacrawl_api') . '/mp3-tag-embed-list';
+            $response = $client_details['client']->request('GET', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
+            ]);
+
+            $res = json_decode($response->getBody());
+            if ($res->status == 455) {
+                abort(455);
+            }
+            $data['tags'] = $res->tags;
+            $data['title'] = $res->title;
+            $data['ex'] = $res->ex;
+            if (!empty(config('app.tag_path'))) {
+                $data['download_path'] = config('app.tag_path') . 's/';
+            } elseif (!empty(config('app.main_site'))) {
+                $data['download_path'] = config('app.main_site_url') . '/' . config('app.main_site') . '/';
+            }
+     
+            return view('pages.embed-playlist', $data);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
             if ($res->hasResponse()) {

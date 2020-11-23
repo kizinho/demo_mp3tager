@@ -69,17 +69,9 @@
 
                     <br/> <br/>
                     <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
-                <audio controls style="width:100%" loop>
-                     @if($p == true)
-                      <source src="{{url($download_path.$download->slug)}}" type="audio/ogg">
-                    <source src="{{url($download_path.$download->slug)}}" type="audio/mpeg">
-                     @else
-                     <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="audio/ogg">
-                    <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="audio/mpeg">
-                  
-                    @endif
-                  Your browser does not support the audio element.
-                  </audio>
+                         <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" 
+                                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts" 
+                                    src="{{url('embed-link?slug='.$download->slug)}}"></iframe>
 
                     </textarea>
                     @else
@@ -114,18 +106,9 @@
                          @endif
              
                     @else
-                <video style="width:100%" controls loop>
-                  @if($p == true)
-                <source src="{{url($download_path.$download->slug)}}" type="video/mp4">
-                <source src="{{url($download_path.$download->slug)}}" type="video/ogg">
-                @else 
-                 <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="video/mp4">
-                <source src="{{url($download_path.$download->time_folder.$download->slug)}}" type="video/ogg">
-               
-                @endif
-                
-                Your browser does not support HTML video.
-            </video>
+                 <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" 
+                                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts" 
+                                    src="{{url('embed-link?slug='.$download->slug)}}"></iframe>
               @endif
 
                     </textarea>
@@ -141,9 +124,22 @@
 
             @endforeach
             @if(count($details) >1 )
-           
+            @if($ex == 'jpg' || $ex == 'png' || $ex == 'jpeg' || $ex == 'gif')
+            @else
+            <div class="download-songs">
+                <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
+                       <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" 
+                                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts" 
+                                    src="{{url('playlist-embed?slug='.$zip)}}"></iframe>
+
+                </textarea>
+
+                <button class="embd-btn">copy Playlist embedded code</button>
+            </div>
+            @endif
+
             <div class="download-songs " style="background-color:  {{config('app.color_site')}}"><a class="text-white" href="{{url('zip-downloads?slug='.$zip)}}"> Batch Download All  <i class="fa fa-download"></i></a> &nbsp;</div> 
-     
+
             @endif
         </div>
 

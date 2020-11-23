@@ -19,22 +19,6 @@ class Token {
         $token = session('token');
         $userData = session('userData');
         if (Cache::has($userData)) {
-            $headers = [
-                'Authorization' => $token
-            ];
-            $client = new Client();
-            $url = config('app.naijacrawl_api') . '/token';
-            $response = $client->request('GET', $url, [
-                'headers' => $headers
-            ]);
-            $res_check = json_decode($response->getBody());
-            if (empty($res_check)) {
-                $userData = session('userData');
-                Cache::forget($userData);
-                session()->forget('token');
-                session()->forget('userData');
-                return redirect('/signin');
-            }
             $res = Cache::get($userData);
         } else {
             $headers = [
