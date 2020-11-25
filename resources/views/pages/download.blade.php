@@ -106,7 +106,7 @@
                          @endif
              
                     @else
-                 <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="300" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" 
+                 <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="280" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" 
                                     sandbox="allow-forms allow-popups allow-same-origin allow-scripts" 
                                     src="{{url('embed-link?slug='.$download->slug)}}"></iframe>
               @endif
@@ -128,7 +128,7 @@
             @else
             <div class="download-songs">
                 <textarea cols="50" rows="5" class="embd-txt" style="width:100%">
-                       <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="300" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" 
+                       <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="280" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" 
                                     sandbox="allow-forms allow-popups allow-same-origin allow-scripts" 
                                     src="{{url('playlist-embed?slug='.$zip)}}"></iframe>
 
