@@ -12,19 +12,16 @@
         <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
         <script src="{{asset('embed/js/jquery-3.2.1.min.js')}}"></script>
         <script src="{{asset('embed/js/jquery.mCustomScrollbar.concat.min.js')}}"></script><!-- playlist scroll -->
-        <script src="{{asset('embed/js/jsmediatags.min.js')}}"></script><!-- id3 tags -->
-        <script src="{{asset('embed/js/radio.js')}}"></script>
-        <script src="{{asset('embed/js/hadmanager.js')}}"></script><!-- ads -->
         <script src="{{asset('embed/js/sharemanager.js')}}"></script><!-- share -->
         <script src="{{asset('embed/js/new.js')}}"></script><!-- main js file --> 
         <script src="{{asset('embed/js/volume_slider.js')}}"></script>
-        <style>
+<!--        <style>
             .hap-player-thumb:before {
                 content: "MP3TAGER";
                 color: #cd6133;
                 font-size: 15px;
             }
-        </style>
+        </style>-->
         <script>
 
 jQuery(document).ready(function ($) {
@@ -52,8 +49,7 @@ $("#hap-wrapper").hap(settings);
 
     </head>
     <body> 
-
-        <!-- player code -->   
+    <!-- player code -->   
         <div id="hap-wrapper" class="hap-art-narrow-light">
 
             <div class="hap-player-outer">
@@ -111,7 +107,16 @@ $("#hap-wrapper").hap(settings);
 
                         </div>
 
-                        <div class="hap-player-thumb-wrapper"><div class="hap-player-thumb"></div>
+                        <div class="hap-player-thumb-wrapper">
+                            <div class="hap-player-header">
+                            <div class="hap-player-image">
+                                <div class="hap-player-thumb"></div>
+                            </div>
+                            <div class="hap-info">
+                                <div class="hap-player-title"></div>
+                                <div class="hap-player-artist"></div>
+                            </div>
+                        </div>
 
                             <div class="hap-volume-wrapper">
                                 <div class="hap-volume-toggle hap-contr-btn" data-tooltip="Volume">
@@ -136,10 +141,6 @@ $("#hap-wrapper").hap(settings);
 
                         <div class="hap-player-bottom">
 
-                            <div class="hap-info">
-                                <div class="hap-player-title"></div>
-                                <div class="hap-player-artist"></div>
-                            </div>
 
                             <div class="hap-seekbar">
                                 <div class="hap-progress-bg">
@@ -160,7 +161,7 @@ $("#hap-wrapper").hap(settings);
                                 <div class="hap-media-time-current">0:00</div>
                                 <div class="hap-media-time-total">0:00</div>
                             </div>
-                            <div class="hap-media-time-ad">Advertising will end in&nbsp;<span></span></div>
+<!--                            <div class="hap-media-time-ad">Advertising will end in&nbsp;<span></span></div>-->
 
                             <div class="hap-player-controls">
 
@@ -229,6 +230,7 @@ $("#hap-wrapper").hap(settings);
                                 </div>
 
                             </div>     
+                          
                         </div>
 
                     </div>
@@ -355,6 +357,7 @@ function playList(options,arg){
     var videoTypes = {
       'webm' : 'video/webm',
       'mp4' : 'video/mp4',
+      'mkv' : 'video/mkv',
       'ogv' : 'video/ogg'
     };
     var extension = video.split('.').pop();

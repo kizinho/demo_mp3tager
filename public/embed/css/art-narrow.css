@@ -1,220 +1,228 @@
-*{
-	margin:0;
-	padding:0;
-	border:0;
-	outline:none;
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
 }
-a{ 
-	text-decoration: none; 
-}
-
-#hap-wrapper{
-	position: relative;
-
-	margin:  auto;
-    font-family: Helvetica,Arial,sans-serif; 
-    display:none;
-}
-.hap-player-outer{
-	transition: opacity 0.3s ease-in-out;
-    opacity: 0;
-}
-.hap-art-narrow-light .hap-player-outer{
-	background: #fff;
-}
-.hap-art-narrow-dark .hap-player-outer{
-	background: #1b1b1b;
-}
-.hap-wrapper-inner{
-	position: relative;
-	overflow: hidden;
-	width: 100%;
-}
-.hap-player-holder{
-	position:relative;
-	width:100%;
+a {
+    text-decoration: none;
 }
 
-.hap-top-bar{
-	position: relative;
-	left: 0;
-	top:0;
-	width:100%;
-	height:50px;
+#hap-wrapper {
+    position: relative;
+
+    margin: auto;
+    font-family: Helvetica, Arial, sans-serif;
+    display: none;
 }
-.hap-player-thumb-wrapper{
-	position:relative;
-	overflow:hidden;
-	width: 100%;
-    height: auto;
-    padding-top: 30%;
-}
-.hap-player-thumb{
-	position: absolute;
-	top:0;
-	left:0;
-	width: 100%;
-	height: 100%;
-	background-position: 50% 50%;
-    background-size: cover;
+.hap-player-outer {
     transition: opacity 0.3s ease-in-out;
     opacity: 0;
 }
-.hap-btn{
-	display: none;
-	height:100%;
+.hap-art-narrow-light .hap-player-outer {
+    background: #fff;
 }
-.hap-art-narrow-light .hap-contr-btn svg{
-	color:#666;
+.hap-art-narrow-dark .hap-player-outer {
+    background: #1b1b1b;
 }
-.hap-art-narrow-dark .hap-contr-btn svg{
-	color:#777;
+.hap-wrapper-inner {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+.hap-player-holder {
+    position: relative;
+    width: 100%;
+}
+
+.hap-top-bar {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 50px;
+}
+
+.hap-player-thumb-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+}
+
+.hap-player-header {
+    display: flex;
+    padding: 0.5rem;
+}
+.hap-player-image {
+    flex-basis: 9rem;
+    height: 6rem;
+    margin-right: 1rem;
+}
+
+.hap-info {
+    position: relative;
+    align-self: center;
+    flex-grow: 2;
+}
+.hap-player-thumb {
+    width: 100%;
+    height: 100%;
+    background-position: 50% 50%;
+    background-size: cover;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    border-radius: 5px;
+}
+.hap-btn {
+    display: none;
+    height: 100%;
+}
+.hap-art-narrow-light .hap-contr-btn svg {
+    color: #666;
+}
+.hap-art-narrow-dark .hap-contr-btn svg {
+    color: #777;
 }
 .hap-btn:hover svg,
 .hap-contr-btn:hover > svg,
-.hap-contr-btn-hover svg{
-	color:#cd6133!important;
+.hap-contr-btn-hover svg {
+    color: #cd6133 !important;
 }
 .hap-art-narrow-light .hap-btn:hover svg,
 .hap-art-narrow-light .hap-contr-btn:hover > svg,
-.hap-art-narrow-light .hap-contr-btn-hover svg{
-	color:#cd6133!important;
+.hap-art-narrow-light .hap-contr-btn-hover svg {
+    color: #cd6133 !important;
 }
 .hap-art-narrow-dark .hap-btn:hover svg,
 .hap-art-narrow-dark .hap-contr-btn:hover > svg,
-.hap-art-narrow-dark .hap-contr-btn-hover svg{
-	color:#db326b!important;
+.hap-art-narrow-dark .hap-contr-btn-hover svg {
+    color: #db326b !important;
 }
-.hap-contr-btn svg{
-	position: absolute;
-	top: 50%;
+.hap-contr-btn svg {
+    position: absolute;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-	height: 20px;
-	fill:currentColor;
-	transition: color .1s ease-out;
+    height: 20px;
+    fill: currentColor;
+    transition: color 0.1s ease-out;
 }
-.hap-loop-toggle svg{
-	height: 24px;
-}
-
-.hap-player-bottom{
-	padding-bottom:10px;
-	margin: 0 25px;
-}
-.hap-info{
-	position: relative;
-	margin-top:20px;
-}
-.hap-player-title{
-	font-size:15px;
-	margin: 0;
-	margin-bottom: 3px;
-	padding:0;
-}
-.hap-art-narrow-light .hap-player-title{
-	color:#222;
-}
-.hap-art-narrow-dark .hap-player-title{
-	color:#d5d5d5;
-}
-.hap-player-artist{
-	font-size:10px;
-	margin: 0;
-	padding:0;
-	
+.hap-loop-toggle svg {
+    height: 24px;
 }
 
-.move{
-		text-align: center;
+.hap-player-bottom {
+    padding-bottom: 10px;
+    margin: 0 25px;
 }
-.hap-player-download-btn{
+.hap-player-title {
+    font-size: 15px;
+    margin: 0;
+    margin-bottom: 3px;
+    padding: 0;
+}
+.hap-art-narrow-light .hap-player-title {
+    color: #222;
+}
+.hap-art-narrow-dark .hap-player-title {
+    color: #d5d5d5;
+}
+.hap-player-artist {
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+}
 
-	font-size:15px;
-	margin: 0;
-	padding:2px;
- background-color: DodgerBlue;
-  border: none;
-  color: white;
-  padding: 2px 4px;
+.move {
+    text-align: center;
+}
+.hap-player-download-btn {
+    font-size: 15px;
+    margin: 0;
+    padding: 2px;
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 2px 4px;
 }
 
 /* Darker background on mouse-over */
 .hap-player-download-btn:hover {
-  background-color: RoyalBlue;
+    background-color: RoyalBlue;
 }
-.hap-art-narrow-light .hap-player-artist{
-	color: #CD6133;
+.hap-art-narrow-light .hap-player-artist {
+    color: #cd6133;
 }
-.hap-art-narrow-dark .hap-player-artist{
-	color:#777;
+.hap-art-narrow-dark .hap-player-artist {
+    color: #777;
 }
 
-.hap-seekbar{
-	position:relative;
-	margin-top:20px;
-	height:15px;
-	cursor: pointer;
-	touch-action: none;
+.hap-seekbar {
+    position: relative;
+    margin-top: 20px;
+    height: 15px;
+    cursor: pointer;
+    touch-action: none;
 }
-.hap-progress-bg{
-	position:relative;
-	width:100%;
-	top:5px;
-	height:5px;
+.hap-progress-bg {
+    position: relative;
+    width: 100%;
+    top: 5px;
+    height: 5px;
 }
-.hap-art-narrow-light .hap-progress-bg{
-	background:#ccc;
+.hap-art-narrow-light .hap-progress-bg {
+    background: #ccc;
 }
-.hap-art-narrow-dark .hap-progress-bg{
-	background:#ccc;
+.hap-art-narrow-dark .hap-progress-bg {
+    background: #ccc;
 }
-.hap-load-level{
-	position:absolute;
-	top:0;
-	height:100%;
+.hap-load-level {
+    position: absolute;
+    top: 0;
+    height: 100%;
 }
-.hap-art-narrow-light .hap-load-level{
-	background:#ddd;
+.hap-art-narrow-light .hap-load-level {
+    background: #ddd;
 }
-.hap-art-narrow-dark .hap-load-level{
-	background:#ddd;
+.hap-art-narrow-dark .hap-load-level {
+    background: #ddd;
 }
-.hap-progress-level{
-	position:absolute;
-	top:0;
-	height:100%;
+.hap-progress-level {
+    position: absolute;
+    top: 0;
+    height: 100%;
 }
-.hap-art-narrow-light .hap-progress-level{
-	background:#cd6133;
+.hap-art-narrow-light .hap-progress-level {
+    background: #cd6133;
 }
-.hap-art-narrow-dark .hap-progress-level{
-	background:#db326b;
+.hap-art-narrow-dark .hap-progress-level {
+    background: #db326b;
 }
-.hap-ad-progress-level{
-	background: #ffeb3b!important;
+.hap-ad-progress-level {
+    background: #ffeb3b !important;
 }
 
 .hap-range-handle-a,
-.hap-range-handle-b{
-	position: absolute;
+.hap-range-handle-b {
+    position: absolute;
     width: 1px;
     height: 20px;
     /*background-color: blue;*/
     top: 0;
     display: none;
 }
-.hap-range-handle-a{
-	left: 0;
+.hap-range-handle-a {
+    left: 0;
 }
-.hap-range-handle-b{
-	right: 0;
+.hap-range-handle-b {
+    right: 0;
 }
-.hap-range-handle-a-hit{
-	position: absolute;
+.hap-range-handle-a-hit {
+    position: absolute;
     top: -15px;
-    left:-20px; 
-	cursor: pointer;
+    left: -20px;
+    cursor: pointer;
     transition: color 0.3s ease-out;
     width: 0;
     border-top: 20px solid;
@@ -222,11 +230,11 @@ a{
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
 }
-.hap-range-handle-b-hit{
-	position: absolute;
+.hap-range-handle-b-hit {
+    position: absolute;
     top: -15px;
-    left:-20px;  
-	cursor: pointer;
+    left: -20px;
+    cursor: pointer;
     transition: color 0.3s ease-out;
     width: 0;
     border-top: 20px solid;
@@ -235,66 +243,65 @@ a{
     border-right: 20px solid transparent;
 }
 .hap-art-narrow-light .hap-range-handle-a-hit,
-.hap-art-narrow-light .hap-range-handle-b-hit{
-	border-top-color:#666;
+.hap-art-narrow-light .hap-range-handle-b-hit {
+    border-top-color: #666;
 }
 .hap-art-narrow-dark .hap-range-handle-a-hit,
-.hap-art-narrow-dark .hap-range-handle-b-hit{
-	border-top-color:#666;
+.hap-art-narrow-dark .hap-range-handle-b-hit {
+    border-top-color: #666;
 }
 .hap-art-narrow-light .hap-range-handle-a-hit:hover,
-.hap-art-narrow-light .hap-range-handle-b-hit:hover{
-	border-top-color:#cd6133;
+.hap-art-narrow-light .hap-range-handle-b-hit:hover {
+    border-top-color: #cd6133;
 }
 .hap-art-narrow-dark .hap-range-handle-a-hit:hover,
-.hap-art-narrow-dark .hap-range-handle-b-hit:hover{
-	border-top-color:#db326b;
+.hap-art-narrow-dark .hap-range-handle-b-hit:hover {
+    border-top-color: #db326b;
 }
 
-.hap-media-time-wrap{
-	position: relative;
-	pointer-events:none;
-	display: flex;
+.hap-media-time-wrap {
+    position: relative;
+    pointer-events: none;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
-	z-index: 2;/*above range handles!*/
+    z-index: 2; /*above range handles!*/
 }
-.hap-media-time-current{
-	position:relative;
-	text-align: center;
-	padding: 0px 0px 0px 2px!important;
-	font-size:11px!important;
-	pointer-events:none;
-	width:auto;
+.hap-media-time-current {
+    position: relative;
+    text-align: center;
+    padding: 0px 0px 0px 2px !important;
+    font-size: 11px !important;
+    pointer-events: none;
+    width: auto;
 }
-.hap-media-time-total{
-	position:relative;
-	text-align: center;
-	padding: 0px 0px 0px 2px!important;
-	font-size:11px!important;
-	pointer-events:none;
-	width:auto;
+.hap-media-time-total {
+    position: relative;
+    text-align: center;
+    padding: 0px 0px 0px 2px !important;
+    font-size: 11px !important;
+    pointer-events: none;
+    width: auto;
 }
 .hap-art-narrow-light .hap-media-time-current,
 .hap-art-narrow-light .hap-media-time-total,
-.hap-art-narrow-light .hap-media-time-ad{
-	color:#333 !important;
+.hap-art-narrow-light .hap-media-time-ad {
+    color: #333 !important;
 }
 .hap-art-narrow-dark .hap-media-time-current,
 .hap-art-narrow-dark .hap-media-time-total,
-.hap-art-narrow-dark .hap-media-time-ad{
-	color:#666 !important;
+.hap-art-narrow-dark .hap-media-time-ad {
+    color: #666 !important;
 }
-.hap-media-time-ad{
-	display: none;
-	position: relative;
+.hap-media-time-ad {
+    display: none;
+    position: relative;
     pointer-events: none;
-	font-size: 11px;
+    font-size: 11px;
 }
 
-
-.hap-player-controls{
-	display: flex;
+.hap-player-controls {
+    display: flex;
     position: relative;
     align-items: center;
     justify-content: space-between;
@@ -302,45 +309,45 @@ a{
     height: 50px;
     margin-top: 10px;
 }
-.hap-bottom-controls{
-	display: flex;
+.hap-bottom-controls {
+    display: flex;
 }
 .hap-player-controls-left,
-.hap-player-controls-right{
-	display: flex;
+.hap-player-controls-right {
+    display: flex;
 }
-.hap-player-controls-left .hap-contr-btn{
-	position:relative;
-	top:0;
-	width:25px;
-	height:25px;
-	margin-right: 10px;
+.hap-player-controls-left .hap-contr-btn {
+    position: relative;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
 }
-.hap-player-controls-right .hap-contr-btn{
-	position:relative;
-	top:0;
-	width:25px;
-	height:25px;
-	margin-left: 10px;
+.hap-player-controls-right .hap-contr-btn {
+    position: relative;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
 }
-.hap-player-controls-center{
-	position: absolute;
-	width:130px;
-	height: 50px;
-	left: 50%;
+.hap-player-controls-center {
+    position: absolute;
+    width: 130px;
+    height: 50px;
+    left: 50%;
     -webkit-transform: translate(-50%, 0);
     -ms-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
 }
-.hap-prev-toggle{
-	position: absolute;
+.hap-prev-toggle {
+    position: absolute;
     top: 10px;
     width: 30px;
     height: 30px;
     left: 0;
 }
-.hap-playback-toggle{
-	position: absolute;
+.hap-playback-toggle {
+    position: absolute;
     top: 0px;
     width: 50px;
     left: 50%;
@@ -349,277 +356,277 @@ a{
     transform: translate(-50%, 0);
     height: 50px;
 }
-.hap-playback-toggle svg{
-	height:27px;
+.hap-playback-toggle svg {
+    height: 27px;
 }
-.hap-next-toggle{
-	position: absolute;
+.hap-next-toggle {
+    position: absolute;
     top: 10px;
     right: 0;
     width: 30px;
     height: 30px;
 }
 
-.hap-playlist-toggle{
-	position:absolute;
-	top:10px;
-	left:20px;
-	width:30px;
-	height:30px;
+.hap-playlist-toggle {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
 }
 
-.hap-top-bar-controls-right{
-	position: absolute;
-	top:10px;
-	right:20px;
-	height:30px;
+.hap-top-bar-controls-right {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    height: 30px;
 }
-.hap-top-bar-controls-right .hap-contr-btn{
-	position: relative;
-	width:30px;
-	height:30px;
-	float: left!important;
-	margin-left: 10px;
+.hap-top-bar-controls-right .hap-contr-btn {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    float: left !important;
+    margin-left: 10px;
 }
 
-.hap-volume-wrapper{
-	position:absolute;
-	bottom:15px;
-	right:22px;
-	width:30px;
-	height:30px;
+.hap-volume-wrapper {
+    position: absolute;
+    bottom: 15px;
+    right: 22px;
+    width: 30px;
+    height: 30px;
 }
-.hap-volume-wrapper:hover .hap-volume-seekbar{
-	display: block;
+.hap-volume-wrapper:hover .hap-volume-seekbar {
+    display: block;
 }
 .hap-art-narrow-light .hap-volume-toggle svg,
-.hap-art-narrow-dark .hap-volume-toggle svg{
-	color:#ddd;
-	filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+.hap-art-narrow-dark .hap-volume-toggle svg {
+    color: #ddd;
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
 }
-.hap-volume-seekbar{
-	position:absolute;
-	top:-120px;
-	left:-6px;
-	width:40px;
-	height:120px;
-	overflow:hidden;
-	cursor: pointer;
-	touch-action: none;
-	display: none;
+.hap-volume-seekbar {
+    position: absolute;
+    top: -120px;
+    left: -6px;
+    width: 40px;
+    height: 120px;
+    overflow: hidden;
+    cursor: pointer;
+    touch-action: none;
+    display: none;
 }
-.hap-art-narrow-light .hap-volume-seekbar{
-	background:#fff;
+.hap-art-narrow-light .hap-volume-seekbar {
+    background: #fff;
 }
-.hap-art-narrow-dark .hap-volume-seekbar{
-	background:#1b1b1b;
+.hap-art-narrow-dark .hap-volume-seekbar {
+    background: #1b1b1b;
 }
-.hap-volume-bg{
-	position:absolute;
-	bottom:10px;
-	left:17px;
-	width:6px;
-	height:100px;
+.hap-volume-bg {
+    position: absolute;
+    bottom: 10px;
+    left: 17px;
+    width: 6px;
+    height: 100px;
 }
-.hap-art-narrow-light .hap-volume-bg{
-	background:#ddd;
+.hap-art-narrow-light .hap-volume-bg {
+    background: #ddd;
 }
-.hap-art-narrow-dark .hap-volume-bg{
-	background:#ddd;
+.hap-art-narrow-dark .hap-volume-bg {
+    background: #ddd;
 }
-.hap-volume-level{
-	position:absolute;
-	bottom:0;
-	left:0;
-	width:100%;
+.hap-volume-level {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
-.hap-art-narrow-light .hap-volume-level{
-	background:#cd6133;
+.hap-art-narrow-light .hap-volume-level {
+    background: #cd6133;
 }
-.hap-art-narrow-dark .hap-volume-level{
-	background:#db326b;
+.hap-art-narrow-dark .hap-volume-level {
+    background: #db326b;
 }
 
-
-#hap-playlist-list{
-	display:none;
+#hap-playlist-list {
+    display: none;
 }
-.hap-playlist-holder{
-	position: absolute;
-	top:0;
-	left:-100%;
-	width:100%;
-	overflow:hidden;
-	height: 100%;
-	box-sizing: border-box; 
-	display: flex;
+.hap-playlist-holder {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
     flex-direction: column;
 }
-.hap-playlist-inner{
-	box-sizing: border-box;
+.hap-playlist-inner {
+    box-sizing: border-box;
     padding: 20px;
     flex: 1;
     overflow: hidden;
 }
-.hap-playlist-item{
-	position: relative;
-	top:0px;
-	left:0px;
-	overflow: hidden;
-	box-sizing: border-box; 
-	display: flex;
-	padding: 12px 8px;
+.hap-playlist-item {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    padding: 12px 8px;
 }
 .hap-playlist-item-content {
     cursor: pointer;
-	flex:1;
-	display: flex;
-	align-items:center;
-	overflow: hidden;
-	margin-right: 10px;
-	font-size: 15px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-right: 10px;
+    font-size: 15px;
 }
-.hap-playlist-item:last-child {  
-	margin-bottom:none;
+.hap-playlist-item:last-child {
+    margin-bottom: none;
 }
 .hap-art-narrow-light .hap-playlist-item-selected {
-	background: #cd6133!important;
+    background: #cd6133 !important;
 }
 .hap-art-narrow-dark .hap-playlist-item-selected {
-	background: #db326b!important;
+    background: #db326b !important;
 }
-.hap-playlist-thumb{
-	position:relative;
-	top:0px;
-	left:0px;
-	height:50px;
-	flex-shrink: 0;
-	overflow:hidden;
-	margin-right: 10px;
+.hap-playlist-thumb {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    height: 50px;
+    flex-shrink: 0;
+    overflow: hidden;
+    margin-right: 10px;
 }
-.hap-thumbimg{
-	position:relative;
-	top:0px;
-	left:0px;
-	display:block;
-	height:100%;
-	max-width: none!important;
-	opacity: 0;
-	-webkit-backface-visibility: hidden;
+.hap-thumbimg {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    display: block;
+    height: 100%;
+    max-width: none !important;
+    opacity: 0;
+    -webkit-backface-visibility: hidden;
 }
-.hap-art-narrow-light .hap-playlist-title-wrap{
-	color:#7B7676;
+.hap-art-narrow-light .hap-playlist-title-wrap {
+    color: #7b7676;
 }
-.hap-art-narrow-dark .hap-playlist-title-wrap{
-	color:#999;
+.hap-art-narrow-dark .hap-playlist-title-wrap {
+    color: #999;
 }
-.hap-art-narrow-light .hap-playlist-item-selected .hap-playlist-title-wrap{
-	color:#fff;
+.hap-art-narrow-light .hap-playlist-item-selected .hap-playlist-title-wrap {
+    color: #fff;
 }
-.hap-art-narrow-dark .hap-playlist-item-selected .hap-playlist-title-wrap{
-	color:#fff;
+.hap-art-narrow-dark .hap-playlist-item-selected .hap-playlist-title-wrap {
+    color: #fff;
 }
 
-.hap-playlist-info{
-	flex:1;
-	display: flex;
+.hap-playlist-info {
+    flex: 1;
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     overflow: hidden;
     margin-right: 10px;
 }
-.hap-playlist-info2{
-	position: relative;
+.hap-playlist-info2 {
+    position: relative;
     margin-left: auto;
-	flex-shrink:0;
-	display: flex;
-	flex-direction:column;
-	justify-content: space-around;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     text-align: right;
 }
-.hap-playlist-description{
-	font-size: 13px;
+.hap-playlist-description {
+    font-size: 13px;
 }
-.hap-art-narrow-light .hap-playlist-description{
-	color: #222;
+.hap-art-narrow-light .hap-playlist-description {
+    color: #222;
 }
-.hap-art-narrow-dark .hap-playlist-description{
-	color: #555;
+.hap-art-narrow-dark .hap-playlist-description {
+    color: #555;
 }
-.hap-playlist-duration{
-	font-size: 12px;
+.hap-playlist-duration {
+    font-size: 12px;
 }
-.hap-art-narrow-light .hap-playlist-duration{
-	color: #222;
+.hap-art-narrow-light .hap-playlist-duration {
+    color: #222;
 }
-.hap-art-narrow-dark .hap-playlist-duration{
-	color: #ccc;
+.hap-art-narrow-dark .hap-playlist-duration {
+    color: #ccc;
 }
-.hap-playlist-date{
-	font-size: 11px;
+.hap-playlist-date {
+    font-size: 11px;
 }
-.hap-art-narrow-light .hap-playlist-date{
-	color: #666;
+.hap-art-narrow-light .hap-playlist-date {
+    color: #666;
 }
-.hap-art-narrow-dark .hap-playlist-date{
-	color: #666;
+.hap-art-narrow-dark .hap-playlist-date {
+    color: #666;
 }
-.hap-playlist-title-wrap{
-	display: flex;
+.hap-playlist-title-wrap {
+    display: flex;
     flex-direction: row;
     align-items: baseline;
 }
 
-.hap-playlist-icons{
-    display:flex;
+.hap-playlist-icons {
+    display: flex;
     margin-left: auto;
 }
-.hap-playlist-item-multiline .hap-playlist-item{
-    flex-direction:column;
+.hap-playlist-item-multiline .hap-playlist-item {
+    flex-direction: column;
 }
-.hap-playlist-item-multiline .hap-playlist-icons{
+.hap-playlist-item-multiline .hap-playlist-icons {
     margin-top: 10px;
 }
 
-.hap-download, .hap-link{
-	text-align: center;
-	min-width: 30px;
-	margin: 0 10px;
-	border: 0!important;
-	box-shadow: none!important;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	position: relative;
+.hap-download,
+.hap-link {
+    text-align: center;
+    min-width: 30px;
+    margin: 0 10px;
+    border: 0 !important;
+    box-shadow: none !important;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
 }
 .hap-art-narrow-light .hap-download,
-.hap-art-narrow-light .hap-link{
-	color:#7B7676!important;
+.hap-art-narrow-light .hap-link {
+    color: #7b7676 !important;
 }
 .hap-art-narrow-dark .hap-download,
-.hap-art-narrow-dark .hap-link{
-	color:#999!important;
+.hap-art-narrow-dark .hap-link {
+    color: #999 !important;
 }
 .hap-download svg,
-.hap-link svg{
-	position: absolute;
-	top: 50%;
+.hap-link svg {
+    position: absolute;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-	height: 16px;
-	fill:currentColor;
-	transition: color .1s ease-out;
+    height: 16px;
+    fill: currentColor;
+    transition: color 0.1s ease-out;
 }
-.hap-art-narrow-light .hap-download:hover svg, 
-.hap-art-narrow-light .hap-link:hover svg{
-	color:#ddd!important;
+.hap-art-narrow-light .hap-download:hover svg,
+.hap-art-narrow-light .hap-link:hover svg {
+    color: #ddd !important;
 }
-.hap-art-narrow-dark .hap-download:hover svg, 
-.hap-art-narrow-dark .hap-link:hover svg{
-	color:#ddd!important;
+.hap-art-narrow-dark .hap-download:hover svg,
+.hap-art-narrow-dark .hap-link:hover svg {
+    color: #ddd !important;
 }
 
-.hap-playlist-filter-msg{
+.hap-playlist-filter-msg {
     position: absolute;
     top: 0;
     left: 0;
@@ -627,10 +634,10 @@ a{
     bottom: 0;
     display: none;
 }
-.hap-playlist-filter::placeholder { 
-    color: inherit!important;
+.hap-playlist-filter::placeholder {
+    color: inherit !important;
 }
-.hap-playlist-filter-msg span{
+.hap-playlist-filter-msg span {
     position: relative;
     float: left;
     top: 50%;
@@ -638,60 +645,60 @@ a{
     transform: translate(-50%, -50%);
     font-size: 20px;
 }
-.hap-art-narrow-light .hap-playlist-filter-msg span{
-	color: #cd6133;
+.hap-art-narrow-light .hap-playlist-filter-msg span {
+    color: #cd6133;
 }
-.hap-art-narrow-dark .hap-playlist-filter-msg span{
-	color: #db326b;
-}
-
-.hap-bottom-bar{
-	position:relative;
-	top:0;
-	height:50px;
-	overflow:hidden;
-	margin: 0 20px;
-}
-.hap-search-filter{
-	position:relative;
-	width:200px!important;
-	height:30px!important;
-	top:50%;
-	margin:-15px 0 0 0px!important;
-	padding:0 3px!important;
-	border:0!important;
-	-moz-border-radius:0 !important;
-    -webkit-border-radius:0 !important;
-	border-radius:0 !important;
-	box-shadow:none!important; 
-	line-height:1!important; 
-	float: left;
-	outline:none;
-	font-size: 16px;
-}
-.hap-art-narrow-light .hap-search-filter{
-	background:#ddd !important;
-	color:#000 !important;
-}
-.hap-art-narrow-dark .hap-search-filter{
-	background:#ddd !important;
-	color:#000 !important;
-}
-.hap-search-filter::placeholder { 
-	color: inherit!important;
-}
-.hap-sort-alpha{
-	position:relative;
-	left:5px;
-	top:0;
-	width:30px;
-	height:100%;
-	text-align: center;
-	float: left;
+.hap-art-narrow-dark .hap-playlist-filter-msg span {
+    color: #db326b;
 }
 
-.hap-playlist-close{
-	cursor: pointer;
+.hap-bottom-bar {
+    position: relative;
+    top: 0;
+    height: 50px;
+    overflow: hidden;
+    margin: 0 20px;
+}
+.hap-search-filter {
+    position: relative;
+    width: 200px !important;
+    height: 30px !important;
+    top: 50%;
+    margin: -15px 0 0 0px !important;
+    padding: 0 3px !important;
+    border: 0 !important;
+    -moz-border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    line-height: 1 !important;
+    float: left;
+    outline: none;
+    font-size: 16px;
+}
+.hap-art-narrow-light .hap-search-filter {
+    background: #ddd !important;
+    color: #000 !important;
+}
+.hap-art-narrow-dark .hap-search-filter {
+    background: #ddd !important;
+    color: #000 !important;
+}
+.hap-search-filter::placeholder {
+    color: inherit !important;
+}
+.hap-sort-alpha {
+    position: relative;
+    left: 5px;
+    top: 0;
+    width: 30px;
+    height: 100%;
+    text-align: center;
+    float: left;
+}
+
+.hap-playlist-close {
+    cursor: pointer;
     position: relative;
     top: 0;
     width: 30px;
@@ -699,148 +706,147 @@ a{
     text-align: center;
     float: right;
 }
-.hap-playlist-close svg{
-	height: 23px;
+.hap-playlist-close svg {
+    height: 23px;
 }
 
 .hap-playback-rate-holder,
-.hap-share-holder{
-	position: absolute;
+.hap-share-holder {
+    position: absolute;
     width: 300px;
     height: 70px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);	
+    transform: translate(-50%, -50%);
     z-index: 10;
     display: none;
 }
-.hap-share-holder{
+.hap-share-holder {
     max-width: 400px;
-    width:100%;
+    width: 100%;
 }
 .hap-art-narrow-light .hap-playback-rate-holder,
-.hap-art-narrow-light .hap-share-holder{
-	background: #fff; 
-	border: 1px solid #ddd;
+.hap-art-narrow-light .hap-share-holder {
+    background: #fff;
+    border: 1px solid #ddd;
 }
 .hap-art-narrow-dark .hap-playback-rate-holder,
-.hap-art-narrow-dark .hap-share-holder{
-	background: #1b1b1b; 
-	border: 1px solid #222;
+.hap-art-narrow-dark .hap-share-holder {
+    background: #1b1b1b;
+    border: 1px solid #222;
 }
-.hap-share-holder-inner{
-	height: 34px;
-	position: absolute;
+.hap-share-holder-inner {
+    height: 34px;
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);	
+    transform: translate(-50%, -50%);
     display: flex;
 }
 .hap-playback-rate-close,
-.hap-share-close{
-	position: absolute;
+.hap-share-close {
+    position: absolute;
     width: 34px;
     height: 34px;
     top: 0;
     right: 0;
 }
-.hap-share-item{
-	position:relative;
-	width:25px;
-	height:100%;
-	text-align: center;
-	float: right;
-	margin-right: 15px;
-	transition: transform 0.3s;
+.hap-share-item {
+    position: relative;
+    width: 25px;
+    height: 100%;
+    text-align: center;
+    float: right;
+    margin-right: 15px;
+    transition: transform 0.3s;
 }
 /* share colors */
 
-.hap-share-item:hover{
+.hap-share-item:hover {
     transform: scale(1.7);
 }
 
-.hap-share-item[data-type="facebook"]:hover svg{
-	color: #3b5998!important;
+.hap-share-item[data-type="facebook"]:hover svg {
+    color: #3b5998 !important;
 }
-.hap-share-item[data-type="twitter"]:hover svg{
-	color: #00aced!important;
+.hap-share-item[data-type="twitter"]:hover svg {
+    color: #00aced !important;
 }
-.hap-share-item[data-type="tumblr"]:hover svg{
-	color: #34526f!important;
+.hap-share-item[data-type="tumblr"]:hover svg {
+    color: #34526f !important;
 }
-.hap-share-item[data-type="whatsapp"]:hover svg{
-	color: #25D366!important;
+.hap-share-item[data-type="whatsapp"]:hover svg {
+    color: #25d366 !important;
 }
-.hap-share-item[data-type="linkedin"]:hover svg{
-	color: #007bb6!important;
+.hap-share-item[data-type="linkedin"]:hover svg {
+    color: #007bb6 !important;
 }
-.hap-share-item[data-type="reddit"]:hover svg{
-	color: #FF4301!important;
+.hap-share-item[data-type="reddit"]:hover svg {
+    color: #ff4301 !important;
 }
-.hap-share-item[data-type="digg"]:hover svg{
-	color: #005be2!important;
+.hap-share-item[data-type="digg"]:hover svg {
+    color: #005be2 !important;
 }
-.hap-share-item[data-type="pinterest"]:hover svg{
-	color: #cb2027!important;
+.hap-share-item[data-type="pinterest"]:hover svg {
+    color: #cb2027 !important;
 }
-
 
 /* playback rate */
 
-.hap-playback-rate-seekbar{
-	position: relative;
-	width:200px;
-	height:30px;
-	position: absolute;
+.hap-playback-rate-seekbar {
+    position: relative;
+    width: 200px;
+    height: 30px;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-	cursor: pointer;
-	touch-action: none;
+    cursor: pointer;
+    touch-action: none;
 }
-.hap-playback-rate-bg{
-	position:absolute;
-	top:14px;
-	left:10px;
-	width:180px;
-	height:4px;
+.hap-playback-rate-bg {
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    width: 180px;
+    height: 4px;
 }
-.hap-art-narrow-light .hap-playback-rate-bg{
-	background:#ddd;
+.hap-art-narrow-light .hap-playback-rate-bg {
+    background: #ddd;
 }
-.hap-art-narrow-dark .hap-playback-rate-bg{
-	background:#ddd;
+.hap-art-narrow-dark .hap-playback-rate-bg {
+    background: #ddd;
 }
-.hap-playback-rate-level{
-	position:absolute;
-	top:0;
-	left:0;
-	height:100%;
-	background:#cd6133;
+.hap-playback-rate-level {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #cd6133;
 }
 .hap-art-narrow-light .hap-playback-rate-level,
-.hap-art-narrow-light .hap-playback-rate-drag{
-	background:#cd6133;
+.hap-art-narrow-light .hap-playback-rate-drag {
+    background: #cd6133;
 }
 .hap-art-narrow-dark .hap-playback-rate-level,
-.hap-art-narrow-dark .hap-playback-rate-drag{
-	background:#db326b;
+.hap-art-narrow-dark .hap-playback-rate-drag {
+    background: #db326b;
 }
-.hap-playback-rate-drag{
+.hap-playback-rate-drag {
     position: relative;
-	top:-9px;
+    top: -9px;
     width: 22px;
     height: 22px;
-	border-radius: 100%;
-	-webkit-transform: scale( 0.5 );
-    transform: scale( 0.5 );
-	-webkit-box-sizing: border-box; 
-    -moz-box-sizing: border-box;    
-   	box-sizing: border-box;    
-   	-webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out; 
+    border-radius: 100%;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     float: right;
- 	margin-right: -9px;
+    margin-right: -9px;
 }
 .hap-playback-rate-drag:hover,
 .hap-playback-rate-drag:active {
@@ -848,171 +854,177 @@ a{
     transform: scale(1);
 }
 
-.hap-tooltip{
-	position:absolute;
-	text-align:center;
-	z-index:10000;
-	pointer-events:none;
-	display:none;
-	font-size:13px!important;
-	padding:5px 10px !important;
-	white-space:nowrap;
+.hap-tooltip {
+    position: absolute;
+    text-align: center;
+    z-index: 10000;
+    pointer-events: none;
+    display: none;
+    font-size: 13px !important;
+    padding: 5px 10px !important;
+    white-space: nowrap;
 }
-.hap-art-narrow-light .hap-tooltip{
-	background:#cd6133;
-	color:#fff!important;
-	box-shadow: 1px 1px 3px #777;
+.hap-art-narrow-light .hap-tooltip {
+    background: #cd6133;
+    color: #fff !important;
+    box-shadow: 1px 1px 3px #777;
 }
-.hap-art-narrow-dark .hap-tooltip{
-	background:#db326b;
-	color:#fff!important;
-	box-shadow: 1px 1px 11px #222;
+.hap-art-narrow-dark .hap-tooltip {
+    background: #db326b;
+    color: #fff !important;
+    box-shadow: 1px 1px 11px #222;
 }
-
 
 .hap-preloader {
-	position:absolute;
-	top:50%;
-	left:50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 40px;
     height: 40px;
-    margin-left:-20px;
-	margin-top:-20px;
+    margin-left: -20px;
+    margin-top: -20px;
     -webkit-animation: hap_preloader 1.2s infinite ease-in-out;
     animation: hap_preloader 1.2s infinite ease-in-out;
 }
 .hap-art-narrow-light .hap-preloader {
-	background-color: #cd6133;
+    background-color: #cd6133;
 }
 .hap-art-narrow-dark .hap-preloader {
-	background-color: #db326b;
+    background-color: #db326b;
 }
 @-webkit-keyframes hap_preloader {
-    0% { -webkit-transform: perspective(120px) }
-    50% { -webkit-transform: perspective(120px) rotateY(180deg) }
-    100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
-}
-@keyframes hap_preloader {
-    0% { 
-	    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-	    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
-    } 50% { 
-	    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-	    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
-    } 100% { 
-	    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-	    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    0% {
+        -webkit-transform: perspective(120px);
+    }
+    50% {
+        -webkit-transform: perspective(120px) rotateY(180deg);
+    }
+    100% {
+        -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
     }
 }
-
-
+@keyframes hap_preloader {
+    0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        -webkit-transform: perspective(120px) rotateX(-180deg)
+            rotateY(-179.9deg);
+    }
+}
 
 /* scroll */
 .hap-playlist-inner .mCSB_inside > .mCSB_container {
     margin-right: 30px;
 }
-.hap-mCSB_full{/* hide scroll area when no scroll */
-	margin-right: 0!important;
+.hap-mCSB_full {
+    /* hide scroll area when no scroll */
+    margin-right: 0 !important;
 }
 
 .hap-visible {
-	opacity: 1!important;
-	transition: opacity 500ms ease-out;
+    opacity: 1 !important;
+    transition: opacity 500ms ease-out;
 }
 
 .hap-youtube-holder,
-.hap-iframe-blocker{
-	position:absolute;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	overflow:hidden;
-}	
-.hap-media{
-	width: 100%;
+.hap-iframe-blocker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    position:absolute;
+    overflow: hidden;
+}
+.hap-media {
+    width: 100%;
+    height: 100%;
+    position: absolute;
     user-select: none;
     visibility: visible;
-    top:0;
-    left:0;
-    max-width:none!important;
+    top: 0;
+    left: 0;
+    max-width: none !important;
 }
 
 /* statistics */
-.hap-stats{
+.hap-stats {
     height: 100%;
     line-height: 1;
     display: flex;
-    justify-content:space-around;
-    min-width:200px;
+    justify-content: space-around;
+    min-width: 200px;
 }
 .hap-play-count,
 .hap-like-count,
-.hap-download-count{
-	display: flex;
-	flex: 1;
-	box-shadow: none;
-	cursor:pointer;
-	border: none;
-	margin: 0 10px;
-	align-items: center;
-	color: inherit;
+.hap-download-count {
+    display: flex;
+    flex: 1;
+    box-shadow: none;
+    cursor: pointer;
+    border: none;
+    margin: 0 10px;
+    align-items: center;
+    color: inherit;
 }
-.hap-stats svg{
-	width:25px;
-	height:15px;
-	text-align: center;
-	fill:currentColor;
-	color:#666;
+.hap-stats svg {
+    width: 25px;
+    height: 15px;
+    text-align: center;
+    fill: currentColor;
+    color: #666;
 }
 .hap-play-count:hover > svg,
 .hap-like-count:hover > svg,
-.hap-download-count:hover > svg{
-	color:#2196F3;
-} 
-.hap-stats span{
-	margin:0!important;
-	padding:0!important;
-	color:#666;
-	font-size:12px!important;
-	pointer-events:none;
-	flex-shrink:0;
+.hap-download-count:hover > svg {
+    color: #2196f3;
+}
+.hap-stats span {
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #666;
+    font-size: 12px !important;
+    pointer-events: none;
+    flex-shrink: 0;
 }
 
-
-
 /* load more */
-.hap-load-more-wrap{
+.hap-load-more-wrap {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
 }
-.hap-load-more-btn{
-	display: inline-block;
-	padding: 8px 10px;
-	transition: all 0.2s ease-out;
+.hap-load-more-btn {
+    display: inline-block;
+    padding: 8px 10px;
+    transition: all 0.2s ease-out;
     cursor: pointer;
     border-radius: 2px;
     opacity: 0;
     font-size: 16px;
 }
-.hap-art-narrow-light .hap-load-more-btn{
-	color: #333;
-	background: #ddd;
+.hap-art-narrow-light .hap-load-more-btn {
+    color: #333;
+    background: #ddd;
 }
-.hap-art-narrow-light .hap-load-more-btn:hover{
+.hap-art-narrow-light .hap-load-more-btn:hover {
     color: #fff;
     background: #777;
 }
-.hap-art-narrow-dark .hap-load-more-btn{
-	color: #ccc;
-	background: #555;
+.hap-art-narrow-dark .hap-load-more-btn {
+    color: #ccc;
+    background: #555;
 }
-.hap-art-narrow-dark .hap-load-more-btn:hover{
+.hap-art-narrow-dark .hap-load-more-btn:hover {
     color: #fff;
     background: #b8b8b8;
 }
+

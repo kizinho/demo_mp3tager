@@ -1,6 +1,4 @@
-html, body {
-    width: 100%;
-}
+
 
 .video-holder, .video-holder * {box-sizing: border-box !important}
 .video-holder {background: #1b1b1b; padding: 10px}
