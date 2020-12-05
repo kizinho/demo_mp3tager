@@ -25,7 +25,7 @@ class AuthController extends Controller {
     public function signIn() {
         return view('pages.signin');
     }
-
+   
     public function signUpCreate(Request $request) {
         $input = $request->all();
         try {
@@ -74,6 +74,7 @@ class AuthController extends Controller {
     public function signInPost(Request $request) {
 
         $input = $request->all();
+        $input['url'] = url('/');
         try {
             $client = new Client();
             $headers = [
@@ -89,7 +90,7 @@ class AuthController extends Controller {
             $res = json_decode($response->getBody());
             if ($res->status == 200) {
                 $token = $res->token->user->token;
-                 $username = $res->token->user->username;
+                $username = $res->token->user->username;
                 session(['token' => $token]);
                 session(['userData' => $username]);
             }
@@ -116,5 +117,7 @@ class AuthController extends Controller {
             }
         }
     }
+
+  
 
 }

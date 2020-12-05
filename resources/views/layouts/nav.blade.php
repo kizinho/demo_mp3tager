@@ -22,6 +22,9 @@
                     <li class="nav-item @if(request()->path() == 'my-files') active @endif">
                         <a class="nav-link" href="{{url('my-files')}}">My Files</a>
                     </li>
+                       <li class="nav-item">
+                        <a class="nav-link cache" href="{{url('cache-clear')}}">Clear Cache</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link update" href="{{url('update-tager')}}">Update Tager</a>
                     </li>

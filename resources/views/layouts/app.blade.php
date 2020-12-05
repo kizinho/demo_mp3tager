@@ -110,6 +110,10 @@ $(".deleted").on("submit", function () {
 
             return confirm("Are you sure? this will download latest version of the tager");
         });
+          $(".cache").on("click", function () {
+
+            return confirm("Are you sure? this will clear all your login and cached datas");
+        });
     </script>
 
     @if(session()->has('message.level'))

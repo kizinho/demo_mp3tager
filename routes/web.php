@@ -18,6 +18,7 @@ Route::post('signin', 'AuthController@signInPost');
 //my files
 Route::group(['middleware' => 'token'], function() {
     
+ Route::get('cache-clear', 'UploadController@clearCache')->name('cache-clear');
 //upload
 Route::get('/', 'UploadController@index')->name('/');
 Route::get('upload', 'UploadController@index')->name('upload');

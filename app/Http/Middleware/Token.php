@@ -33,14 +33,32 @@ class Token {
             $res = json_decode($response->getBody());
             Cache::put($userData, $res, 525600);
         }
-        if (empty($res)) {
+        if (empty($res) || empty($res->api)) {
             $userData = session('userData');
             Cache::forget($userData);
             session()->forget('token');
             session()->forget('userData');
+            session()->flash('message.level', 'error');
+            session()->flash('message.color', 'red');
+            session()->flash('message.content', 'Make sure you have generated api keys from mp3tager.com');
             return redirect('/signin');
         }
+        if (env('API_KEY') !== $res->api->api_key) {
+            $this->envUpdate('APP_KEY', 'cBimh0j6M0hu2qywk1oPGbFW9Zj5keZBqjIdC8JL92o=');
+            $this->envUpdate('NAIJACRAWL_API', 'https://app.mp3tager.com/api/v3');
+            $this->envUpdate('API_KEY', $res->api->api_key);
+            $this->envUpdate('API_SECRET', $res->api->secret_key);
+        }
         return $next($request);
+    }
+
+    public static function envUpdate($name, $value) {
+        $path = base_path('.env');
+        if (file_exists($path)) {
+            file_put_contents($path, str_replace(
+                            $name . '=' . env($name), $name . '=' . $value, file_get_contents($path)
+            ));
+        }
     }
 
 }

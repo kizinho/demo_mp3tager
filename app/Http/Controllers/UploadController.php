@@ -15,6 +15,7 @@ class UploadController extends Controller {
 
     public function index(Request $request) {
 
+
         if (Cache::has('countupload')) {
             $res = Cache::get('countupload');
         } else {
@@ -695,7 +696,7 @@ class UploadController extends Controller {
                     'query' => $input
                 ]);
             }
-              $data['ex'] = $res->ex;
+            $data['ex'] = $res->ex;
             return view('pages.download', $data);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
@@ -1339,7 +1340,7 @@ class UploadController extends Controller {
             } elseif (!empty(config('app.main_site'))) {
                 $data['download_path'] = config('app.main_site_url') . '/' . config('app.main_site') . '/';
             }
-     
+
             return view('pages.embed-playlist', $data);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
@@ -1462,6 +1463,17 @@ class UploadController extends Controller {
                 }
             }
         }
+    }
+
+    public function clearCache() {
+        $userData = session('userData');
+        Cache::forget($userData);
+        session()->forget('token');
+        session()->forget('userData');
+        session()->flash('message.level', 'success');
+        session()->flash('message.color', 'green');
+        session()->flash('message.content', 'Cache cleared');
+        return redirect('/signin');
     }
 
 }

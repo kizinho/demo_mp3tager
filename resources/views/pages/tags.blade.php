@@ -197,15 +197,15 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="tag-field tag-field-img" id="show-image{{ $loop->iteration }}"  data-render="{{ $loop->iteration }}" style="display:none"> <!-- variable here -->
+                        <div class="tag-field tag-field-img" id="show-image{{ $loop->iteration }}"  data-render-choice="{{ $loop->iteration+234 }}" style="display:none"> <!-- variable here -->
                             <div class="row">
                                 <div class="col-sm">
-                                    <label class="tag-responsive-p">New cover Art image (up to 2Mb) </label>
-                                    <input type="file" id='img-file-{{ $loop->iteration }}' name="coverart_choice[{{$key}}]" data-type='img' class="d-nn" accept=".png,.jpg,.jpeg"> <!-- variable here -->
+                                    <label class="tag-responsive-p">New cover Art image (max 800mb) </label>
+                                    <input type="file" id='img-file-{{ $loop->iteration+234 }}' name="coverart_choice[{{$key}}]" data-type-choice='img' class="d-nn" accept=".png,.jpg,.jpeg"> <!-- variable here -->
                                 </div>
                                 <div class="col-sm browse-btn-cont img-txt-style">
-                                    <label for="img-file-{{ $loop->iteration }}" class="browse-btn">Browse</label> <!-- variable here -->
-                                    <input type="text" placeholder="png , jpg , jpeg"   id="img-text-choice{{ $loop->iteration }}" readonly> <!-- variable here -->
+                                    <label for="img-file-{{ $loop->iteration+234 }}" class="browse-btn">Browse</label> <!-- variable here -->
+                                    <input type="text" placeholder="png , jpg , jpeg"   id="img-text-choice{{ $loop->iteration+234 }}" readonly> <!-- variable here -->
                                 </div>
                             </div>
                         </div>
@@ -217,7 +217,7 @@
                         <div class="tag-field tag-field-img"  data-render="{{ $loop->iteration }}"> <!-- variable here -->
                             <div class="row">
                                 <div class="col-sm">
-                                    <label class="tag-responsive-p">Select image file (up to 2Mb) </label>
+                                    <label class="tag-responsive-p">Select image file (max 800mb) </label>
                                     <input type="file" id='img-file-{{ $loop->iteration }}' name="coverart[{{$key}}]" data-type='img' class="d-nn" accept=".png,.jpg,.jpeg"> <!-- variable here -->
                                 </div>
                                 <div class="col-sm browse-btn-cont img-txt-style">
@@ -720,9 +720,9 @@
             $(mylbltext).val(e.target.files[0].name);
     })
             $("input[type = file]").change(function (e) {
-    var parentIndexImgChoice = $(this).parent().parent().parent().attr('data-render');
+    var parentIndexImgChoice = $(this).parent().parent().parent().attr('data-render-choice');
     var mylbltextChoice = "#img-text-choice" + parentIndexImgChoice;
-    if ($(this).attr('data-type') == 'img')
+    if ($(this).attr('data-type-choice') == 'img')
             $(mylbltextChoice).val(e.target.files[0].name);
     })
 
