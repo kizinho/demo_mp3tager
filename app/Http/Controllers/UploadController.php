@@ -369,7 +369,15 @@ class UploadController extends Controller {
                 continue;
             }
         }
-
+        if (!empty(config('app.tag_path'))) {
+            $download_path = url(config('app.tag_path') . 's/');
+        } elseif (!empty(config('app.main_site'))) {
+            $download_path = config('app.main_site_url') . '/' . config('app.main_site') . '/';
+        }
+        $output[] = [
+            'name' => 'url',
+            'path' => $download_path
+        ];
         try {
             $client_details = static::client();
             $url = config('app.naijacrawl_api') . '/mp3-tag-details';
@@ -378,6 +386,7 @@ class UploadController extends Controller {
                 'query' => $output
             ]);
             $res = json_decode($response->getBody());
+            
             if (empty($res)) {
                 $data = [
                     'status' => 411,
@@ -697,6 +706,7 @@ class UploadController extends Controller {
                 ]);
             }
             $data['ex'] = $res->ex;
+            $data['is_output'] = $res->is_output;
             return view('pages.download', $data);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
@@ -1182,6 +1192,7 @@ class UploadController extends Controller {
             $data['tab'] = $res->data->tab;
             $data['search'] = $res->data->search;
             $data['type'] = $res->data->type;
+            $data['is_output'] = $res->data->is_output;
             return view('pages.my-files', $data);
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
@@ -1313,6 +1324,78 @@ class UploadController extends Controller {
                 }
                 if ($response->getStatusCode() == 404) {
                     abort(404);
+                }
+            }
+        }
+    }
+
+//embed 2
+    public function embed2(Request $request) {
+        $input['slug'] = $request->slug;
+        try {
+            $client_details = static::client();
+            $url = config('app.naijacrawl_api') . '/mp3-tag-embed-v2';
+            $response = $client_details['client']->request('GET', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
+            ]);
+
+            $res = json_decode($response->getBody());
+            if ($res->status == 455) {
+                abort(455);
+            }
+            $data['tags'] = $res->tags;
+            if (!empty(config('app.tag_path'))) {
+                $data['download_path'] = config('app.tag_path') . 's/';
+            } elseif (!empty(config('app.main_site'))) {
+                $data['download_path'] = config('app.main_site_url') . '/' . config('app.main_site') . '/';
+            }
+
+            return view('pages.embed-v2', $data);
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+            }
+        }
+    }
+  public function played(Request $request) {
+        $link = $request->server('HTTP_REFERER');
+        $input = $request->all();
+        $ip = $request->getClientIp();
+        $input['id'] = $request->id;
+        $input['link'] = $link;
+        $input['ip'] = $ip;
+        $input['website'] = config('app.url');
+
+        try {
+            $client_details = static::client();
+            $url = config('app.naijacrawl_api') . '/mp3-tag-played';
+            $response = $client_details['client']->request('POST', $url, [
+                'headers' => $client_details['headers'],
+                'query' => $input
+            ]);
+//
+            $res = json_decode($response->getBody());
+        
+        } catch (\GuzzleHttp\Exception\RequestException $res) {
+
+            if ($res->hasResponse()) {
+                $response = $res->getResponse();
+                if ($response->getStatusCode() == 500) {
+                    abort(500);
+                }
+                if ($response->getStatusCode() == 404) {
+                    abort(404);
+                }
+                if ($response->getStatusCode() == 405) {
+                    abort(405);
                 }
             }
         }

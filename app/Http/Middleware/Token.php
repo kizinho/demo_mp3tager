@@ -38,9 +38,9 @@ class Token {
             Cache::forget($userData);
             session()->forget('token');
             session()->forget('userData');
-            session()->flash('message.level', 'error');
-            session()->flash('message.color', 'red');
-            session()->flash('message.content', 'Make sure you have generated api keys from mp3tager.com');
+//            session()->flash('message.level', 'error');
+//            session()->flash('message.color', 'red');
+//            session()->flash('message.content', 'Make sure you have generated api keys from mp3tager.com');
             return redirect('/signin');
         }
         if (env('API_KEY') !== $res->api->api_key) {

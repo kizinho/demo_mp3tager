@@ -51,4 +51,6 @@ Route::get('{path}/{year}/{month}/{slug}', 'UploadController@downloadTagG');
 Route::get('{path}/{folder}/{year}/{month}/{slug}', 'UploadController@downloadTag');
 Route::get('zip-downloads', 'UploadController@downloadBatch')->name('zip-downloads');
 Route::get('embed-link', 'UploadController@embed')->name('embed-link');
+Route::post('played', 'UploadController@played');
+Route::get('embed-link-v2', 'UploadController@embed2')->name('embed-link-v2');
 Route::get('playlist-embed', 'UploadController@embedList')->name('playlist-embed');

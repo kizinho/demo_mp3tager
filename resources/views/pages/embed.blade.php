@@ -7,7 +7,7 @@
         <title>{{$tags->title}} - Audio Player</title>
         <link rel="stylesheet" type="text/css" href="{{asset('embed/css/jquery.mCustomScrollbar.css')}}" media="all" /><!-- playlist scroll -->
         <link rel="stylesheet" type="text/css" href="{{asset('embed/css/art-narrow.css')}}" /><!-- main css file -->
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
         <script src="{{asset('embed/js/jquery-3.2.1.min.js')}}"></script>
         <script src="{{asset('embed/js/jquery.mCustomScrollbar.concat.min.js')}}"></script><!-- playlist scroll -->
@@ -53,7 +53,7 @@ jQuery(document).ready(function ($) {
     </head>
     <body> 
 
-         <!-- player code -->   
+        <!-- player code -->   
         <div id="hap-wrapper" class="hap-art-narrow-light">
 
             <div class="hap-player-outer">
@@ -91,36 +91,36 @@ jQuery(document).ready(function ($) {
 
                     <div class="hap-player-holder">
 
-<!--                        <div class="hap-top-bar">
-
-                            <div class="hap-playlist-toggle hap-contr-btn" data-tooltip="Playlist">
-                                <svg viewBox="0 0 512 512"><path d="M149.333 216v80c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24v-80c0-13.255 10.745-24 24-24h101.333c13.255 0 24 10.745 24 24zM0 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zM125.333 32H24C10.745 32 0 42.745 0 56v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24zm80 448H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zm-24-424v80c0 13.255 10.745 24 24 24H488c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24zm24 264H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24z"></path></svg>
-                            </div>
-
-                            <div class="hap-top-bar-controls-right">
-
-                                <div class="hap-share-toggle hap-contr-btn" data-tooltip="Share">
-                                    <svg viewBox="0 0 448 512"><path d="M352 320c-22.608 0-43.387 7.819-59.79 20.895l-102.486-64.054a96.551 96.551 0 0 0 0-41.683l102.486-64.054C308.613 184.181 329.392 192 352 192c53.019 0 96-42.981 96-96S405.019 0 352 0s-96 42.981-96 96c0 7.158.79 14.13 2.276 20.841L155.79 180.895C139.387 167.819 118.608 160 96 160c-53.019 0-96 42.981-96 96s42.981 96 96 96c22.608 0 43.387-7.819 59.79-20.895l102.486 64.054A96.301 96.301 0 0 0 256 416c0 53.019 42.981 96 96 96s96-42.981 96-96-42.981-96-96-96z"></path></svg>
-                                </div>
-                                                            
-                                                            <div class="hap-popup-toggle hap-contr-btn" data-tooltip="Expand">
-                                                                <svg viewBox="0 0 512 512"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"></path></svg>
-                                                            </div>
-
-                            </div>
-
-                        </div>-->
+                        <!--                        <div class="hap-top-bar">
+                        
+                                                    <div class="hap-playlist-toggle hap-contr-btn" data-tooltip="Playlist">
+                                                        <svg viewBox="0 0 512 512"><path d="M149.333 216v80c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24v-80c0-13.255 10.745-24 24-24h101.333c13.255 0 24 10.745 24 24zM0 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zM125.333 32H24C10.745 32 0 42.745 0 56v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24zm80 448H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zm-24-424v80c0 13.255 10.745 24 24 24H488c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24zm24 264H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24z"></path></svg>
+                                                    </div>
+                        
+                                                    <div class="hap-top-bar-controls-right">
+                        
+                                                        <div class="hap-share-toggle hap-contr-btn" data-tooltip="Share">
+                                                            <svg viewBox="0 0 448 512"><path d="M352 320c-22.608 0-43.387 7.819-59.79 20.895l-102.486-64.054a96.551 96.551 0 0 0 0-41.683l102.486-64.054C308.613 184.181 329.392 192 352 192c53.019 0 96-42.981 96-96S405.019 0 352 0s-96 42.981-96 96c0 7.158.79 14.13 2.276 20.841L155.79 180.895C139.387 167.819 118.608 160 96 160c-53.019 0-96 42.981-96 96s42.981 96 96 96c22.608 0 43.387-7.819 59.79-20.895l102.486 64.054A96.301 96.301 0 0 0 256 416c0 53.019 42.981 96 96 96s96-42.981 96-96-42.981-96-96-96z"></path></svg>
+                                                        </div>
+                                                                                    
+                                                                                    <div class="hap-popup-toggle hap-contr-btn" data-tooltip="Expand">
+                                                                                        <svg viewBox="0 0 512 512"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"></path></svg>
+                                                                                    </div>
+                        
+                                                    </div>
+                        
+                                                </div>-->
 
                         <div class="hap-player-thumb-wrapper">
                             <div class="hap-player-header">
-                            <div class="hap-player-image">
-                                <div class="hap-player-thumb"></div>
+                                <div class="hap-player-image">
+                                    <div class="hap-player-thumb"></div>
+                                </div>
+                                <div class="hap-info">
+                                    <div class="hap-player-title"></div>
+                                    <div class="hap-player-artist"></div>
+                                </div>
                             </div>
-                            <div class="hap-info">
-                                <div class="hap-player-title"></div>
-                                <div class="hap-player-artist"></div>
-                            </div>
-                        </div>
 
                             <div class="hap-volume-wrapper">
                                 <div class="hap-volume-toggle hap-contr-btn" data-tooltip="Volume">
@@ -234,10 +234,7 @@ jQuery(document).ready(function ($) {
                                 </div>
 
                             </div>     
-                            <!--                            <div class="move">
-                                                            <i class="fa fa-download"></i> {{App\Http\Controllers\Converter::number_format_short(intval($tags->downloads))}}
-                                                            <a class="hap-player-download-btn" target="_paren" href="{{url('tag-downloads/'.$tags->slug)}}"> Download</a>
-                                                        </div>-->
+
                         </div>
 
                     </div>
@@ -310,10 +307,35 @@ jQuery(document).ready(function ($) {
 
             </div> 
 
-
+            <input id="tag" type="hidden" value="{{$tags->id}}">
 
         </div>       
+        <script>
 
+            jQuery(document).on('click', '.hap-btn-play', function (event) {
+                var formData = jQuery("#tag").val();
+                event.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{url('played')}}",
+                    type: 'POST',
+                    data: {id: formData},
+                    success: function (data) {
+                        if (data.status === 200) {
+
+                            return false;
+                        }
+
+                    }
+
+                });
+            });
+
+        </script>
     </body>
 </html>
 @else
@@ -322,8 +344,8 @@ jQuery(document).ready(function ($) {
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>{{$tags->title}} - Video Player</title>
-       <script src="{{asset('embed/js/jquery-3.2.1.min.js')}}"></script>
+        <title>{{$tags->title}} - Video Player</title>
+        <script src="{{asset('embed/js/jquery-3.2.1.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('media/js/player.js')}}"></script>
         <link type="text/css" rel="stylesheet" href="{{asset('media/css/player.css')}}">
         <style>
@@ -339,21 +361,21 @@ jQuery(document).ready(function ($) {
         </style>
     </head>
     <video 
-    class="mep-playlist" 
-    data-showplaylist="true" 
+        class="mep-playlist" 
+        data-showplaylist="true" 
 
-    width="100%" 
-    height="226" 
-    poster="" 
-    controls="controls" 
-    preload="auto" 
-    loop=""
-    >
-    <source src="{{url($download_path.$tags->time_folder.$tags->slug)}}" type="video/webm" title="{{$tags->title}}" data-poster="">
-    <source src="{{url($download_path.$tags->time_folder.$tags->slug)}}" type="video/mp4" title="{{$tags->title}}" data-poster="">
-    <source src="{{url($download_path.$tags->time_folder.$tags->slug)}}"  type="video/mkv" title="{{$tags->title}}" data-poster="">
-    <img src="{{asset('no-video-playlist.png')}}" width="530" title="No video playlist capabilities. Please upgrade your browser!">
-</video>
+        width="100%" 
+        height="226" 
+        poster="" 
+        controls="controls" 
+        preload="auto" 
+        loop=""
+        >
+        <source src="{{url($download_path.$tags->time_folder.$tags->slug)}}" type="video/webm" title="{{$tags->title}}" data-poster="">
+        <source src="{{url($download_path.$tags->time_folder.$tags->slug)}}" type="video/mp4" title="{{$tags->title}}" data-poster="">
+        <source src="{{url($download_path.$tags->time_folder.$tags->slug)}}"  type="video/mkv" title="{{$tags->title}}" data-poster="">
+        <img src="{{asset('no-video-playlist.png')}}" width="530" title="No video playlist capabilities. Please upgrade your browser!">
+    </video>
 </body>
 </html>
 @endif

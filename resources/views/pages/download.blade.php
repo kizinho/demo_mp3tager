@@ -52,7 +52,9 @@
                     <button class="badge badge-primary down-btn-item clip-btn"> copy <i class="fas fa-copy"></i></button> link to clipborad 
                     <input type="text" style="opacity: 0;">
                     <br/>
-
+                    @if($is_output ==1)
+                    <a href="{{url('tags?' . $key . '='.$download->slug)}}"> Edit  <i class="fa fa-pen"></i></a>
+                    @endif
                     <br/> <br/>
                     @if($download->mime_type == 'mp3')
                     <audio controls style="width:100%" loop>
@@ -74,6 +76,7 @@
                                     src="{{url('embed-link?slug='.$download->slug)}}"></iframe>
 
                     </textarea>
+                  
                     @else
                     @if($download->mime_type == 'jpg' || $download->mime_type == 'png' || $download->mime_type == 'jpeg' || $download->mime_type == 'gif')
                     @if($p == true)
@@ -114,7 +117,20 @@
                     </textarea>
                     @endif
 
-                    <button class="embd-btn">copy embedded code</button>
+                    <button class="embd-btn embd-btn1">copy embedded code</button>
+                    
+                       @if($download->mime_type == 'jpg' || $download->mime_type == 'png' || $download->mime_type == 'jpeg' || $download->mime_type == 'gif')
+                     @else
+                       <textarea cols="50" rows="5" class="embd-txt embd-txt2" style="width:100%">
+                         <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="230" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" 
+                                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts" 
+                                    src="{{url('embed-link-v2?slug='.$download->slug)}}"></iframe>
+
+                    </textarea>
+                  
+                    
+                    <button class="embd-btn embd-btn2">copy embedded code V2</button>
+                      @endif
                 </div> 
                 @if(config('app.ads_enable') == true)
                 @include('layouts.text')
@@ -138,7 +154,12 @@
             </div>
             @endif
 
-            <div class="download-songs " style="background-color:  {{config('app.color_site')}}"><a class="text-white" href="{{url('zip-downloads?slug='.$zip)}}"> Batch Download All  <i class="fa fa-download"></i></a> &nbsp;</div> 
+            <div class="download-songs " style="background-color:  {{config('app.color_site')}}"><a class="text-white" href="{{url('zip-downloads?slug='.$zip)}}"> Batch Download All  <i class="fa fa-download"></i></a> 
+       &nbsp;
+        @if($is_output ==1)
+       <span class="badge badge-success"><a  style="background-color:  {{config('app.color_site')}}" class="text-white"  href="{{url('tags?'.$url)}}"> Edit  <i class="fa fa-pen"></i></a></span>
+            @endif
+            </div> 
 
             @endif
         </div>
@@ -161,7 +182,7 @@
             toastr.success(message, {timeOut: 50000});
         });
 
-        $('.embd-btn').click(function () {
+        $('.embd-btn1').click(function () {
             var targetTextArea = $(this).prev();
             var copyTextArea = targetTextArea;
             copyTextArea.select();
@@ -170,7 +191,14 @@
             toastr.success(message, {timeOut: 50000});
         });
 
-
+ $('.embd-btn2').click(function () {
+            var targetTextArea = $(this).prev();
+            var copyTextArea = targetTextArea;
+            copyTextArea.select();
+            document.execCommand("copy");
+            let message = "Embedded Code V2 Copied Successfully , you can use it on your website for post";
+            toastr.success(message, {timeOut: 50000});
+        });
 
     })
 </script>
