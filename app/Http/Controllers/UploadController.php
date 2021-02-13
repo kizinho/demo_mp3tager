@@ -52,12 +52,12 @@ class UploadController extends Controller {
 
     public function imageEdit(Request $request) {
 
-        if (Cache::has('countupload')) {
-            $res = Cache::get('countupload');
+        if (Cache::has('countuploadimg')) {
+            $res = Cache::get('countuploadimg');
         } else {
             try {
                 $client_details = static::client();
-                $url = config('app.naijacrawl_api') . '/mp3-get_count';
+                $url = config('app.naijacrawl_api') . '/mp3-get_count_image';
                 $response = $client_details['client']->request('GET', $url, [
                     'headers' => $client_details['headers']
                 ]);
@@ -66,7 +66,7 @@ class UploadController extends Controller {
                 if (empty($res)) {
                     abort(405);
                 }
-                Cache::put('countupload', $res, 525600);
+                Cache::put('countuploadimg', $res, 525600);
             } catch (\GuzzleHttp\Exception\RequestException $res) {
 
                 if ($res->hasResponse()) {
@@ -386,7 +386,7 @@ class UploadController extends Controller {
                 'query' => $output
             ]);
             $res = json_decode($response->getBody());
-            
+
             if (empty($res)) {
                 $data = [
                     'status' => 411,
@@ -540,7 +540,8 @@ class UploadController extends Controller {
                         'tager_setting_active_text' => $request->tager_setting_active_text,
                         'tager_setting_active_image' => $request->tager_setting_active_image,
                         'zip_name' => $request->zip_name,
-                        'job' => $job
+                        'job' => $job,
+                        'output_converter' => $request->output_converter
                     ]
             ),
         ];
@@ -1365,7 +1366,8 @@ class UploadController extends Controller {
             }
         }
     }
-  public function played(Request $request) {
+
+    public function played(Request $request) {
         $link = $request->server('HTTP_REFERER');
         $input = $request->all();
         $ip = $request->getClientIp();
@@ -1383,7 +1385,6 @@ class UploadController extends Controller {
             ]);
 //
             $res = json_decode($response->getBody());
-        
         } catch (\GuzzleHttp\Exception\RequestException $res) {
 
             if ($res->hasResponse()) {

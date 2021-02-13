@@ -348,6 +348,7 @@ jQuery(document).ready(function ($) {
         <script src="{{asset('embed/js/jquery-3.2.1.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('media/js/player.js')}}"></script>
         <link type="text/css" rel="stylesheet" href="{{asset('media/css/player.css')}}">
+         <meta name="csrf-token" content="{{ csrf_token() }}">
         <style>
             /*            .vjs-big-play-centered:before {
                             content: "MP3TAGER";
@@ -376,6 +377,38 @@ jQuery(document).ready(function ($) {
         <source src="{{url($download_path.$tags->time_folder.$tags->slug)}}"  type="video/mkv" title="{{$tags->title}}" data-poster="">
         <img src="{{asset('no-video-playlist.png')}}" width="530" title="No video playlist capabilities. Please upgrade your browser!">
     </video>
+        <input id="tag-mp4" type="hidden" value="{{$tags->id}}">
+     <script>
+            $(document).ready(function () {
+
+                $(".play-pause").click(function (event) {
+                    var formData = jQuery("#tag-mp4").val();
+                    event.preventDefault();
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    jQuery.ajax({
+                        url: "{{url('played')}}",
+                        type: 'POST',
+                        data: {id: formData},
+                        success: function (data) {
+                            if (data.status === 200) {
+
+                                return false;
+                            }
+
+                        }
+
+                    });
+                });
+
+
+
+            });
+
+    </script>
 </body>
 </html>
 @endif

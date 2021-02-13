@@ -1,27 +1,27 @@
 @section('title')
-<title>Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4 files {{date('Y')}}</title>
-<meta name="description" content="Upload and use this free online editor tool for editing mp3 and Mp4  files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files " />
-<meta name="keywords" content="Upload mp3 -  join two mp3 and Mp4  files online | mp3 tager for editing mp3 files" />
+<title>Upload page - editing  jpg , png , gif and  jpeg {{date('Y')}}</title>
+<meta name="description" content="add watermark | Upload and use this free online editor tool for editing jpg , png , gif and jpeg" />
+<meta name="keywords" content="add watermark | Upload and use this free online editor tool for editing jpg , png , gif and jpeg" />
 <meta name="apple-mobile-web-app-title" content="Mp3Tager" />
 <meta property="fb:app_id" content="" />
 <meta name="theme-color" content="#08192D"/>
-<meta property="og:title" content="Upload mp3 -  join two mp3 and Mp4  files online | mp3 tager for editing mp3 files" />
-<meta property="og:description" content=" Upload and use this free online editor tool for editing mp3 and Mp4  files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files " />
+<meta property="og:title" content="add watermark | Upload and use this free online editor tool for editing jpg , png , gif and jpeg" />
+<meta property="og:description" content="Upload and use this free online editor tool for editing jpg , png , gif and jpeg " />
 <meta property="og:url" content="{{url('/')}}" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Mp3Tager" />
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="@mp3tager">
-<meta name="twitter:title" content="Upload mp3 -  join two mp3   files online | mp3 tager for editing mp3 and Mp4  files">
-<meta name="twitter:description" content="Upload and use this free online editor tool for editing mp3 and Mp4  files, join mp3  or voice tag, editing of mp3 tags like changing the cover art, album, title, of any mp3 files">
+<meta name="twitter:title" content="add watermark | Upload and use this free online editor tool for editing jpg , png , gif and jpeg">
+<meta name="twitter:description" content="Upload and use this free online editor tool for editing jpg , png , gif and jpeg">
 <link rel="canonical" href="{{url('/')}}" />
 <meta property="og:image" content="{{url(config('app.logo'))}}" />
-<meta property="og:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3and Mp4   files">
+<meta property="og:image:alt" content="add watermark | Upload and use this free online editor tool for editing jpg , png , gif and jpeg">
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:image" content="{{url(config('app.logo'))}}" />
-<meta name="twitter:image:alt" content="Upload mp3 -  join two mp3 files online | mp3 tager for editing mp3 and Mp4  files" />
+<meta name="twitter:image:alt" content="add watermark | Upload and use this free online editor tool for editing jpg , png , gif and jpeg" />
 
 <link rel="stylesheet" href="{{asset('dropzone/dropzone.min.css')}}">
 <style>
@@ -146,7 +146,7 @@
                                     @if(config('app.ads_enable') == true)
                                     @include('layouts.text')
                                     @endif
-                                    <div class="alert alert-secondary small text-center " >Mp3 , Mp4, MKV , Mov , M4a , 3gp , 3g2 , jpg , png , gif , jpeg &  Mj2 Edited this year: &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
+                                    <div class="alert alert-secondary small text-center " >jpg , png , gif & jpeg Edited this year : &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
                                 </div>
                             </div>
                         </div>

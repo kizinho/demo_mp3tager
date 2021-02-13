@@ -63,6 +63,8 @@ return [
     'main_site' => env('TAG_SAVE_PATH_MAIN_SITE'),
     'main_site_url' => env('MAIN_SITE_URL'),
     'main_site_store' => env('MAIN_SITE_STORE'),
+    'album' => env('ALBUM'),
+    'year' => env('YEAR'),
     /*
       |--------------------------------------------------------------------------
       | Application Timezone
@@ -129,17 +131,17 @@ return [
       | this array to grant expanded functionality to your applications.
       |
      */
-         'providers' => [
+    'providers' => [
         /*
          * Laravel Framework Service Providers...
          */
-       // Illuminate\Auth\AuthServiceProvider::class,
+        // Illuminate\Auth\AuthServiceProvider::class,
         //Illuminate\Broadcasting\BroadcastServiceProvider::class,
         //Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
         Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
         Illuminate\Cookie\CookieServiceProvider::class,
-       Illuminate\Database\DatabaseServiceProvider::class,
+        Illuminate\Database\DatabaseServiceProvider::class,
         Illuminate\Encryption\EncryptionServiceProvider::class,
         Illuminate\Filesystem\FilesystemServiceProvider::class,
         Illuminate\Foundation\Providers\FoundationServiceProvider::class,
@@ -210,7 +212,7 @@ return [
         'Route' => Illuminate\Support\Facades\Route::class,
         'Schema' => Illuminate\Support\Facades\Schema::class,
         'Session' => Illuminate\Support\Facades\Session::class,
-       // 'Storage' => Illuminate\Support\Facades\Storage::class,
+        // 'Storage' => Illuminate\Support\Facades\Storage::class,
         'Str' => Illuminate\Support\Str::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,

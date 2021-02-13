@@ -330,10 +330,31 @@
                                     <label>Album</label>
                                 </div>
                                 <div class="col-sm">
-                                    <input type="text" placeholder='Album' name="album[{{$key}}]" value=" {{$tag->album}}" required>
+                                    <input type="text" placeholder='Album' name="album[{{$key}}]" value="@if(!empty(config('app.album'))) {{config('app.album')}} @else {{$tag->album}} @endif" required>
                                 </div>
                             </div>
                         </div>
+                         @if($tag->mime_type =='mp4' || $tag->mime_type =='webm' || $tag->mime_type =='mkv')
+                                <div class="tag-field tag-responsive">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <label>Out put Converter [Optional]</label>
+                                        </div>
+                                        <div class="col-sm">
+                                            <select class="form-control"  name="output_converter[{{$key}}]">
+                                                <option value="" selected disabled>Select Resolution </option>
+                                                <option value="240">240p</option>
+                                                <option value="360">360p</option>
+                                                <option value="480">480p</option>
+                                                <option value="720">720p</option>
+                                                <option value="1080">1080p</option>
+                                                <option value="1440">1440p</option>
+                                                <option value="2160">2160p</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
                         @endif
                         @if($tag->mime_type == 'mp3')
                         <div class="tag-field tag-responsive">
@@ -379,7 +400,7 @@
                                     <label>Year</label>
                                 </div>
                                 <div class="col-sm">
-                                    <input type="text" placeholder='year' name="year[{{$key}}]" value=" {{$tag->year}}" required>
+                                    <input type="text" placeholder='year' name="year[{{$key}}]" value="@if(!empty(config('app.year'))) {{config('app.year')}} @else {{$tag->year}} @endif " required>
                                 </div>
                             </div>
                         </div>
@@ -442,7 +463,7 @@
                         <div class="tag-field tag-responsive">
                             <div class="row align-items-center">
                                 <div class="col-sm-6">
-                                    <div class="watermarkSelect">Invalid FIle Extension
+                                    <div class="watermarkSelect">Convert to another file type for easy tagging
 
                                     </div>
 
@@ -450,7 +471,7 @@
                                 <div class="col-sm-6">
 
                                     <select class="markSelect form-control" name="extension[{{$key}}]"  @if($tag->mime_type !=='mp3' || $tag->mime_type !=='mp4') required  @endif> <!-- variable here -->
-                                            <option value="" selected disabled>Check your File Extension </option>
+                                            <option value="" selected disabled>Choose your File Extension </option>
                                         <option value="mp3">Mp3</option>
                                         <option value="mp4">Mp4</option>
                                         <option value="mkv">Mkv</option>

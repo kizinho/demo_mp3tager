@@ -122,7 +122,7 @@
                        @if($download->mime_type == 'jpg' || $download->mime_type == 'png' || $download->mime_type == 'jpeg' || $download->mime_type == 'gif')
                      @else
                        <textarea cols="50" rows="5" class="embd-txt embd-txt2" style="width:100%">
-                         <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="230" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" 
+                         <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="250" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" 
                                     sandbox="allow-forms allow-popups allow-same-origin allow-scripts" 
                                     src="{{url('embed-link-v2?slug='.$download->slug)}}"></iframe>
 
