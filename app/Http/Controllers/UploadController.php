@@ -549,6 +549,11 @@ class UploadController extends Controller {
             'name' => 'zip_name',
             'contents' => $request->zip_name
         ];
+          $output [] = [
+            'name' => 'random_string_upload',
+            'contents' => $request->random_string_upload
+        ];
+        
         $output [] = [
             'name' => 'url',
             'contents' => url('/')

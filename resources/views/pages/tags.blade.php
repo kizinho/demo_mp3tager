@@ -601,21 +601,36 @@
             $(".modal").hide();
             }
     });
+      let generateRandomString = (stringLength) => {
+            stringLength = typeof stringLength === 'number' ? stringLength : 20;
+            const possibleCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890';
+            let str = '';
+            for (let i = 0; i < stringLength; i++) {
+                const randomChar = possibleCharacters.charAt(
+                        Math.floor(Math.random() * possibleCharacters.length)
+                        );
+                str += randomChar;
+            }
+            return str;
+        };
+        let generator = generateRandomString(10);
     var id_name = "";
     $('input[name^="id"]').each(function () {
     id_name = $(this).val() + "," + id_name;
     });
     var id = id_name.split(',');
     let ping = setInterval(function () {
-    checkProgress(id);
+    checkProgress(generator);
     }, 12000);
     function clear_interval(interval) {
     return clearInterval(interval);
     }
+    var formData = new FormData(this);
+        formData.append('random_string_upload', generator);
     jQuery.ajax({
     url: "{{url('tags')}}",
             type: 'POST',
-            data: new FormData(this),
+            data: formData,
             dataType: 'JSON',
             contentType: false,
             cache: false,
