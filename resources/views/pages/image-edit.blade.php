@@ -141,12 +141,12 @@
                                     </div>
 
                                     <div class="alert alert-info small" role="alert">
-                                        Allowed file types:  jpg , png , jpeg , gif
+                                        Allowed file types:  jpg , png , jpeg , gif , webp
                                     </div>
                                     @if(config('app.ads_enable') == true)
                                     @include('layouts.text')
                                     @endif
-                                    <div class="alert alert-secondary small text-center " >jpg , png , gif & jpeg Edited this year : &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
+                                    <div class="alert alert-secondary small text-center " >jpg , png , gif , webp & jpeg Edited this year : &nbsp; <span class="text-danger">{{number_format($count_upload)}}</span></div>
                                 </div>
                             </div>
                         </div>
@@ -221,12 +221,12 @@
             @if(config('app.ads_enable') == true)
             @include('layouts.banner')
             @endif
-            {{config('app.name')}} is the best online editing tool to change your mp3  , jpg , gif , png , jpegand Mp4 tags like watermark on mp4, cover art and join two mp3 files . 
+            {{config('app.name')}} is the best online editing tool to change your mp3  , jpg , gif , png , webp , jpeg and Mp4 tags like watermark on mp4, cover art and join two mp3 files . 
             Using this platform you can upload and edit your mp3 tags or join another mp3 .
             Download your updated files by using our easy download button .
             <br/>  <br/>
             <small>
-                {{config('app.name')}} you can now change your mp3 , jpg , png , gif , jpeg and Mp4 files by adding pictures to mp3 or Mp4 tag, changing mp3tag title, changing mp3tag album, changing mp3tag artist and joining mp3 voice tag . 
+                {{config('app.name')}} you can now change your mp3 , jpg , png , gif , jpeg , webp and Mp4 files by adding pictures to mp3 or Mp4 tag, changing mp3tag title, changing mp3tag album, changing mp3tag artist and joining mp3 voice tag . 
             </small>
             @if(config('app.ads_enable') == true)
             @include('layouts.text')
@@ -260,7 +260,10 @@
 </script>
 <script src="{{asset('dropzone/dropzone.min.js')}}"></script>
 <script>
-
+  let ping;
+    function clear_interval(interval) {
+        return clearInterval(interval);
+    }
     Dropzone.options.myUpload = {
         url: "{{url('upload')}}",
         autoProcessQueue: false,
@@ -269,7 +272,7 @@
         maxFiles: 15,
         maxFilesize: 2000,
         timeout: 3000000,
-        acceptedFiles: '.png,.jpg,.jpeg,.gif',
+        acceptedFiles: '.png,.jpg,.jpeg,.gif,.webp',
         addRemoveLinks: true,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

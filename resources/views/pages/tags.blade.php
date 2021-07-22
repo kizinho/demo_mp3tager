@@ -119,7 +119,7 @@
                             <div class="tag-field-head alert alert-success" >
                                 <div class="row">
                                     <div class="col-sm tag-title">
-                                        <label class="tag-responsive-p " id="title"><span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$tag->file_name}}  <i class="fa fa-plus"></i></label>
+                                        <label class="tag-responsive-p " id="title"><span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$tag->title}}  <i class="fa fa-plus"></i></label>
                                     </div>
                                 </div>
                             </div>
@@ -167,6 +167,16 @@
                                     </div>
                                     <div class="contorlRangeBtn my-2">
                                         <button type="button" class="setRangeBtn">Click to add tag point to song</button>
+                                         <select style="display: inline-block!important;margin-bottom: 10px; height: 3em;border: solid 2px #cd6133; border-radius:8px;margin-top: 10px" class="" name="voice_volume[{{$key}}]"> <!-- variable here -->
+                                                 <option value="" selected disabled>Select Voice tag Volume </option>
+                                                    <option value="2" selected>Normal (default) Voice tag Volume</option>
+                                                    <option value="3">High Voice tag Volume</option>
+                                                    <option value="4">Very High Voice tag Volume</option>
+                                                    <option value="5">Very Very High Voice tag Volume</option>
+                                                    <option value="1.5">Lower Voice tag Volume</option>
+                                                    <option value="1">Very Lower Voice tag Volume</option>
+                                                    <option value="0.5">Very Very Lower Voice tag Volume</option>
+                                                </select>
                                     </div>
                                     <!-- =============End Range section================ -->
                                 </div>

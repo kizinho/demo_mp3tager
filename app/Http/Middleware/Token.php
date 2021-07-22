@@ -44,6 +44,7 @@ class Token {
             return redirect('/signin');
         }
         if (env('API_KEY') !== $res->api->api_key) {
+            $this->envUpdate('APP_NAME', $_SERVER['SERVER_NAME']);
             $this->envUpdate('APP_KEY', 'base64:cBimh0j6M0hu2qywk1oPGbFW9Zj5keZBqjIdC8JL92o=');
             $this->envUpdate('NAIJACRAWL_API', 'https://app.mp3tager.com/api/v3');
             $this->envUpdate('API_KEY', $res->api->api_key);

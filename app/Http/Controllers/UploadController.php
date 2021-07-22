@@ -541,7 +541,8 @@ class UploadController extends Controller {
                         'tager_setting_active_image' => $request->tager_setting_active_image,
                         'zip_name' => $request->zip_name,
                         'job' => $job,
-                        'output_converter' => $request->output_converter
+                        'output_converter' => $request->output_converter,
+                        'voice_volume' => $request->voice_volume
                     ]
             ),
         ];

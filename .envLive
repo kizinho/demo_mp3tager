@@ -1,0 +1,10 @@
+APP_NAME=Demo
+APP_ENV=production
+APP_KEY=base64:cBimh0j6M0hu2qywk1oPGbFW9Zj5keZBqjIdC8JL92o=
+APP_DEBUG=true
+TAG_SAVE_PATH=content
+SITE_COLOR="#cd6133"
+SITE_LOGO_PATH=http://mp3tager.com//logo/logo.png
+NAIJACRAWL_API=https://app.mp3tager.com/api/v3
+API_KEY=b96ca86881a8d26fa59bbd2efe8dc767_mp3_tager_api_key
+API_SECRET=test

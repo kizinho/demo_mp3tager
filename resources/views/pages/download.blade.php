@@ -41,7 +41,7 @@
 
                     <div class="download-songs " style="background-color: #d4edda; color: #000">
 
-                        <span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$download->file_name}} <i class="fa fa-plus"></i>
+                        <span class='badge badge-primary'> {{ $loop->iteration }}</span> {{$download->title}} <i class="fa fa-plus"></i>
 
                     </div>
                 </a>
